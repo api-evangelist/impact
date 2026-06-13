@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "impact": "https://impact.com/",
+    "aid": "https://apis.io/aid",
+    "Partnership": "https://schema.org/Organization",
+    "AffiliateProgram": "https://schema.org/Service",
+    "PerformanceMarketing": "https://schema.org/MarketingAction",
+    "Conversion": "https://schema.org/Action",
+    "Commission": "https://schema.org/MonetaryAmount",
+    "MediaPartner": "https://schema.org/Person",
+    "Brand": "https://schema.org/Brand",
+    "Campaign": "https://schema.org/Campaign",
+    "Contract": "https://schema.org/Contract",
+    "Report": "https://schema.org/Report",
+    "Tracking": "https://schema.org/TrackAction",
+    "AccountSID": "https://schema.org/identifier",
+    "baseURL": {
+      "@id": "https://schema.org/url",
+      "@type": "@id"
+    },
+    "humanURL": {
+      "@id": "https://schema.org/url",
+      "@type": "@id"
+    }
+  },
+  "@type": "WebAPI",
+  "@id": "https://impact.com/",
+  "name": "Impact Partnership Management API",
+  "description": "Partnership management platform with a REST API for managing affiliate relationships, tracking conversions, paying partners, and reporting on partnership performance across brands.",
+  "url": "https://integrations.impact.com/",
+  "provider": {
+    "@type": "Organization",
+    "name": "impact.com",
+    "url": "https://impact.com/",
+    "sameAs": [
+      "https://www.linkedin.com/company/impactdotcom",
+      "https://x.com/impactdotcom",
+      "https://github.com/ImpactInc"
+    ]
+  },
+  "documentation": "https://integrations.impact.com/",
+  "termsOfService": "https://impact.com/",
+  "category": [
+    "Affiliate",
+    "Partnerships",
+    "Performance Marketing",
+    "Commission",
+    "Tracking",
+    "Creator Economy",
+    "Partner Management"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://impact.com/pricing/"
+  }
+}

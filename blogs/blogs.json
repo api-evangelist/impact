@@ -1,0 +1,17 @@
+{
+  "aid": "impact",
+  "name": "Impact Blog",
+  "description": "Blog and press releases from impact.com covering partnerships, affiliate marketing, performance marketing, and platform innovations.",
+  "url": "https://impact.com/feed/",
+  "type": "RSS",
+  "confirmed": true,
+  "feeds": [
+    {
+      "title": "impact.com",
+      "description": "Partnerships, Ad Fraud Detection & Marketing Intelligence ~ SaaS Platform Solution",
+      "url": "https://impact.com/feed/",
+      "type": "RSS",
+      "humanURL": "https://impact.com/press-releases/"
+    }
+  ]
+}
