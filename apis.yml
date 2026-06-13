@@ -1,0 +1,97 @@
+aid: impact
+name: Impact
+description: Partnership management platform with a REST API for managing affiliate
+  relationships, tracking conversions, paying partners, and reporting on partnership
+  performance across brands.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/impact/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Affiliate
+  - Partnerships
+  - Performance Marketing
+  - Commission
+  - Tracking
+  - Creator Economy
+  - Partner Management
+apis:
+  - aid: impact:brand-api
+    name: Impact Brand API
+    description: REST API for brands to manage partnership campaigns, track conversions,
+      process commissions, manage contracts, and report on partnership performance.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://integrations.impact.com/
+    baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+    tags:
+      - Brand
+      - Advertiser
+      - Campaigns
+      - Conversions
+      - Contracts
+    properties:
+      - type: Documentation
+        url: https://integrations.impact.com/
+      - type: Authentication
+        url: https://integrations.impact.com/
+  - aid: impact:partner-api
+    name: Impact Partner API
+    description: REST API for media partners and publishers to access campaigns, report
+      on content performance, manage commission tracking, and query earning reports.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://integrations.impact.com/
+    baseURL: https://api.impact.com/MediaPartners/{AccountSID}/
+    tags:
+      - Publisher
+      - Partner
+      - Media
+      - Commission
+      - Reporting
+    properties:
+      - type: Documentation
+        url: https://integrations.impact.com/
+      - type: Authentication
+        url: https://integrations.impact.com/
+  - aid: impact:agency-api
+    name: Impact Agency API
+    description: REST API for agencies to manage multiple client accounts, consolidate
+      reporting across brands, and automate partnership operations at scale.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://integrations.impact.com/
+    baseURL: https://api.impact.com/Agencies/{AccountSID}/
+    tags:
+      - Agency
+      - Multi-client
+      - Reporting
+      - Automation
+    properties:
+      - type: Documentation
+        url: https://integrations.impact.com/
+      - type: Authentication
+        url: https://integrations.impact.com/
+common:
+  - type: Website
+    url: https://impact.com/
+  - type: Documentation
+    url: https://integrations.impact.com/
+  - type: GitHubOrg
+    url: https://github.com/ImpactInc
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/impactdotcom
+  - type: Blog
+    url: https://impact.com/press-releases/
+  - type: Pricing
+    url: https://impact.com/pricing/
+  - type: X
+    url: https://x.com/impactdotcom
+  - type: Plans
+    url: plans/impact-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/impact-rate-limits.yml
+  - type: FinOps
+    url: finops/impact-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

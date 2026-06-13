@@ -1,0 +1,71 @@
+name: Impact Plans and Pricing
+description: Pricing plans for the impact.com partnership management platform covering
+  affiliate, creator, and B2B partnership automation.
+version: '0.1'
+url: https://impact.com/pricing/
+plans:
+  - name: Starter
+    description: Entry-level partnership management for brands launching their affiliate
+      program. Includes automated partner matchmaking, performance tracking, promo
+      code creation, and marketing asset distribution.
+    price: 30.00
+    currency: USD
+    period: month
+    notes: Price is $30/month or 3% of monthly revenue generated through the platform,
+      whichever is higher. 30-day free trial available.
+    features:
+      - Automated partner matchmaking
+      - Performance tracking
+      - Promo code creation
+      - Marketing asset distribution
+      - Live chat and email support
+      - Limited API access
+  - name: Essential
+    description: Mid-market plan for brands with an established affiliate base unlocking
+      more advanced automation, dedicated onboarding support, and access to a large
+      partner network.
+    price: 500.00
+    currency: USD
+    period: month
+    features:
+      - All Starter features
+      - Access to 90000+ partners
+      - Multi-domain campaigns
+      - Unlimited contract templates with 120+ custom terms
+      - Event tracking (conversions, leads, installs, bookings)
+      - 40+ performance reports
+      - Dedicated customer support
+      - Enhanced API access
+  - name: Pro
+    description: Enterprise plan for high-volume brands requiring advanced analytics,
+      cross-device tracking, fraud detection, custom dashboards, and full API access.
+    price: 2500.00
+    currency: USD
+    period: month
+    features:
+      - All Essential features
+      - Partner discovery by content search
+      - Cross-device journey tracking
+      - Custom dashboards via Data Lab
+      - Dedicated success representative
+      - Competitive benchmarking
+      - Fraud detection and behavior analytics
+      - Unlimited API access
+  - name: Publisher / Partner
+    description: Free access for publishers and media partners applying to join the
+      impact.com network. Requires application approval.
+    price: 0.00
+    currency: USD
+    period: month
+    features:
+      - Campaign discovery
+      - Commission tracking
+      - Content and link management
+      - Partner API access
+      - Performance reporting
+fees:
+  - type: Platform Transaction Fee
+    description: Performance-based fee charged on commissions successfully generated
+      through the platform across all tiers.
+    rate: 2.5%
+    notes: Applied on every commission payout processed through impact.com

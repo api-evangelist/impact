@@ -1,0 +1,43 @@
+name: Impact API Rate Limits
+description: Rate limiting policies for the impact.com REST APIs covering Brand,
+  Partner, and Agency API endpoints.
+version: '0.1'
+url: https://integrations.impact.com/
+policies:
+  - name: General API Rate Limit
+    description: The impact.com partner and brand APIs limit how many calls a client
+      can make in a given hour to protect the system against traffic spikes. Requests
+      that exceed the limit are throttled.
+    scope: account
+    period: hour
+    notes: Specific per-hour numeric limits are not publicly documented. Limits may
+      vary by plan tier and endpoint group.
+    enforcement:
+      - type: Throttle
+        statusCode: 429
+        statusMessage: Too Many Requests
+        retryAfterHeader: true
+  - name: Exponential Backoff Recommended
+    description: When a 429 response is received, callers should implement exponential
+      backoff with jitter before retrying, especially for scripts and automated agents.
+    scope: client
+    guidance: Add exponential backoff plus jitter inside scripts or agents when handling
+      429 responses.
+headers:
+  - name: Retry-After
+    description: Returned in 429 responses to indicate how long the client should
+      wait before retrying the request.
+scopes:
+  - name: Accounts
+  - name: Action Inquiries
+  - name: Actions
+  - name: Campaigns
+  - name: Catalogs
+  - name: Contracts
+  - name: Deals
+  - name: Reports
+notes:
+  - Rate limit documentation is available to authenticated impact.com clients through
+    the Developer Hub at integrations.impact.com.
+  - Limits are enforced per-account and may differ between the Brand, Partner, and
+    Agency API personas.

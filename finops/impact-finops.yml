@@ -1,0 +1,82 @@
+name: Impact FinOps Framework
+description: FinOps cost management framework for impact.com API usage aligned with
+  FOCUS specification principles covering partnership platform spend, commission costs,
+  and API consumption costs.
+version: '1.0'
+url: https://impact.com/pricing/
+framework: FinOps FOCUS 1.0
+costCategories:
+  - name: Platform Subscription
+    description: Monthly subscription fee for the impact.com platform tier selected
+      by the brand.
+    billingModel: subscription
+    currency: USD
+    tiers:
+      - name: Starter
+        unitPrice: 30.00
+        minimumCharge: 30.00
+        revenueBasedAlternative: '3% of monthly platform-referred revenue, whichever
+          is higher'
+      - name: Essential
+        unitPrice: 500.00
+        period: month
+      - name: Pro
+        unitPrice: 2500.00
+        period: month
+  - name: Platform Transaction Fee
+    description: Performance-based commission fee applied on all partner commissions
+      processed through the impact.com platform.
+    billingModel: usage
+    unit: percentage of commission
+    rate: 2.5%
+    notes: Applies across all plan tiers on every successful commission payout
+  - name: Partner Commissions
+    description: Commissions paid out to affiliates, creators, and B2B partners through
+      the platform. Variable cost driven by partnership performance and negotiated
+      commission rates.
+    billingModel: usage
+    unit: conversion event
+    notes: Commission rates are set per contract. Costs scale directly with partnership
+      performance (GMV).
+optimization:
+  - name: Match Plan to Active Partner Count
+    description: Select the plan tier that aligns with your active partner count and
+      feature requirements to avoid overpaying on the subscription fee.
+    action: Right-size subscription tier
+  - name: Monitor Transaction Fee Volume
+    description: Track total partner commissions processed monthly. At high volume
+      the 2.5% transaction fee can exceed subscription costs and should factor into
+      ROI calculations.
+    action: Track GMV and fee impact monthly
+  - name: Use API Automation to Reduce Manual Operations
+    description: Leverage Brand and Agency APIs to automate contract creation, conversion
+      tracking, and reporting to reduce manual labor costs.
+    action: Automate repetitive workflows via API
+  - name: Leverage Free Publisher Access
+    description: Publishers and media partners access the platform for free. Encourage
+      partner self-service to reduce brand-side support overhead.
+    action: Onboard partners to self-service portal
+allocation:
+  - dimension: API Persona
+    values:
+      - Brand
+      - Partner
+      - Agency
+  - dimension: Campaign
+    description: Attribute platform spend and commissions to individual partnership
+      campaigns for ROI analysis.
+  - dimension: Partner Type
+    values:
+      - Affiliate
+      - Creator / Influencer
+      - B2B / Referral
+      - Content Partner
+reporting:
+  - name: Platform Spend Report
+    description: Monthly subscription fees plus transaction fees by billing period.
+  - name: Commission Attribution Report
+    description: Total partner commissions by campaign, partner type, and conversion
+      event available via the Reports API endpoint.
+  - name: ROI by Partnership Channel
+    description: Revenue generated through partnerships versus total platform and
+      commission spend per channel.
