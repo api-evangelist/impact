@@ -7,11 +7,11 @@
   "confirmed": true,
   "feeds": [
     {
-      "title": "impact.com",
-      "description": "Partnerships, Ad Fraud Detection & Marketing Intelligence ~ SaaS Platform Solution",
-      "url": "https://impact.com/feed/",
-      "type": "RSS",
-      "humanURL": "https://impact.com/press-releases/"
+      "source": "https://www.linkedin.com/company/impactdotcom",
+      "error": "HTTPError"
     }
-  ]
+  ],
+  "repo": "impact",
+  "post_count": 0,
+  "fetched": "2026-06-14T20:42:17Z"
 }
