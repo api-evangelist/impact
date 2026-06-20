@@ -4,7 +4,7 @@ description: Partnership management platform with a REST API for managing affili
   relationships, tracking conversions, paying partners, and reporting on partnership
   performance across brands.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/impact/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -22,7 +22,7 @@ apis:
   name: Impact Brand API
   description: REST API for brands to manage partnership campaigns, track conversions,
     process commissions, manage contracts, and report on partnership performance.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://integrations.impact.com/
   baseURL: https://api.impact.com/Advertisers/{AccountSID}/
   tags:
@@ -42,7 +42,7 @@ apis:
   name: Impact Partner API
   description: REST API for media partners and publishers to access campaigns, report
     on content performance, manage commission tracking, and query earning reports.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://integrations.impact.com/
   baseURL: https://api.impact.com/MediaPartners/{AccountSID}/
   tags:
@@ -60,7 +60,7 @@ apis:
   name: Impact Agency API
   description: REST API for agencies to manage multiple client accounts, consolidate
     reporting across brands, and automate partnership operations at scale.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://integrations.impact.com/
   baseURL: https://api.impact.com/Agencies/{AccountSID}/
   tags:
