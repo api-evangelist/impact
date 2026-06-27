@@ -5,13 +5,20 @@
   "url": "https://impact.com/feed/",
   "type": "RSS",
   "confirmed": true,
+  "repo": "impact",
   "feeds": [
+    {
+      "source": "https://impact.com/feed/",
+      "feed_url": "https://impact.com/feed/",
+      "title": "",
+      "saved": 1,
+      "method": "feed"
+    },
     {
       "source": "https://www.linkedin.com/company/impactdotcom",
       "error": "HTTPError"
     }
   ],
-  "repo": "impact",
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:03:07Z",
+  "post_count": 2
 }
