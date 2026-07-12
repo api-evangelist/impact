@@ -74,6 +74,10 @@ apis:
   - type: Authentication
     url: https://integrations.impact.com/
 common:
+- type: VulnerabilityDisclosure
+  url: security/impact-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/impact-domain-security.yml
 - type: Website
   url: https://impact.com/
 - type: Documentation
