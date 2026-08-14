@@ -1,8 +1,11 @@
 aid: impact
 name: Impact
-description: Partnership management platform with a REST API for managing affiliate
-  relationships, tracking conversions, paying partners, and reporting on partnership
-  performance across brands.
+description: impact.com is a partnership management platform for affiliate, creator, influencer and customer-referral
+  programs. It publishes four REST API personas - Brand v14, Partner v16, Agency v3 and Advocate v13 -
+  across 69 OpenAPI 3.1 documents and 245 operations, a remote OAuth 2.1 MCP server at mcp.impact.com,
+  first-party agent skills, an Advocate GraphQL endpoint, webhook and postback event delivery, and an
+  agent-readable developer portal that serves llms.txt, per-page markdown and a live documentation question
+  interface.
 type: Index
 accessModel:
   pricing: freemium
@@ -19,7 +22,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/impact.png
 url: https://raw.githubusercontent.com/api-evangelist/impact/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 tags:
 - Affiliate
@@ -29,13 +32,21 @@ tags:
 - Tracking
 - Creator Economy
 - Partner Management
+- Referral
+- Attribution
+- Payouts
+- Marketing
+- Advertising
+- MCP
+- Agents
 apis:
 - aid: impact:brand-api
   name: Impact Brand API
-  description: REST API for brands to manage partnership campaigns, track conversions,
-    process commissions, manage contracts, and report on partnership performance.
+  description: 'REST API for brands and advertisers: partners, programs, contracts, actions and conversions,
+    deals, promo codes, catalogs, ads, tracking links, invoices, exception lists, reports and bulk export
+    jobs. Version 14, released 2026-06-01.'
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://integrations.impact.com/
+  humanURL: https://integrations.impact.com/brand-api-reference
   baseURL: https://api.impact.com/Advertisers/{AccountSID}/
   tags:
   - Brand
@@ -45,18 +56,85 @@ apis:
   - Contracts
   properties:
   - type: Documentation
-    url: https://integrations.impact.com/
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
   - type: Authentication
-    url: https://integrations.impact.com/
-  - url: graphql/impact-graphql.md
-    type: GraphQL
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Overlay
+    url: overlays/impact-brand-overlay.yaml
+  - type: OpenAPI
+    url: openapi/impact-brand-account-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-actioninquiries-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-actions-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-ads-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-calldata-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-catalogs-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-clicks-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-contacts-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-contracts-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-conversions-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-deals-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-deferreddeeplink-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-exceptionlists-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-invoices-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-jobs-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-notes-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-pageload-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-partnergroups-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-partners-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-phonenumbers-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-programs-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-promocodeexceptionlists-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-promocodes-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-reports-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-routingrules-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-submissions-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-tasks-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-trackinglinks-v14-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-trackingvaluerequests-v14-openapi.yml
 - aid: impact:partner-api
   name: Impact Partner API
-  description: REST API for media partners and publishers to access campaigns, report
-    on content performance, manage commission tracking, and query earning reports.
+  description: 'REST API for media partners, publishers and creators: programs, contracts, actions and
+    action inquiries, clicks, ads, tracking links, promo codes, catalogs, stores, media properties, invoices,
+    tax documents, withdrawal settings, reports and event notifications. Version 16.'
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://integrations.impact.com/
-  baseURL: https://api.impact.com/MediaPartners/{AccountSID}/
+  humanURL: https://integrations.impact.com/partner-api-reference
+  baseURL: https://api.impact.com/Mediapartners/{AccountSID}/
   tags:
   - Publisher
   - Partner
@@ -65,15 +143,73 @@ apis:
   - Reporting
   properties:
   - type: Documentation
-    url: https://integrations.impact.com/
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
   - type: Authentication
-    url: https://integrations.impact.com/
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: Webhooks
+    url: https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Overlay
+    url: overlays/impact-partner-overlay.yaml
+  - type: OpenAPI
+    url: openapi/impact-partner-account-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-actioninquiries-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-actions-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-ads-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-campaigns-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-catalogs-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-clicks-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-contracts-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-conversions-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-deals-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-eventnotifications-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-exceptionlists-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-identityverification-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-invoices-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-jobs-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-mediaproperties-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-promo-codes-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-promocodeexceptionlists-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-promotions-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-reports-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-stores-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-tasks-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-taxdocument-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-trackinglinks-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-users-v16-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-partner-withdrawalsettings-v16-openapi.yml
 - aid: impact:agency-api
   name: Impact Agency API
-  description: REST API for agencies to manage multiple client accounts, consolidate
-    reporting across brands, and automate partnership operations at scale.
+  description: 'REST API for agencies managing multiple advertiser accounts: advertiser roster, company
+    information, compliance content submission, report export and job management. Version 3.'
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://integrations.impact.com/
+  humanURL: https://integrations.impact.com/agency-v3
   baseURL: https://api.impact.com/Agencies/{AccountSID}/
   tags:
   - Agency
@@ -82,9 +218,96 @@ apis:
   - Automation
   properties:
   - type: Documentation
-    url: https://integrations.impact.com/
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
   - type: Authentication
-    url: https://integrations.impact.com/
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Overlay
+    url: overlays/impact-agency-overlay.yaml
+  - type: OpenAPI
+    url: openapi/impact-agency-advertisers-v3-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-agency-companyinformation-v3-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-agency-compliance-v3-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-agency-jobs-v3-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-agency-reports-v3-openapi.yml
+- aid: impact:advocate-api
+  name: Impact Advocate API
+  description: 'REST and GraphQL API for impact.com Advocate, the customer-referral product acquired as
+    SaaSquatch: participants, referrals, referral codes, rewards and reward balances, share links, data
+    exports and webhook subscriptions. Version 13, served from the Advocate product host and tenant-scoped
+    by tenant_alias.'
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  baseURL: https://app.referralsaasquatch.com/api/v1/{tenant_alias}/
+  tags:
+  - Advocate
+  - Referral
+  - Rewards
+  - Participants
+  - Share Links
+  - Webhooks
+  properties:
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+  - type: OpenAPI
+    url: openapi/impact-brand-advocate-account-v13-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-advocate-export-v13-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-advocate-referral-v13-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-advocate-referralcode-v13-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-advocate-reward-v13-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-advocate-rewardbalance-v13-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-advocate-sharelinks-v13-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-advocate-user-v13-openapi.yml
+  - type: OpenAPI
+    url: openapi/impact-brand-advocate-webhook-v13-openapi.yml
+- aid: impact:mcp-server
+  name: Impact MCP Server
+  description: Remote Model Context Protocol server for impact.com. Fifteen documented tools give an AI
+    assistant account-scoped access to performance analytics, invoices, partner and program discovery,
+    promo codes, tracking link creation, website and social metrics, order investigation and platform
+    help. Authorized with OAuth 2.1 and a per-client usage token.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://integrations.impact.com/ai-solutions/mcp-quick-start
+  baseURL: https://mcp.impact.com/mcp
+  tags:
+  - MCP
+  - Agents
+  - AI
+  - Analytics
+  - Discovery
+  properties:
+  - type: MCPServer
+    url: mcp/impact-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/impact-tool-crosswalk.yml
+  - type: Documentation
+    url: https://integrations.impact.com/ai-solutions/mcp-quick-start
+  - type: Authentication
+    url: authentication/impact-authentication.yml
+  - type: OAuthScopes
+    url: scopes/impact-scopes.yml
+  - type: AgentSkill
+    url: skills/_index.yml
 common:
 - type: VulnerabilityDisclosure
   url: security/impact-vulnerability-disclosure.yml
@@ -101,7 +324,7 @@ common:
 - type: Blog
   url: https://impact.com/press-releases/
 - type: Pricing
-  url: https://impact.com/pricing/
+  url: https://impact.com/get-started/
 - type: X
   url: https://x.com/impactdotcom
 - type: Plans
@@ -114,6 +337,75 @@ common:
   url: blogs/blogs.json
 - type: JSONLDContext
   url: json-ld/impact-context.jsonld
+- type: DeveloperPortal
+  url: https://integrations.impact.com/
+- type: APIReference
+  url: https://integrations.impact.com/brand-api-reference
+- type: GettingStarted
+  url: https://integrations.impact.com/rest-apis/api-quick-start
+- type: Support
+  url: https://help.impact.com/
+- type: SignUp
+  url: https://impact.com/get-started/
+- type: TermsOfService
+  url: https://impact.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://impact.com/privacy-policy/
+- type: StatusPage
+  url: https://status.impact.com/
+- type: Deprecation
+  url: lifecycle/impact-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/impact-lifecycle.yml
+- type: ChangeLog
+  url: changelog/impact-changelog.yml
+- type: Conventions
+  url: conventions/impact-conventions.yml
+- type: ErrorCatalog
+  url: errors/impact-problem-types.yml
+- type: Authentication
+  url: authentication/impact-authentication.yml
+- type: OAuthScopes
+  url: scopes/impact-scopes.yml
+- type: Conformance
+  url: conformance/impact-conformance.yml
+- type: Compliance
+  url: security/impact-trust-center.yml
+- type: TrustCenter
+  url: security/impact-trust-center.yml
+- type: Security
+  url: security/impact-vulnerability-disclosure.yml
+- type: SecurityTxt
+  url: well-known/impact-security.txt
+- type: WellKnown
+  url: well-known/impact-well-known.yml
+- type: Packages
+  url: packages/impact-packages.yml
+- type: SDKs
+  url: packages/impact-packages.yml
+- type: Components
+  url: components/impact-components.yml
+- type: DataModel
+  url: data-model/impact-data-model.yml
+- type: Sandbox
+  url: sandbox/impact-sandbox.yml
+- type: LLMsTxt
+  url: llms/impact-llms.txt
+- type: MCPServer
+  url: mcp/impact-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/impact-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Webhooks
+  url: asyncapi/impact-webhooks.yml
+- type: GraphQL
+  url: graphql/impact-advocate-graphql.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 96
+  pass: local-v1
