@@ -1,0 +1,405 @@
+openapi: 3.1.0
+info:
+  title: Conversions API
+  version: '16'
+  description: 'The Conversions API lets you submit conversion events (for example,
+
+    card-linked offer transactions) directly to impact.com so that brands
+
+    receive more up-to-date reporting. Submit your campaign and
+
+    event-tracker details along with the transaction; once accepted, the
+
+    conversion is queued for processing and a URI is returned that you can poll
+
+    for status.
+
+
+    Once a submitted conversion is processed and attributed, it becomes an Action
+
+    (see the Actions API).
+
+    '
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+  description: Production server
+tags:
+- name: Conversions
+  description: Endpoint for submitting your conversion events to impact.com.
+paths:
+  /Mediapartners/{AccountSID}/PartnerConversions:
+    post:
+      operationId: createConversion
+      tags:
+      - Conversions
+      summary: Submit a Conversion Event
+      description: 'Submits a conversion event for tracking and attribution. A minimum
+
+        set of parameters is required, such as your impact partner ID
+
+        (`MediaPartnerId` or `MediaId`), the campaign (`CampaignId`), and
+
+        event identifier (`ActionTrackerId`), an event date (`EventDate`),
+
+        and a unique order ID (`OrderId`).
+
+
+        On success, the conversion will be queued, and a `QueuedUri` will be
+
+        returned. Use Event Notifications or Action Feeds to receive updates
+
+        when conversions are tracked, credited, modified, or reversed.
+
+
+        - [Event Notifications & Postbacks](https://help.impact.com/partner/what-would-you-like-to-learn-about/platform-features/action-management/event-notifications-and-postbacks)
+
+        - [Action Life Cycle Events](https://help.impact.com/partner/what-would-you-like-to-learn-about/platform-features/action-management/event-notifications-and-postbacks/action-life-cycle-event-notification-faqs)
+
+        - [Action Feeds](https://help.impact.com/partner/what-would-you-like-to-learn-about/platform-features/action-management/data-feeds/set-up-an-action-event-data-feed-as-a-partner#set-up-an-action-data-feed)
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/AccountSID'
+      requestBody:
+        required: true
+        description: 'The details of the conversion event, submitted as form-encoded data.
+
+
+          You must supply either `MediaPartnerId` or `MediaId` (one of the two is
+
+          required) in addition to the fields listed as required below.
+
+          '
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConversionPayload'
+      responses:
+        '200':
+          description: The conversion event was successfully queued for processing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversionSubmissionResponse'
+        '400':
+          description: Bad Request. The request was invalid, likely due to missing required fields or incorrect data formats.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversionError'
+        '401':
+          description: Unauthorized. No valid credentials were supplied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthError'
+              example:
+                status: 401
+                title: Unauthorized
+        '403':
+          description: Access Denied. The authenticated account does not have permission to perform this action (for example, a `MediaPartnerId`/`AccountSID` mismatch).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthError'
+              example:
+                status: 403
+                title: Access Denied
+components:
+  parameters:
+    AccountSID:
+      name: AccountSID
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier for the partner account.
+  schemas:
+    ConversionType:
+      type: string
+      description: 'The conversion type. The only accepted value is `CLO` or `clo`
+
+        (case-insensitive). If absent or blank it''ll default to partner.
+
+        Similarly, unknown non-empty values will queue with a warning and
+
+        default to partner.
+
+
+        This field is required for CLO partners. To flag a conversion as a
+
+        card-linked offer, include the parameter `ConversionType=CLO`.
+
+        '
+      example: CLO
+    ConversionPayload:
+      type: object
+      description: The details of a conversion event you submit.
+      required:
+      - ActionTrackerId
+      - CampaignId
+      - EventDate
+      - MediaId
+      - MediaPartnerId
+      - OrderId
+      properties:
+        ActionTrackerId:
+          type: integer
+          description: The action tracker associated with the conversion event.
+          example: 19845
+        CampaignId:
+          type: integer
+          description: The campaign this conversion should be attributed to.
+          example: 10306
+        EventDate:
+          type: string
+          description: The date/time of the transaction. Accepts `NOW` or an ISO 8601 timestamp.
+          example: '2023-02-15T22:55:32-08:00'
+        MediaId:
+          type: integer
+          description: An alias for `MediaPartnerId`. Accepted when `MediaPartnerId` is omitted.
+          example: 1924609
+        MediaPartnerId:
+          type: integer
+          description: Your account ID. You can use `MediaId` instead, but you must provide one of the two.
+          example: 1924609
+        OrderId:
+          type: string
+          description: 'A unique identifier you supply for this transaction. Used for
+
+            deduplication. Example: `9217374917471`
+
+
+            For CLO partners, this should be mapped to the
+
+            `CardLinkedTransactionId`. Example: `OrderId={CardLinkedTransactionId}`
+
+            '
+          example: '9217374917471'
+        Amount:
+          type: number
+          format: decimal
+          description: "The total transaction (sale) amount for the conversion. Returns and\nnegative amounts are not currently supported and will result in an\nerror.\n\nDo not send `Amount` together with item-level fields (e.g.\n`ItemPrice1` or `ItemSubTotal1`). Once item fields are detected,\nitem parsing drives the sale items and the order-level `Amount`\nfallback will not be used.\n\n- For simple conversions, send order-level `Amount` and don't\n  send item fields.\n- For itemized conversions, omit order-level `Amount`.\n- For each item, either send `ItemSubTotalN` or `ItemPriceN` and\n  `ItemQuantityN`.\n- Don't send both `ItemPriceN` and `ItemSubTotalN` for the same\n  item; if both are present, the item subtotal/amount will be\n  used rather than `price * quantity`.\n"
+          example: 156.11
+        CardBin:
+          type: string
+          description: Card BIN for CLO transactions. Must be exactly 6 or 8 digits; invalid values are ignored with a warning.
+          example: '411111'
+        CardLastFour:
+          type: string
+          description: The last four digits of the card used. Must be exactly 4 digits; invalid values are ignored with a warning.
+          example: '1234'
+        ConversionType:
+          $ref: '#/components/schemas/ConversionType'
+        CurrencyCode:
+          type: string
+          description: Three-letter ISO 4217 alpha currency code for the transaction. If omitted, your account's default currency is used.
+          example: USD
+        CustomerCity:
+          type: string
+          description: City of the customer (billing city).
+          example: New York
+        CustomerCountry:
+          type: string
+          description: Country of the customer (billing country).
+          example: US
+        CustomerPostCode:
+          type: string
+          description: Postal (ZIP) code of the customer (billing ZIP).
+          example: '11101'
+        CustomerStatus:
+          type: string
+          maxLength: 255
+          description: Status of the customer for this conversion (e.g. new or returning).
+          example: New
+        Date1-Date15:
+          type: string
+          format: date-time
+          description: General fields (Date1 through Date15) that accept a date and time in ISO 8601 format you want to send. Appears in brand reports.
+          example: '2026-09-10T22:55:32-08:00'
+        DeviceMfr:
+          type: string
+          description: Mobile device's manufacturer. Pass `android.os.Build.MANUFACTURER` on Android or `"Apple"` on iOS.
+          example: Apple
+        DeviceModel:
+          type: string
+          description: Mobile device's model. Pass `android.os.Build.MODEL` on Android or the value from `systemInfo.machine` on iOS.
+          example: iPhone 15
+        IpAddress:
+          type: string
+          description: Customer's IP address. Used for fraud detection and install attribution.
+          example: 72.194.216.61
+        ItemBrand[i]:
+          type: string
+          description: Brand name for the product referenced. Can also be automatically pulled if a product catalog has been uploaded.
+          example: Acme
+        ItemCategory[i]:
+          type: string
+          description: Category of the item.
+        ItemDeliveryType[i]:
+          type: string
+          description: Type of delivery method specified for this item (e.g. INSTORE).
+          example: INSTORE
+        ItemDiscount[i]:
+          type: number
+          format: decimal
+          description: Discount applied to each item purchased of this type (not to the entire line item).
+        ItemDiscountRate[i]:
+          type: number
+          format: decimal
+          description: The discount rate (%) applied to each item purchased.
+          example: 10.0
+        ItemMpn[i]:
+          type: string
+          description: Manufacturer part number (MPN) for the product referenced. Can also be automatically pulled if a product catalog has been uploaded.
+          example: ACME-MPN-101
+        ItemName[i]:
+          type: string
+          description: The name for the product referenced. Can also be automatically appended through uploading a product catalog.
+        ItemPrice[i]:
+          type: number
+          format: decimal
+          description: Unit price for the item. Do not send if `ItemSubTotal[i]` is passed.
+        ItemPromoCode[i]:
+          type: string
+          description: Promotional code applied to the item for the order. Note that this parameter does not work with unique tracking codes set up for particular partners.
+          example: 10OFF-ACME
+        ItemQuantity[i]:
+          type: integer
+          description: Number of units for this line item.
+        ItemSku[i]:
+          type: string
+          description: SKU for the item (e.g., ItemSku1, ItemSku2).
+        ItemSubCategory[i]:
+          type: string
+          description: If applicable, the subcategory for the product referenced at the item level. Can also be automatically pulled if a product catalog has been uploaded.
+          example: Tennis
+        ItemSubTotal[i]:
+          type: number
+          format: decimal
+          description: Total price for the line item. Do not send if `ItemPrice[i]` is passed.
+        ItemTotalDiscount[i]:
+          type: number
+          format: decimal
+          description: Discount applied to this line item (not just for each product of this type). This amount is automatically subtracted from the `ItemSubTotal` to determine the final sale amount for payout and reporting purposes.
+        LocationId:
+          type: string
+          description: Identifier for the location associated with this conversion, such as a merchant ID (MID). Primarily used for accommodations and card-linked transactions.
+          example: '12345'
+        LocationName:
+          type: string
+          description: Name of the location associated with this conversion, such as a physical store or website.
+          example: company.com
+        Money1-Money3:
+          type: number
+          format: decimal
+          description: 'General money fields (Money1 through Money3) that accept any monetary data you want to send. Appears in brand reports. Format: decimal (18,2).'
+          example: 173.11
+        Note:
+          type: string
+          maxLength: 255
+          description: General field used to pass information for event-level reporting purposes.
+          example: Customer confirmed delivery.
+        Numeric1-Numeric10:
+          type: number
+          format: decimal
+          description: 'General numeric fields (Numeric1 through Numeric10) that accept any numeric data you want to send. Appears in brand reports. Format: decimal (18,2).'
+          example: 15.6
+        PayoutAmount:
+          type: number
+          format: decimal
+          description: Payout amount for CLO transactions. Optional. if present, must be a non-negative decimal or it will be ignored with a warning.
+          example: 12.5
+        SharedId:
+          type: string
+          maxLength: 255
+          description: A free-form field that accepts any value brands can use to create custom payouts to partners.
+          example: Recurring
+        SubId1-SubId3:
+          type: string
+          maxLength: 255
+          description: Custom text fields (SubId1 through SubId3) typically used by partners to segment their traffic. Appears in brand reports.
+          example: p_capi_1001
+        Text1-Text50:
+          type: string
+          maxLength: 255
+          description: General text fields (Text1 through Text50) that accept strings of any text data you want to send. Appears in brand reports.
+          example: text1value
+        UserAgent:
+          type: string
+          description: User agent of the customer, used to provide device reporting.
+          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
+    ConversionSubmissionResponse:
+      type: object
+      description: Returned when a conversion event is successfully queued for processing.
+      properties:
+        Status:
+          type: string
+          description: The submission status. `QUEUED` means the conversion was accepted for processing.
+          example: QUEUED
+        QueuedUri:
+          type: string
+          format: uri-reference
+          description: URI of the queued submission record. Use this to poll for processing status.
+          example: /Mediapartners/<AccountSID>/APISubmissions/A-b1234c56-7d89-0e12-3f4g-5h6ij7k8901l
+        warnings:
+          type: array
+          description: 'Included when one or more optional field values were invalid or not
+
+            recognized and were ignored or defaulted instead of causing an error.
+
+            '
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: The name of the field the warning applies to.
+              level:
+                type: string
+                description: The severity of the warning.
+              message:
+                type: string
+                description: A human-readable message describing the warning.
+          example:
+          - field: CardBin
+            level: WARNING
+            message: 'CardBin ignored: must be exactly 6 or 8 digits.'
+    ConversionError:
+      type: object
+      description: Returned when the conversion submission request is invalid.
+      properties:
+        Status:
+          type: string
+          description: Indicates that the request failed.
+          example: ERROR
+        errors:
+          type: array
+          description: One or more validation errors describing what was wrong with the request.
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: The name of the field that caused the error.
+              level:
+                type: string
+                description: The severity of the error.
+              message:
+                type: string
+                description: A human-readable error message.
+    AuthError:
+      type: object
+      description: Returned when the request could not be authenticated or is not authorized.
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 401
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          example: Unauthorized

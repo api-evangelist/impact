@@ -1,0 +1,105 @@
+name: Impact Authentication Profile
+description: Every authentication mechanism impact.com publishes across its REST APIs, its
+  Advocate APIs and its MCP server, with what each one is used for and where it is declared.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/brand-api-reference/readme/authentication
+docs:
+  authentication: https://integrations.impact.com/brand-api-reference/readme/authentication
+  create_api_key: https://integrations.impact.com/rest-apis/api-quick-start/create-an-api-key
+  quick_start: https://integrations.impact.com/rest-apis/api-quick-start
+  mcp: https://integrations.impact.com/ai-solutions/mcp-quick-start
+schemes:
+  - id: basicAuth
+    type: http
+    scheme: basic
+    applies_to: [Brand API v14, Partner API v16, Agency API v3, Advocate API v13]
+    username: Account SID
+    password: Auth Token
+    header: 'Authorization: Basic base64(AccountSID:AuthToken)'
+    transport: HTTPS only, port 443
+    declared_in_openapi: partially
+    declared_in_openapi_note: Only the nine Advocate v13 documents declare a securitySchemes
+      block. All 29 Brand v14, 26 Partner v16 and 5 Agency v3 documents omit securitySchemes
+      and security entirely, so the auth requirement is invisible to any tool reading those
+      specs.
+    failure_status: 401
+  - id: APIKey
+    type: http
+    scheme: basic
+    applies_to: [Advocate API v13]
+    description: Tenant API key, for server-to-server interactions only.
+    declared_in_openapi: true
+    declared_in: openapi/impact-brand-advocate-*-v13-openapi.yml
+  - id: UserJWT
+    type: apiKey
+    in: header
+    name: X-SaaSquatch-User-Token
+    applies_to: [Advocate API v13, Advocate Web SDK, Advocate Mobile SDKs]
+    description: Per-user JWT used by the Advocate Web and Mobile SDKs and by Open Endpoints in
+      client-side contexts.
+    declared_in_openapi: true
+  - id: oauth2
+    type: oauth2
+    applies_to: [MCP server, multi-customer applications]
+    protocol: OAuth 2.1
+    issuer: https://app.impact.com
+    authorization_endpoint: https://app.impact.com/oauth2/authorize
+    token_endpoint: https://app.impact.com/oauth2/token
+    revocation_endpoint: https://app.impact.com/oauth2/revoke
+    introspection_endpoint: https://app.impact.com/oauth2/introspect
+    userinfo_endpoint: https://app.impact.com/oauth2/userinfo
+    jwks_uri: https://app.impact.com/oauth2/jwks
+    grants: [authorization_code, client_credentials, refresh_token]
+    pkce: [S256]
+    token_endpoint_auth_methods: [client_secret_basic, client_secret_post, client_secret_jwt,
+      private_key_jwt, none]
+    scopes: [mcp:read, mcp:write, openid]
+    metadata:
+      authorization_server: https://app.impact.com/.well-known/oauth-authorization-server
+      protected_resource: https://app.impact.com/.well-known/oauth-protected-resource
+      openid_configuration: https://app.impact.com/.well-known/openid-configuration
+    probed: '2026-08-13'
+    http_status: 200
+  - id: openIdConnect
+    type: openIdConnect
+    issuer: https://app.impact.com
+    discovery: https://app.impact.com/.well-known/openid-configuration
+    id_token_signing: [RS256]
+    subject_types: [public]
+    scopes_supported: [openid]
+    note: OIDC discovery is served, but scopes_supported lists only openid - no profile or
+      email - so the identity surface is minimal.
+token_model:
+  scoped_tokens:
+    available: true
+    since: April 2025
+    granularity: per API category and per endpoint
+    creation: impact.com UI, Settings, Technical, API, Create Access Token
+    forbidden_status: 403
+    note: A scoped token that is disabled, or enabled but not permitted on the endpoint,
+      returns 403 rather than 401.
+  legacy_tokens:
+    available: true
+    granularity: read/write or read-only only
+    status: supported, upgrade encouraged, no sunset date published
+  mcp_tokens:
+    minted_per: LLM client
+    scoped_to: the consenting user's own platform permissions
+    refresh: refresh token issued
+    revocation: per-token delete in the UI, or account-wide MCP disable which deletes every
+      minted token
+  api_version_pinning: each token is created against a specific API version
+guidance_published:
+  - Start with read-only scopes so scripts cannot mutate production objects.
+  - Use separate tokens per environment (development, staging, production).
+  - Never hardcode credentials; use a vault or encrypted environment variables.
+  - Redact Account SID, Auth Token, OAuth and bearer tokens from anything pasted into
+    third-party assistants.
+findings:
+  - Documentation-level auth is strong and explicit, but spec-level auth is largely missing -
+    60 of 69 published OpenAPI documents declare no security scheme at all.
+  - impact.com serves all three OAuth/OIDC discovery documents anonymously on app.impact.com,
+    which is unusual for a platform of this type and materially helps agent clients.
+provider_action: Add the documented basicAuth securityScheme and a top-level security
+  requirement to the Brand, Partner and Agency OpenAPI documents.

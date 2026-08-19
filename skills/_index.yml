@@ -1,0 +1,82 @@
+name: Impact Agent Skills
+description: Agent Skills impact.com publishes for its own MCP server. impact.com calls them
+  "MCP Skills" and describes them as a curated first-party set - reusable workflows a user
+  installs into Claude, Cursor or VS Code so the assistant knows how to drive
+  https://mcp.impact.com/mcp for a specific partnership job.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/ai-solutions/mcp-skills
+install_guide: https://integrations.impact.com/ai-solutions/mcp-skills/install-an-mcp-skill
+faq: https://integrations.impact.com/ai-solutions/mcp-skills/mcp-skills-faq
+skills:
+  - name: partner-weekly-performance-digest
+    title: Partner Weekly Performance Digest
+    audience: Partner
+    file: skills/impact-partner-weekly-performance-digest.md
+    method: searched
+    source: https://integrations.impact.com/ai-solutions/mcp-skills/partner-skills/partner-weekly-performance-digest
+    package_url: https://3238951795-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FiVbdCghMC6mw51rrphG6%2Fuploads%2F2MRauCIxUjoSzuzXkYDc%2Fpartner-weekly-performance-digest.md
+    http_status: 200
+    required_tools: [resolve_query_fields, query_performance]
+    optional_tools: [resolve_program]
+    note: Saved verbatim. Carries real Agent Skill frontmatter - name, description, audience,
+      required_tools, optional_tools, deliverable.
+documented_but_package_not_retrievable:
+  - title: Brand Partner Performance Scorecard
+    audience: Brand
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/brand-skills/brand-partner-performance-scorecard
+    note: The page carries a file block, but the attached download resolves to
+      partner-weekly-performance-digest.md - the Partner skill, byte-identical to the file
+      attached to the Partner page. The Brand scorecard package itself is not served.
+  - title: Brand Partner Discovery Brief
+    audience: Brand
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/brand-skills/brand-partner-discovery-brief
+  - title: Brand Channel / Media Mix Brief
+    audience: Brand
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/brand-skills/brand-channel-media-mix-brief
+  - title: Brand Action Quality & Reverse Brief
+    audience: Brand
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/brand-skills/brand-action-quality-and-reverse-brief
+  - title: Brand Cost & Efficiency Brief
+    audience: Brand
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/brand-skills/brand-cost-and-efficiency-brief
+  - title: Brand Campaign Performance Scorecard
+    audience: Brand
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/brand-skills/brand-campaign-performance-scorecard
+  - title: Brand Invoice Status Brief
+    audience: Brand
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/brand-skills/brand-invoice-status-brief
+  - title: Partner Program Portfolio Scorecard
+    audience: Partner
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/partner-skills/partner-program-portfolio-scorecard
+  - title: Partner Promo & Offers Readiness
+    audience: Partner
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/partner-skills/partner-promo-and-offers-readiness
+  - title: Partner Tracking-link Pack
+    audience: Partner
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/partner-skills/partner-tracking-link-pack
+  - title: Partner Invoice Status Brief
+    audience: Partner
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/partner-skills/partner-invoice-status-brief
+  - title: Partner Program Discovery Brief
+    audience: Partner
+    docs: https://integrations.impact.com/ai-solutions/mcp-skills/partner-skills/partner-program-discovery-brief
+finding:
+  summary: impact.com advertises 13 first-party Agent Skills. Only one downloadable skill
+    package is actually served, and the Brand flagship skill's download link points at the
+    Partner skill's file.
+  checked: '2026-08-13'
+  evidence:
+    - url: https://integrations.impact.com/ai-solutions/mcp-skills/brand-skills
+      status: 200
+      note: 7 Brand skill tiles rendered
+    - url: https://integrations.impact.com/ai-solutions/mcp-skills/partner-skills
+      status: 200
+      note: 6 Partner skill tiles rendered
+    - url: https://integrations.impact.com/files/TaGURa5d0hKG4GjIfEYK
+      status: 404
+      note: The /files/<id> reference GitBook emits in the markdown export is not directly
+        fetchable; the resolved storage URL for that id serves
+        partner-weekly-performance-digest.md.
+  provider_action: Attach the remaining 12 skill packages, and correct the file attached to
+    the Brand Partner Performance Scorecard page.

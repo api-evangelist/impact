@@ -1,0 +1,52 @@
+name: Impact Security and Privacy Center
+description: impact.com's published security and privacy page, the certifications it names, and
+  the privacy processes it commits to.
+generated: '2026-08-13'
+method: searched
+source: https://impact.com/security-and-privacy/
+http_status: 200
+checked: '2026-08-13'
+trust_center_url: https://impact.com/security-and-privacy/
+portal_type: marketing page
+portal_note: A published security and privacy page, not a live trust portal - there is no
+  document request flow, no subprocessor list page, and no evidence library. Certification
+  reports are not downloadable from the public page.
+certifications:
+  - name: SOC 1 Type II
+    scope: internal controls over financial reporting
+    published: true
+  - name: ISO/IEC 27001:2022
+    scope: information security management system
+    published: true
+  - name: PCI DSS Level 4
+    scope: merchant compliance, maintained through annual SAQ completion
+    published: true
+not_claimed:
+  - SOC 2 Type II
+  - HIPAA
+  - FedRAMP
+  - ISO 27017
+  - ISO 27018
+privacy_commitments:
+  - name: Consent and opt-out
+    description: Customizable consent forms, with participant-controlled unsubscribe and
+      opt-out.
+  - name: Right to be forgotten
+    description: Complete removal of personal information from impact.com systems and its
+      subprocessors, requested through the support portal.
+  - name: Data portability
+    description: Data transfer/export on request.
+legal:
+  privacy_policy: https://impact.com/privacy-policy/
+  terms_of_use: https://impact.com/terms-of-use/
+  responsible_disclosure: https://impact.responsibledisclosure.com/hc/en-us
+  accessibility_policy: published in site footer
+  modern_slavery_statement: published in site footer
+  paia_manual: published in site footer
+findings:
+  - impact.com names SOC 1 Type II rather than SOC 2 Type II. For a SaaS platform holding
+    partner payment and conversion data, SOC 2 is the control report buyers usually ask for,
+    and it is not claimed.
+  - PCI DSS Level 4 is the lowest merchant tier and describes impact.com's own card
+    acceptance, not the security of the partner payout rails.
+  - No certification artefacts are retrievable without a sales conversation.

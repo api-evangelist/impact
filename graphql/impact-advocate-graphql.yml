@@ -1,0 +1,58 @@
+name: Impact Advocate GraphQL API
+description: The one real GraphQL surface impact.com publishes - the Advocate (SaaSquatch)
+  GraphQL API used to build custom referral participant experiences, integrations and admin
+  interfaces.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/graphql-api
+endpoint: https://app.referralsaasquatch.com/api/v1/{tenant_alias}/graphql
+ownership_note: app.referralsaasquatch.com is the Advocate product host. SaaSquatch was
+  acquired by impact.com and is sold as impact.com Advocate; impact.com's own developer portal
+  documents this endpoint and the published OpenAPI documents for the same host carry the
+  title "SaaSquatch by impact.com API".
+product: Advocate
+docs:
+  graphql: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/graphql-api
+  custom_experience: https://integrations.impact.com/integration-guides/for-brands/advocate/build-a-custom-advocate-experience-with-graphql
+  rest_auth: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+authentication:
+  same_as: Advocate REST API
+  schemes: [basicAuth (Account SID / Auth Token), APIKey (tenant API key, server-to-server),
+    UserJWT (X-SaaSquatch-User-Token, client-side)]
+tenancy:
+  path_variable: tenant_alias
+  where_to_find: impact.com Settings, Advocate Settings, General, Tenant Details
+explorer:
+  available: true
+  location: impact.com Settings, Advocate Settings, GraphQL
+  features: [query editor, results pane, Documentation Explorer with the full schema]
+  access: authenticated impact.com account only
+schema:
+  captured: false
+  introspection_attempted: true
+  introspection_result: gated
+  evidence:
+    - url: https://app.referralsaasquatch.com/api/v1/test/graphql
+      method: POST
+      body: '{"query":"{__schema{queryType{name}}}"}'
+      http_status: 404
+      response: '{"message":"Missing or invalid tenant alias.","statusCode":404,"apiErrorCode":"TENANT_NOT_FOUND","rsCode":"RS045"}'
+      fetched: '2026-08-13'
+  note: Introspection requires a real tenant alias plus credentials. The schema is published
+    only inside the authenticated GraphQL explorer's Documentation Explorer, so no SDL is
+    retrievable anonymously. No SDL is stored here - inventing one would misrepresent the
+    provider's contract.
+provenance_correction:
+  date: '2026-08-13'
+  removed:
+    - graphql/impact-schema.graphql
+    - graphql/impact-graphql.md
+  reason: A prior enrichment round generated an 844-line "conceptual" GraphQL SDL and a
+    companion type catalogue by transliterating the impact.com REST surface into GraphQL
+    types, queries and mutations. impact.com publishes no such schema. Those files asserted a
+    GraphQL API shape the provider does not ship, and the apis.yml pointer typed them as
+    GraphQL on the Brand API, crediting impact.com with a contract it never published. Both
+    files were deleted and replaced by this probed record of the one GraphQL endpoint that
+    actually exists.
+provider_action: Publish the Advocate GraphQL SDL, or an introspection-enabled public schema
+  endpoint, so integrators can generate types without an authenticated session.

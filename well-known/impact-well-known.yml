@@ -1,0 +1,131 @@
+name: Impact Well-Known Endpoints
+description: Probe of RFC 8615 /.well-known/ paths across every impact.com host named in apis.yml
+  and in the harvested OpenAPI servers[] blocks.
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes, 2026-08-13
+hosts:
+  - impact.com
+  - api.impact.com
+  - app.impact.com
+  - mcp.impact.com
+  - integrations.impact.com
+probes:
+  - host: impact.com
+    path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain
+    file: well-known/impact-security.txt
+    document: true
+    note: PGP-signed security.txt with Contact, Policy, Encryption, Acknowledgments and
+      Canonical. Expires 2029-01-01.
+  - host: impact.com
+    path: /.well-known/openid-configuration
+    status: 404
+    document: false
+  - host: impact.com
+    path: /.well-known/oauth-authorization-server
+    status: 404
+    document: false
+  - host: impact.com
+    path: /.well-known/api-catalog
+    status: 404
+    document: false
+  - host: impact.com
+    path: /.well-known/ai-plugin.json
+    status: 404
+    document: false
+  - host: impact.com
+    path: /.well-known/agent-card.json
+    status: 404
+    document: false
+  - host: impact.com
+    path: /.well-known/agent.json
+    status: 404
+    document: false
+  - host: app.impact.com
+    path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    file: well-known/impact-oauth-protected-resource.json
+    document: true
+    note: RFC 9728 protected-resource metadata for the MCP server. Names resource
+      https://mcp.impact.com/mcp, authorization server https://app.impact.com, and scopes
+      mcp:read and mcp:write.
+  - host: app.impact.com
+    path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: well-known/impact-oauth-authorization-server.json
+    document: true
+    note: RFC 8414 authorization-server metadata. authorization_code, client_credentials and
+      refresh_token grants; PKCE S256; revocation and introspection endpoints published.
+  - host: app.impact.com
+    path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: well-known/impact-openid-configuration.json
+    document: true
+    note: OIDC discovery document. userinfo endpoint, RS256 id_token signing, scopes_supported
+      is openid only.
+  - host: api.impact.com
+    path: /.well-known/security.txt
+    status: 404
+    document: false
+  - host: api.impact.com
+    path: /.well-known/openid-configuration
+    status: 404
+    document: false
+  - host: api.impact.com
+    path: /.well-known/oauth-authorization-server
+    status: 404
+    document: false
+  - host: api.impact.com
+    path: /.well-known/oauth-protected-resource
+    status: 404
+    document: false
+  - host: api.impact.com
+    path: /.well-known/api-catalog
+    status: 404
+    document: false
+  - host: api.impact.com
+    path: /.well-known/ai-plugin.json
+    status: 404
+    document: false
+  - host: api.impact.com
+    path: /.well-known/agent-card.json
+    status: 404
+    document: false
+  - host: api.impact.com
+    path: /.well-known/agent.json
+    status: 404
+    document: false
+  - host: mcp.impact.com
+    path: /.well-known/oauth-protected-resource
+    status: 404
+    document: false
+    note: The MCP endpoint itself does not serve protected-resource metadata; its 401
+      WWW-Authenticate header delegates to app.impact.com instead, which does serve it.
+  - host: mcp.impact.com
+    path: /.well-known/oauth-authorization-server
+    status: 404
+    document: false
+  - host: mcp.impact.com
+    path: /.well-known/agent-card.json
+    status: 404
+    document: false
+  - host: integrations.impact.com
+    path: /.well-known/security.txt
+    status: 404
+    document: false
+    note: Docs host returns an HTML SPA shell body on the 404, not a document.
+  - host: integrations.impact.com
+    path: /.well-known/agent-card.json
+    status: 404
+    document: false
+summary:
+  paths_probed: 24
+  documents_served: 4
+  agent_card: false
+  security_txt: true
+  oauth_metadata: true

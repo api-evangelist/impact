@@ -1,0 +1,84 @@
+name: Impact Embeddable Components
+description: Client-side and embeddable UI surfaces impact.com publishes. All of them belong to
+  the Advocate (SaaSquatch) referral product; the Brand, Partner and Agency APIs ship no
+  embeddable component library.
+generated: '2026-08-13'
+method: searched
+source: https://github.com/saasquatch/program-tools + https://www.npmjs.com/org/saasquatch
+ownership_note: github.com/saasquatch is impact.com's Advocate product organization; impact.com
+  documents these as its own SDK and component surface.
+families:
+  - name: Mint Components
+    package: '@saasquatch/mint-components'
+    registry: npm
+    version: 2.3.1
+    published: '2026-08-13'
+    repository: https://github.com/saasquatch/program-tools
+    technology: web components (Stencil)
+    description: The design library for Advocate participant experiences - referral widgets,
+      leaderboards, reward tables, share buttons, portal pages and forms rendered inside a
+      brand's own site or a hosted microsite.
+    embedding: custom elements, loaded through the Advocate widget runtime or bundled directly
+  - name: Bedrock Components
+    package: '@saasquatch/bedrock-components'
+    registry: npm
+    version: 1.5.3
+    published: '2026-04-01'
+    repository: https://github.com/saasquatch/program-tools
+    technology: web components
+    description: Adds advanced conditional logic, routing and data binding on top of Mint
+      Components for widgets and microsite pages.
+  - name: PayPal Components
+    package: '@saasquatch/paypal-components'
+    registry: npm
+    version: 1.0.3
+    published: '2023-06-14'
+    repository: https://github.com/saasquatch/program-tools
+    technology: web components
+    description: Payout-connection components for PayPal-based reward fulfilment.
+    status: stale
+loaders:
+  - name: squatch-js
+    package: '@saasquatch/squatch-js'
+    registry: npm
+    version: 2.8.4
+    published: '2026-04-02'
+    repository: https://github.com/saasquatch/squatch-js
+    description: The browser SDK that identifies the current user, opens embedded or popup
+      widgets, and renders the component tree into a host page.
+    auth: UserJWT via the X-SaaSquatch-User-Token header
+  - name: Advocate installation scripts
+    docs: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-tracking-integrations/advocate-installation-scripts
+    description: Script-tag installation for Advocate tracking and widget rendering, including
+      an advanced variant and a Google Tag Manager path.
+    versioning: unpinned
+    note: The documented install is a script tag that floats to the current build. A consumer
+      cannot tell which version they are running, and neither can we.
+hosted_surfaces:
+  - name: Advocate microsites
+    description: Hosted referral portal pages composed from Mint and Bedrock components,
+      routed by '@saasquatch/microsite-router'.
+    package: '@saasquatch/microsite-router'
+    version: 1.0.6
+    published: '2026-02-27'
+  - name: Share links
+    docs: https://integrations.impact.com/integration-guides/for-brands/advocate/share-links-for-advocate
+    description: Prebuilt participant share URLs and channel-specific share targets, also
+      exposed as REST operations in openapi/impact-brand-advocate-sharelinks-v13-openapi.yml.
+mobile:
+  - name: squatch-ios
+    platform: iOS (Swift, Objective-C)
+    repository: https://github.com/saasquatch/squatch-ios
+    version: v1.0.0-beta.1
+    published: '2021-05-18'
+  - name: squatch-android
+    platform: Android
+    repository: https://github.com/saasquatch/squatch-android
+    version: 0.1.2
+    published: '2026-04-10'
+gaps:
+  - No embeddable component library exists for the Brand, Partner or Agency products. Brands
+    and partners get an API and a hosted dashboard, nothing to embed.
+  - The Advocate component surface has no published component catalog page on
+    integrations.impact.com; it is discoverable only from npm and the program-tools
+    repository.

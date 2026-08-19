@@ -1,0 +1,159 @@
+name: impact.com MCP Server
+description: First-party remote Model Context Protocol server for the impact.com partnership
+  management platform. Exposes account-scoped tools for performance analytics, invoices,
+  partner and program discovery, promo codes, tracking links, and platform help.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/ai-solutions/mcp-quick-start
+status: live
+lifecycle: beta
+deployment:
+  mode: remote
+  endpoint: https://mcp.impact.com/mcp
+  auth: oauth
+  verified: probed
+authorization:
+  protocol: OAuth 2.1
+  authorization_server: https://app.impact.com
+  protected_resource_metadata: https://app.impact.com/.well-known/oauth-protected-resource
+  authorization_server_metadata: https://app.impact.com/.well-known/oauth-authorization-server
+  authorization_endpoint: https://app.impact.com/oauth2/authorize
+  token_endpoint: https://app.impact.com/oauth2/token
+  revocation_endpoint: https://app.impact.com/oauth2/revoke
+  pkce: S256
+  scopes:
+    - mcp:read
+    - mcp:write
+  notes:
+    - A separate MCP usage token is minted per LLM client, scoped to the consenting user's
+      own platform permissions.
+    - A refresh token is issued so the client renews without re-consent.
+    - An account administrator can disable MCP account-wide; doing so deletes every minted
+      MCP usage token immediately.
+    - MCP is enabled by default on every impact.com account.
+x-evidence:
+  - url: https://mcp.impact.com/mcp
+    method: POST
+    body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    http_status: 401
+    response: '{"message":"Unauthorized"}'
+    www_authenticate: Bearer resource_metadata="https://app.impact.com/.well-known/oauth-protected-resource"
+    fetched: '2026-08-13'
+    note: The live tool schema is OAuth-gated. The tool list below is taken from the
+      provider's published MCP Tools reference, not from an authenticated tools/list call,
+      so inputSchema is not available and must be recovered by authenticated introspection.
+  - url: https://app.impact.com/.well-known/oauth-protected-resource
+    http_status: 200
+    fetched: '2026-08-13'
+tools_source: https://integrations.impact.com/ai-solutions/mcp-tools
+tools:
+  - name: search_help_center
+    audience: [brand, partner]
+    category: support
+    description: Searches the impact.com Help Center for how-to and support answers, scoped to
+      the caller's account type.
+  - name: get_marketing_guidance
+    audience: [brand, partner]
+    category: guidance
+    description: Answers strategy and best-practice questions about referral and partnership
+      marketing; recommends Partner Experience Academy courses.
+  - name: query_performance
+    audience: [brand, partner]
+    category: analytics
+    description: Retrieves performance analytics (clicks, actions, revenue) grouped by
+      dimensions such as brand, partner or date, over a date range with optional comparison
+      period.
+  - name: list_invoices
+    audience: [brand, partner]
+    category: billing
+    description: Lists recipient-generated invoices, newest first, 25 per page, optionally
+      filtered by created date.
+  - name: get_invoice
+    audience: [brand, partner]
+    category: billing
+    description: Retrieves one recipient-generated invoice by invoice number, including line
+      items and per-program breakdown.
+  - name: get_website_metrics
+    audience: [brand]
+    category: discovery
+    description: Retrieves traffic, engagement and audience metrics for a website domain, for
+      evaluating a publisher, partner or competitor site.
+  - name: get_social_metrics
+    audience: [brand]
+    category: discovery
+    description: Retrieves follower, engagement and reach metrics for a social profile, given a
+      platform and handle.
+  - name: investigate_order_action
+    audience: [brand]
+    category: tracking
+    description: Looks up conversion and action-tracking records for a specific order ID within
+      a campaign, to explain why an order did or did not convert.
+  - name: get_brand_overdue_amount
+    audience: [brand]
+    category: billing
+    description: Retrieves total overdue fees broken into overdue impact.com fees and overdue
+      partner fees.
+  - name: recommend_partners
+    audience: [brand]
+    category: discovery
+    description: Returns a ranked list of partners recommended for the program based on
+      category, country, promotional method and audience-similarity signals.
+  - name: search_products
+    audience: [partner]
+    category: discovery
+    description: Searches the impact.com marketplace for products, merchants and offers, with
+      optional category, merchant and commission filters.
+  - name: list_partner_promo_codes
+    audience: [partner]
+    category: promotions
+    description: Retrieves the partner's promo codes, returning ACTIVE and PENDING codes by
+      default, filterable by state or brand.
+  - name: get_partner_promo_code
+    audience: [partner]
+    category: promotions
+    description: Retrieves full details for one promo code the partner owns - code text, credit
+      rule, match mode, brand, deal and schedule.
+  - name: create_tracking_links
+    audience: [partner]
+    category: tracking
+    description: Creates tracking links for one or more program destination URLs, with optional
+      sub IDs and deep links.
+  - name: recommend_programs
+    audience: [partner]
+    category: discovery
+    description: Returns a ranked list of brand programs recommended for the partner based on
+      category, country and audience-similarity signals.
+undocumented_tools_referenced_in_skills:
+  - name: resolve_query_fields
+    seen_in: skills/impact-partner-weekly-performance-digest.md
+    note: Required by the published partner weekly digest skill but absent from the published
+      MCP Tools reference pages.
+  - name: resolve_program
+    seen_in: skills/impact-partner-weekly-performance-digest.md
+    note: Optional in the published skill; absent from the MCP Tools reference pages.
+  - name: resolve_partner
+    seen_in: skills/impact-partner-weekly-performance-digest.md
+    note: Named as a Brand-only resolver in the published skill; absent from the MCP Tools
+      reference pages.
+  - name: resolve_partner_group
+    seen_in: skills/impact-partner-weekly-performance-digest.md
+    note: Named as a Brand-only resolver in the published skill; absent from the MCP Tools
+      reference pages.
+clients_documented:
+  - Cursor
+  - Visual Studio Code
+  - Claude Desktop
+  - Claude Code
+docs:
+  quick_start: https://integrations.impact.com/ai-solutions/mcp-quick-start
+  tools: https://integrations.impact.com/ai-solutions/mcp-tools
+  brand_tools: https://integrations.impact.com/ai-solutions/mcp-tools/brand-mcp-tools
+  partner_tools: https://integrations.impact.com/ai-solutions/mcp-tools/partner-mcp-tools
+  skills: https://integrations.impact.com/ai-solutions/mcp-skills
+  faq: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp.impact.com-faq
+notes:
+  - This is a remote hosted MCP endpoint an agent can call directly. impact.com ships no
+    local stdio package, so mode is remote and install/package are intentionally absent.
+  - The MCP tool surface is NOT a wrapper over the REST API. Only a handful of tools map to
+    published REST operations; the analytics, discovery and guidance tools have no public REST
+    equivalent. See mcp/impact-tool-crosswalk.yml.

@@ -1,0 +1,85 @@
+name: Impact API Lifecycle
+description: Versioning policy, deprecation posture, archived version availability, support
+  channels and operational status for the impact.com platform APIs.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/brand-api-reference/readme/versioning
+versioning:
+  scheme: integer, dated release
+  policy_url: https://integrations.impact.com/brand-api-reference/readme/versioning
+  selection:
+    default: the account's configured API version, set in account API settings
+    per_request_query_param: IrVersion
+    per_request_header: IR-Version
+  breaking_change_definition:
+    - a resource or field is removed from a response
+    - the Type or meaning of an attribute changes
+  non_breaking:
+    - new resources added
+    - new fields added to an existing resource
+  current:
+    brand: '14'
+    partner: '16'
+    agency: '3'
+    advocate: '13'
+  releases:
+    - version: '11'
+      date: '2022-10-12'
+    - version: '12'
+      date: '2024-05-06'
+    - version: '13'
+      date: '2025-03-01'
+    - version: '14'
+      date: '2026-06-01'
+deprecation:
+  policy_published: true
+  policy_url: https://integrations.impact.com/brand-api-reference/readme/versioning
+  mechanism: account-pinned major versions. A backwards-incompatible change ships as a new
+    dated version; older versions remain callable until the account is upgraded.
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  sunset_dates_published: false
+  archived_versions_documented:
+    - brand-api-reference/brand-api-reference-v13
+    - brand-api-reference/brand-api-reference-v12
+    - brand-api-reference/brand-api-reference-v11
+    - partner-api-reference/partner-v15
+    - partner-api-reference/partner-v14
+    - agency-v3/agency-v2
+  documented_deprecations:
+    - item: Legacy Reports export flow
+      superseded_by: ReportExport
+      version: '13'
+      migration_guide: https://integrations.impact.com/brand-api-reference/reference/reportexport/migrate-to-reportexport
+      sunset_date: not published
+    - item: Legacy API access tokens (minted before April 2025)
+      superseded_by: scoped tokens
+      version: '13'
+      status: still usable; read/write or read-only only, no fine-grained scopes
+      sunset_date: not published
+  gaps:
+    - No Sunset or Deprecation response headers (RFC 8594) are emitted or documented.
+    - No retirement dates are published for versions 11, 12 or 13, or for the legacy token
+      model, so a consumer cannot plan a migration from the published record alone.
+    - The word "deprecated" does not appear as an operation-level flag in any of the 69
+      published OpenAPI documents.
+status_page:
+  url: https://status.impact.com/
+  http_status: 200
+  checked: '2026-08-13'
+  title: impact.com Status
+sla:
+  published: false
+  note: No public uptime SLA. Commercial terms are behind a sales engagement.
+support:
+  developer_portal: https://integrations.impact.com/
+  help_center: https://help.impact.com/
+  support_ticket: https://app.impact.com/support/portal.ihtml?createTicket=true
+  api_contact: https://app.impact.com/secure/help/contact-support.ihtml
+  note: The contact object in the published Partner v16 OpenAPI documents names "impact.com
+    Developer Support" and points at the in-app support form.
+network:
+  public_ip_addresses: https://integrations.impact.com/public-ip-addresses
+  note: impact.com publishes the egress IP ranges its systems call from, which is a real
+    operational courtesy for customers allow-listing webhook and postback traffic.

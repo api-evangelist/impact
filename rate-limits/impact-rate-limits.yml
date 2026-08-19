@@ -1,43 +1,69 @@
 name: Impact API Rate Limits
-description: Rate limiting policies for the impact.com REST APIs covering Brand,
-  Partner, and Agency API endpoints.
-version: '0.1'
-url: https://integrations.impact.com/
-policies:
-  - name: General API Rate Limit
-    description: The impact.com partner and brand APIs limit how many calls a client
-      can make in a given hour to protect the system against traffic spikes. Requests
-      that exceed the limit are throttled.
-    scope: account
-    period: hour
-    notes: Specific per-hour numeric limits are not publicly documented. Limits may
-      vary by plan tier and endpoint group.
-    enforcement:
-      - type: Throttle
-        statusCode: 429
-        statusMessage: Too Many Requests
-        retryAfterHeader: true
-  - name: Exponential Backoff Recommended
-    description: When a 429 response is received, callers should implement exponential
-      backoff with jitter before retrying, especially for scripts and automated agents.
-    scope: client
-    guidance: Add exponential backoff plus jitter inside scripts or agents when handling
-      429 responses.
+description: Published rate limits for the impact.com REST APIs, the response headers the API
+  returns, and the status code on exhaustion.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+docs:
+  brand: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  agency: https://integrations.impact.com/agency-v3/readme/rate-limits
+limit_count: 4
+status_on_exhaustion: 429
+status_text: Too Many Requests
 headers:
+  - name: X-RateLimit-Limit
+    description: Maximum number of requests allowed for the resource within the given time
+      period.
+  - name: X-RateLimit-Remaining
+    description: Number of requests left as of the current request within the given time
+      period.
+  - name: X-RateLimit-Reset
+    description: Number of seconds until the limit is reset. impact.com cites
+      draft-polli-ratelimit-headers-02 section 3.3 for the semantics.
   - name: Retry-After
-    description: Returned in 429 responses to indicate how long the client should
-      wait before retrying the request.
-scopes:
-  - name: Accounts
-  - name: Action Inquiries
-  - name: Actions
-  - name: Campaigns
-  - name: Catalogs
-  - name: Contracts
-  - name: Deals
-  - name: Reports
-notes:
-  - Rate limit documentation is available to authenticated impact.com clients through
-    the Developer Hub at integrations.impact.com.
-  - Limits are enforced per-account and may differ between the Brand, Partner, and
-    Agency API personas.
+    present: false
+    note: Not documented and not listed among the headers returned on a 429.
+standard_ratelimit_headers: false
+standard_note: impact.com returns the legacy X-RateLimit-* family, not the RFC 9331
+  RateLimit-* family.
+limits:
+  - scope: per-account, per-endpoint-group
+    endpoint_group: /Catalogs
+    window: hour
+    limit: 3600
+    unit: requests
+  - scope: per-account
+    endpoint_group: default (all other endpoints)
+    window: hour
+    limit: 1000
+    unit: requests
+  - scope: per-account, per-endpoint-group
+    endpoint_group: /ReportExport
+    window: day
+    limit: 100
+    unit: requests
+  - scope: per-account, per-endpoint-group
+    endpoint_group: /ClickExport
+    window: day
+    limit: 10
+    unit: requests
+guidance_published:
+  - Each app may have different default rate limits; limits are subject to change based on
+    system needs.
+  - Applications should monitor their current rate limit status and dynamically throttle.
+  - The Building with LLMs guidance tells agent builders to implement 429 handling, jittered
+    backoff, concurrency caps and idempotency patterns where replay is safe.
+pagination_ceilings:
+  - endpoint: /Reports
+    behaviour: always returns a page size of 20,000 regardless of PageSize
+  - endpoint: /Advertisers/{AccountSID}/Catalogs/{CatalogId}/Items
+    behaviour: cannot page beyond 20,000 total results; requesting past the ceiling returns 400
+findings:
+  - Numeric limits, the exhaustion status and the exact response headers are all published,
+    which is above average for this sector.
+  - The ClickExport limit of 10 per day is severe for an agent-driven workflow and is the
+    limit most likely to be hit unexpectedly.
+  - No Retry-After header is documented, so a client must compute its own wait from
+    X-RateLimit-Reset.
+  - Rate limits are not expressed in any of the 69 published OpenAPI documents - no
+    x-ratelimit extension, no documented 429 response object.

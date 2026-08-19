@@ -1,0 +1,92 @@
+name: Impact Event and Webhook Surface
+description: The event-driven surface impact.com publishes - Advocate webhooks with a named
+  event catalog and a subscription management API, plus Brand/Partner Event Notification
+  postbacks. impact.com publishes no AsyncAPI document for any of it.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+asyncapi:
+  published: false
+  probed:
+    - url: https://integrations.impact.com/asyncapi.yaml
+      status: 404
+    - url: https://api.impact.com/asyncapi.json
+      status: 404
+  note: No AsyncAPI document is published on any impact.com host or in the saasquatch GitHub
+    organization. The event surface is real and documented, but only in prose plus one OpenAPI
+    document describing the inbound postback shape.
+surfaces:
+  - name: Advocate Webhooks
+    product: Advocate
+    style: webhook (provider POSTs to a subscriber URL)
+    docs: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+    security_docs: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/webhook-security-for-advocate-programs
+    management_api: openapi/impact-brand-advocate-webhook-v13-openapi.yml
+    management_operations:
+      - GET /{tenant_alias}/subscription
+      - PUT /{tenant_alias}/subscription/{url}
+      - DELETE /{tenant_alias}/subscription/{url}
+      - POST /{tenant_alias}/subscription/{url}/test
+    envelope_fields: [id, type, tenantAlias, live, created, data]
+    events:
+      - name: user.created
+        description: A participant was created in the Advocate program.
+      - name: user.reward.balance.changed
+        description: A participant's reward balance changed.
+      - name: coupon.created
+        description: A coupon was created for a participant.
+      - name: reward.created
+        description: A reward was created.
+      - name: referral.started
+        description: A referral was started.
+      - name: referral.converted
+        description: A referral converted.
+      - name: export.created
+        description: A data export job was created.
+      - name: export.completed
+        description: A data export job finished.
+      - name: test
+        description: Test event emitted by the subscription test endpoint.
+    replay: subscription test endpoint only
+  - name: Partner Event Notifications
+    product: Partner API
+    style: postback (impact.com GETs or POSTs to a partner-configured URL)
+    docs: https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+    openapi: openapi/impact-partner-eventnotifications-v16-openapi.yml
+    operations: [receiveEventNotificationGet, receiveEventNotificationPost]
+    delivery_modes:
+      - mode: GET
+        description: Query-string parameters, pixel-style integrations.
+      - mode: POST
+        description: JSON body shaped by the body template configured in Event Notifications
+          settings.
+    payload_fields: [campaign_id, action_id, status, payout, items]
+    item_fields: [sku, qty, amt]
+    acknowledgement: any 2xx; impact.com will not retry after a 200
+    retry_policy: not published
+    named_event_catalog: false
+    note: The payload is template-driven - what arrives depends on the URL/body template the
+      partner configures - so there is no fixed event type vocabulary, only a common field set.
+  - name: Brand Event Notification Postbacks
+    product: Brand API
+    style: postback
+    docs: https://integrations.impact.com/brand-api-reference/reference/webhooks
+    setup_docs:
+      - https://integrations.impact.com/brand-api-reference/reference/webhooks/enable-postbacks
+      - https://integrations.impact.com/brand-api-reference/reference/webhooks/set-up-postbacks-for-partners
+    triggers: [action, click, other tracked events]
+    named_event_catalog: false
+    openapi: none
+operational_support:
+  egress_ip_ranges: https://integrations.impact.com/public-ip-addresses
+  note: impact.com publishes the IP ranges its postback and webhook traffic originates from,
+    so subscribers can allow-list.
+findings:
+  - Only the Advocate side has a named event catalog with a stable envelope and a subscription
+    management API. The much larger Brand and Partner postback surface is template-driven with
+    no event type vocabulary and no published retry policy.
+  - There is no AsyncAPI document anywhere, so none of this is machine-readable as an event
+    contract.
+provider_action: Publish an AsyncAPI 3.0 document for the Advocate event catalog, which already
+  has everything AsyncAPI needs - named events, a stable envelope and a subscription API - and
+  a retry/redelivery policy for the postback surface.

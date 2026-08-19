@@ -1,0 +1,148 @@
+name: Impact API Conventions
+description: Cross-cutting runtime semantics for the impact.com REST APIs - authentication
+  style, pagination, versioning, error envelope, rate-limit signalling, response formats and
+  the deferred-response (job) pattern.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/brand-api-reference/readme
+docs:
+  authentication: https://integrations.impact.com/brand-api-reference/readme/authentication
+  requests: https://integrations.impact.com/brand-api-reference/readme/requests
+  responses: https://integrations.impact.com/brand-api-reference/readme/responses
+  errors: https://integrations.impact.com/brand-api-reference/readme/status-codes-and-errors
+  pagination: https://integrations.impact.com/brand-api-reference/readme/pagination
+  rate_limits: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  versioning: https://integrations.impact.com/brand-api-reference/readme/versioning
+  changelog: https://integrations.impact.com/brand-api-reference/readme/changelog
+auth:
+  style: http-basic
+  username: Account SID
+  password: Auth Token
+  header: 'Authorization: Basic base64(AccountSID:AuthToken)'
+  transport: HTTPS only on port 443; plain HTTP fails
+  failure_status: 401
+  scoped_tokens: true
+  scoped_tokens_note: Tokens minted after April 2025 carry per-category, per-endpoint scopes.
+    A scoped token that is disabled, or enabled but not permitted on the endpoint, returns 403
+    rather than 401.
+  base_paths:
+    brand: https://api.impact.com/Advertisers/{AccountSID}/
+    partner: https://api.impact.com/Mediapartners/{AccountSID}/
+    agency: https://api.impact.com/Agencies/{AccountSID}/
+  oauth:
+    used_for: MCP server and multi-customer applications
+    grant: authorization_code with PKCE (S256); client_credentials and refresh_token also
+      advertised
+    metadata: https://app.impact.com/.well-known/oauth-authorization-server
+idempotency:
+  supported: false
+  header: null
+  note: impact.com publishes no idempotency key. The Building with LLMs guidance tells agent
+    builders to "implement 429 handling, jittered backoff, concurrency caps, and idempotency
+    patterns where replay is safe" - putting replay safety on the caller. Write operations use
+    plain POST/PUT/DELETE with no dedupe token, so a retried conversion submission can double
+    count.
+pagination:
+  style: page-number
+  request_params:
+    - name: Page
+      description: 1-indexed page number. Defaults to 1.
+    - name: PageSize
+      description: Objects per page. Defaults to the resource default, commonly 1,000.
+  response_fields:
+    - '@page'
+    - '@numpages'
+    - '@pagesize'
+    - '@total'
+    - '@start'
+    - '@end'
+    - '@uri'
+    - '@firstpageuri'
+    - '@nextpageuri'
+    - '@previouspageuri'
+    - '@lastpageuri'
+  notes:
+    - Pagination metadata keys are prefixed with @ and returned as strings, an XML-era carry
+      over from the Impact Radius API.
+    - Reports always return a page size of 20,000 regardless of PageSize.
+    - Catalog Items cannot page beyond 20,000 total results; requesting past that returns 400.
+versioning:
+  scheme: integer, dated release
+  current:
+    brand: '14'
+    partner: '16'
+    agency: '3'
+    advocate: '13'
+  released:
+    '11': '2022-10-12'
+    '12': '2024-05-06'
+    '13': '2025-03-01'
+    '14': '2026-06-01'
+  override_query_param: IrVersion
+  override_header: IR-Version
+  default: the account's configured API version
+  breaking_change_definition:
+    - a resource or field is removed from a response
+    - the Type/meaning of an attribute changes
+  non_breaking:
+    - new resources added
+    - new fields added to a resource
+error_envelope:
+  format: proprietary
+  content_types: [application/json, application/xml]
+  shape:
+    Status: ERROR
+    Message: human readable summary
+    Errors:
+      - Field: the offending field
+        Message: what was wrong with it
+  rfc9457: false
+  note: Not application/problem+json. No type URI, no instance, no problem registry. See
+    errors/impact-problem-types.yml.
+rate_limit_signalling:
+  status_on_exhaustion: 429
+  headers:
+    - X-RateLimit-Limit
+    - X-RateLimit-Remaining
+    - X-RateLimit-Reset
+  reset_semantics: seconds until reset, aligned with draft-polli-ratelimit-headers-02 section
+    3.3
+  retry_after: not documented
+  standard_ratelimit_headers: false
+  note: impact.com uses the legacy X-RateLimit-* family, not the RFC 9331 RateLimit-* family.
+content_negotiation:
+  request_body: application/x-www-form-urlencoded on most write operations, plus query-string
+    parameters on GET
+  response: application/json (Accept header) or application/xml
+  default_response: XML on some legacy endpoints; send Accept application/json explicitly
+deferred_responses:
+  pattern: job
+  description: Long-running exports return a Job. The caller polls the Jobs endpoint for
+    status and then downloads the result.
+  operations: [listJobs, retrieveJobStatus, downloadJobResults, replayJob]
+  applies_to: [ReportExport, ClickExport, catalog and bulk operations]
+  docs: https://integrations.impact.com/brand-api-reference/reference/deferred-response-overview
+tracing:
+  request_id_header: not published
+  note: No correlation identifier is documented. The Building with LLMs page advises logging
+    "correlation identifiers when available", conceding they may not be.
+field_expansion:
+  supported: false
+metadata_fields:
+  supported: false
+  note: No generic key/value metadata bag on resources. Partner-side custom data is carried by
+    SubId1-SubId3 on tracking links and actions.
+machine_readable_docs:
+  llms_txt: https://integrations.impact.com/llms.txt
+  llms_full_txt: https://integrations.impact.com/llms-full.txt
+  per_page_markdown: append .md to any documentation URL
+  dynamic_query: GET <page>.md?ask=<url-encoded question>&goal=<goal>
+  note: Every documentation page is retrievable as markdown, and the portal answers natural
+    language questions over its own corpus. This is one of the strongest agent-facing
+    documentation postures in the catalog.
+cross_links:
+  errors: errors/impact-problem-types.yml
+  lifecycle: lifecycle/impact-lifecycle.yml
+  authentication: authentication/impact-authentication.yml
+  rate_limits: rate-limits/impact-rate-limits.yml
+  scopes: scopes/impact-scopes.yml

@@ -1,0 +1,77 @@
+name: Impact OAuth Scopes and Token Scoping
+description: The OAuth 2.1 scopes impact.com publishes for its MCP server, and the scoped-token
+  model that governs REST API access.
+generated: '2026-08-13'
+method: probed
+source: https://app.impact.com/.well-known/oauth-protected-resource
+docs:
+  mcp: https://integrations.impact.com/ai-solutions/mcp-quick-start
+  scoped_tokens: https://integrations.impact.com/rest-apis/api-quick-start/create-an-api-key
+  scoped_token_best_practices: https://help.impact.com/other/reference-documentation/api-access-tokens-and-changelog/scoped-tokens-best-practices
+  migrate_to_scoped_tokens: https://help.impact.com/other/reference-documentation/api-access-tokens-and-changelog/migrate-to-scoped-tokens
+oauth:
+  issuer: https://app.impact.com
+  protected_resource: https://mcp.impact.com/mcp
+  metadata_url: https://app.impact.com/.well-known/oauth-protected-resource
+  http_status: 200
+  probed: '2026-08-13'
+  bearer_methods_supported: [header]
+  scopes:
+    - name: mcp:read
+      description: Read access through the MCP server, further constrained by the consenting
+        user's own platform permissions.
+    - name: mcp:write
+      description: Write access through the MCP server (creating campaigns, updating settings,
+        managing partners, creating tracking links), further constrained by the consenting
+        user's own platform permissions.
+    - name: openid
+      description: Advertised by the OpenID Connect discovery document as the only supported
+        OIDC scope.
+      source: https://app.impact.com/.well-known/openid-configuration
+rest_token_scoping:
+  model: scoped access tokens
+  since: April 2025
+  granularity: API category toggle plus per-endpoint selection
+  enforcement_status: 403
+  enumerable: false
+  note: The REST scope vocabulary is not published as a machine-readable list. Scopes are
+    chosen from category and endpoint toggles inside the impact.com UI when a token is minted,
+    so the full scope set can only be enumerated from an authenticated account. No OpenAPI
+    document declares an oauth2 securityScheme with a scopes map.
+  categories_observed_from_published_endpoint_groups:
+    - Accounts
+    - Actions
+    - Action Inquiries
+    - Ads
+    - Call Data
+    - Catalogs
+    - Clicks
+    - Contacts
+    - Contracts
+    - Conversions
+    - Deals
+    - Exception Lists
+    - Invoices
+    - Jobs
+    - Notes
+    - Partners
+    - Partner Groups
+    - Programs
+    - Promo Codes
+    - Promo Code Exception Lists
+    - Reports
+    - Routing Rules
+    - Submissions
+    - Tasks
+    - Tracking Links
+    - Tracking Value Requests
+  categories_note: Derived from the tag/endpoint groups in the 69 published OpenAPI documents,
+    not from a published scope registry. Treat as the shape of the scope surface, not as
+    literal scope strings.
+findings:
+  - Only the MCP surface has a published, machine-readable scope vocabulary, and it is exactly
+    two scopes - mcp:read and mcp:write - covering every one of the fifteen documented tools.
+  - The REST surface has genuinely fine-grained scoping but publishes no scope registry, so an
+    integrator cannot request or document least-privilege access without logging in.
+provider_action: Publish the scoped-token category and endpoint vocabulary as data, and declare
+  it as an oauth2 or apiKey securityScheme with a scopes map in the OpenAPI documents.

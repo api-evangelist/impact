@@ -1,0 +1,93 @@
+name: Impact API Error Catalog
+description: HTTP status codes and error envelope for the impact.com REST APIs, from the
+  published Status Codes & Errors reference and the 4xx/5xx responses declared in the
+  harvested OpenAPI documents.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/brand-api-reference/readme/status-codes-and-errors
+derived_from: openapi/impact-*-openapi.yml
+format: proprietary
+rfc9457: false
+problem_json: false
+content_types:
+  - application/json
+  - application/xml
+envelope:
+  fields:
+    - name: Status
+      type: string
+      description: ERROR on failure.
+    - name: Message
+      type: string
+      description: Human-readable summary of the failure.
+    - name: Errors
+      type: array
+      description: Per-field validation failures, present when the failure is a validation
+        failure.
+      items:
+        - name: Field
+          type: string
+        - name: Message
+          type: string
+  example:
+    Status: ERROR
+    Message: Validation Failed
+    Errors:
+      - Field: AccountId
+        Message: Not a numeric value
+  xml_root: ImpactRadiusResponse
+statuses:
+  - code: 200
+    title: OK
+    description: Everything worked as expected.
+  - code: 201
+    title: Created
+    description: Everything worked as expected.
+  - code: 400
+    title: Bad Request
+    description: Often a missing required parameter. Also returned when paging past the 20,000
+      result ceiling on Catalog Items.
+    remediation: Read the Errors array; each entry names the offending Field.
+  - code: 401
+    title: Unauthorized
+    description: No valid API credentials provided, or credentials sent over plain HTTP.
+    remediation: Send Authorization Basic base64(AccountSID:AuthToken) over HTTPS.
+  - code: 402
+    title: Request Failed
+    description: Parameters were valid but the request failed.
+  - code: 403
+    title: Forbidden
+    description: Returned by scoped tokens that are disabled, or enabled but not permitted on
+      the specific endpoint.
+    remediation: Widen the token's scopes in Settings, Technical, API, or mint a token with the
+      required endpoint enabled. A 403 here is a scope problem, not a credential problem.
+  - code: 404
+    title: Not Found
+    description: The requested resource does not exist.
+  - code: 405
+    title: Method Not Allowed
+    description: The HTTP method used is not supported on that path.
+  - code: 429
+    title: Too Many Requests
+    description: The hourly or daily rate limit for the endpoint group was exceeded.
+    remediation: Read X-RateLimit-Reset and back off with exponential delay plus jitter.
+    headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+  - code: 500
+    title: Internal Server Error
+    description: Something went wrong on impact.com's end.
+    remediation: Retry with exponential backoff.
+  - code: 502
+    title: Bad Gateway
+  - code: 503
+    title: Service Unavailable
+  - code: 504
+    title: Gateway Timeout
+findings:
+  - The 69 published OpenAPI documents declare success responses in detail but carry almost no
+    4xx/5xx response objects. The error contract lives entirely in prose on the Status Codes &
+    Errors page, so a code generator reading the specs alone gets no error model.
+  - The error envelope is not RFC 9457 problem+json. There is no type URI, no instance, and no
+    machine-stable error code - only a free-text Message and a Field name.
+  - The XML root element is still ImpactRadiusResponse, from the pre-rebrand Impact Radius API.
+provider_action: Add 400/401/403/429/500 responses with the documented envelope schema to the
+  shared components of each published OpenAPI document, and give each failure a stable code.

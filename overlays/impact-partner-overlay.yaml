@@ -1,0 +1,89 @@
+overlay: 1.0.0
+info:
+  title: Impact Partner API v16 enrichment overlay
+  version: 1.0.0
+  description: API Evangelist enrichment overlay. impact.com publishes these OpenAPI documents without
+    a securitySchemes block, without error responses and without rate-limit metadata, even though all
+    three are documented in prose on integrations.impact.com. This overlay adds them back without mutating
+    the provider document. The same actions apply across all 26 Partner v16 documents for this persona;
+    extends names one representative document.
+extends: openapi/impact-partner-actions-v16-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: https://integrations.impact.com/brand-api-reference/readme
+actions:
+- target: $.info
+  description: Record the persona base path and the documentation home.
+  update:
+    x-impact-base-path: https://api.impact.com/Mediapartners/{AccountSID}/
+    x-impact-docs: https://integrations.impact.com/
+    x-impact-llms-txt: https://integrations.impact.com/llms.txt
+- target: $.components
+  description: Add the HTTP Basic scheme impact.com documents but omits from this persona's specs.
+  update:
+    securitySchemes:
+      basicAuth:
+        type: http
+        scheme: basic
+        description: HTTP Basic. Username is the Account SID, password is the Auth Token. HTTPS only;
+          plain HTTP fails. Documented at https://integrations.impact.com/brand-api-reference/readme/authentication
+- target: $
+  description: Apply the documented authentication requirement to every operation.
+  update:
+    security:
+    - basicAuth: []
+- target: $.info
+  description: Record the documented rate limits and the headers the API returns on them.
+  update:
+    x-ratelimit:
+      status: 429
+      headers:
+      - X-RateLimit-Limit
+      - X-RateLimit-Remaining
+      - X-RateLimit-Reset
+      default_hourly: 1000
+      catalogs_hourly: 3600
+      report_export_daily: 100
+      click_export_daily: 10
+      docs: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+- target: $.info
+  description: Record the documented error envelope, which the provider documents in prose but declares
+    in no response object.
+  update:
+    x-error-envelope:
+      format: proprietary
+      rfc9457: false
+      fields:
+      - Status
+      - Message
+      - Errors[].Field
+      - Errors[].Message
+      docs: https://integrations.impact.com/brand-api-reference/readme/status-codes-and-errors
+- target: $.info
+  description: Record the versioning controls, which are request-level but undeclared as parameters.
+  update:
+    x-versioning:
+      query_param: IrVersion
+      header: IR-Version
+      docs: https://integrations.impact.com/brand-api-reference/readme/versioning
+- target: $.info
+  description: Record the pagination contract.
+  update:
+    x-pagination:
+      style: page-number
+      request:
+      - Page
+      - PageSize
+      response:
+      - '@page'
+      - '@numpages'
+      - '@pagesize'
+      - '@total'
+      - '@start'
+      - '@end'
+      - '@uri'
+      - '@firstpageuri'
+      - '@nextpageuri'
+      - '@previouspageuri'
+      - '@lastpageuri'
+      docs: https://integrations.impact.com/brand-api-reference/readme/pagination

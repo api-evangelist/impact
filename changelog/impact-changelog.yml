@@ -1,0 +1,118 @@
+name: Impact API Changelog
+description: Versioned change record for the impact.com REST APIs. impact.com publishes a
+  per-version changelog on each API reference (Brand, Partner, Agency) rather than a dated
+  feed - entries are tagged with the version they landed in, and versions carry release dates.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/brand-api-reference/readme/changelog
+docs:
+  brand: https://integrations.impact.com/brand-api-reference/readme/changelog
+  agency: https://integrations.impact.com/agency-v3/readme/changelog
+scheme: integer version, dated release; entries tagged by version, not by date
+dated_feed: false
+rss: false
+current_versions:
+  brand: '14'
+  partner: '16'
+  agency: '3'
+  advocate: '13'
+version_release_dates:
+  '11': '2022-10-12'
+  '12': '2024-05-06'
+  '13': '2025-03-01'
+  '14': '2026-06-01'
+entries:
+  - version: '14'
+    date: '2026-06-01'
+    title: Change to Programs Endpoint
+    type: addition
+    breaking: false
+    summary: The Programs API endpoint gained a type string field to differentiate campaign
+      formats.
+  - version: '13'
+    date: '2025-03-01'
+    title: 'New feature: Application Processing API'
+    type: addition
+    breaking: false
+    summary: Contracts gained POST support to accept pending partner applications (optionally
+      assigning a groupId) and DELETE support to decline them (optionally with reason and
+      groupId).
+  - version: '13'
+    date: '2025-03-01'
+    title: Rate limit changes for ReportExport and ClickExport
+    type: policy
+    breaking: false
+    summary: ReportExport limited to 100 requests per day and ClickExport to 10 requests per
+      day, with delayed enforcement for many brands.
+  - version: '13'
+    date: '2025-03-01'
+    title: 'New endpoint: PromoCodeExceptionLists'
+    type: addition
+    breaking: false
+    summary: Create, update, retrieve and delete promo code exception lists.
+  - version: '13'
+    date: '2025-03-01'
+    title: Scoped tokens
+    type: addition
+    breaking: false
+    summary: API credentials with per-category, per-endpoint permissions, replacing the
+      read/write and read-only levels of legacy tokens.
+  - version: '13'
+    date: '2025-03-01'
+    title: Migrate to ReportExport
+    type: deprecation
+    breaking: true
+    summary: Legacy Reports export flow superseded by ReportExport; a migration guide is
+      published alongside the reference.
+  - version: '13'
+    date: '2025-03-01'
+    title: 'New endpoint: Upload'
+    type: addition
+    breaking: false
+  - version: '13'
+    date: '2025-03-01'
+    title: Changes to Contract endpoint
+    type: change
+    breaking: true
+  - version: '12'
+    date: '2024-05-06'
+    title: Improvements to the /Ads endpoint
+    type: change
+    breaking: true
+  - version: '12'
+    date: '2024-05-06'
+    title: Change to Contracts endpoint
+    type: change
+    breaking: true
+  - version: '12'
+    date: '2024-05-06'
+    title: Change to Catalogs endpoints
+    type: change
+    breaking: true
+  - version: '12'
+    date: '2024-05-06'
+    title: 'New endpoint: LegalEntities'
+    type: addition
+    breaking: false
+  - version: '12'
+    date: '2024-05-06'
+    title: Changes to the Create a Partner endpoint
+    type: change
+    breaking: true
+  - version: '12'
+    date: '2024-05-06'
+    title: Changes to actions and action updates
+    type: change
+    breaking: true
+  - version: '11'
+    date: '2022-10-12'
+    title: Ensure your data is always fresh
+    type: guidance
+    breaking: false
+notes:
+  - The changelog is a collapsible list on the API reference readme, not a dated feed. Entries
+    inherit the release date of their version, so change granularity below the version is not
+    dated.
+  - Version 14 shipped 2026-06-01 with exactly one published change, while the Partner API is
+    already at v16 with no separately published Partner changelog page - the version ladders
+    for Brand and Partner have diverged.

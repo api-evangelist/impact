@@ -1,0 +1,172 @@
+name: Impact Standards Conformance
+description: Which industry and cross-cutting standards the impact.com platform APIs actually
+  conform to, judged against the published documentation and the 69 harvested OpenAPI
+  documents. Every entry carries the evidence it was decided on.
+generated: '2026-08-13'
+method: derived
+source: openapi/impact-*-openapi.yml + https://integrations.impact.com/ +
+  https://impact.com/security-and-privacy/
+conformance:
+  - id: openapi
+    name: OpenAPI Specification
+    conforms: true
+    version: 3.1.0
+    evidence: 69 OpenAPI 3.1.0 documents published through the GitBook developer portal at
+      openapi.gitbook.com/o/0mbgBjArWXoMupyWdFkH/spec/, covering 245 operations across Brand
+      v14, Partner v16, Agency v3 and Advocate v13. Each parses and declares servers[] on an
+      impact.com-controlled host.
+  - id: openapi-security-declaration
+    name: OpenAPI security schemes declared
+    conforms: false
+    evidence: Only the 9 Advocate v13 documents declare securitySchemes. The 29 Brand v14, 26
+      Partner v16 and 5 Agency v3 documents declare neither securitySchemes nor security, so
+      the HTTP Basic requirement is documented only in prose.
+  - id: openapi-error-declaration
+    name: OpenAPI error responses declared
+    conforms: false
+    evidence: The published documents declare success responses but essentially no 4xx/5xx
+      response objects. The error contract lives on a prose page.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: No AsyncAPI document on any impact.com host or in the saasquatch GitHub
+      organization, despite a named Advocate event catalog and a subscription management API.
+  - id: graphql
+    name: GraphQL
+    conforms: partial
+    evidence: A real GraphQL endpoint exists for Advocate at
+      app.referralsaasquatch.com/api/v1/{tenant_alias}/graphql, but the schema is only visible
+      inside the authenticated explorer. Anonymous introspection returns 404 TENANT_NOT_FOUND.
+  - id: mcp
+    name: Model Context Protocol
+    conforms: true
+    evidence: Remote MCP server at https://mcp.impact.com/mcp. A JSON-RPC tools/list POST
+      returns 401 with a spec-correct WWW-Authenticate Bearer resource_metadata challenge
+      pointing at RFC 9728 protected-resource metadata.
+  - id: agent-skills
+    name: Agent Skills
+    conforms: partial
+    evidence: 13 first-party MCP Skills are advertised with install instructions and
+      frontmatter metadata, but only one downloadable package is actually served, and the Brand
+      flagship skill's download resolves to the Partner skill's file.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: /.well-known/agent-card.json and /.well-known/agent.json return 404 on
+      impact.com, api.impact.com, mcp.impact.com, integrations.impact.com and
+      developer.impact.com.
+  - id: oauth2
+    name: OAuth 2.0 / 2.1
+    conforms: true
+    evidence: https://app.impact.com/.well-known/oauth-authorization-server returns 200 with
+      authorization_code, client_credentials and refresh_token grants, PKCE S256, and
+      revocation plus introspection endpoints.
+  - id: rfc8414
+    name: RFC 8414 OAuth Authorization Server Metadata
+    conforms: true
+    evidence: 200 at https://app.impact.com/.well-known/oauth-authorization-server, 2026-08-13.
+  - id: rfc9728
+    name: RFC 9728 OAuth Protected Resource Metadata
+    conforms: true
+    evidence: 200 at https://app.impact.com/.well-known/oauth-protected-resource declaring
+      resource https://mcp.impact.com/mcp and scopes mcp:read, mcp:write. The MCP endpoint's
+      401 WWW-Authenticate header points at it.
+  - id: oidc
+    name: OpenID Connect Discovery
+    conforms: true
+    evidence: 200 at https://app.impact.com/.well-known/openid-configuration with userinfo
+      endpoint, jwks_uri and RS256 id_token signing. scopes_supported is openid only.
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: The error envelope is a proprietary {Status, Message, Errors[{Field, Message}]}
+      shape returned as application/json or application/xml. No type URI, no instance, no
+      problem registry.
+  - id: rfc9331
+    name: RFC 9331 RateLimit header fields
+    conforms: false
+    evidence: impact.com returns X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset
+      and cites draft-polli-ratelimit-headers-02, not the RateLimit-* fields of the published
+      RFC.
+  - id: rfc8594
+    name: RFC 8594 Sunset header
+    conforms: false
+    evidence: No Sunset or Deprecation header is emitted or documented. Version retirement is
+      account-pinned with no published sunset dates.
+  - id: idempotency
+    name: Idempotency keys
+    conforms: false
+    evidence: No idempotency key header is published for any write operation, including
+      conversion submission. The Building with LLMs page puts replay safety on the caller.
+  - id: pagination
+    name: Documented pagination
+    conforms: true
+    evidence: Page/PageSize request parameters and an eleven-field @-prefixed response envelope
+      including next/prev/first/last page URIs, plus documented per-endpoint ceilings.
+  - id: rfc9116
+    name: RFC 9116 security.txt
+    conforms: true
+    evidence: PGP-signed security.txt at https://impact.com/.well-known/security.txt with
+      Contact, Policy, Encryption, Acknowledgments, Preferred-Languages, Canonical and Expires
+      2029-01-01.
+  - id: llmstxt
+    name: llms.txt
+    conforms: true
+    evidence: 200 at https://integrations.impact.com/llms.txt, a 115KB markdown index of the
+      whole developer portal, plus llms-full.txt, per-page .md representations and a
+      documented ?ask= query interface.
+  - id: soc1
+    name: SOC 1 Type II
+    conforms: true
+    evidence: Claimed at https://impact.com/security-and-privacy/. Report not publicly
+      retrievable.
+  - id: iso27001
+    name: ISO/IEC 27001:2022
+    conforms: true
+    evidence: Claimed at https://impact.com/security-and-privacy/. Certificate not publicly
+      retrievable.
+  - id: pcidss
+    name: PCI DSS
+    conforms: true
+    level: Level 4 Merchant
+    evidence: Claimed at https://impact.com/security-and-privacy/, maintained through annual
+      SAQ.
+  - id: soc2
+    name: SOC 2 Type II
+    conforms: false
+    evidence: Not claimed anywhere on impact.com. SOC 1 Type II is claimed instead.
+  - id: gdpr
+    name: GDPR data subject rights
+    conforms: partial
+    evidence: Right to be forgotten, consent/opt-out and data portability are committed to at
+      https://impact.com/security-and-privacy/, exercised through the support portal rather
+      than an API.
+  - id: jsonapi
+    name: JSON:API
+    conforms: false
+    evidence: Responses use a proprietary envelope with @-prefixed pagination keys and
+      PascalCase resource collections.
+  - id: odata
+    name: OData
+    conforms: false
+  - id: fhir
+    name: FHIR
+    conforms: false
+    note: Not applicable to this sector.
+  - id: fapi
+    name: FAPI
+    conforms: false
+    note: Not applicable to this sector.
+  - id: scim
+    name: SCIM
+    conforms: false
+    evidence: User management is exposed through the proprietary Partner Users endpoints, not
+      SCIM.
+summary:
+  conforms: 12
+  partial: 3
+  does_not_conform: 11
+  strongest: OpenAPI breadth, OAuth/OIDC discovery, MCP, llms.txt and agent-readable
+    documentation.
+  weakest: RFC 9457 errors, idempotency, RFC 8594 sunset headers, AsyncAPI, and security
+    declarations inside the OpenAPI documents themselves.

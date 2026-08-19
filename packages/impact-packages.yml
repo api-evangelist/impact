@@ -1,0 +1,156 @@
+name: Impact Client Libraries and Packages
+description: First-party client libraries published by impact.com for its platform APIs. All
+  currently published SDKs come from the Advocate (SaaSquatch) side of the product; the
+  Brand, Partner and Agency REST APIs ship no first-party SDK in any registry.
+generated: '2026-08-13'
+method: searched
+source: https://github.com/saasquatch + registry.npmjs.org + jitpack.io +
+  https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate
+ownership_note: github.com/saasquatch is impact.com's Advocate product organization - SaaSquatch
+  was acquired by impact.com and is now sold as impact.com Advocate. impact.com's own docs at
+  integrations.impact.com link to these repositories as "our iOS SDK", "our Android SDK" and
+  "our Java SDK", which is why they are recorded as first-party.
+packages:
+  - name: '@saasquatch/squatch-js'
+    registry: npm
+    url: https://www.npmjs.com/package/@saasquatch/squatch-js
+    repository: https://github.com/saasquatch/squatch-js
+    language: JavaScript
+    official: true
+    product: Advocate
+    description: Official browser/web SDK for Advocate referral programs - widget rendering,
+      user identification and share link retrieval.
+    install: npm install @saasquatch/squatch-js
+    version: 2.8.4
+    published: '2026-04-02'
+  - name: '@saasquatch/mint-components'
+    registry: npm
+    url: https://www.npmjs.com/package/@saasquatch/mint-components
+    repository: https://github.com/saasquatch/program-tools
+    language: TypeScript
+    official: true
+    product: Advocate
+    description: Web component library for referral and loyalty participant experiences. See
+      components/impact-components.yml.
+    install: npm install @saasquatch/mint-components
+    version: 2.3.1
+    published: '2026-08-13'
+  - name: '@saasquatch/bedrock-components'
+    registry: npm
+    url: https://www.npmjs.com/package/@saasquatch/bedrock-components
+    repository: https://github.com/saasquatch/program-tools
+    language: TypeScript
+    official: true
+    product: Advocate
+    description: Component library adding advanced logic to Advocate widgets and microsite
+      pages.
+    install: npm install @saasquatch/bedrock-components
+    version: 1.5.3
+    published: '2026-04-01'
+  - name: '@saasquatch/component-boilerplate'
+    registry: npm
+    url: https://www.npmjs.com/package/@saasquatch/component-boilerplate
+    repository: https://github.com/saasquatch/program-tools
+    language: TypeScript
+    official: true
+    product: Advocate
+    description: Shared hooks and data-layer boilerplate used by the Advocate component
+      libraries.
+    version: 1.6.10
+    published: '2026-02-27'
+  - name: '@saasquatch/program-boilerplate'
+    registry: npm
+    url: https://www.npmjs.com/package/@saasquatch/program-boilerplate
+    repository: https://github.com/saasquatch/program-tools
+    language: TypeScript
+    official: true
+    product: Advocate
+    description: Boilerplate for authoring custom Advocate program logic.
+    version: 4.1.0
+    published: '2026-03-20'
+  - name: com.github.saasquatch:saasquatch-java-sdk
+    registry: jitpack
+    url: https://jitpack.io/#saasquatch/saasquatch-java-sdk
+    repository: https://github.com/saasquatch/saasquatch-java-sdk
+    language: Java
+    official: true
+    product: Advocate
+    description: Official Java SDK for the Advocate REST and GraphQL APIs.
+    install: "implementation 'com.github.saasquatch:saasquatch-java-sdk:0.2.0'"
+    version: 0.2.0
+    published: '2024-11-22'
+    note: Not published to Maven Central - repo1.maven.org/maven2/com/saasquatch/ returns 404.
+      Distributed via JitPack only, which builds from the git tag. Version and date are the
+      latest git tag (0.2.0) and the repository's last push; JitPack exposes no dated release
+      metadata endpoint.
+  - name: com.github.saasquatch:squatch-android
+    registry: jitpack
+    url: https://jitpack.io/#saasquatch/squatch-android
+    repository: https://github.com/saasquatch/squatch-android
+    language: Java
+    official: true
+    product: Advocate
+    description: Official Android SDK for Advocate - user registration, referral tracking and
+      referral code/link retrieval.
+    install: "implementation 'com.github.saasquatch:squatch-android:0.1.2'"
+    version: 0.1.2
+    published: '2026-04-10'
+    note: Not on Maven Central. Version and date taken from the GitHub release 0.1.2.
+  - name: squatch-ios
+    registry: swift-package-manager
+    url: https://github.com/saasquatch/squatch-ios
+    repository: https://github.com/saasquatch/squatch-ios
+    language: Swift
+    official: true
+    product: Advocate
+    description: Official iOS SDK for Advocate, Swift and Objective-C. Distributed as a Swift
+      package (Package.swift in the repo root); no CocoaPods podspec is published.
+    version: v1.0.0-beta.1
+    published: '2021-05-18'
+    note: Still on a 2021 beta tag. The repository has commits as recent as 2026-04-02 but no
+      release has been cut in five years, so consumers pinning a tag are on a beta from 2021.
+  - name: saasquatch-cli
+    registry: npm
+    url: https://www.npmjs.com/package/saasquatch-cli
+    repository: https://github.com/saasquatch/saasquatch-cli
+    language: JavaScript
+    official: true
+    product: Advocate
+    description: Command line interface for Referral SaaSquatch.
+    version: 1.4.0
+    published: '2017-01-11'
+    status: abandoned
+    note: Last publish 2017-01-11, nearly a decade stale, and not referenced anywhere in the
+      current integrations.impact.com documentation. Recorded for completeness; do not treat
+      as a supported CLI.
+gaps:
+  - surface: Brand API v14
+    sdk: none
+    note: 29 OpenAPI documents, no first-party client library in npm, PyPI, Maven Central,
+      NuGet, RubyGems, Packagist, crates.io or pkg.go.dev. The docs teach raw curl and the
+      Python requests library.
+  - surface: Partner API v16
+    sdk: none
+  - surface: Agency API v3
+    sdk: none
+  - surface: MCP server
+    sdk: n/a
+    note: Remote endpoint at https://mcp.impact.com/mcp; nothing to install.
+searched_registries:
+  - registry: npm
+    result: 5 first-party @saasquatch packages plus the abandoned saasquatch-cli
+  - registry: Maven Central
+    result: no com.saasquatch or com.impact groupId - solrsearch returns numFound 0 and
+      repo1.maven.org returns 404
+  - registry: PyPI
+    result: no first-party package
+  - registry: RubyGems
+    result: no first-party package
+  - registry: NuGet
+    result: no first-party package
+  - registry: crates.io
+    result: no first-party package
+  - registry: pkg.go.dev
+    result: no first-party package
+  - registry: JitPack
+    result: two first-party Java/Android artifacts

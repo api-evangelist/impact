@@ -1,0 +1,188 @@
+name: Impact MCP to REST Tool Crosswalk
+description: Binding between the tools the impact.com MCP server exposes and the operations
+  published in the impact.com Brand v14, Partner v16 and Agency v3 OpenAPI documents.
+generated: '2026-08-13'
+method: derived
+source: mcp/impact-mcp.yml + openapi/impact-*-openapi.yml
+surfaces:
+  openapi:
+    brand: openapi/impact-brand-*-v14-openapi.yml
+    partner: openapi/impact-partner-*-v16-openapi.yml
+    agency: openapi/impact-agency-*-v3-openapi.yml
+    advocate: openapi/impact-brand-advocate-*-v13-openapi.yml
+    gated: false
+    note: 69 OpenAPI 3.1.0 documents, 245 operations, published by impact.com through its
+      GitBook developer portal and fetched anonymously.
+  mcp:
+    url: https://mcp.impact.com/mcp
+    gated: true
+    note: tools/list returns HTTP 401 without an OAuth 2.1 bearer token, so no live inputSchema
+      was available. Tools below are mapped by published name and description; confidence is
+      set accordingly.
+  graphql:
+    endpoint: https://app.referralsaasquatch.com/api/v1/{tenant_alias}/graphql
+    gated: true
+    note: Advocate GraphQL endpoint. Introspection requires a real tenant alias plus
+      credentials; anonymous POST returns 404 TENANT_NOT_FOUND.
+crosswalk:
+  - tool: list_invoices
+    category: billing
+    binding: direct
+    confidence: high
+    rest:
+      - listInvoices
+    note: Brand listInvoices (GET /Advertisers/{AccountSID}/Invoices) and Partner listInvoices
+      (GET /Mediapartners/{AccountSID}/Invoices). The tool is account-scoped, so the persona
+      decides which operation backs it.
+  - tool: get_invoice
+    category: billing
+    binding: direct
+    confidence: high
+    rest:
+      - getInvoiceById
+      - retrieveInvoice
+    note: Brand getInvoiceById and Partner retrieveInvoice. The tool takes an invoice number
+      where the REST operations take an invoice ID.
+  - tool: list_partner_promo_codes
+    category: promotions
+    binding: direct
+    confidence: high
+    rest:
+      - listPromoCodes
+    note: Partner listPromoCodes (GET /Mediapartners/{AccountSID}/PromoCodes). The tool
+      defaults to ACTIVE and PENDING; the REST operation exposes state as a filter.
+  - tool: get_partner_promo_code
+    category: promotions
+    binding: direct
+    confidence: high
+    rest:
+      - retrievePromoCode
+  - tool: create_tracking_links
+    category: tracking
+    binding: direct
+    confidence: high
+    rest:
+      - createTrackingLink
+    note: Partner createTrackingLink (POST
+      /Mediapartners/{AccountSID}/Programs/{ProgramId}/TrackingLinks). The tool batches
+      multiple destination URLs; the REST operation is one link per call, which the published
+      Partner Tracking-link Pack skill confirms ("one call per URL").
+  - tool: query_performance
+    category: analytics
+    binding: composite
+    confidence: medium
+    rest:
+      - listAllReports
+      - runReport
+      - getReportMetadata
+      - listReports
+      - retrieveMetadata
+    note: The tool takes measures, dimensions, date ranges and a comparison period. The REST
+      Reports API is the nearest published equivalent but is report-template driven, not
+      measure/dimension driven. The published skills show query_performance calling a
+      DataLab-style field catalog (partner_affiliate_performance) that has no public REST
+      operation, so this is a composite/adjacent binding rather than a wrapper.
+  - tool: investigate_order_action
+    category: tracking
+    binding: composite
+    confidence: medium
+    rest:
+      - listActions
+      - getActionById
+      - listActionUpdates
+      - listActionInquiries
+    note: Brand Actions and ActionUpdates operations carry the conversion and tracking records
+      the tool reports on. The tool resolves by order ID within a campaign, which REST exposes
+      as a filter on listActions rather than a dedicated operation.
+  - tool: get_brand_overdue_amount
+    category: billing
+    binding: adjacent
+    confidence: low
+    rest:
+      - listInvoices
+    note: Brand invoices carry line-item status, but no published REST operation returns the
+      account-level split of overdue impact.com fees versus overdue partner fees that the tool
+      returns.
+  - tool: recommend_programs
+    category: discovery
+    binding: adjacent
+    confidence: low
+    rest:
+      - listPrograms
+    note: Partner listPrograms (GET /Mediapartners/{AccountSID}/Campaigns) lists programs the
+      partner is already in. The tool ranks programs the partner is NOT in, using
+      audience-similarity signals with no REST counterpart.
+  - tool: search_products
+    category: discovery
+    binding: adjacent
+    confidence: low
+    rest:
+      - searchCatalogItems
+      - listCatalogItems
+    note: Partner searchCatalogItems searches catalogs the partner already has access to. The
+      tool searches the wider impact.com marketplace, which is broader than the REST surface.
+mcp_only:
+  - tool: search_help_center
+    reason: Searches help.impact.com content. No REST operation exposes the Help Center.
+  - tool: get_marketing_guidance
+    reason: Generative guidance layer backed by Partner Experience Academy content. No REST
+      counterpart.
+  - tool: get_website_metrics
+    reason: Third-party-style traffic and audience metrics for an arbitrary domain. No REST
+      operation returns website metrics.
+  - tool: get_social_metrics
+    reason: Follower, engagement and reach metrics for a social profile. No REST operation
+      returns social metrics.
+  - tool: recommend_partners
+    reason: Ranked partner recommendations using audience-similarity signals. Brand
+      listPartners only returns partners already in the program.
+  - tool: resolve_query_fields
+    reason: Field-catalog resolver named by the published partner skill. Not in the published
+      MCP Tools reference and not in any OpenAPI document.
+  - tool: resolve_program
+    reason: Name-to-ID resolver named by the published partner skill. Not documented on either
+      surface.
+  - tool: resolve_partner
+    reason: Brand-only name-to-ID resolver named by the published partner skill. Not documented
+      on either surface.
+  - tool: resolve_partner_group
+    reason: Brand-only resolver named by the published partner skill. Not documented on either
+      surface.
+rest_only_domains:
+  - domain: Contracts and applications
+    operations: [listContracts, retrieveContract]
+    note: No MCP tool accepts, declines or reads partner contracts.
+  - domain: Conversion submission
+    operations: [submitConversion, createConversion]
+    note: The tracking write path - the highest-volume REST surface - has no MCP tool.
+  - domain: Product catalogs
+    operations: [listCatalogs, retrieveCatalog, listCatalogItems, searchCatalogItems]
+  - domain: Deals and promotions
+    operations: [listDeals, createDeal, updateDeal, deleteDeal, listPromotions]
+  - domain: Ads and creative
+    operations: [listAds, retrieveAd, retrieveAdCode, retrieveAdIFrameCode]
+  - domain: Payouts, tax and banking
+    operations: [retrieveWithdrawalSettings, updateWithdrawalSettings, retrieveLatestTaxDocument,
+      createTaxDocument]
+  - domain: Exception lists and promo code exception lists
+    operations: [retrieveExceptionList, listExceptionListItems, createPromoCodeExceptionList]
+  - domain: Media properties, stores and users
+    operations: [listMediaProperties, createMediaProperty, listStores, listUsers]
+  - domain: Jobs and bulk exports
+    operations: [listJobs, retrieveJobStatus, downloadJobResults, replayJob, exportClicks]
+  - domain: Advocate referrals and rewards
+    operations: [Advocate v13 User, Referral, Reward, RewardBalance, ShareLinks, Webhook,
+      Export operations]
+  - domain: Agency multi-advertiser management
+    operations: [listAdvertisers, retrieveCompanyInformation, complianceContent]
+coverage:
+  mcp_tools_published: 15
+  mcp_tools_referenced_in_skills_only: 4
+  tools_bound_to_rest: 9
+  tools_mcp_only: 9
+  rest_operations_total: 245
+  rest_operations_reachable_via_mcp: 21
+  rest_coverage_percent: 8.6
+  note: The MCP server is a purpose-built analytics-and-discovery surface, not a generated
+    wrapper over the REST API. Roughly nine percent of published REST operations are reachable
+    through a tool, and more than half the tools have no REST equivalent at all.

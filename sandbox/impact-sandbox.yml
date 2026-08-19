@@ -1,0 +1,63 @@
+name: Impact Testing and Sandbox
+description: What impact.com publishes for testing an integration before and after go-live.
+  There is no sandbox account, no test-mode credential and no test data set - testing is done
+  against production with a Test Action flow.
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/integration-guides/end-to-end-tests
+sandbox_account: false
+test_mode_keys: false
+test_credentials: false
+test_data_fixtures: false
+time_simulation: false
+note: impact.com publishes no separate sandbox environment, no test/live key prefix pair and
+  no hosted test tokens. Tokens are minted against a live account; the only environment
+  separation impact.com recommends is minting separate tokens per environment against the
+  same production account.
+testing_model:
+  name: Production end-to-end test with Test Actions
+  docs: https://integrations.impact.com/integration-guides/end-to-end-tests
+  requirement: impact.com requires at least one end-to-end test of each new event type in the
+    production environment before launch.
+  flow:
+    - Settings, Tracking, Event Types, hover the event type, More, Test.
+    - Choose Template Term, Ad and optionally a Landing Page URL, then Start Test in New
+      Window.
+    - Complete a real conversion on the site in the same browser session, recording the Order
+      ID and payload parameters.
+    - Review the tracked payload under Engage, Transactions, Test Actions, matching on the
+      Order ID.
+    - Approve to validate the event type, or Reject and repeat after correcting the
+      integration.
+  latency: up to 30 minutes for a test transaction to surface on the Test Actions screen
+  browser_guidance:
+    - Clear cache and cookies before each test.
+    - Disable ad-blocking extensions.
+    - Use private, incognito or guest mode.
+    - Disable third-party cookies.
+  coverage_guidance:
+    - Sale events - test multiple SKUs with quantity of at least 2 each, with and without a
+      promo code and discount.
+    - Lead events - vary payload parameters such as promo codes, notes and text fields that
+      affect payout conditions.
+  isolation: Test Actions are recorded separately from live transactions and must be explicitly
+    approved or rejected, so they do not pay out. This is the closest impact.com gets to a test
+    mode.
+advocate_testing:
+  docs: https://integrations.impact.com/integration-guides/for-brands/advocate/end-to-end-testing-for-advocate
+  webhook_test: POST /{tenant_alias}/subscription/{url}/test emits a `test` event to a
+    subscribed endpoint.
+  spec: openapi/impact-brand-advocate-webhook-v13-openapi.yml
+credential_hygiene_published:
+  - Start with read-only scoped tokens.
+  - Use separate tokens per environment - development, staging, production.
+  - Store credentials in a vault or encrypted environment variables, never in source control.
+findings:
+  - For a platform that moves partner commission payments, the absence of any sandbox is the
+    single largest developer-experience gap. Every integration test is a real conversion on a
+    live account.
+  - The published guidance leans on browser hygiene (clear cookies, disable ad blockers,
+    incognito) because tracking is cookie-dependent, which makes automated CI testing of the
+    tracking path effectively impossible.
+provider_action: Ship a sandbox account or a test-mode credential with a documented test data
+  set, so an integration can be verified without transacting in production.
