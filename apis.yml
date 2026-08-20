@@ -25,6 +25,21 @@ created: '2026-06-13'
 modified: '2026-08-13'
 specificationVersion: '0.23'
 tags:
+- Affiliates
+- Partnerships
+- Performance Marketing
+- Commission
+- Tracking
+- Creator Economy
+- Partner Management
+- Referral
+- Attribution
+- Payouts
+- Marketing
+- Advertising
+- MCP
+- Agents
+tags_raw:
 - Affiliate
 - Partnerships
 - Performance Marketing
@@ -136,6 +151,12 @@ apis:
   humanURL: https://integrations.impact.com/partner-api-reference
   baseURL: https://api.impact.com/Mediapartners/{AccountSID}/
   tags:
+  - Publishers
+  - Partner
+  - Media
+  - Commission
+  - Reporting
+  tags_raw:
   - Publisher
   - Partner
   - Media
@@ -252,6 +273,13 @@ apis:
   - Rewards
   - Participants
   - Share Links
+  - Webhook
+  tags_raw:
+  - Advocate
+  - Referral
+  - Rewards
+  - Participants
+  - Share Links
   - Webhooks
   properties:
   - type: Documentation
@@ -290,6 +318,12 @@ apis:
   humanURL: https://integrations.impact.com/ai-solutions/mcp-quick-start
   baseURL: https://mcp.impact.com/mcp
   tags:
+  - MCP
+  - Agents
+  - Artificial Intelligence
+  - Analytics
+  - Discovery
+  tags_raw:
   - MCP
   - Agents
   - AI
