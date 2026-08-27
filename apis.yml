@@ -55,265 +55,13 @@ tags_raw:
 - MCP
 - Agents
 apis:
-- aid: impact:brand-api
-  name: Impact Brand API
-  description: 'REST API for brands and advertisers: partners, programs, contracts, actions and conversions,
-    deals, promo codes, catalogs, ads, tracking links, invoices, exception lists, reports and bulk export
-    jobs. Version 14, released 2026-06-01.'
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://integrations.impact.com/brand-api-reference
-  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
-  tags:
-  - Brand
-  - Advertiser
-  - Campaigns
-  - Conversions
-  - Contracts
-  properties:
-  - type: Documentation
-    url: https://integrations.impact.com/brand-api-reference
-  - type: APIReference
-    url: https://integrations.impact.com/brand-api-reference/readme
-  - type: Authentication
-    url: https://integrations.impact.com/brand-api-reference/readme/authentication
-  - type: ChangeLog
-    url: https://integrations.impact.com/brand-api-reference/readme/changelog
-  - type: RateLimits
-    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
-  - type: Webhooks
-    url: asyncapi/impact-webhooks.yml
-  - type: Overlay
-    url: overlays/impact-brand-overlay.yaml
-  - type: OpenAPI
-    url: openapi/impact-brand-account-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-actioninquiries-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-actions-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-ads-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-calldata-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-catalogs-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-clicks-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-contacts-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-contracts-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-conversions-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-deals-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-deferreddeeplink-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-exceptionlists-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-invoices-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-jobs-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-notes-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-pageload-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-partnergroups-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-partners-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-phonenumbers-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-programs-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-promocodeexceptionlists-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-promocodes-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-reports-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-routingrules-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-submissions-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-tasks-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-trackinglinks-v14-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-trackingvaluerequests-v14-openapi.yml
-- aid: impact:partner-api
-  name: Impact Partner API
-  description: 'REST API for media partners, publishers and creators: programs, contracts, actions and
-    action inquiries, clicks, ads, tracking links, promo codes, catalogs, stores, media properties, invoices,
-    tax documents, withdrawal settings, reports and event notifications. Version 16.'
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://integrations.impact.com/partner-api-reference
-  baseURL: https://api.impact.com/Mediapartners/{AccountSID}/
-  tags:
-  - Publishers
-  - Partner
-  - Media
-  - Commission
-  - Reporting
-  tags_raw:
-  - Publisher
-  - Partner
-  - Media
-  - Commission
-  - Reporting
-  properties:
-  - type: Documentation
-    url: https://integrations.impact.com/partner-api-reference
-  - type: APIReference
-    url: https://integrations.impact.com/partner-api-reference/readme
-  - type: Authentication
-    url: https://integrations.impact.com/brand-api-reference/readme/authentication
-  - type: Webhooks
-    url: https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
-  - type: Overlay
-    url: overlays/impact-partner-overlay.yaml
-  - type: OpenAPI
-    url: openapi/impact-partner-account-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-actioninquiries-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-actions-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-ads-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-campaigns-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-catalogs-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-clicks-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-contracts-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-conversions-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-deals-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-eventnotifications-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-exceptionlists-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-identityverification-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-invoices-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-jobs-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-mediaproperties-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-promo-codes-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-promocodeexceptionlists-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-promotions-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-reports-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-stores-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-tasks-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-taxdocument-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-trackinglinks-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-users-v16-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-partner-withdrawalsettings-v16-openapi.yml
-- aid: impact:agency-api
-  name: Impact Agency API
-  description: 'REST API for agencies managing multiple advertiser accounts: advertiser roster, company
-    information, compliance content submission, report export and job management. Version 3.'
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://integrations.impact.com/agency-v3
-  baseURL: https://api.impact.com/Agencies/{AccountSID}/
-  tags:
-  - Agency
-  - Multi-client
-  - Reporting
-  - Automation
-  properties:
-  - type: Documentation
-    url: https://integrations.impact.com/agency-v3
-  - type: APIReference
-    url: https://integrations.impact.com/agency-v3/readme
-  - type: Authentication
-    url: https://integrations.impact.com/agency-v3/readme/authentication
-  - type: ChangeLog
-    url: https://integrations.impact.com/agency-v3/readme/changelog
-  - type: Overlay
-    url: overlays/impact-agency-overlay.yaml
-  - type: OpenAPI
-    url: openapi/impact-agency-advertisers-v3-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-agency-companyinformation-v3-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-agency-compliance-v3-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-agency-jobs-v3-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-agency-reports-v3-openapi.yml
-- aid: impact:advocate-api
-  name: Impact Advocate API
-  description: 'REST and GraphQL API for impact.com Advocate, the customer-referral product acquired as
-    SaaSquatch: participants, referrals, referral codes, rewards and reward balances, share links, data
-    exports and webhook subscriptions. Version 13, served from the Advocate product host and tenant-scoped
-    by tenant_alias.'
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
-  baseURL: https://app.referralsaasquatch.com/api/v1/{tenant_alias}/
-  tags:
-  - Advocate
-  - Referral
-  - Rewards
-  - Participants
-  - Share Links
-  - Webhook
-  tags_raw:
-  - Advocate
-  - Referral
-  - Rewards
-  - Participants
-  - Share Links
-  - Webhooks
-  properties:
-  - type: Documentation
-    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
-  - type: Authentication
-    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
-  - type: GraphQL
-    url: graphql/impact-advocate-graphql.yml
-  - type: Webhooks
-    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
-  - type: OpenAPI
-    url: openapi/impact-brand-advocate-account-v13-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-advocate-export-v13-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-advocate-referral-v13-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-advocate-referralcode-v13-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-advocate-reward-v13-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-advocate-rewardbalance-v13-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-advocate-sharelinks-v13-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-advocate-user-v13-openapi.yml
-  - type: OpenAPI
-    url: openapi/impact-brand-advocate-webhook-v13-openapi.yml
 - aid: impact:mcp-server
   name: Impact MCP Server
-  description: Remote Model Context Protocol server for impact.com. Fifteen documented tools give an AI
-    assistant account-scoped access to performance analytics, invoices, partner and program discovery,
-    promo codes, tracking link creation, website and social metrics, order investigation and platform
-    help. Authorized with OAuth 2.1 and a per-client usage token.
+  description: >-
+    Remote Model Context Protocol server for impact.com. Fifteen documented tools give an AI assistant
+    account-scoped access to performance analytics, invoices, partner and program discovery, promo codes,
+    tracking link creation, website and social metrics, order investigation and platform help. Authorized
+    with OAuth 2.1 and a per-client usage token.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://integrations.impact.com/ai-solutions/mcp-quick-start
   baseURL: https://mcp.impact.com/mcp
@@ -342,7 +90,2904 @@ apis:
     url: scopes/impact-scopes.yml
   - type: AgentSkill
     url: skills/_index.yml
+- aid: impact:impact-account-api
+  name: Impact Account API
+  description: The Account API from Impact — 2 operation(s) for account.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-account-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-accounts-api
+  name: Impact Accounts API
+  description: Endpoints for managing partner company account information.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-action-inquiries-api
+  name: Impact Action Inquiries API
+  description: The Action Inquiries API from Impact — 4 operation(s) for action inquiries.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Action Inquiries
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-action-inquiries-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-action-updates-api
+  name: Impact Action Updates API
+  description: The Action Updates API from Impact — 2 operation(s) for action updates.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Action Updates
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-action-updates-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-actions-api
+  name: Impact Actions API
+  description: The Actions API from Impact — 10 operation(s) for actions.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Actions
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-actions-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-ads-api
+  name: Impact Ads API
+  description: The Ads API from Impact — 7 operation(s) for ads.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Ads
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-ads-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-advertisers-api
+  name: Impact Advertisers API
+  description: Advertiser accounts managed by this agency.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Advertisers
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-advertisers-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-api-submissions-api
+  name: Impact API Submissions API
+  description: The API Submissions API from Impact — 2 operation(s) for api submissions.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - API Submissions
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-api-submissions-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-call-data-api
+  name: Impact Call Data API
+  description: The Call Data API from Impact — 1 operation(s) for call data.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Call Data
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-call-data-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-catalog-items-api
+  name: Impact Catalog Items API
+  description: The Catalog Items API from Impact — 3 operation(s) for catalog items.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Catalog Items
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-catalog-items-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-catalogs-api
+  name: Impact Catalogs API
+  description: The Catalogs API from Impact — 8 operation(s) for catalogs.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Catalogs
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-catalogs-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-clickexport-api
+  name: Impact Click Export API
+  description: The ClickExport API from Impact — 2 operation(s) for clickexport.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - ClickExport
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-clickexport-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-clicks-api
+  name: Impact Clicks API
+  description: The Clicks API from Impact — 2 operation(s) for clicks.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Clicks
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-clicks-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-company-information-api
+  name: Impact Company Information API
+  description: Your agency's company profile, addresses, and key contacts.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Company Information
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-company-information-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-compliance-content-api
+  name: Impact Compliance Content API
+  description: Submit content for impact.com compliance monitoring and retrieve job status and results.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Compliance Content
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-compliance-content-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-contacts-api
+  name: Impact Contacts API
+  description: The Contacts API from Impact — 2 operation(s) for contacts.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-contracts-api
+  name: Impact Contracts API
+  description: The Contracts API from Impact — 5 operation(s) for contracts.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-conversions-api
+  name: Impact Conversions API
+  description: The Conversions API from Impact — 2 operation(s) for conversions.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Conversions
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-conversions-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-deals-api
+  name: Impact Deals API
+  description: The Deals API from Impact — 4 operation(s) for deals.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Deals
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-deals-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-deferred-deep-linking-api
+  name: Impact Deferred Deep Linking API
+  description: The Deferred Deep Linking API from Impact — 1 operation(s) for deferred deep linking.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Deferred Deep Linking
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-deferred-deep-linking-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-event-notifications-api
+  name: Impact Event Notifications API
+  description: >-
+    Inbound webhook payloads that impact.com sends to a partner-configured URL when events occur.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Event Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-event-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-exception-list-items-api
+  name: Impact Exception List Items API
+  description: The Exception List Items API from Impact — 2 operation(s) for exception list items.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Exception List Items
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-exception-list-items-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-exception-lists-api
+  name: Impact Exception Lists API
+  description: The Exception Lists API from Impact — 4 operation(s) for exception lists.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Exception Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-exception-lists-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-export-api
+  name: Impact Export API
+  description: >-
+    Endpoints for working with bulk data exports: create a new export, look up the status of an existing
+    export, download a completed export, and list recent exports.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Export
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-export-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-ftp-submissions-api
+  name: Impact FTP Submissions API
+  description: The FTP Submissions API from Impact — 3 operation(s) for ftp submissions.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - FTP Submissions
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-ftp-submissions-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-identity-verification-api
+  name: Impact Identity Verification API
+  description: Endpoint for creating and resuming identity verification sessions.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Identity Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-identity-verification-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-invoices-api
+  name: Impact Invoices API
+  description: The Invoices API from Impact — 6 operation(s) for invoices.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-jobs-api
+  name: Impact Jobs API
+  description: Schedule, monitor, replay, and download large-scale asynchronous jobs.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-legal-entities-api
+  name: Impact Legal Entities API
+  description: The Legal Entities API from Impact — 2 operation(s) for legal entities.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Legal Entities
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-legal-entities-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-media-properties-api
+  name: Impact Media Properties API
+  description: >-
+    Endpoints for listing, creating, retrieving, updating, and deleting partner media properties.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Media Properties
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-media-properties-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-notes-api
+  name: Impact Notes API
+  description: The Notes API from Impact — 2 operation(s) for notes.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-notes-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-open-endpoint-api
+  name: Impact Open Endpoint API
+  description: >-
+    Special methods designed for Client-facing applications like the Mobile and Javascript SDKs.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Open Endpoint
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-open-endpoint-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-page-load-api
+  name: Impact Page Load API
+  description: The Page Load API from Impact — 1 operation(s) for page load.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Page Load
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-page-load-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-partner-groups-api
+  name: Impact Partner Groups API
+  description: The Partner Groups API from Impact — 2 operation(s) for partner groups.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Partner Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-partner-groups-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-partners-api
+  name: Impact Partners API
+  description: The Partners API from Impact — 2 operation(s) for partners.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Partners
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-partners-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-phone-numbers-api
+  name: Impact Phone Numbers API
+  description: The Phone Numbers API from Impact — 2 operation(s) for phone numbers.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Phone Numbers
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-phone-numbers-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-programs-api
+  name: Impact Programs API
+  description: The Programs API from Impact — 5 operation(s) for programs.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Programs
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-programs-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-promo-code-exception-list-items-api
+  name: Impact Promo Code Exception List Items API
+  description: >-
+    The Promo Code Exception List Items API from Impact — 2 operation(s) for promo code exception list
+    items.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Promo Code Exception List Items
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-promo-code-exception-list-items-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-promo-code-exception-lists-api
+  name: Impact Promo Code Exception Lists API
+  description: >-
+    The Promo Code Exception Lists API from Impact — 4 operation(s) for promo code exception lists.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Promo Code Exception Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-promo-code-exception-lists-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-promo-codes-api
+  name: Impact Promo Codes API
+  description: The Promo Codes API from Impact — 4 operation(s) for promo codes.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Promo Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-promo-codes-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-promotions-api
+  name: Impact Promotions API
+  description: Endpoints for listing and retrieving brand promotions available to your partner account.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Promotions
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-promotions-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-referral-api
+  name: Impact Referral API
+  description: A Referral tracks who has referred whom.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Referral
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-referral-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-referral-code-api
+  name: Impact Referral Code API
+  description: >-
+    Endpoints for working with referral codes: look up a code and its associated reward, or apply a code
+    to a referred account. For background on what referral codes are, see the Referral Code Overview.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Referral Code
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-referral-code-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-report-export-api
+  name: Impact Report Export API
+  description: The Report Export API from Impact — 2 operation(s) for report export.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Report Export
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-report-export-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-reportexport-api
+  name: Impact Report Export API
+  description: >-
+    Asynchronously export reports through impact.com's Jobs system. Recommended for all report downloads.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - ReportExport
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-reportexport-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-reports-api
+  name: Impact Reports API
+  description: List available reports, fetch their metadata, and run them synchronously.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-reports-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-reports-legacy-api
+  name: Impact Reports (Legacy) API
+  description: >-
+    Legacy synchronous reports endpoint. Subject to pagination limits — prefer `ReportExport` for large
+    datasets.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Reports (Legacy)
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-reports-legacy-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-reward-api
+  name: Impact Reward API
+  description: >-
+    A Reward keeps track of a prize, discount or credit that someone has received.
+
+    All reward types other than gift card integrated rewards can be cancelled using the impact.com API,
+    or through the impact.com Admin portal, if they have not already been redeemed.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Reward
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-reward-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-reward-balance-api
+  name: Impact Reward Balance API
+  description: Reward Balances summarizes the Rewards in someone's account.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Reward Balance
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-reward-balance-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-routing-rules-api
+  name: Impact Routing Rules API
+  description: The Routing Rules API from Impact — 2 operation(s) for routing rules.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Routing Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-routing-rules-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-share-links-api
+  name: Impact Share Links API
+  description: >-
+    Endpoints for retrieving the share links of a given user. Share links are organised by engagement
+    medium and share medium. For background on how they work, see the Share Links Overview.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Share Links
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-share-links-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-stores-api
+  name: Impact Stores API
+  description: >-
+    Endpoints for browsing partner storefronts, their groups, and the catalog items inside them.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Stores
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-stores-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-tasks-api
+  name: Impact Tasks API
+  description: The Tasks API from Impact — 4 operation(s) for tasks.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-tax-documents-api
+  name: Impact Tax Documents API
+  description: Endpoints for creating, completing, and retrieving partner tax documents.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Tax Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-tax-documents-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-tracking-links-api
+  name: Impact Tracking Links API
+  description: The Tracking Links API from Impact — 2 operation(s) for tracking links.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Tracking Links
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-tracking-links-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-tracking-value-requests-api
+  name: Impact Tracking Value Requests API
+  description: >-
+    The Tracking Value Requests API from Impact — 2 operation(s) for tracking value requests.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Tracking Value Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-tracking-value-requests-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-unsubscribed-contacts-api
+  name: Impact Unsubscribed Contacts API
+  description: The Unsubscribed Contacts API from Impact — 1 operation(s) for unsubscribed contacts.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Unsubscribed Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-unsubscribed-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-user-api
+  name: Impact User API
+  description: API for managing users, including creation, lookup, and blocking.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-user-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-users-api
+  name: Impact Users API
+  description: Endpoints for listing and retrieving partner-account users.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-users-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-webhook-api
+  name: Impact Webhook API
+  description: >-
+    Endpoints for managing webhook subscriptions: list current subscriptions, register new endpoint URLs,
+    remove existing ones, and send a test event to verify a subscription.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Webhook
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-webhook-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
+- aid: impact:impact-withdrawal-settings-api
+  name: Impact Withdrawal Settings API
+  description: >-
+    Endpoints for retrieving and updating your bank account, PayPal, and payment scheduling settings.
+  humanURL: https://integrations.impact.com/brand-api-reference
+  baseURL: https://api.impact.com/Advertisers/{AccountSID}/
+  tags:
+  - Withdrawal Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-withdrawal-settings-api-openapi.yml
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/readme
+  - type: Authentication
+    url: https://integrations.impact.com/brand-api-reference/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/readme/changelog
+  - type: RateLimits
+    url: https://integrations.impact.com/brand-api-reference/readme/rate-limits
+  - type: Webhooks
+    url: asyncapi/impact-webhooks.yml
+  - type: Documentation
+    url: https://integrations.impact.com/partner-api-reference
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/readme
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/partner-api-reference/reference/webhooks/event-notifications
+  - type: Documentation
+    url: https://integrations.impact.com/agency-v3
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3/readme
+  - type: Authentication
+    url: https://integrations.impact.com/agency-v3/readme/authentication
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog
+  - type: Documentation
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Authentication
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api
+  - type: GraphQL
+    url: graphql/impact-advocate-graphql.yml
+  - type: Webhooks
+    url: >-
+      https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
 common:
+- type: Overlay
+  url: overlays/impact-brand-overlay.yaml
+- type: Overlay
+  url: overlays/impact-partner-overlay.yaml
+- type: Overlay
+  url: overlays/impact-agency-overlay.yaml
 - type: VulnerabilityDisclosure
   url: security/impact-vulnerability-disclosure.yml
 - type: DomainSecurity
