@@ -2994,6 +2994,9 @@ apis:
     url: >-
       https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs
 common:
+- type: CapabilityMap
+  url: capabilities/impact-capability-edges.yml
+  name: Impact Business Capability Map
 - type: Overlay
   url: overlays/impact-brand-overlay.yaml
 - type: Overlay
