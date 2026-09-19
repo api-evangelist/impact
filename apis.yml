@@ -40,11 +40,11 @@ tags:
 - Affiliates
 - Partnerships
 - Performance Marketing
-- Commission
+- Commissions
 - Tracking
 - Creator Economy
 - Partner Management
-- Referral
+- Referrals
 - Attribution
 - Payouts
 - Marketing
@@ -582,6 +582,8 @@ apis:
   humanURL: https://integrations.impact.com/brand-api-reference
   baseURL: https://api.impact.com/Advertisers/{AccountSID}/
   tags:
+  - Catalog
+  tags_raw:
   - Catalogs
   properties:
   - type: OpenAPI
@@ -911,6 +913,8 @@ apis:
   humanURL: https://integrations.impact.com/brand-api-reference
   baseURL: https://api.impact.com/Advertisers/{AccountSID}/
   tags:
+  - Conversion
+  tags_raw:
   - Conversions
   properties:
   - type: OpenAPI
@@ -2049,6 +2053,8 @@ apis:
   humanURL: https://integrations.impact.com/brand-api-reference
   baseURL: https://api.impact.com/Advertisers/{AccountSID}/
   tags:
+  - Referrals
+  tags_raw:
   - Referral
   properties:
   - type: OpenAPI
