@@ -11,8 +11,30 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 2
+edge_count: 4
 edges:
+- tag: Webhook
+  spec_file: impact-webhook-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.85
+  evidence: '"API for managing Webhook subscriptions"; createWebhook / listWebhooks / deleteWebhook /
+    testWebhook, schema WebhookEndpoint'
+  reason: Explicit lifecycle of outbound webhook/event subscriptions including delivery testing, which
+    is precisely the webhook & event subscription management capability in the developer-platform L1.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: Ads
+  spec_file: impact-ads-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.75
+  evidence: POST /Advertisers/{AccountSID}/Ads createAd 'Create an Ad'; GET /Mediapartners/{AccountSID}/Ads/{Id}/TrackingLink
+    'Retrieve an Ad's Tracking Link'; GET .../IFrameCode
+  reason: Operations create and serve advertising creatives with ad code, iframe code and tracking links
+    for partners to place — digital advertising asset and tracking management, i.e. digital marketing.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Partners
   spec_file: impact-partners-api-openapi.yml
   capability_id: BC-410.60
