@@ -227,93 +227,6 @@ paths:
       description: Production server
 components:
   schemas:
-    TaskDetails:
-      type: object
-      properties:
-        Summary:
-          type: string
-          example: Acme Rewards Card Update
-        Description:
-          type: string
-          example: The Acme Rewards Card APR has changed, please update your ads to reflect this new value.
-        Urgent:
-          type: boolean
-          example: true
-        State:
-          type: string
-          enum:
-          - NEW
-          - INPROGRESS
-          - DUPLICATE
-          - INVALID
-          - BLOCKED
-          - COMPLETED
-          - APPROVED
-          example: INPROGRESS
-        Type:
-          type: string
-          enum:
-          - COMPLIANCE
-          - TECHNICAL
-          - GENERAL
-          - CREATIVE
-          - FINANCE
-          - CONTRACTS
-          - ANALYTICS
-          - MONITORING
-          example: COMPLIANCE
-        SubtypeId:
-          type: string
-          nullable: true
-          example: '275'
-        SubtypeName:
-          type: string
-          nullable: true
-          example: Content
-        ResolutionId:
-          type: string
-          nullable: true
-          example: ''
-        ResolutionName:
-          type: string
-          nullable: true
-          example: ''
-    Comment:
-      type: object
-      properties:
-        Id:
-          type: integer
-          description: Unique identifier for the comment.
-          example: 98765
-        Comment:
-          type: string
-          description: The comment text.
-          example: I've updated our home page with the latest ads, see attached screenshot.
-        Commenter:
-          type: string
-          description: Name of the user who posted the comment.
-          example: Wile E. Coyote
-        Attachments:
-          type: array
-          description: Details about each attachment on the comment.
-          items:
-            $ref: '#/components/schemas/Attachment'
-    Attachment:
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier for the attachment.
-          example: task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7
-        Filename:
-          type: string
-          description: Original filename of the attachment.
-          example: acme_reward_card_details.pdf
-        Location:
-          type: string
-          format: uri
-          description: URL to download the attachment.
-          example: https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf
     Task:
       type: object
       properties:
@@ -376,38 +289,27 @@ components:
         LastUpdatedBy:
           $ref: '#/components/schemas/User'
           description: Name of the user that last updated the task.
-    User:
+    Comment:
       type: object
       properties:
-        Username:
-          type: string
-          description: The user's username.
-          example: Wile E. Coyote
-        EmailAddress:
-          type: string
-          format: email
-          description: The user's email address.
-          example: wilecoyote@example.com
-    TaskReference:
-      type: object
-      properties:
-        PartnerId:
+        Id:
           type: integer
-          description: Unique identifier of the partner this task is about.
-          example: 2552842
-        PartnerValue1:
+          description: Unique identifier for the comment.
+          example: 98765
+        Comment:
           type: string
-          description: Custom partner tracking value 1.
-          example: vip
-        PartnerValue2:
+          description: The comment text.
+          example: I've updated our home page with the latest ads, see attached screenshot.
+        Commenter:
           type: string
-          description: Custom partner tracking value 2.
-          example: north-america
-        PartnerValue3:
-          type: string
-          description: Custom partner tracking value 3.
-          example: tennis
-    TaskDetails_2:
+          description: Name of the user who posted the comment.
+          example: Wile E. Coyote
+        Attachments:
+          type: array
+          description: Details about each attachment on the comment.
+          items:
+            $ref: '#/components/schemas/Attachment'
+    TaskDetails:
       type: object
       properties:
         Summary:
@@ -443,9 +345,8 @@ components:
           - MONITORING
           example: COMPLIANCE
         SubtypeId:
-          type:
-          - string
-          - 'null'
+          type: string
+          nullable: true
           example: '275'
         SubtypeName:
           type: string
@@ -459,6 +360,53 @@ components:
           type: string
           nullable: true
           example: ''
+    Attachment:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the attachment.
+          example: task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7
+        Filename:
+          type: string
+          description: Original filename of the attachment.
+          example: acme_reward_card_details.pdf
+        Location:
+          type: string
+          format: uri
+          description: URL to download the attachment.
+          example: https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf
+    User:
+      type: object
+      properties:
+        Username:
+          type: string
+          description: The user's username.
+          example: Wile E. Coyote
+        EmailAddress:
+          type: string
+          format: email
+          description: The user's email address.
+          example: wilecoyote@example.com
+    TaskReference:
+      type: object
+      properties:
+        PartnerId:
+          type: integer
+          description: Unique identifier of the partner this task is about.
+          example: 2552842
+        PartnerValue1:
+          type: string
+          description: Custom partner tracking value 1.
+          example: vip
+        PartnerValue2:
+          type: string
+          description: Custom partner tracking value 2.
+          example: north-america
+        PartnerValue3:
+          type: string
+          description: Custom partner tracking value 3.
+          example: tennis
     Task_2:
       type: object
       properties:
@@ -521,6 +469,58 @@ components:
         LastUpdatedBy:
           $ref: '#/components/schemas/User'
           description: Name of the user that last updated the task.
+    TaskDetails_2:
+      type: object
+      properties:
+        Summary:
+          type: string
+          example: Acme Rewards Card Update
+        Description:
+          type: string
+          example: The Acme Rewards Card APR has changed, please update your ads to reflect this new value.
+        Urgent:
+          type: boolean
+          example: true
+        State:
+          type: string
+          enum:
+          - NEW
+          - INPROGRESS
+          - DUPLICATE
+          - INVALID
+          - BLOCKED
+          - COMPLETED
+          - APPROVED
+          example: INPROGRESS
+        Type:
+          type: string
+          enum:
+          - COMPLIANCE
+          - TECHNICAL
+          - GENERAL
+          - CREATIVE
+          - FINANCE
+          - CONTRACTS
+          - ANALYTICS
+          - MONITORING
+          example: COMPLIANCE
+        SubtypeId:
+          type:
+          - string
+          - 'null'
+          example: '275'
+        SubtypeName:
+          type: string
+          nullable: true
+          example: Content
+        ResolutionId:
+          type: string
+          nullable: true
+          example: ''
+        ResolutionName:
+          type: string
+          nullable: true
+          example: ''
   securitySchemes:
     basicAuth:
       type: http

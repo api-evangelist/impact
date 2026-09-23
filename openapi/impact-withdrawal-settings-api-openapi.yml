@@ -3,22 +3,7 @@ info:
   title: Partner Withdrawal Settings API
   version: '16'
   termsOfService: https://impact.com/terms
-  description: 'Withdrawal Settings hold the bank account, PayPal, and payment scheduling information impact.com uses to pay you out. Required fields vary by country and payment method.
-
-
-    Typical workflow:
-
-
-    1. **Retrieve required fields** for your country (and optionally a payment method) to learn which fields are mandatory.
-
-    2. **Update your settings** with the values you''ve collected.
-
-    3. **Retrieve your settings** to confirm what''s saved.
-
-
-    The `PaymentSchedulingType` field controls when payouts trigger — either when your balance crosses `PaymentThreshold` (`BALANCE_THRESHOLD`) or on a fixed day of the month (`FIXED_DAY`).
-
-    '
+  description: Withdrawal Settings hold the bank account, PayPal, and payment scheduling information impact.com uses to pay you out.
   contact:
     name: impact.com Developer Support
     url: https://app.impact.com/secure/help/contact-support.ihtml
@@ -64,9 +49,7 @@ paths:
       tags:
       - Withdrawal Settings
       summary: Update withdrawal settings
-      description: 'Updates the partner''s withdrawal settings. Only the parameters provided in the request body are changed; all others remain unchanged. Call `RequiredFields` first to learn which fields are mandatory for your country and payment method.
-
-        '
+      description: Updates the partner's withdrawal settings. Only the parameters provided in the request body are changed; all others remain unchanged. Call `RequiredFields` first to learn which fields are mandatory for your country and payment method.
       parameters:
       - name: AccountSID
         in: path
@@ -142,6 +125,124 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/WithdrawalSettings/RequiredFields?bankCountry=US' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
 components:
   schemas:
+    WithdrawalSettings:
+      type: object
+      properties:
+        PaymentMethod:
+          type: string
+          enum:
+          - PAYPAL
+          - BANK_TRANSFER
+          description: How impact.com sends your payouts.
+          example: BANK_TRANSFER
+        PaypalEmailAddress:
+          type: string
+          description: Email address of the PayPal account that receives payouts. Required when `PaymentMethod` is `PAYPAL`.
+          example: ''
+        BankCountry:
+          type: string
+          description: ISO 3166-1 alpha-2 country code of the country where the bank account is held.
+          example: US
+        BeneficiaryAccountName:
+          type: string
+          description: Full name on the bank account that will receive funds.
+          example: ''
+        BeneficiaryClassification:
+          type: string
+          enum:
+          - BUSINESS
+          - INDIVIDUAL
+          - CPF
+          - CNPJ
+          description: Classification of the account holder. `BUSINESS` and `INDIVIDUAL` apply globally; `CPF` and `CNPJ` are Brazilian taxpayer types.
+          example: ''
+        ClassificationCode:
+          type: string
+          description: Additional classification code required by some country/classification combinations (notably Brazil).
+          example: ''
+        BeneficiaryAlternativeName:
+          type: string
+          description: Alternative name on the account, where the bank's system requires one.
+          example: ''
+        BeneficiaryTaxPayerId:
+          type: string
+          description: Taxpayer identifier of the beneficiary, in the format used by `BankCountry` (e.g., SSN/EIN for US, CPF/CNPJ for Brazil).
+          example: ''
+        BankAccountType:
+          type: string
+          enum:
+          - CHECKING
+          - SAVINGS
+          - NOT_SET
+          description: Type of bank account that will receive funds.
+          example: NOT_SET
+        BankAccountNumber:
+          type: string
+          description: The bank account number that will receive funds. For SEPA countries this is the IBAN.
+          example: ''
+        SwiftCode:
+          type: string
+          description: SWIFT/BIC code identifying the receiving bank. Required for international transfers.
+          example: ''
+        RoutingCode:
+          type: string
+          description: Domestic routing code for the receiving bank (e.g., US ABA routing number, UK sort code).
+          example: ''
+        VoCode:
+          type: string
+          description: Country-specific verification code used by some banking jurisdictions.
+          example: ''
+        AgencyCode:
+          type: string
+          description: Bank agency identifier used in some Latin American banking systems.
+          example: ''
+        BankAddress:
+          type: string
+          description: Street address of the receiving bank branch.
+          example: ''
+        BankPostalCode:
+          type: string
+          description: Postal code of the receiving bank branch.
+          example: ''
+        BankCity:
+          type: string
+          description: City of the receiving bank branch.
+          example: ''
+        BankState:
+          type: string
+          description: State or province of the receiving bank branch.
+          example: ''
+        BranchCode:
+          type: string
+          description: Branch identifier code (e.g., transit number, sort code segment, branch number).
+          example: ''
+        BankName:
+          type: string
+          description: Name of the receiving bank.
+          example: ''
+        BranchName:
+          type: string
+          description: Name of the receiving bank's branch.
+          example: ''
+        PaymentSchedulingType:
+          type: string
+          enum:
+          - BALANCE_THRESHOLD
+          - FIXED_DAY
+          description: Determines whether payouts trigger by balance threshold or on a fixed day of the month.
+          example: BALANCE_THRESHOLD
+        PaymentThreshold:
+          type: string
+          description: Minimum account balance that triggers a payout when `PaymentSchedulingType` is `BALANCE_THRESHOLD`. Min $20 USD, max $10,000 USD.
+          example: '10000.00'
+        PaymentDay:
+          type: string
+          description: Day of the month payouts are issued when `PaymentSchedulingType` is `FIXED_DAY`. Either `1` or `15`. Returns `0` when not applicable.
+          example: '0'
+        Uri:
+          type: string
+          description: API resource path for these withdrawal settings.
+          example: /Mediapartners/<AccountSID>/WithdrawalSettings
     WithdrawalSettingsUpdate:
       type: object
       description: Fields you can submit to update withdrawal settings. Any field omitted from the request is left unchanged.
@@ -289,124 +390,6 @@ components:
               - BankAccountType
               - BankAccountNumber
               - RoutingCode
-    WithdrawalSettings:
-      type: object
-      properties:
-        PaymentMethod:
-          type: string
-          enum:
-          - PAYPAL
-          - BANK_TRANSFER
-          description: How impact.com sends your payouts.
-          example: BANK_TRANSFER
-        PaypalEmailAddress:
-          type: string
-          description: Email address of the PayPal account that receives payouts. Required when `PaymentMethod` is `PAYPAL`.
-          example: ''
-        BankCountry:
-          type: string
-          description: ISO 3166-1 alpha-2 country code of the country where the bank account is held.
-          example: US
-        BeneficiaryAccountName:
-          type: string
-          description: Full name on the bank account that will receive funds.
-          example: ''
-        BeneficiaryClassification:
-          type: string
-          enum:
-          - BUSINESS
-          - INDIVIDUAL
-          - CPF
-          - CNPJ
-          description: Classification of the account holder. `BUSINESS` and `INDIVIDUAL` apply globally; `CPF` and `CNPJ` are Brazilian taxpayer types.
-          example: ''
-        ClassificationCode:
-          type: string
-          description: Additional classification code required by some country/classification combinations (notably Brazil).
-          example: ''
-        BeneficiaryAlternativeName:
-          type: string
-          description: Alternative name on the account, where the bank's system requires one.
-          example: ''
-        BeneficiaryTaxPayerId:
-          type: string
-          description: Taxpayer identifier of the beneficiary, in the format used by `BankCountry` (e.g., SSN/EIN for US, CPF/CNPJ for Brazil).
-          example: ''
-        BankAccountType:
-          type: string
-          enum:
-          - CHECKING
-          - SAVINGS
-          - NOT_SET
-          description: Type of bank account that will receive funds.
-          example: NOT_SET
-        BankAccountNumber:
-          type: string
-          description: The bank account number that will receive funds. For SEPA countries this is the IBAN.
-          example: ''
-        SwiftCode:
-          type: string
-          description: SWIFT/BIC code identifying the receiving bank. Required for international transfers.
-          example: ''
-        RoutingCode:
-          type: string
-          description: Domestic routing code for the receiving bank (e.g., US ABA routing number, UK sort code).
-          example: ''
-        VoCode:
-          type: string
-          description: Country-specific verification code used by some banking jurisdictions.
-          example: ''
-        AgencyCode:
-          type: string
-          description: Bank agency identifier used in some Latin American banking systems.
-          example: ''
-        BankAddress:
-          type: string
-          description: Street address of the receiving bank branch.
-          example: ''
-        BankPostalCode:
-          type: string
-          description: Postal code of the receiving bank branch.
-          example: ''
-        BankCity:
-          type: string
-          description: City of the receiving bank branch.
-          example: ''
-        BankState:
-          type: string
-          description: State or province of the receiving bank branch.
-          example: ''
-        BranchCode:
-          type: string
-          description: Branch identifier code (e.g., transit number, sort code segment, branch number).
-          example: ''
-        BankName:
-          type: string
-          description: Name of the receiving bank.
-          example: ''
-        BranchName:
-          type: string
-          description: Name of the receiving bank's branch.
-          example: ''
-        PaymentSchedulingType:
-          type: string
-          enum:
-          - BALANCE_THRESHOLD
-          - FIXED_DAY
-          description: Determines whether payouts trigger by balance threshold or on a fixed day of the month.
-          example: BALANCE_THRESHOLD
-        PaymentThreshold:
-          type: string
-          description: Minimum account balance that triggers a payout when `PaymentSchedulingType` is `BALANCE_THRESHOLD`. Min $20 USD, max $10,000 USD.
-          example: '10000.00'
-        PaymentDay:
-          type: string
-          description: Day of the month payouts are issued when `PaymentSchedulingType` is `FIXED_DAY`. Either `1` or `15`. Returns `0` when not applicable.
-          example: '0'
-        Uri:
-          type: string
-          description: API resource path for these withdrawal settings.
-          example: /Mediapartners/<AccountSID>/WithdrawalSettings
   securitySchemes:
     basicAuth:
       type: http

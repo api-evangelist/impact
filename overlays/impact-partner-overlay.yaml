@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: Impact Partner API v16 enrichment overlay
   version: 1.0.0
-  description: API Evangelist enrichment overlay. impact.com publishes these OpenAPI documents without
+  x-description: API Evangelist enrichment overlay. impact.com publishes these OpenAPI documents without
     a securitySchemes block, without error responses and without rate-limit metadata, even though all
     three are documented in prose on integrations.impact.com. This overlay adds them back without mutating
     the provider document. The same actions apply across all 26 Partner v16 documents for this persona;

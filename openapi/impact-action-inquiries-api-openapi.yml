@@ -647,14 +647,6 @@ components:
       - UNTRACKED
       - INCORRECT
       - DECLINED
-    ResolutionStatus:
-      type: string
-      description: The current resolution status of the inquiry.
-      enum:
-      - UNRESOLVED
-      - VALID
-      - DECLINED
-      - INCOMPLETE
     Comment:
       type: object
       properties:
@@ -684,6 +676,14 @@ components:
       - Transaction not fully completed online
       - Enquiry does not provide complete information required for evaluation
       - Other
+    ResolutionStatus:
+      type: string
+      description: The current resolution status of the inquiry.
+      enum:
+      - UNRESOLVED
+      - VALID
+      - DECLINED
+      - INCOMPLETE
   parameters:
     AccountSID:
       name: AccountSID

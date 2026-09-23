@@ -65,9 +65,7 @@ paths:
       tags:
       - Tracking Links
       summary: Create a tracking link
-      description: 'Generates a new tracking link for the specified program. Up to **5,000 vanity links** can exist on an account — exceeding that limit returns a 403 Forbidden response.
-
-        '
+      description: Generates a new tracking link for the specified program. Up to **5,000 vanity links** can exist on an account — exceeding that limit returns a 403 Forbidden response.
       parameters:
       - name: AccountSID
         in: path

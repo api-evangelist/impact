@@ -272,55 +272,6 @@ components:
           nullable: true
           description: Custom CSS for styling the interstitial page.
           example: ''
-    SubCondition:
-      type: object
-      properties:
-        Variable:
-          type: string
-          description: The variable to evaluate against.
-          enum:
-          - IP_ADDRESS
-          - SHARED_ID
-          - COUNTRY
-          - REGION
-          - AD_STATUS
-          - SUB_ID1
-          - SUB_ID2
-          - SUB_ID3
-          - MP_ID
-          - DEVICE_TYPE
-          - REF_URL
-          - LANDING_PAGE
-          - SKU
-          - AD_ID
-          - CURRENT_DATE
-          - RANDOM
-          - MOBILE_FALLBACK
-        Operator:
-          type: string
-          description: How the variable is compared to the values.
-          enum:
-          - CONTAINS
-          - STARTS_WITH
-          - ENDS_WITH
-          - EQUALS
-          - MATCHES
-          - IP_RANGE
-          - IN
-          - NOT_CONTAINS
-          - NOT_STARTS_WITH
-          - NOT_ENDS_WITH
-          - NOT_EQUALS
-          - NOT_IN
-          - REGEX
-          - LT
-          - GT
-        Values:
-          type: array
-          description: The values the variable is compared to.
-          items:
-            type: string
-            example: US
     RoutingRule:
       type: object
       properties:
@@ -413,3 +364,52 @@ components:
           type: string
           format: uri-reference
           example: /Advertisers/<AccountSID>/Programs/1000/BlockRedirectRules/50000
+    SubCondition:
+      type: object
+      properties:
+        Variable:
+          type: string
+          description: The variable to evaluate against.
+          enum:
+          - IP_ADDRESS
+          - SHARED_ID
+          - COUNTRY
+          - REGION
+          - AD_STATUS
+          - SUB_ID1
+          - SUB_ID2
+          - SUB_ID3
+          - MP_ID
+          - DEVICE_TYPE
+          - REF_URL
+          - LANDING_PAGE
+          - SKU
+          - AD_ID
+          - CURRENT_DATE
+          - RANDOM
+          - MOBILE_FALLBACK
+        Operator:
+          type: string
+          description: How the variable is compared to the values.
+          enum:
+          - CONTAINS
+          - STARTS_WITH
+          - ENDS_WITH
+          - EQUALS
+          - MATCHES
+          - IP_RANGE
+          - IN
+          - NOT_CONTAINS
+          - NOT_STARTS_WITH
+          - NOT_ENDS_WITH
+          - NOT_EQUALS
+          - NOT_IN
+          - REGEX
+          - LT
+          - GT
+        Values:
+          type: array
+          description: The values the variable is compared to.
+          items:
+            type: string
+            example: US

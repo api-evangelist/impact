@@ -239,24 +239,17 @@ paths:
         source: "curl -L \\\n  --request DELETE \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}/Items/{ItemId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
-    ExceptionListItemCreateForm:
+    SuccessUriResponse:
       type: object
-      required:
-      - Value
       properties:
-        Value:
+        Status:
           type: string
-          description: The CATEGORY or SKU value.
-          example: CA
-        Name:
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
           type: string
-          description: Display name for contracting purposes.
-          example: California
-        Upsert:
-          type: boolean
-          default: false
-          description: If true, updates an existing item with the same 'Value'.
-          example: true
+          format: uri-reference
+          description: The unique reference to the affected resource.
     ExceptionListItem:
       type: object
       properties:
@@ -305,17 +298,24 @@ components:
           type: boolean
           default: false
           description: If true, updates existing items where 'Value' matches.
-    SuccessUriResponse:
+    ExceptionListItemCreateForm:
       type: object
+      required:
+      - Value
       properties:
-        Status:
+        Value:
           type: string
-          description: Indicates whether the operation was successful.
-          example: OK
-        Uri:
+          description: The CATEGORY or SKU value.
+          example: CA
+        Name:
           type: string
-          format: uri-reference
-          description: The unique reference to the affected resource.
+          description: Display name for contracting purposes.
+          example: California
+        Upsert:
+          type: boolean
+          default: false
+          description: If true, updates an existing item with the same 'Value'.
+          example: true
   securitySchemes:
     basicAuth:
       type: http

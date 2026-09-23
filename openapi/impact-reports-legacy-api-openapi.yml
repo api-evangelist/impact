@@ -400,31 +400,6 @@ components:
           format: uri-reference
           description: The relative URI to run the report in the impact.com web app. Present when `ApiAccessible` is `false` — these reports cannot be run via API.
           example: /secure/agency/report/viewReport.report?id=8019
-    ReportFilter:
-      type: object
-      description: A single filter parameter that a report accepts.
-      properties:
-        Name:
-          type: string
-          description: The display name of the filter as shown in the impact.com UI (e.g., `"Start Date"`). When passing the filter as a query parameter, convert it to uppercase with underscores in place of spaces — `"Start Date"` becomes `START_DATE`.
-          example: Start Date
-        DataType:
-          type: string
-          description: The data type the filter accepts.
-          enum:
-          - Boolean
-          - Date (yyyy-MM-dd'T'HH:mm:ssZZ)
-          - Decimal
-          - Integer
-          - String
-          example: String
-        Format:
-          type: string
-          description: An optional input format constraint. When empty, no specific format is enforced beyond the data type.
-          enum:
-          - yyyy-MM-dd
-          - ''
-          example: ''
     ReportMetadata:
       type: object
       description: Metadata describing a single report's accepted filters (input parameters) and returned attributes (output columns).
@@ -458,6 +433,31 @@ components:
           type: string
           format: uri-reference
           description: The relative URI of this metadata resource.
+    ReportFilter:
+      type: object
+      description: A single filter parameter that a report accepts.
+      properties:
+        Name:
+          type: string
+          description: The display name of the filter as shown in the impact.com UI (e.g., `"Start Date"`). When passing the filter as a query parameter, convert it to uppercase with underscores in place of spaces — `"Start Date"` becomes `START_DATE`.
+          example: Start Date
+        DataType:
+          type: string
+          description: The data type the filter accepts.
+          enum:
+          - Boolean
+          - Date (yyyy-MM-dd'T'HH:mm:ssZZ)
+          - Decimal
+          - Integer
+          - String
+          example: String
+        Format:
+          type: string
+          description: An optional input format constraint. When empty, no specific format is enforced beyond the data type.
+          enum:
+          - yyyy-MM-dd
+          - ''
+          example: ''
     Report_2:
       type: object
       properties:

@@ -99,9 +99,7 @@ paths:
         **Migration note:** If you''re migrating from the `Clicks` endpoint to `ClickExport`, note that the result object uses `ProgramId` and `ProgramName` in place of the previous `CampaignId` and `CampaignName`.
 
 
-        See the impact.com rate-limit documentation for this endpoint''s request limits.
-
-        '
+        See the impact.com rate-limit documentation for this endpoint''s request limits.'
       parameters:
       - name: AccountSID
         in: path

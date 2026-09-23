@@ -172,9 +172,7 @@ paths:
       tags:
       - Programs
       summary: Retrieve program logo
-      description: 'Returns the program''s logo as a binary image. Use the `Accept` request header to choose the format — `image/gif` (default), `image/png`, or `image/jpeg`.
-
-        '
+      description: Returns the program's logo as a binary image. Use the `Accept` request header to choose the format — `image/gif` (default), `image/png`, or `image/jpeg`.
       parameters:
       - name: AccountSID
         in: path

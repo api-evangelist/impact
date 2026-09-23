@@ -114,7 +114,29 @@ paths:
       - lang: cURL
         source: "curl -L \\\n  --request POST \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/credit/bulkredeem' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    RewardDebitResponse:
+      description: Details about a successful Reward Balance Debit transaction.
+      properties:
+        creditRedeemed:
+          type: integer
+          example: 200
+          description: The amount of credit that was just debitted.
+        creditAvailable:
+          type: integer
+          example: 0
+          description: The remaining credit in this account of the same unit type.
+        unit:
+          type: string
+          example: cents
+          description: The type of credit that was just debitted.
     RewardBalance:
       description: Details of the balance of several individual rewards.
       properties:
@@ -165,23 +187,6 @@ components:
         totalFuelTankCodes:
           type: integer
           description: 'The number of earned fueltank rewards. Only works with type: `FUELTANK`'
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error
-          type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code
-          type: string
-          example: RS042
     RewardBalanceDebitRequest:
       description: A request to debit a Reward Balance
       required:
@@ -201,28 +206,23 @@ components:
           type: integer
           description: The amount of credit to be debitted.
           example: 200
-    RewardDebitResponse:
-      description: Details about a successful Reward Balance Debit transaction.
+    Error:
       properties:
-        creditRedeemed:
+        statusCode:
+          description: The HTTP status code of the error
           type: integer
-          example: 200
-          description: The amount of credit that was just debitted.
-        creditAvailable:
-          type: integer
-          example: 0
-          description: The remaining credit in this account of the same unit type.
-        unit:
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
           type: string
-          example: cents
-          description: The type of credit that was just debitted.
-  responses:
-    GeneralError:
-      description: Unexpected Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          example: RS042
   securitySchemes:
     APIKey:
       type: http

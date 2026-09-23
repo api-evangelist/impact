@@ -133,9 +133,7 @@ paths:
       tags:
       - Promo Code Exception Lists
       summary: Retrieve a Promo Code Exception List
-      description: 'Retrieves the details of an existing promo code exception list using its unique ID. The PromoCodeExceptionListId can be obtained from the Contracts API.
-
-        '
+      description: Retrieves the details of an existing promo code exception list using its unique ID. The PromoCodeExceptionListId can be obtained from the Contracts API.
       parameters:
       - name: AccountSID
         in: path

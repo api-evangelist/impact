@@ -422,7 +422,11 @@ paths:
   /Mediapartners/{AccountSID}/Jobs/{JobId}/Download:
     get:
       summary: Download Job Results
-      description: "Download the job result file if the job was completed successfully. \nIf the job isn't done, the job status will be returned. \nA job result is available for download for 90 days.\n"
+      description: 'Download the job result file if the job was completed successfully.
+
+        If the job isn''t done, the job status will be returned.
+
+        A job result is available for download for 90 days.'
       operationId: downloadJobResults
       tags:
       - Jobs
@@ -474,7 +478,9 @@ paths:
   /Mediapartners/{AccountSID}/Jobs/{JobId}/Replay:
     put:
       summary: Replay Job
-      description: "Replay a completed job. Replays are intended for jobs with COMPLETED, FAILED, or CANCELLED status, \nor if additional results are expected for the chosen export window.\n"
+      description: 'Replay a completed job. Replays are intended for jobs with COMPLETED, FAILED, or CANCELLED status,
+
+        or if additional results are expected for the chosen export window.'
       operationId: replayJob
       tags:
       - Jobs
@@ -511,6 +517,14 @@ paths:
       description: Production server
 components:
   parameters:
+    AccountSID:
+      name: AccountSID
+      in: path
+      required: true
+      description: Your Agency Account SID.
+      schema:
+        type: string
+      example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
     JobId:
       name: JobId
       in: path
@@ -520,14 +534,6 @@ components:
         type: string
         format: uuid
       example: 81258bc5-54cf-4a09-9fbc-eb837637d02f
-    AccountSID:
-      name: AccountSID
-      in: path
-      required: true
-      description: Your Agency Account SID.
-      schema:
-        type: string
-      example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
   schemas:
     Job:
       type: object

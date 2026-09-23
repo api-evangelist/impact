@@ -102,6 +102,17 @@ paths:
                 $ref: '#/components/schemas/SuccessUriResponse'
 components:
   schemas:
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected resource.
     UnsubscribedContact:
       type: object
       properties:
@@ -183,14 +194,3 @@ components:
           description: The list of unsubscribed contact objects on this page.
           items:
             $ref: '#/components/schemas/UnsubscribedContact'
-    SuccessUriResponse:
-      type: object
-      properties:
-        Status:
-          type: string
-          description: Indicates whether the operation was successful.
-          example: OK
-        Uri:
-          type: string
-          format: uri-reference
-          description: The unique reference to the affected resource.

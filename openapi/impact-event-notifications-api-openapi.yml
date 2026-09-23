@@ -2,27 +2,7 @@ openapi: 3.2.0
 info:
   title: Partner Event Notifications API
   version: '16'
-  description: 'Event Notifications (also known as webhooks or postbacks) are HTTP requests that **impact.com sends to your server** in real time when relevant events occur — actions tracked, clicks credited, status changes, and so on.
-
-
-    This is an **inbound** integration: you configure a URL in your impact.com account, and impact.com fires HTTP requests at that URL when events happen. You don''t call any impact.com endpoint to receive notifications.
-
-
-    **How it works:**
-
-
-    1. In your impact.com partner account, configure an Event Notification URL.
-
-    2. Use placeholder tokens like `{CampaignId}`, `{ActionId}`, `{Status}`, `{Payout}` in either the URL (for GET delivery) or the JSON request body (for POST delivery). impact.com substitutes the real values at fire time.
-
-    3. impact.com calls your URL whenever a matching event occurs.
-
-    4. Your server returns a `2xx` response to acknowledge receipt. Non-`2xx` responses are retried by impact.com.
-
-
-    This spec documents the **shape of the request impact.com sends to your server** — it is not an endpoint you call.
-
-    '
+  description: Event Notifications (also known as webhooks or postbacks) are HTTP requests that **impact.com sends to your server** in real time when relevant events occur — actions tracked, clicks credited, status changes, and so on.
   contact:
     name: impact.com Developer Support
     url: https://app.impact.com/secure/help/contact-support.ihtml
@@ -42,9 +22,7 @@ paths:
       description: 'impact.com sends a POST request with a JSON body to your configured URL when an event occurs. Your server should return a `2xx` response to acknowledge successful receipt.
 
 
-        The fields included in the payload are determined by the URL template / body template you configure in impact.com. The schema below shows the most common fields.
-
-        '
+        The fields included in the payload are determined by the URL template / body template you configure in impact.com. The schema below shows the most common fields.'
       requestBody:
         description: Event notification payload sent by impact.com.
         content:
@@ -64,9 +42,7 @@ paths:
       description: 'impact.com sends a GET request to your configured URL with event data as query-string parameters. This delivery mode is typically used for simple pixel-style integrations.
 
 
-        The query parameters present depend on the URL template you configure in your impact.com Event Notifications settings.
-
-        '
+        The query parameters present depend on the URL template you configure in your impact.com Event Notifications settings.'
       parameters:
       - name: campaign_id
         in: query
