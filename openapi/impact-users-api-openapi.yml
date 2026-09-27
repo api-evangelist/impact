@@ -92,6 +92,13 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Users/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
 components:
   schemas:
+    UserState:
+      type: string
+      enum:
+      - ACTIVE
+      - PENDING
+      - INVITED
+      description: The account state of the user.
     AccessRight:
       type: object
       properties:
@@ -187,13 +194,6 @@ components:
           type: string
           description: API resource path for this user.
           example: /Mediapartners/<AccountSID>/Users/I-1139074
-    UserState:
-      type: string
-      enum:
-      - ACTIVE
-      - PENDING
-      - INVITED
-      description: The account state of the user.
   securitySchemes:
     basicAuth:
       type: http

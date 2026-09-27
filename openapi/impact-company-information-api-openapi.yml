@@ -161,7 +161,7 @@ paths:
     get:
       summary: Get Company Information
       description: Retrieves the details of the brand account, determined by the API keys used for authentication.
-      operationId: getCompanyInformation
+      operationId: getAdvertisersByAccountSIDCompanyInformation
       tags:
       - Company Information
       parameters:
@@ -178,6 +178,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CompanyInformation_2'
+      x-operation-id-source: normalized
+      x-operation-id-original: getCompanyInformation
     put:
       summary: Update Company Information
       description: 'Updates the account by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
@@ -187,7 +189,7 @@ paths:
 
 
         The corporate address fields (`CorporateAddressLine1`, `CorporateAddressLine2`, `CorporateAddressCity`, `CorporateAddressPostalCode`, `CorporateAddressCountry`) update the corporate address. The billing address fields (`BillingAddressLine1`, `BillingAddressLine2`, `BillingAddressCity`, `BillingAddressPostalCode`, `BillingAddressCountry`) update the billing address. These are returned as nested `CorporateAddress` and `BillingAddress` objects by the GET endpoint.'
-      operationId: updateCompanyInformation
+      operationId: putAdvertisersByAccountSIDCompanyInformation
       tags:
       - Company Information
       parameters:
@@ -220,10 +222,48 @@ paths:
                     format: uri-reference
                     description: The unique reference to the updated resource.
                     example: /Advertisers/<AccountSID>/CompanyInformation
+      x-operation-id-source: normalized
+      x-operation-id-original: updateCompanyInformation
     servers:
     - url: https://api.impact.com
 components:
   schemas:
+    Contact:
+      type: object
+      description: An agency employee assigned to a key contact role.
+      properties:
+        UserId:
+          type: string
+          description: 'The impact.com numeric user ID of the assigned employee. Empty if no contact has been assigned to this role.
+
+
+            To resolve to a full user record, use the Users endpoint.'
+          example: '5402850'
+        Name:
+          type: string
+          description: The contact's full display name. Empty if no contact is assigned.
+          example: Carrie Oakey
+        Email:
+          type: string
+          format: email
+          description: The contact's email address. Empty if no contact is assigned.
+          example: carrie.oakey@nuttandco-agency.com
+        WorkPhoneNumber:
+          type: string
+          description: The contact's work phone number. Digits only. Empty if not set.
+          example: '15125550191'
+        WorkPhoneNumberCountry:
+          type: string
+          description: The country associated with the work phone number.
+          example: US
+        CellPhoneNumber:
+          type: string
+          description: The contact's mobile phone number. Digits only. Empty if not set.
+          example: ''
+        CellPhoneNumberCountry:
+          type: string
+          description: The country associated with the cell phone number.
+          example: ''
     Address:
       type: object
       description: A physical address on the agency's account.
@@ -360,42 +400,6 @@ components:
           type: string
           description: The relative URI for this resource within the Agency API.
           example: /Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/CompanyInformation
-    Contact:
-      type: object
-      description: An agency employee assigned to a key contact role.
-      properties:
-        UserId:
-          type: string
-          description: 'The impact.com numeric user ID of the assigned employee. Empty if no contact has been assigned to this role.
-
-
-            To resolve to a full user record, use the Users endpoint.'
-          example: '5402850'
-        Name:
-          type: string
-          description: The contact's full display name. Empty if no contact is assigned.
-          example: Carrie Oakey
-        Email:
-          type: string
-          format: email
-          description: The contact's email address. Empty if no contact is assigned.
-          example: carrie.oakey@nuttandco-agency.com
-        WorkPhoneNumber:
-          type: string
-          description: The contact's work phone number. Digits only. Empty if not set.
-          example: '15125550191'
-        WorkPhoneNumberCountry:
-          type: string
-          description: The country associated with the work phone number.
-          example: US
-        CellPhoneNumber:
-          type: string
-          description: The contact's mobile phone number. Digits only. Empty if not set.
-          example: ''
-        CellPhoneNumberCountry:
-          type: string
-          description: The country associated with the cell phone number.
-          example: ''
     CompanyInformationUpdate:
       type: object
       description: 'Partial company information update. All fields are optional — omitted fields keep their existing values.
@@ -547,44 +551,23 @@ components:
           format: uri-reference
           description: The unique reference to this object in the impact.com API.
           example: /Advertisers/<AccountSID>/CompanyInformation
-    Industry:
-      type: object
-      properties:
-        IndustryId:
-          type: string
-          description: Unique identifier for the selected industry.
-          example: '833'
-        IndustryName:
-          type: string
-          description: The display name for the selected industry.
-          example: Miscellaneous Retail Stores, Not Elsewhere Classified
-    Address_2:
-      type: object
-      properties:
-        AddressLine1:
-          type: string
-          description: Address line 1 (address number, street name)
-          example: 1640 Riverside Dr.
-        AddressLine2:
-          type: string
-          description: Address line 2 (building, unit, suite, etc. number)
-          example: Suite 400
-        City:
-          type: string
-          description: City, district, suburb, town, or village
-          example: Hill Valley
-        State:
-          type: string
-          description: State or territory
-          example: CALIFORNIA
-        PostalCode:
-          type: string
-          description: ZIP or postal code
-          example: '90210'
-        Country:
-          type: string
-          description: Two-letter ISO 3166-1 alpha-2 country code.
-          example: US
+    OrganizationType:
+      type: string
+      description: Organization type for the account.
+      enum:
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER
+      example: CORP
     CompanyInformationUpdate_2:
       type: object
       description: Fields available for updating company information.
@@ -661,23 +644,6 @@ components:
           type: string
           description: Two-letter country code for the billing address.
           example: US
-    OrganizationType:
-      type: string
-      description: Organization type for the account.
-      enum:
-      - NONP_GOV
-      - CORP
-      - SOLE_IND
-      - LLC_LLP_LLS
-      - TRUST
-      - SOLE_TRD
-      - PARTNERS
-      - LLC
-      - LLP
-      - COMPANY
-      - GOVERNMENT
-      - OTHER
-      example: CORP
     Contact_2:
       type: object
       properties:
@@ -710,6 +676,44 @@ components:
           type: string
           description: Two-letter country code for the cell phone number.
           example: US
+    Address_2:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+          description: Address line 1 (address number, street name)
+          example: 1640 Riverside Dr.
+        AddressLine2:
+          type: string
+          description: Address line 2 (building, unit, suite, etc. number)
+          example: Suite 400
+        City:
+          type: string
+          description: City, district, suburb, town, or village
+          example: Hill Valley
+        State:
+          type: string
+          description: State or territory
+          example: CALIFORNIA
+        PostalCode:
+          type: string
+          description: ZIP or postal code
+          example: '90210'
+        Country:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+    Industry:
+      type: object
+      properties:
+        IndustryId:
+          type: string
+          description: Unique identifier for the selected industry.
+          example: '833'
+        IndustryName:
+          type: string
+          description: The display name for the selected industry.
+          example: Miscellaneous Retail Stores, Not Elsewhere Classified
 x-refined-from:
 - impact-agency-companyinformation-v3-openapi.yml
 - impact-brand-account-v14-openapi.yml

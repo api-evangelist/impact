@@ -172,7 +172,7 @@ paths:
     get:
       summary: List All Jobs
       description: Returns a list of jobs, which can be filtered by their creation date.
-      operationId: listJobs
+      operationId: getAdvertisersByAccountSIDJobs
       tags:
       - Jobs
       parameters:
@@ -211,6 +211,8 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Jobs' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
       security:
       - basicAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: listJobs
     servers:
     - url: https://api.impact.com
   /Advertisers/{AccountSID}/Jobs/{JobId}:
@@ -256,7 +258,7 @@ paths:
         - Returns 202 with the job status if still processing.
 
         - Returns 302 to redirect to a temporary signed URL for download (if `Mode` is not ''Stream'').'
-      operationId: downloadJobResult
+      operationId: getAdvertisersByAccountSIDJobsByJobIdDownload
       tags:
       - Jobs
       parameters:
@@ -299,13 +301,15 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Jobs/{JobId}/Download' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
       security:
       - basicAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: downloadJobResult
     servers:
     - url: https://api.impact.com
   /Advertisers/{AccountSID}/Jobs/{JobId}/Replay:
     put:
       summary: Replay a Job
       description: Re-queues a completed, failed, or cancelled job for processing. This is useful if you expect additional results to be present for your original export window.
-      operationId: replayJob
+      operationId: putAdvertisersByAccountSIDJobsByJobIdReplay
       tags:
       - Jobs
       parameters:
@@ -334,13 +338,15 @@ paths:
         source: "curl -L \\\n  --request PUT \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Jobs/{JobId}/Replay' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
       security:
       - basicAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: replayJob
     servers:
     - url: https://api.impact.com
   /Mediapartners/{AccountSID}/Jobs:
     get:
       summary: List Jobs
       description: Returns a list of jobs based on creation date filters.
-      operationId: listJobs
+      operationId: getMediapartnersByAccountSIDJobs
       tags:
       - Jobs
       parameters:
@@ -380,6 +386,8 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Jobs' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
       security:
       - basicAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: listJobs
     servers:
     - url: https://api.impact.com
       description: Production server
@@ -481,7 +489,7 @@ paths:
       description: 'Replay a completed job. Replays are intended for jobs with COMPLETED, FAILED, or CANCELLED status,
 
         or if additional results are expected for the chosen export window.'
-      operationId: replayJob
+      operationId: putMediapartnersByAccountSIDJobsByJobIdReplay
       tags:
       - Jobs
       parameters:
@@ -512,6 +520,8 @@ paths:
         source: "curl -L \\\n  --request PUT \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Jobs/{JobId}/Replay' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
       security:
       - basicAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: replayJob
     servers:
     - url: https://api.impact.com
       description: Production server

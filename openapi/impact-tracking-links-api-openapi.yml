@@ -61,7 +61,7 @@ paths:
     - url: https://api.impact.com
   /Mediapartners/{AccountSID}/Programs/{ProgramId}/TrackingLinks:
     post:
-      operationId: createTrackingLink
+      operationId: postMediapartnersByAccountSIDProgramsByProgramIdTrackingLinks
       tags:
       - Tracking Links
       summary: Create a tracking link
@@ -186,6 +186,8 @@ paths:
       - lang: Shell
         label: curl
         source: "curl -L \\\n  --request POST \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Programs/{ProgramId}/TrackingLinks' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+      x-operation-id-source: normalized
+      x-operation-id-original: createTrackingLink
     servers:
     - url: https://api.impact.com
       description: Production server

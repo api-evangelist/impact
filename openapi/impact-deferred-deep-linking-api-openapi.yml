@@ -88,27 +88,6 @@ components:
               message:
                 type: string
                 description: A description of the warning.
-    DeferredDeepLinkResponse:
-      type: object
-      description: Contains the deep link information if a match is found, along with connection details.
-      properties:
-        landingPage:
-          type: string
-          format: uri
-          description: URL of the web page the user was being redirected to before the app store.
-          example: https://www.acme.com/products/tennis-balls
-        clickId:
-          type: string
-          description: The unique impact.com click identifier.
-          example: QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0
-        clickIpAddress:
-          type: string
-          description: IP Address captured at the time of the click.
-          example: 192.168.1.1
-        connectionIpAddress:
-          type: string
-          description: IP Address captured when the connection to this endpoint is made.
-          example: 192.168.1.2
     DeferredDeepLinkRequest:
       type: object
       required:
@@ -153,6 +132,27 @@ components:
           type: string
           description: Third-party web tracking cookie or anonymous user ID.
           example: a1b2c3d4e5f6
+    DeferredDeepLinkResponse:
+      type: object
+      description: Contains the deep link information if a match is found, along with connection details.
+      properties:
+        landingPage:
+          type: string
+          format: uri
+          description: URL of the web page the user was being redirected to before the app store.
+          example: https://www.acme.com/products/tennis-balls
+        clickId:
+          type: string
+          description: The unique impact.com click identifier.
+          example: QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0
+        clickIpAddress:
+          type: string
+          description: IP Address captured at the time of the click.
+          example: 192.168.1.1
+        connectionIpAddress:
+          type: string
+          description: IP Address captured when the connection to this endpoint is made.
+          example: 192.168.1.2
   securitySchemes:
     basicAuth:
       type: http

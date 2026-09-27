@@ -266,17 +266,6 @@ paths:
         source: "curl -L \\\n  --request PUT \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs/{CatalogId}/BulkUpdate' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/json' \\\n  --header 'Accept: */*'"
 components:
   schemas:
-    SuccessUriResponse:
-      type: object
-      properties:
-        Status:
-          type: string
-          example: OK
-          description: Indicates whether the operation was successful (e.g., `OK`).
-        Uri:
-          type: string
-          format: uri-reference
-          description: URI of the affected resource.
     CatalogItem:
       type: object
       properties:
@@ -573,6 +562,17 @@ components:
       - Url
       allOf:
       - $ref: '#/components/schemas/CatalogItem'
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          example: OK
+          description: Indicates whether the operation was successful (e.g., `OK`).
+        Uri:
+          type: string
+          format: uri-reference
+          description: URI of the affected resource.
   securitySchemes:
     basicAuth:
       type: http

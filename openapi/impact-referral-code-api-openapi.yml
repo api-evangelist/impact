@@ -145,22 +145,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  responses:
-    GeneralError:
-      description: Unexpected Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    TenantAlias:
-      name: tenant_alias
-      in: path
-      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
-      required: true
-      schema:
-        type: string
   schemas:
+    Code:
+      description: A referral code, the referrer it belongs to, and details of the reward it unlocks.
+      type: object
+      properties:
+        code:
+          type: string
+          description: The unique identifier for the code. For example `BOBTESTERSON`.
+          example: CFMVQHNUEU2AWWDO
+        dateCreated:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when the code was created.
+          example: 1774386824953
+        programId:
+          type: string
+          nullable: true
+          description: The ID of the program that the code belongs to. Null if not associated with a specific program.
+          example: null
+        referrerName:
+          type: string
+          description: The display name of the owner of this code. For example `Bob Testerson`.
+          example: Bob T
+        reward:
+          $ref: '#/components/schemas/RewardTemplate'
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error.
+          type: integer
+          format: int32
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code.
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code.
+          type: string
+          example: RS042
     RewardTemplate:
       description: Details of the reward that could be earned, but is not yet earned.
       type: object
@@ -226,46 +251,21 @@ components:
       description: <span class="label">Classic Only</span> Details of the reward that could be earned, but is not yet earned.
       allOf:
       - $ref: '#/components/schemas/RewardTemplate'
-    Code:
-      description: A referral code, the referrer it belongs to, and details of the reward it unlocks.
-      type: object
-      properties:
-        code:
-          type: string
-          description: The unique identifier for the code. For example `BOBTESTERSON`.
-          example: CFMVQHNUEU2AWWDO
-        dateCreated:
-          type: integer
-          format: int64
-          description: Unix timestamp (milliseconds) when the code was created.
-          example: 1774386824953
-        programId:
-          type: string
-          nullable: true
-          description: The ID of the program that the code belongs to. Null if not associated with a specific program.
-          example: null
-        referrerName:
-          type: string
-          description: The display name of the owner of this code. For example `Bob Testerson`.
-          example: Bob T
-        reward:
-          $ref: '#/components/schemas/RewardTemplate'
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error.
-          type: integer
-          format: int32
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code.
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code.
-          type: string
-          example: RS042
+  parameters:
+    TenantAlias:
+      name: tenant_alias
+      in: path
+      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+      required: true
+      schema:
+        type: string
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     APIKey:
       type: http

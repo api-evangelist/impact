@@ -51,6 +51,9 @@ tags:
 - Advertising
 - MCP
 - Agents
+- Affiliate Marketing
+- Influencer Marketing
+- Referral Marketing
 tags_raw:
 - Affiliate
 - Partnerships
@@ -66,6 +69,9 @@ tags_raw:
 - Advertising
 - MCP
 - Agents
+- Affiliate Marketing
+- Influencer Marketing
+- Referral Marketing
 apis:
 - aid: impact:mcp-server
   name: Impact MCP Server
@@ -3067,6 +3073,10 @@ common:
   url: asyncapi/impact-webhooks.yml
 - type: GraphQL
   url: graphql/impact-advocate-graphql.yml
+- type: Blog
+  url: https://impact.com/insights/
+- type: GitHubOrganization
+  url: https://github.com/saasquatch
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

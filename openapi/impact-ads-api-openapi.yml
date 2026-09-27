@@ -215,7 +215,7 @@ paths:
     - url: https://api.impact.com
   /Mediapartners/{AccountSID}/Ads:
     get:
-      operationId: listAds
+      operationId: getMediapartnersByAccountSIDAds
       tags:
       - Ads
       summary: List Ads
@@ -281,6 +281,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Ad_2'
+      x-operation-id-source: normalized
+      x-operation-id-original: listAds
     servers:
     - url: https://api.impact.com
   /Mediapartners/{AccountSID}/Ads/{Id}:

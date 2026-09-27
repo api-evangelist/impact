@@ -252,23 +252,6 @@ components:
           enum:
           - CATEGORY
           - SKU
-    ExceptionListUpdate:
-      type: object
-      properties:
-        ActionTrackerId:
-          type: string
-          description: Comma-separated list of event type IDs.
-          example: '18500'
-        Name:
-          type: string
-          description: The display name for the exception list.
-          example: USA-State-CA-Exclusions
-        Type:
-          type: string
-          description: Whether this list applies to CATEGORY or SKU.
-          enum:
-          - CATEGORY
-          - SKU
     ExceptionList:
       type: object
       properties:
@@ -347,6 +330,23 @@ components:
           type: string
           format: uri-reference
           description: The unique reference to the affected resource.
+    ExceptionListUpdate:
+      type: object
+      properties:
+        ActionTrackerId:
+          type: string
+          description: Comma-separated list of event type IDs.
+          example: '18500'
+        Name:
+          type: string
+          description: The display name for the exception list.
+          example: USA-State-CA-Exclusions
+        Type:
+          type: string
+          description: Whether this list applies to CATEGORY or SKU.
+          enum:
+          - CATEGORY
+          - SKU
     ExceptionList_2:
       type: object
       properties:

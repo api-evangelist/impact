@@ -139,22 +139,6 @@ paths:
         '200':
           $ref: '#/components/responses/SuccessUriResponse'
 components:
-  responses:
-    SuccessUriResponse:
-      description: The request was successful.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Status:
-                type: string
-                description: Indicates whether the operation was successful.
-                example: OK
-              Uri:
-                type: string
-                format: uri-reference
-                description: The unique reference to the affected request.
   schemas:
     TrackingValueApproval:
       type: object
@@ -534,3 +518,19 @@ components:
           format: uri-reference
           description: The unique reference to this request in the impact.com API.
           example: /Advertisers/<AccountSID>/TrackingValueRequests/55555
+  responses:
+    SuccessUriResponse:
+      description: The request was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates whether the operation was successful.
+                example: OK
+              Uri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the affected request.

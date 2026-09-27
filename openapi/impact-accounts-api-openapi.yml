@@ -268,26 +268,6 @@ paths:
                     example: /Mediapartners/<AccountSID>/CompanyInformation
 components:
   schemas:
-    ParentalStatus:
-      type: string
-      description: The parental status of the partner.
-      enum:
-      - Mom
-      - Dad
-      - Grandfather
-      - Grandmother
-      - Other
-      - None
-    Gender:
-      type: string
-      description: The gender identity of the partner.
-      enum:
-      - Female
-      - Male
-      - Transgender
-      - Non-binary
-      - Genderqueer
-      - None
     Education:
       type: string
       description: The highest level of education completed.
@@ -299,16 +279,6 @@ components:
       - Some_high_school
       - Some_college
       - Other
-      - None
-    HouseholdIncome:
-      type: string
-      description: The annual household income bracket of the partner.
-      enum:
-      - 35K
-      - Over_35K
-      - Over_50K
-      - Over_75K
-      - Over_100K
       - None
     CompanyInformation:
       type: object
@@ -434,6 +404,42 @@ components:
           type: string
           description: Unique reference to the company information object in the impact.com API.
           example: /Mediapartners/<AccountSID>/CompanyInformation
+    ParentalStatus:
+      type: string
+      description: The parental status of the partner.
+      enum:
+      - Mom
+      - Dad
+      - Grandfather
+      - Grandmother
+      - Other
+      - None
+    OrganizationType:
+      type: string
+      description: The legal structure of the organization. Available options vary depending on the country the business is registered in.
+      enum:
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER
+    Gender:
+      type: string
+      description: The gender identity of the partner.
+      enum:
+      - Female
+      - Male
+      - Transgender
+      - Non-binary
+      - Genderqueer
+      - None
     PromotionalMethod:
       type: string
       description: A promotional method used to drive traffic and conversions.
@@ -454,76 +460,19 @@ components:
       - OFFLINE
       - OTHER
       - CASHBACK
-    Address:
-      type: object
-      properties:
-        AddressLine1:
-          type: string
-          description: The first line of the address (street number and name).
-          example: 123 Harmony Lane
-        AddressLine2:
-          type: string
-          description: The second line of the address (apartment, suite, unit, etc.).
-          example: Unit 2B
-        City:
-          type: string
-          description: The city, district, suburb, town, or village.
-          example: Los Angeles
-        State:
-          type: string
-          description: The state, province, or territory.
-          example: CALIFORNIA
-        PostalCode:
-          type: string
-          description: The ZIP or postal code.
-          example: '90027'
-        Country:
-          type: string
-          description: Two-letter ISO 3166-1 alpha-2 country code.
-          example: US
-    RelationshipStatus:
+    Pronouns:
       type: string
-      description: The relationship status of the partner.
+      description: The preferred pronouns of the partner.
       enum:
-      - Married
-      - Not_Married
-      - Separated
-      - Widowed
-      - Divorced
-      - None
-    OrganizationType:
-      type: string
-      description: The legal structure of the organization. Available options vary depending on the country the business is registered in.
-      enum:
-      - NONP_GOV
-      - CORP
-      - SOLE_IND
-      - LLC_LLP_LLS
-      - TRUST
-      - SOLE_TRD
-      - PARTNERS
-      - LLC
-      - LLP
-      - COMPANY
-      - GOVERNMENT
-      - OTHER
-    Ethnicity:
-      type: string
-      description: The ethnic background of the partner.
-      enum:
-      - African_American
-      - American_Indian
-      - Asian
-      - Black
-      - Hispanic
-      - Latino
-      - Middle_Eastern
-      - Multiracial
-      - Native_Hawaiian
-      - Pacific_Islander
-      - South_Asian
-      - White
-      - Other
+      - he_him
+      - she_her
+      - they_them
+      - ey_em
+      - ne_nem
+      - ve_ver
+      - xe_xem
+      - xie_xem
+      - ze_zir
       - None
     Contact:
       type: object
@@ -556,17 +505,68 @@ components:
           type: string
           description: Two-letter ISO 3166-1 alpha-2 country code for the cell phone number.
           example: ''
-    Pronouns:
+    HouseholdIncome:
       type: string
-      description: The preferred pronouns of the partner.
+      description: The annual household income bracket of the partner.
       enum:
-      - he_him
-      - she_her
-      - they_them
-      - ey_em
-      - ne_nem
-      - ve_ver
-      - xe_xem
-      - xie_xem
-      - ze_zir
+      - 35K
+      - Over_35K
+      - Over_50K
+      - Over_75K
+      - Over_100K
+      - None
+    Address:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+          description: The first line of the address (street number and name).
+          example: 123 Harmony Lane
+        AddressLine2:
+          type: string
+          description: The second line of the address (apartment, suite, unit, etc.).
+          example: Unit 2B
+        City:
+          type: string
+          description: The city, district, suburb, town, or village.
+          example: Los Angeles
+        State:
+          type: string
+          description: The state, province, or territory.
+          example: CALIFORNIA
+        PostalCode:
+          type: string
+          description: The ZIP or postal code.
+          example: '90027'
+        Country:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+    Ethnicity:
+      type: string
+      description: The ethnic background of the partner.
+      enum:
+      - African_American
+      - American_Indian
+      - Asian
+      - Black
+      - Hispanic
+      - Latino
+      - Middle_Eastern
+      - Multiracial
+      - Native_Hawaiian
+      - Pacific_Islander
+      - South_Asian
+      - White
+      - Other
+      - None
+    RelationshipStatus:
+      type: string
+      description: The relationship status of the partner.
+      enum:
+      - Married
+      - Not_Married
+      - Separated
+      - Widowed
+      - Divorced
       - None

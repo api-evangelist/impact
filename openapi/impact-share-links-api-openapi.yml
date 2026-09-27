@@ -135,13 +135,67 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  responses:
-    GeneralError:
-      description: Unexpected Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    TenantAlias:
+      name: tenant_alias
+      in: path
+      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+      required: true
+      schema:
+        type: string
+    AccountId:
+      name: accountId
+      in: path
+      description: The ID of the account to look up
+      required: true
+      schema:
+        type: string
+    ProgramId:
+      name: programId
+      in: query
+      description: The ID of the program whose share links to return. Required — the API returns `400` if omitted.
+      required: true
+      schema:
+        type: string
+        example: '47255'
+    UserId:
+      name: userId
+      in: path
+      description: Filters share links by `user.id`.
+      required: true
+      schema:
+        type: string
+    EngagementMedium:
+      name: engagementMedium
+      in: query
+      description: Filters share urls by `engagementMedium`.
+      schema:
+        type: string
+        enum:
+        - EMBED
+        - POPUP
+        - HOSTED
+        - MOBILE
+        - EMAIL
+        - UNKNOWN
+    ShareMedium:
+      name: shareMedium
+      in: query
+      description: Filters share urls by `shareMedium`.
+      schema:
+        type: string
+        enum:
+        - EMAIL
+        - FACEBOOK
+        - TWITTER
+        - PINTEREST
+        - WHATSAPP
+        - LINEMESSENGER
+        - FBMESSENGER
+        - SMS
+        - LINKEDIN
+        - DIRECT
+        - UNKNOWN
   schemas:
     Error:
       properties:
@@ -160,6 +214,30 @@ components:
           type: string
           nullable: true
           example: RS042
+    Shareurls:
+      description: A user's share links, organised by engagement medium and share medium.
+      type: object
+      properties:
+        shareLinks:
+          type: object
+          properties:
+            cleanShareLink:
+              type: string
+              format: uri
+              description: The clean (unencoded) share link for the program's primary link. If the program uses a vanity link, this is the unencoded form; otherwise it's the `UNKNOWN` engagement medium and `UNKNOWN` share medium link.
+              example: https://share.impact.squatchtesting.com/mzbnEyE
+            EMAIL:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            MOBILE:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            EMBED:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            POPUP:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            HOSTED:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            UNKNOWN:
+              $ref: '#/components/schemas/ShareMediumLinks'
     Sharelink:
       description: '**Deprecated** flat-format share link response. Returned by the deprecated *Lookup a user''s share links* endpoint. New integrations should use the `Shareurls` schema.
 
@@ -278,91 +356,13 @@ components:
         linkedinShareLink:
           type: string
           description: The share link for LinkedIn.
-    Shareurls:
-      description: A user's share links, organised by engagement medium and share medium.
-      type: object
-      properties:
-        shareLinks:
-          type: object
-          properties:
-            cleanShareLink:
-              type: string
-              format: uri
-              description: The clean (unencoded) share link for the program's primary link. If the program uses a vanity link, this is the unencoded form; otherwise it's the `UNKNOWN` engagement medium and `UNKNOWN` share medium link.
-              example: https://share.impact.squatchtesting.com/mzbnEyE
-            EMAIL:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            MOBILE:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            EMBED:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            POPUP:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            HOSTED:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            UNKNOWN:
-              $ref: '#/components/schemas/ShareMediumLinks'
-  parameters:
-    ShareMedium:
-      name: shareMedium
-      in: query
-      description: Filters share urls by `shareMedium`.
-      schema:
-        type: string
-        enum:
-        - EMAIL
-        - FACEBOOK
-        - TWITTER
-        - PINTEREST
-        - WHATSAPP
-        - LINEMESSENGER
-        - FBMESSENGER
-        - SMS
-        - LINKEDIN
-        - DIRECT
-        - UNKNOWN
-    EngagementMedium:
-      name: engagementMedium
-      in: query
-      description: Filters share urls by `engagementMedium`.
-      schema:
-        type: string
-        enum:
-        - EMBED
-        - POPUP
-        - HOSTED
-        - MOBILE
-        - EMAIL
-        - UNKNOWN
-    TenantAlias:
-      name: tenant_alias
-      in: path
-      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
-      required: true
-      schema:
-        type: string
-    UserId:
-      name: userId
-      in: path
-      description: Filters share links by `user.id`.
-      required: true
-      schema:
-        type: string
-    AccountId:
-      name: accountId
-      in: path
-      description: The ID of the account to look up
-      required: true
-      schema:
-        type: string
-    ProgramId:
-      name: programId
-      in: query
-      description: The ID of the program whose share links to return. Required — the API returns `400` if omitted.
-      required: true
-      schema:
-        type: string
-        example: '47255'
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     APIKey:
       type: http

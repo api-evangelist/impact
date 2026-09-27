@@ -89,7 +89,7 @@ paths:
     - url: https://api.impact.com
   /Mediapartners/{AccountSID}/ClickExport:
     get:
-      operationId: exportClicks
+      operationId: getMediapartnersByAccountSIDClickExport
       tags:
       - ClickExport
       summary: Export Clicks
@@ -186,6 +186,8 @@ paths:
       - lang: Shell
         label: curl
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/ClickExport?Date=2026-01-15&ResultFormat=JSON' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
+      x-operation-id-source: normalized
+      x-operation-id-original: exportClicks
     servers:
     - url: https://api.impact.com
 x-refined-from:

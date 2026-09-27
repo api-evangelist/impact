@@ -265,7 +265,7 @@ paths:
     - url: https://api.impact.com
   /Mediapartners/{AccountSID}/Contracts:
     get:
-      operationId: listContracts
+      operationId: getMediapartnersByAccountSIDContracts
       tags:
       - Contracts
       summary: List Contracts
@@ -355,6 +355,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Contract_2'
+      x-operation-id-source: normalized
+      x-operation-id-original: listContracts
     servers:
     - url: https://api.impact.com
   /Mediapartners/{AccountSID}/Contracts/{Id}:
@@ -395,6 +397,79 @@ paths:
     - url: https://api.impact.com
 components:
   schemas:
+    TemplateTerms:
+      type: object
+      properties:
+        TemplateId:
+          type: integer
+          description: Unique identifier for the template terms.
+          example: 99999
+        VersionId:
+          type: integer
+          description: Version number of the template terms.
+          example: 6
+        Name:
+          type: string
+          description: Display name for the template terms.
+          example: ACME Public Terms
+        Labels:
+          type: array
+          description: Labels assigned to these template terms.
+          items:
+            type: string
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 currency code for payouts.
+          example: USD
+        EventPayouts:
+          type: array
+          description: Payout configurations per event type.
+          items:
+            $ref: '#/components/schemas/EventPayout'
+        PromotionalTerms:
+          type: array
+          description: Additional promotional terms attached to the contract.
+          items:
+            $ref: '#/components/schemas/PromotionalTerm'
+    EventPayout:
+      type: object
+      properties:
+        EventTypeId:
+          type: integer
+          description: Unique identifier for the event type.
+          example: 18500
+        EventTypeName:
+          type: string
+          description: Display name of the event type.
+          example: Online Sale
+        EventCategory:
+          type: string
+          description: Category of the event (e.g., SALE, LEAD, CLICK).
+          example: SALE
+        DefaultPayout:
+          type: number
+          format: decimal
+          description: Default flat payout amount for the event.
+          example: 10.0
+        DefaultPayoutRate:
+          type: number
+          format: decimal
+          description: Default percentage payout rate for the event.
+          example: 15
+        PayoutLevel:
+          type: string
+          description: Whether payout is calculated per item, order, click, or call.
+          enum:
+          - ITEM
+          - ORDER
+          - CLICK
+          - CALL
+          example: ITEM
+        PayoutGroups:
+          type: array
+          description: Conditional payout groups for this event type.
+          items:
+            $ref: '#/components/schemas/PayoutGroup'
     ScheduledTerm:
       type: object
       properties:
@@ -438,111 +513,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EventPayout'
-    TemplateTerms:
-      type: object
-      properties:
-        TemplateId:
-          type: integer
-          description: Unique identifier for the template terms.
-          example: 99999
-        VersionId:
-          type: integer
-          description: Version number of the template terms.
-          example: 6
-        Name:
-          type: string
-          description: Display name for the template terms.
-          example: ACME Public Terms
-        Labels:
-          type: array
-          description: Labels assigned to these template terms.
-          items:
-            type: string
-        Currency:
-          type: string
-          description: Three-letter ISO 4217 currency code for payouts.
-          example: USD
-        EventPayouts:
-          type: array
-          description: Payout configurations per event type.
-          items:
-            $ref: '#/components/schemas/EventPayout'
-        PromotionalTerms:
-          type: array
-          description: Additional promotional terms attached to the contract.
-          items:
-            $ref: '#/components/schemas/PromotionalTerm'
-    DeclineContractRequest:
-      type: object
-      required:
-      - contractId
-      properties:
-        contractId:
-          type: string
-          description: The unique identifier of the pending contract to decline.
-          example: P-25070000
-        reason:
-          type: string
-          description: A human-readable explanation for why the contract proposal was declined.
-          example: Incompatible Content
-        groupId:
-          type: string
-          description: 'The unique identifier of the partner group to which the declined partner will be added. Provide multiple IDs as a comma-separated string if adding to more than one group.
-
-            '
-          example: '1234'
-    Rule:
-      type: object
-      properties:
-        Variable:
-          type: string
-          example: CUSTOMER_COUNTRY
-        Operator:
-          type: string
-          example: IS
-        Values:
-          type: array
-          items:
-            type: string
-    EventPayout:
-      type: object
-      properties:
-        EventTypeId:
-          type: integer
-          description: Unique identifier for the event type.
-          example: 18500
-        EventTypeName:
-          type: string
-          description: Display name of the event type.
-          example: Online Sale
-        EventCategory:
-          type: string
-          description: Category of the event (e.g., SALE, LEAD, CLICK).
-          example: SALE
-        DefaultPayout:
-          type: number
-          format: decimal
-          description: Default flat payout amount for the event.
-          example: 10.0
-        DefaultPayoutRate:
-          type: number
-          format: decimal
-          description: Default percentage payout rate for the event.
-          example: 15
-        PayoutLevel:
-          type: string
-          description: Whether payout is calculated per item, order, click, or call.
-          enum:
-          - ITEM
-          - ORDER
-          - CLICK
-          - CALL
-          example: ITEM
-        PayoutGroups:
-          type: array
-          description: Conditional payout groups for this event type.
-          items:
-            $ref: '#/components/schemas/PayoutGroup'
     CampaignTerm:
       type: object
       properties:
@@ -565,6 +535,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EventPayout'
+    Rule:
+      type: object
+      properties:
+        Variable:
+          type: string
+          example: CUSTOMER_COUNTRY
+        Operator:
+          type: string
+          example: IS
+        Values:
+          type: array
+          items:
+            type: string
     ContractDecisionResponse:
       type: object
       properties:
@@ -574,21 +557,34 @@ components:
           enum:
           - OK
           example: OK
-    AcceptContractRequest:
+    PromotionalTerm:
       type: object
-      required:
-      - contractId
       properties:
-        contractId:
+        TermsName:
           type: string
-          description: The unique identifier of the pending contract to accept.
-          example: P-25070000
-        groupId:
+          description: The display name of the promotional term.
+          example: Custom Terms
+        TermsType:
           type: string
-          description: 'The unique identifier of the partner group to which the accepted partner will be added. Provide multiple IDs as a comma-separated string if adding to more than one group.
-
-            '
-          example: '1234'
+          description: Category of promotional term.
+          enum:
+          - CUSTOM
+          - EMAIL
+          - COPYWRITING
+          - PAID_SEARCH
+          - SEO
+          - TRADEMARK
+          - APPROVAL
+          example: CUSTOM
+        TermsContent:
+          type: string
+          description: The text content of the promotional term.
+          example: <p>Custom promotional terms content.</p>
+        TermsPdfUri:
+          type: string
+          format: uri-reference
+          nullable: true
+          description: The URI to a PDF version of the promotional terms, if available.
     PayoutGroup:
       type: object
       properties:
@@ -618,34 +614,6 @@ components:
           type: array
           items:
             type: object
-    PromotionalTerm:
-      type: object
-      properties:
-        TermsName:
-          type: string
-          description: The display name of the promotional term.
-          example: Custom Terms
-        TermsType:
-          type: string
-          description: Category of promotional term.
-          enum:
-          - CUSTOM
-          - EMAIL
-          - COPYWRITING
-          - PAID_SEARCH
-          - SEO
-          - TRADEMARK
-          - APPROVAL
-          example: CUSTOM
-        TermsContent:
-          type: string
-          description: The text content of the promotional term.
-          example: <p>Custom promotional terms content.</p>
-        TermsPdfUri:
-          type: string
-          format: uri-reference
-          nullable: true
-          description: The URI to a PDF version of the promotional terms, if available.
     Contract:
       type: object
       properties:
@@ -734,130 +702,60 @@ components:
           format: uri-reference
           description: The unique reference to this contract in the impact.com API.
           example: /Advertisers/<AccountSID>/Campaigns/1000/Contracts/S-7777777
-    Terms:
+    DeclineContractRequest:
       type: object
-      description: The payout terms defined in the contract.
+      required:
+      - contractId
       properties:
-        TemplateTermName:
+        contractId:
           type: string
-          description: Display name of the payout template these terms are based on.
-          example: ScheduledTerms Test
-        Currency:
+          description: The unique identifier of the pending contract to decline.
+          example: P-25070000
+        reason:
           type: string
-          description: ISO 4217 currency code for payouts under this contract.
-          example: USD
-        TemplateId:
+          description: A human-readable explanation for why the contract proposal was declined.
+          example: Incompatible Content
+        groupId:
           type: string
-          description: Unique identifier of the contract template the terms are based on.
-        VersionId:
+          description: 'The unique identifier of the partner group to which the declined partner will be added. Provide multiple IDs as a comma-separated string if adding to more than one group.
+
+            '
+          example: '1234'
+    AcceptContractRequest:
+      type: object
+      required:
+      - contractId
+      properties:
+        contractId:
           type: string
-          description: Version identifier of the contract template revision used.
-        Name:
+          description: The unique identifier of the pending contract to accept.
+          example: P-25070000
+        groupId:
           type: string
-          description: Display name of the terms.
-        Labels:
-          type: array
-          description: Brand-applied labels grouping the contract by traits like commission tier.
-          items:
-            type: string
-        EventPayouts:
-          type: array
-          description: Payout rules for each tracked event type.
-          items:
-            $ref: '#/components/schemas/EventPayout_2'
-        SpecialTermsList:
-          type: array
-          description: Any special terms or conditions appended to the contract.
-          items:
-            $ref: '#/components/schemas/SpecialTerm'
-        ChangeNotificationPeriod:
+          description: 'The unique identifier of the partner group to which the accepted partner will be added. Provide multiple IDs as a comma-separated string if adding to more than one group.
+
+            '
+          example: '1234'
+    Locking:
+      type: object
+      description: Rules governing when an action locks and can no longer be modified.
+      properties:
+        Basis:
           type: string
-          description: Number of days advance notice required before the brand can modify the contract terms.
+          description: The basis for the locking schedule (e.g., TRACKED, CLEARED).
+          example: TRACKED
+        Period:
+          type: string
+          description: The unit of the locking period (e.g., MONTH, DAY).
+          example: MONTH
+        MonthOffset:
+          type: string
+          description: Number of months after the basis date before locking occurs.
+          example: '1'
+        DayOffset:
+          type: string
+          description: Number of days after the month offset before locking occurs.
           example: '0'
-        ReturnPolicy:
-          type: string
-          description: The return policy applied to this contract (e.g., ALWAYS_OK, NO_RETURNS).
-          example: ALWAYS_OK
-        MaxReturnPercentage:
-          type: string
-          description: The maximum percentage of actions that can be reversed as returns.
-          example: '100'
-        CustomCreativePayer:
-          type: string
-          description: Who pays for custom creative assets (e.g., ADVERTISER, PUBLISHER).
-          example: ADVERTISER
-        ActionLimit:
-          type: string
-          description: Maximum number of actions allowed before payouts cap, per ActionLimitPeriod.
-        ActionLimitPeriod:
-          type: string
-          description: Period over which ActionLimit is measured (e.g., DAY, WEEK, MONTH).
-        SpendLimit:
-          type: string
-          format: decimal
-          description: Maximum spend allowed before payouts cap, per SpendLimitPeriod.
-        SpendLimitPeriod:
-          type: string
-          description: Period over which SpendLimit is measured (e.g., DAY, WEEK, MONTH).
-        MinEarningPerClick:
-          type: string
-          format: decimal
-          description: Minimum earnings per click guaranteed by the contract.
-        ContractStartSlottingFee:
-          type: string
-          format: decimal
-          description: Slotting fee paid at the start of the contract.
-    CampaignTermEventPayout:
-      type: object
-      description: Payout rules for a specific event type within a campaign term.
-      properties:
-        EventTypeId:
-          type: string
-          description: Unique identifier for the event type this payout applies to.
-          example: '18503'
-        PayoutLevel:
-          type: string
-          description: Whether the payout is calculated at the order level or per item (e.g., ORDER, ITEM).
-          example: ITEM
-        PayoutGroups:
-          type: array
-          description: Ordered groups of item-matching rules and their associated payout rates.
-          items:
-            $ref: '#/components/schemas/PayoutGroup_2'
-    PayoutRestriction:
-      type: object
-      description: A rule that prevents payout for an action when its conditions match.
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of this payout restriction.
-        Rules:
-          type: array
-          description: Conditions that must all match for the restriction to apply.
-          items:
-            $ref: '#/components/schemas/Rule_2'
-        ZeroPayoutHideReport:
-          type: string
-          description: Whether to hide the action from reports when payout is zero due to this restriction.
-    Rule_2:
-      type: object
-      description: A single condition within a payout adjustment or payout group.
-      properties:
-        Variable:
-          type: string
-          description: The attribute being evaluated (e.g., DERIVED_BROWSER, CUSTOMER_STATUS, ITEM_SKU, ITEM_CATEGORY).
-          example: CUSTOMER_STATUS
-        Operator:
-          type: string
-          description: The comparison operator (e.g., IS, IS_NOT, CONTAINS).
-          example: IS
-        Values:
-          type: array
-          description: The values to compare against.
-          items:
-            type: string
-          example:
-          - EXISTING
     EventPayout_2:
       type: object
       description: Payout rules for a specific tracked event type.
@@ -924,6 +822,25 @@ components:
           description: The referral types and attribution windows that qualify for credit.
           items:
             $ref: '#/components/schemas/ValidReferral'
+    Limit:
+      type: object
+      description: A cap on payouts within a period.
+      properties:
+        Type:
+          type: string
+          description: What is being limited (e.g., ACTION, PAYOUT).
+        Value:
+          type: string
+          description: The numeric limit value.
+        LimitBy:
+          type: string
+          description: Dimension the limit applies to (e.g., CUSTOMER, ITEM).
+        Period:
+          type: string
+          description: Time period over which the limit resets (e.g., DAY, MONTH).
+        WeekendOverrideValue:
+          type: string
+          description: Override value applied on weekends.
     CampaignTerm_2:
       type: object
       description: A campaign-level payout term override applied on top of the base contract terms.
@@ -951,22 +868,23 @@ components:
           description: Item-level payout rules applied by this campaign term.
           items:
             $ref: '#/components/schemas/CampaignTermEventPayout'
-    SpecialTerm:
+    CampaignTermEventPayout:
       type: object
-      description: A special term or condition appended to the contract.
+      description: Payout rules for a specific event type within a campaign term.
       properties:
-        TermsName:
+        EventTypeId:
           type: string
-          description: Display name of the special term.
-          example: Custom Terms
-        TermsType:
+          description: Unique identifier for the event type this payout applies to.
+          example: '18503'
+        PayoutLevel:
           type: string
-          description: The type of special term (e.g., CUSTOM, PROMOTIONAL_RESTRICTION).
-          example: CUSTOM
-        TermsContent:
-          type: string
-          description: The full text or HTML content of the special term.
-          example: <p>Custom terms and conditions content.</p>
+          description: Whether the payout is calculated at the order level or per item (e.g., ORDER, ITEM).
+          example: ITEM
+        PayoutGroups:
+          type: array
+          description: Ordered groups of item-matching rules and their associated payout rates.
+          items:
+            $ref: '#/components/schemas/PayoutGroup_2'
     PerformanceBonusTier:
       type: object
       description: A single threshold tier within a performance bonus structure.
@@ -979,6 +897,25 @@ components:
           type: string
           description: The bonus payout rate applied once the revenue threshold is reached.
           example: '0'
+    Rule_2:
+      type: object
+      description: A single condition within a payout adjustment or payout group.
+      properties:
+        Variable:
+          type: string
+          description: The attribute being evaluated (e.g., DERIVED_BROWSER, CUSTOMER_STATUS, ITEM_SKU, ITEM_CATEGORY).
+          example: CUSTOMER_STATUS
+        Operator:
+          type: string
+          description: The comparison operator (e.g., IS, IS_NOT, CONTAINS).
+          example: IS
+        Values:
+          type: array
+          description: The values to compare against.
+          items:
+            type: string
+          example:
+          - EXISTING
     PayoutScheduling:
       type: object
       description: Rules governing when a locked action is scheduled for payout.
@@ -991,22 +928,48 @@ components:
           type: string
           description: The payout period frequency (e.g., END_OF_DAY, END_OF_WEEK, END_OF_MONTH).
           example: END_OF_DAY
-    ValidReferral:
+    PerformanceBonus:
       type: object
-      description: A referral type and attribution window that qualifies for conversion credit.
+      description: Tiered bonus payout that activates when a revenue or action threshold is reached.
       properties:
         Type:
           type: string
-          description: The type of referral that qualifies (e.g., CLICKS, IMPRESSIONS).
-          example: CLICKS
-        Window:
+          description: The type of performance bonus (e.g., SUBSEQUENT_ACTIONS, ALL_ACTIONS).
+          example: SUBSEQUENT_ACTIONS
+        Basis:
           type: string
-          description: The length of the attribution window.
-          example: '30'
-        WindowUnit:
+          description: The metric used to measure performance (e.g., REVENUE, ACTIONS).
+          example: REVENUE
+        Period:
           type: string
-          description: The unit of the attribution window (e.g., DAY, HOUR).
-          example: DAY
+          description: The time period over which performance is measured (e.g., CALENDAR_MONTH, CALENDAR_YEAR).
+          example: CALENDAR_MONTH
+        Tiers:
+          type: array
+          description: The threshold tiers and their associated bonus payout rates.
+          items:
+            $ref: '#/components/schemas/PerformanceBonusTier'
+    PayoutAdjustment:
+      type: object
+      description: A conditional rule that adjusts the default payout rate.
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the payout adjustment rule.
+          example: 8c281c2e-f61e-4b11-a9f9-9be38c79fe9e
+        Rules:
+          type: array
+          description: Conditions that must be met for this adjustment to apply.
+          items:
+            $ref: '#/components/schemas/Rule_2'
+        Direction:
+          type: string
+          description: Whether this adjustment increases or decreases the payout (INCREASE, DECREASE).
+          example: INCREASE
+        Rate:
+          type: string
+          description: The adjustment rate applied to the payout when conditions are met.
+          example: '0'
     PayoutGroup_2:
       type: object
       description: A ranked group of item-matching rules with an associated payout rate.
@@ -1038,87 +1001,22 @@ components:
           description: Payout caps that limit this group's earnings within a period.
           items:
             $ref: '#/components/schemas/Limit'
-    PerformanceBonus:
+    SpecialTerm:
       type: object
-      description: Tiered bonus payout that activates when a revenue or action threshold is reached.
+      description: A special term or condition appended to the contract.
       properties:
-        Type:
+        TermsName:
           type: string
-          description: The type of performance bonus (e.g., SUBSEQUENT_ACTIONS, ALL_ACTIONS).
-          example: SUBSEQUENT_ACTIONS
-        Basis:
+          description: Display name of the special term.
+          example: Custom Terms
+        TermsType:
           type: string
-          description: The metric used to measure performance (e.g., REVENUE, ACTIONS).
-          example: REVENUE
-        Period:
+          description: The type of special term (e.g., CUSTOM, PROMOTIONAL_RESTRICTION).
+          example: CUSTOM
+        TermsContent:
           type: string
-          description: The time period over which performance is measured (e.g., CALENDAR_MONTH, CALENDAR_YEAR).
-          example: CALENDAR_MONTH
-        Tiers:
-          type: array
-          description: The threshold tiers and their associated bonus payout rates.
-          items:
-            $ref: '#/components/schemas/PerformanceBonusTier'
-    Locking:
-      type: object
-      description: Rules governing when an action locks and can no longer be modified.
-      properties:
-        Basis:
-          type: string
-          description: The basis for the locking schedule (e.g., TRACKED, CLEARED).
-          example: TRACKED
-        Period:
-          type: string
-          description: The unit of the locking period (e.g., MONTH, DAY).
-          example: MONTH
-        MonthOffset:
-          type: string
-          description: Number of months after the basis date before locking occurs.
-          example: '1'
-        DayOffset:
-          type: string
-          description: Number of days after the month offset before locking occurs.
-          example: '0'
-    PayoutAdjustment:
-      type: object
-      description: A conditional rule that adjusts the default payout rate.
-      properties:
-        Id:
-          type: string
-          description: Unique identifier for the payout adjustment rule.
-          example: 8c281c2e-f61e-4b11-a9f9-9be38c79fe9e
-        Rules:
-          type: array
-          description: Conditions that must be met for this adjustment to apply.
-          items:
-            $ref: '#/components/schemas/Rule_2'
-        Direction:
-          type: string
-          description: Whether this adjustment increases or decreases the payout (INCREASE, DECREASE).
-          example: INCREASE
-        Rate:
-          type: string
-          description: The adjustment rate applied to the payout when conditions are met.
-          example: '0'
-    Limit:
-      type: object
-      description: A cap on payouts within a period.
-      properties:
-        Type:
-          type: string
-          description: What is being limited (e.g., ACTION, PAYOUT).
-        Value:
-          type: string
-          description: The numeric limit value.
-        LimitBy:
-          type: string
-          description: Dimension the limit applies to (e.g., CUSTOMER, ITEM).
-        Period:
-          type: string
-          description: Time period over which the limit resets (e.g., DAY, MONTH).
-        WeekendOverrideValue:
-          type: string
-          description: Override value applied on weekends.
+          description: The full text or HTML content of the special term.
+          example: <p>Custom terms and conditions content.</p>
     Contract_2:
       type: object
       properties:
@@ -1192,6 +1090,110 @@ components:
           type: string
           description: Unique reference to the contract object in the impact.com API.
           example: /Mediapartners/<AccountSID>/Contracts/S-37085294
+    Terms:
+      type: object
+      description: The payout terms defined in the contract.
+      properties:
+        TemplateTermName:
+          type: string
+          description: Display name of the payout template these terms are based on.
+          example: ScheduledTerms Test
+        Currency:
+          type: string
+          description: ISO 4217 currency code for payouts under this contract.
+          example: USD
+        TemplateId:
+          type: string
+          description: Unique identifier of the contract template the terms are based on.
+        VersionId:
+          type: string
+          description: Version identifier of the contract template revision used.
+        Name:
+          type: string
+          description: Display name of the terms.
+        Labels:
+          type: array
+          description: Brand-applied labels grouping the contract by traits like commission tier.
+          items:
+            type: string
+        EventPayouts:
+          type: array
+          description: Payout rules for each tracked event type.
+          items:
+            $ref: '#/components/schemas/EventPayout_2'
+        SpecialTermsList:
+          type: array
+          description: Any special terms or conditions appended to the contract.
+          items:
+            $ref: '#/components/schemas/SpecialTerm'
+        ChangeNotificationPeriod:
+          type: string
+          description: Number of days advance notice required before the brand can modify the contract terms.
+          example: '0'
+        ReturnPolicy:
+          type: string
+          description: The return policy applied to this contract (e.g., ALWAYS_OK, NO_RETURNS).
+          example: ALWAYS_OK
+        MaxReturnPercentage:
+          type: string
+          description: The maximum percentage of actions that can be reversed as returns.
+          example: '100'
+        CustomCreativePayer:
+          type: string
+          description: Who pays for custom creative assets (e.g., ADVERTISER, PUBLISHER).
+          example: ADVERTISER
+        ActionLimit:
+          type: string
+          description: Maximum number of actions allowed before payouts cap, per ActionLimitPeriod.
+        ActionLimitPeriod:
+          type: string
+          description: Period over which ActionLimit is measured (e.g., DAY, WEEK, MONTH).
+        SpendLimit:
+          type: string
+          format: decimal
+          description: Maximum spend allowed before payouts cap, per SpendLimitPeriod.
+        SpendLimitPeriod:
+          type: string
+          description: Period over which SpendLimit is measured (e.g., DAY, WEEK, MONTH).
+        MinEarningPerClick:
+          type: string
+          format: decimal
+          description: Minimum earnings per click guaranteed by the contract.
+        ContractStartSlottingFee:
+          type: string
+          format: decimal
+          description: Slotting fee paid at the start of the contract.
+    ValidReferral:
+      type: object
+      description: A referral type and attribution window that qualifies for conversion credit.
+      properties:
+        Type:
+          type: string
+          description: The type of referral that qualifies (e.g., CLICKS, IMPRESSIONS).
+          example: CLICKS
+        Window:
+          type: string
+          description: The length of the attribution window.
+          example: '30'
+        WindowUnit:
+          type: string
+          description: The unit of the attribution window (e.g., DAY, HOUR).
+          example: DAY
+    PayoutRestriction:
+      type: object
+      description: A rule that prevents payout for an action when its conditions match.
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of this payout restriction.
+        Rules:
+          type: array
+          description: Conditions that must all match for the restriction to apply.
+          items:
+            $ref: '#/components/schemas/Rule_2'
+        ZeroPayoutHideReport:
+          type: string
+          description: Whether to hide the action from reports when payout is zero due to this restriction.
 x-refined-from:
 - impact-brand-contracts-v14-openapi.yml
 - impact-partner-contracts-v16-openapi.yml

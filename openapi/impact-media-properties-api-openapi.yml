@@ -270,6 +270,15 @@ paths:
         source: "curl -L \\\n  --request DELETE \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/MediaProperties/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
+    RevenueModel:
+      type: string
+      description: The monetization model used by a media property.
+      enum:
+      - PAY_PER_LEAD
+      - PAY_PER_INQUIRY
+      - PAY_PER_SALE
+      - PAY_PER_CLICK
+      - PAY_PER_INSTALL
     MediaProperty:
       type: object
       properties:
@@ -379,6 +388,12 @@ components:
       - LINKEDIN
       - WECHAT
       - WEIBO
+    MobilePlatform:
+      type: string
+      description: The mobile operating system platform the app is published on.
+      enum:
+      - IOS
+      - ANDROID
     PropertyType:
       type: string
       description: The type of media property — website, mobile app, or social media account.
@@ -386,21 +401,6 @@ components:
       - WEBSITE
       - MOBILE
       - SOCIAL
-    RevenueModel:
-      type: string
-      description: The monetization model used by a media property.
-      enum:
-      - PAY_PER_LEAD
-      - PAY_PER_INQUIRY
-      - PAY_PER_SALE
-      - PAY_PER_CLICK
-      - PAY_PER_INSTALL
-    MobilePlatform:
-      type: string
-      description: The mobile operating system platform the app is published on.
-      enum:
-      - IOS
-      - ANDROID
   securitySchemes:
     basicAuth:
       type: http

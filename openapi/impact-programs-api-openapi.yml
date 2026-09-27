@@ -86,7 +86,7 @@ paths:
     - url: https://api.impact.com
   /Mediapartners/{AccountSID}/Campaigns:
     get:
-      operationId: listPrograms
+      operationId: getMediapartnersByAccountSIDCampaigns
       tags:
       - Programs
       summary: List all joined programs
@@ -125,6 +125,8 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Campaigns' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
       security:
       - basicAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: listPrograms
     servers:
     - url: https://api.impact.com
       description: Production server

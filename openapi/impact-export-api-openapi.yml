@@ -150,14 +150,24 @@ paths:
         default:
           $ref: '#/components/responses/GeneralError'
 components:
-  responses:
-    GeneralError:
-      description: Unexpected Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code.
+          type: string
+          nullable: true
+          example: RS042
     Export:
       description: An export record. Includes the original request fields plus the export's `id`, `status`, and timestamps.
       allOf:
@@ -308,23 +318,13 @@ components:
           type: integer
           description: The total number of results available across all pages.
           example: 2
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error
-          type: integer
-          format: int32
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine error code
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code.
-          type: string
-          nullable: true
-          example: RS042
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     APIKey:
       type: http

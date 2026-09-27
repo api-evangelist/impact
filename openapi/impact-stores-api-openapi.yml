@@ -140,59 +140,47 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Stores/{Id}/Group/{GroupId}/Items' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
 components:
   schemas:
-    StoreGroup:
+    Store:
       type: object
       properties:
         Id:
           type: string
-          description: Unique identifier for the group within the store.
-          example: '817'
+          description: Unique identifier for the store (also the brand's Campaign ID).
+          example: '10306'
         Name:
           type: string
-          description: Display name of the group.
-          example: Professional Equipment
-        NumberOfProducts:
+          description: Display name of the store as shown on the brand's storefront.
+          example: Hazel's Wellness Picks
+        NumberOfGroups:
           type: string
-          description: Number of products in this group.
-          example: '17'
+          description: Number of curated groups in this store.
+          example: '1'
         DateLastUpdated:
           type: string
           format: date-time
-          description: Date and time the group was last updated (ISO 8601).
-          example: '2025-06-20T08:01:43-07:00'
-        StartDate:
+          description: Date and time the store was last updated (ISO 8601).
+          example: '2025-06-20T08:03:12-07:00'
+        StoreUri:
           type: string
-          format: date-time
-          description: Date and time from which this group is active (ISO 8601). Empty for groups with no scheduled start.
-          example: ''
-        EndDate:
+          description: Web URL to view this store in the impact.com interface.
+          example: https://member.impactradius.com/secure/mediapartner/ads/view-partner-storefront-flow.ihtml?storefrontId=10306
+        StoreAvatar:
           type: string
-          format: date-time
-          description: Date and time at which this group ends (ISO 8601). Empty for groups with no scheduled end.
-          example: ''
-        Status:
+          description: Public CDN URL of the brand's logo for this store. May be empty.
+          example: https://cdn2.impact.com/display-logo-via-campaign/10306.png
+        StoreBanner:
           type: string
-          enum:
-          - ACTIVE
-          - DISABLED
-          description: Current state of the group.
-          example: ACTIVE
-        CatalogId:
-          type: string
-          description: Unique identifier for the brand catalog that contains the items in this group.
-          example: '24836'
+          description: Public CDN URL of the storefront banner image. May be empty.
+          example: https://product.impact.com/productservices/apps/assets/banner/MTAzMDZfRnJpIEp1biAyMCAxNTowMzoxMSBVVEMgMjAyNQ==.JPG
         Uri:
           type: string
-          description: Web URL to view the products in this group in the impact.com interface.
-          example: https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817
-        ItemsUri:
-          type: string
-          description: API resource path to list the items in this group.
-          example: /Mediapartners/<AccountSID>/Stores/10306/Group/817/Items
-        GroupProductPreview:
-          type: string
-          description: Optional preview image representing the group's products. May be empty.
-          example: ''
+          description: API resource path for this store.
+          example: /Mediapartners/<AccountSID>/Stores/10306
+        Groups:
+          type: array
+          description: The curated groups contained in this store.
+          items:
+            $ref: '#/components/schemas/StoreGroup'
     CatalogItem:
       type: object
       description: A product within a store group. For richer item operations and full-catalog search, see the Partner Catalogs API at `Uri`.
@@ -506,47 +494,59 @@ components:
           type: string
           description: API resource path to this item in the Partner Catalogs API.
           example: /Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016
-    Store:
+    StoreGroup:
       type: object
       properties:
         Id:
           type: string
-          description: Unique identifier for the store (also the brand's Campaign ID).
-          example: '10306'
+          description: Unique identifier for the group within the store.
+          example: '817'
         Name:
           type: string
-          description: Display name of the store as shown on the brand's storefront.
-          example: Hazel's Wellness Picks
-        NumberOfGroups:
+          description: Display name of the group.
+          example: Professional Equipment
+        NumberOfProducts:
           type: string
-          description: Number of curated groups in this store.
-          example: '1'
+          description: Number of products in this group.
+          example: '17'
         DateLastUpdated:
           type: string
           format: date-time
-          description: Date and time the store was last updated (ISO 8601).
-          example: '2025-06-20T08:03:12-07:00'
-        StoreUri:
+          description: Date and time the group was last updated (ISO 8601).
+          example: '2025-06-20T08:01:43-07:00'
+        StartDate:
           type: string
-          description: Web URL to view this store in the impact.com interface.
-          example: https://member.impactradius.com/secure/mediapartner/ads/view-partner-storefront-flow.ihtml?storefrontId=10306
-        StoreAvatar:
+          format: date-time
+          description: Date and time from which this group is active (ISO 8601). Empty for groups with no scheduled start.
+          example: ''
+        EndDate:
           type: string
-          description: Public CDN URL of the brand's logo for this store. May be empty.
-          example: https://cdn2.impact.com/display-logo-via-campaign/10306.png
-        StoreBanner:
+          format: date-time
+          description: Date and time at which this group ends (ISO 8601). Empty for groups with no scheduled end.
+          example: ''
+        Status:
           type: string
-          description: Public CDN URL of the storefront banner image. May be empty.
-          example: https://product.impact.com/productservices/apps/assets/banner/MTAzMDZfRnJpIEp1biAyMCAxNTowMzoxMSBVVEMgMjAyNQ==.JPG
+          enum:
+          - ACTIVE
+          - DISABLED
+          description: Current state of the group.
+          example: ACTIVE
+        CatalogId:
+          type: string
+          description: Unique identifier for the brand catalog that contains the items in this group.
+          example: '24836'
         Uri:
           type: string
-          description: API resource path for this store.
-          example: /Mediapartners/<AccountSID>/Stores/10306
-        Groups:
-          type: array
-          description: The curated groups contained in this store.
-          items:
-            $ref: '#/components/schemas/StoreGroup'
+          description: Web URL to view the products in this group in the impact.com interface.
+          example: https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817
+        ItemsUri:
+          type: string
+          description: API resource path to list the items in this group.
+          example: /Mediapartners/<AccountSID>/Stores/10306/Group/817/Items
+        GroupProductPreview:
+          type: string
+          description: Optional preview image representing the group's products. May be empty.
+          example: ''
   securitySchemes:
     basicAuth:
       type: http
