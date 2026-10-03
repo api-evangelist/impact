@@ -177,33 +177,6 @@ paths:
       - lang: cURL
         source: "curl -L \\\n  --request DELETE \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/PromoCodeExceptionLists/{ListId}/Items/{ItemId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
-  responses:
-    DeletedResponse:
-      description: The resource was deleted successfully.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Status:
-                type: string
-                description: Indicates that the resource was deleted.
-                example: DELETED
-    SuccessUriResponse:
-      description: The request was successful.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Status:
-                type: string
-                description: Indicates whether the operation was successful.
-                example: OK
-              Uri:
-                type: string
-                format: uri-reference
-                description: The unique reference to the affected resource.
   schemas:
     PromoCodeExceptionListItem:
       type: object
@@ -240,6 +213,33 @@ components:
           format: uri-reference
           description: The unique reference to this item in the impact.com API.
           example: /Advertisers/<AccountSID>/PromoCodeExceptionLists/99999/Items/1001
+  responses:
+    DeletedResponse:
+      description: The resource was deleted successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates that the resource was deleted.
+                example: DELETED
+    SuccessUriResponse:
+      description: The request was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates whether the operation was successful.
+                example: OK
+              Uri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the affected resource.
   securitySchemes:
     basicAuth:
       type: http

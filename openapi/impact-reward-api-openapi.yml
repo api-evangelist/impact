@@ -449,6 +449,57 @@ components:
         amount:
           type: integer
           description: 'The earned quantity of the reward. Works with: `FUELTANK`'
+    Redemption:
+      title: A redemption object
+      description: Details about when a quantity of a reward was redeemed from the impact.com system.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for this redemption
+          example: 5462600de4b09b1c41238f2f
+        dateRedeemed:
+          type: integer
+          description: Timestamp of when this redemption took place.
+          example: 1415733261275
+        quantityRedeemed:
+          type: integer
+          description: the amount of the reward that was redeemed.
+      example:
+        id: 5462600de4b09b1c41238f2f
+        dateRedeemed: 1415733261275
+        quantityRedeemed: 2000
+    RewardDebitResponse:
+      description: Details about a successful Reward Balance Debit transaction.
+      properties:
+        creditRedeemed:
+          type: integer
+          example: 200
+          description: The amount of credit that was just debitted.
+        creditAvailable:
+          type: integer
+          example: 1800
+          description: The remaining credit in this account of the same unit type.
+        unit:
+          type: string
+          example: cents
+          description: The type of credit that was just debitted.
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          example: RS042
     RewardList:
       type: array
       description: A list of Reward objects.
@@ -560,57 +611,6 @@ components:
           enum:
           - PCT_DISCOUNT
           - CREDIT
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error
-          type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code
-          type: string
-          example: RS042
-    RewardDebitResponse:
-      description: Details about a successful Reward Balance Debit transaction.
-      properties:
-        creditRedeemed:
-          type: integer
-          example: 200
-          description: The amount of credit that was just debitted.
-        creditAvailable:
-          type: integer
-          example: 1800
-          description: The remaining credit in this account of the same unit type.
-        unit:
-          type: string
-          example: cents
-          description: The type of credit that was just debitted.
-    Redemption:
-      title: A redemption object
-      description: Details about when a quantity of a reward was redeemed from the impact.com system.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for this redemption
-          example: 5462600de4b09b1c41238f2f
-        dateRedeemed:
-          type: integer
-          description: Timestamp of when this redemption took place.
-          example: 1415733261275
-        quantityRedeemed:
-          type: integer
-          description: the amount of the reward that was redeemed.
-      example:
-        id: 5462600de4b09b1c41238f2f
-        dateRedeemed: 1415733261275
-        quantityRedeemed: 2000
     RewardDebitRequest:
       description: A request to debit a single reward
       required:

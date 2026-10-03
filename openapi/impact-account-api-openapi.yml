@@ -123,23 +123,6 @@ components:
         code:
           type: string
           example: BOBTESTERSON
-    Account:
-      required:
-      - id
-      - subscription
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the account.
-          example: abc123
-        subscription:
-          $ref: '#/components/schemas/AccountSubscription'
-        referral:
-          $ref: '#/components/schemas/AccountReferral'
-        currency:
-          type: string
-          example: USD
-          description: ISO 4217 standard currency code (e.g. `USD`, `EUR`).
     AccountSubscription:
       required:
       - status
@@ -169,6 +152,23 @@ components:
           type: number
           format: double
           example: 49.99
+    Account:
+      required:
+      - id
+      - subscription
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the account.
+          example: abc123
+        subscription:
+          $ref: '#/components/schemas/AccountSubscription'
+        referral:
+          $ref: '#/components/schemas/AccountReferral'
+        currency:
+          type: string
+          example: USD
+          description: ISO 4217 standard currency code (e.g. `USD`, `EUR`).
   securitySchemes:
     APIKey:
       type: http

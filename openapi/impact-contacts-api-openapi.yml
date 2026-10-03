@@ -206,6 +206,58 @@ paths:
         source: "curl -L \\\n  --request DELETE \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contacts/{ContactId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
+    ContactCreate:
+      type: object
+      required:
+      - FirstName
+      - LastName
+      - EmailAddress
+      - Accounts
+      properties:
+        FirstName:
+          type: string
+          example: Wile
+        LastName:
+          type: string
+          example: Coyote
+        EmailAddress:
+          type: string
+          format: email
+          example: wile.coyote@example.com
+        Accounts:
+          type: string
+          description: A comma-separated string of partner account IDs.
+          example: 12345,67890
+        Title:
+          type: string
+          example: Marketing Manager
+        ProfileImageUrl:
+          type: string
+          format: uri
+          description: URL of an image file. Cannot be used with `ProfileImageFile`.
+          example: https://example.com/profile.jpg
+        ProfileImageFile:
+          type: string
+          format: binary
+          description: An image file to upload. Use `multipart/form-data`.
+        WorkPhoneNumber:
+          type: string
+          description: Requires `WorkPhoneNumberCountry`.
+          example: '8051234567'
+        WorkPhoneNumberCountry:
+          type: string
+          example: US
+        CellphoneNumber:
+          type: string
+          description: Requires `CellphoneNumberCountry`.
+          example: '8059876543'
+        CellphoneNumberCountry:
+          type: string
+          example: US
+        Labels:
+          type: string
+          description: A comma-separated string of labels.
+          example: VIP,Tier1
     Contact:
       type: object
       properties:
@@ -260,68 +312,6 @@ components:
                 type: string
               Name:
                 type: string
-        Uri:
-          type: string
-          format: uri-reference
-          example: /Advertisers/<AccountSID>/Campaigns/1000/Contacts/2750
-    ContactCreate:
-      type: object
-      required:
-      - FirstName
-      - LastName
-      - EmailAddress
-      - Accounts
-      properties:
-        FirstName:
-          type: string
-          example: Wile
-        LastName:
-          type: string
-          example: Coyote
-        EmailAddress:
-          type: string
-          format: email
-          example: wile.coyote@example.com
-        Accounts:
-          type: string
-          description: A comma-separated string of partner account IDs.
-          example: 12345,67890
-        Title:
-          type: string
-          example: Marketing Manager
-        ProfileImageUrl:
-          type: string
-          format: uri
-          description: URL of an image file. Cannot be used with `ProfileImageFile`.
-          example: https://example.com/profile.jpg
-        ProfileImageFile:
-          type: string
-          format: binary
-          description: An image file to upload. Use `multipart/form-data`.
-        WorkPhoneNumber:
-          type: string
-          description: Requires `WorkPhoneNumberCountry`.
-          example: '8051234567'
-        WorkPhoneNumberCountry:
-          type: string
-          example: US
-        CellphoneNumber:
-          type: string
-          description: Requires `CellphoneNumberCountry`.
-          example: '8059876543'
-        CellphoneNumberCountry:
-          type: string
-          example: US
-        Labels:
-          type: string
-          description: A comma-separated string of labels.
-          example: VIP,Tier1
-    SuccessUriResponse:
-      type: object
-      properties:
-        Status:
-          type: string
-          example: OK
         Uri:
           type: string
           format: uri-reference
@@ -381,6 +371,16 @@ components:
           type: string
           description: A comma-separated string of partner account IDs to remove.
           example: '67890'
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Contacts/2750
   securitySchemes:
     basicAuth:
       type: http

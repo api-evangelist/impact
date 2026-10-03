@@ -536,27 +536,6 @@ components:
           type: string
           format: uri-reference
           example: /Advertisers/<AccountSid>/ActionInquiries/778987
-    RejectReason:
-      type: string
-      description: The reason provided by the brand for declining the inquiry.
-      enum:
-      - This transaction has been tracked successfully
-      - Another marketing channel was credited with the sale
-      - Another marketing channel was credited with the sale, due to a voucher/discount code used
-      - Did not meet terms and conditions set by merchant
-      - Transaction not completed - Order cancelled, changed, or returned
-      - Transaction cannot be traced
-      - Transaction not fully completed online
-      - Enquiry does not provide complete information required for evaluation
-      - Other
-    ResolutionStatus:
-      type: string
-      description: The current resolution status of the inquiry.
-      enum:
-      - UNRESOLVED
-      - VALID
-      - DECLINED
-      - INCOMPLETE
     Comment:
       type: object
       properties:
@@ -686,6 +665,27 @@ components:
           type: string
           description: Unique reference to the action inquiry object in the impact.com API.
           example: /Mediapartners/<AccountSID>/ActionInquiries/15652378
+    RejectReason:
+      type: string
+      description: The reason provided by the brand for declining the inquiry.
+      enum:
+      - This transaction has been tracked successfully
+      - Another marketing channel was credited with the sale
+      - Another marketing channel was credited with the sale, due to a voucher/discount code used
+      - Did not meet terms and conditions set by merchant
+      - Transaction not completed - Order cancelled, changed, or returned
+      - Transaction cannot be traced
+      - Transaction not fully completed online
+      - Enquiry does not provide complete information required for evaluation
+      - Other
+    ResolutionStatus:
+      type: string
+      description: The current resolution status of the inquiry.
+      enum:
+      - UNRESOLVED
+      - VALID
+      - DECLINED
+      - INCOMPLETE
   parameters:
     AccountSID:
       name: AccountSID

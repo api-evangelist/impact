@@ -268,18 +268,6 @@ paths:
                     example: /Mediapartners/<AccountSID>/CompanyInformation
 components:
   schemas:
-    Education:
-      type: string
-      description: The highest level of education completed.
-      enum:
-      - Bachelors_Degree
-      - PhD
-      - Masters_Degree
-      - High_School
-      - Some_high_school
-      - Some_college
-      - Other
-      - None
     CompanyInformation:
       type: object
       properties:
@@ -404,76 +392,6 @@ components:
           type: string
           description: Unique reference to the company information object in the impact.com API.
           example: /Mediapartners/<AccountSID>/CompanyInformation
-    ParentalStatus:
-      type: string
-      description: The parental status of the partner.
-      enum:
-      - Mom
-      - Dad
-      - Grandfather
-      - Grandmother
-      - Other
-      - None
-    OrganizationType:
-      type: string
-      description: The legal structure of the organization. Available options vary depending on the country the business is registered in.
-      enum:
-      - NONP_GOV
-      - CORP
-      - SOLE_IND
-      - LLC_LLP_LLS
-      - TRUST
-      - SOLE_TRD
-      - PARTNERS
-      - LLC
-      - LLP
-      - COMPANY
-      - GOVERNMENT
-      - OTHER
-    Gender:
-      type: string
-      description: The gender identity of the partner.
-      enum:
-      - Female
-      - Male
-      - Transgender
-      - Non-binary
-      - Genderqueer
-      - None
-    PromotionalMethod:
-      type: string
-      description: A promotional method used to drive traffic and conversions.
-      enum:
-      - EMAIL
-      - SEARCH
-      - LOYALTY
-      - COUPON
-      - SYNDICATION_BLOG_NETWORKS
-      - CPA_NETWORK
-      - MOBILE
-      - CONTENT
-      - SHOPPING
-      - SOCIAL_MEDIA_INFLUENCER
-      - SERVICE_PROVIDER
-      - CONSUMER_SOFTWARE
-      - INCENTIVIZED
-      - OFFLINE
-      - OTHER
-      - CASHBACK
-    Pronouns:
-      type: string
-      description: The preferred pronouns of the partner.
-      enum:
-      - he_him
-      - she_her
-      - they_them
-      - ey_em
-      - ne_nem
-      - ve_ver
-      - xe_xem
-      - xie_xem
-      - ze_zir
-      - None
     Contact:
       type: object
       properties:
@@ -505,15 +423,19 @@ components:
           type: string
           description: Two-letter ISO 3166-1 alpha-2 country code for the cell phone number.
           example: ''
-    HouseholdIncome:
+    Pronouns:
       type: string
-      description: The annual household income bracket of the partner.
+      description: The preferred pronouns of the partner.
       enum:
-      - 35K
-      - Over_35K
-      - Over_50K
-      - Over_75K
-      - Over_100K
+      - he_him
+      - she_her
+      - they_them
+      - ey_em
+      - ne_nem
+      - ve_ver
+      - xe_xem
+      - xie_xem
+      - ze_zir
       - None
     Address:
       type: object
@@ -542,6 +464,58 @@ components:
           type: string
           description: Two-letter ISO 3166-1 alpha-2 country code.
           example: US
+    RelationshipStatus:
+      type: string
+      description: The relationship status of the partner.
+      enum:
+      - Married
+      - Not_Married
+      - Separated
+      - Widowed
+      - Divorced
+      - None
+    ParentalStatus:
+      type: string
+      description: The parental status of the partner.
+      enum:
+      - Mom
+      - Dad
+      - Grandfather
+      - Grandmother
+      - Other
+      - None
+    Education:
+      type: string
+      description: The highest level of education completed.
+      enum:
+      - Bachelors_Degree
+      - PhD
+      - Masters_Degree
+      - High_School
+      - Some_high_school
+      - Some_college
+      - Other
+      - None
+    PromotionalMethod:
+      type: string
+      description: A promotional method used to drive traffic and conversions.
+      enum:
+      - EMAIL
+      - SEARCH
+      - LOYALTY
+      - COUPON
+      - SYNDICATION_BLOG_NETWORKS
+      - CPA_NETWORK
+      - MOBILE
+      - CONTENT
+      - SHOPPING
+      - SOCIAL_MEDIA_INFLUENCER
+      - SERVICE_PROVIDER
+      - CONSUMER_SOFTWARE
+      - INCENTIVIZED
+      - OFFLINE
+      - OTHER
+      - CASHBACK
     Ethnicity:
       type: string
       description: The ethnic background of the partner.
@@ -560,13 +534,39 @@ components:
       - White
       - Other
       - None
-    RelationshipStatus:
+    Gender:
       type: string
-      description: The relationship status of the partner.
+      description: The gender identity of the partner.
       enum:
-      - Married
-      - Not_Married
-      - Separated
-      - Widowed
-      - Divorced
+      - Female
+      - Male
+      - Transgender
+      - Non-binary
+      - Genderqueer
       - None
+    HouseholdIncome:
+      type: string
+      description: The annual household income bracket of the partner.
+      enum:
+      - 35K
+      - Over_35K
+      - Over_50K
+      - Over_75K
+      - Over_100K
+      - None
+    OrganizationType:
+      type: string
+      description: The legal structure of the organization. Available options vary depending on the country the business is registered in.
+      enum:
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER

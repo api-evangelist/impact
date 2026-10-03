@@ -383,46 +383,6 @@ paths:
     - url: https://api.impact.com
 components:
   schemas:
-    CatalogPullSettingsUpdate:
-      type: object
-      required:
-      - uploadType
-      - pullFromUrlSettings
-      properties:
-        uploadType:
-          type: string
-          enum:
-          - CLIENT_PULL
-          description: Method for retrieving the catalog (e.g., `PULL_FROM_URL`).
-        pullFromUrlSettings:
-          type: object
-          required:
-          - address
-          - fileName
-          - pullFrequency
-          properties:
-            address:
-              type: string
-              description: Full URL or FTP path to the remote file.
-            fileName:
-              type: string
-              description: Name of the file to process from the remote server.
-            pullFrequency:
-              type: string
-              enum:
-              - 2H
-              - 4H
-              - 8H
-              - 1W
-              - 1M
-              description: How often the feed should be pulled.
-            pullTime:
-              type: string
-              description: Scheduled time for the pull (e.g., '12:30').
-            timeZone:
-              type: string
-              description: Timezone for the scheduled pull (e.g., 'America/New_York').
-          description: Settings for pulling the catalog from a URL — endpoint, auth, schedule.
     Catalog:
       type: object
       properties:
@@ -518,6 +478,46 @@ components:
           format: uri-reference
           example: /Advertisers/<AccountSID>/Actions/1000.4636.401482/Items/12345
           description: Direct URI to this catalog.
+    CatalogPullSettingsUpdate:
+      type: object
+      required:
+      - uploadType
+      - pullFromUrlSettings
+      properties:
+        uploadType:
+          type: string
+          enum:
+          - CLIENT_PULL
+          description: Method for retrieving the catalog (e.g., `PULL_FROM_URL`).
+        pullFromUrlSettings:
+          type: object
+          required:
+          - address
+          - fileName
+          - pullFrequency
+          properties:
+            address:
+              type: string
+              description: Full URL or FTP path to the remote file.
+            fileName:
+              type: string
+              description: Name of the file to process from the remote server.
+            pullFrequency:
+              type: string
+              enum:
+              - 2H
+              - 4H
+              - 8H
+              - 1W
+              - 1M
+              description: How often the feed should be pulled.
+            pullTime:
+              type: string
+              description: Scheduled time for the pull (e.g., '12:30').
+            timeZone:
+              type: string
+              description: Timezone for the scheduled pull (e.g., 'America/New_York').
+          description: Settings for pulling the catalog from a URL — endpoint, auth, schedule.
     Catalog_2:
       type: object
       properties:

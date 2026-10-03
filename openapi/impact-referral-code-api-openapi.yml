@@ -170,22 +170,6 @@ components:
           example: Bob T
         reward:
           $ref: '#/components/schemas/RewardTemplate'
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error.
-          type: integer
-          format: int32
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code.
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code.
-          type: string
-          example: RS042
     RewardTemplate:
       description: Details of the reward that could be earned, but is not yet earned.
       type: object
@@ -223,6 +207,26 @@ components:
           type: string
           description: JSON object containing details about the reward. Works with `INTEGRATION`.
           example: '{}'
+    ClassicRewardTemplate:
+      description: <span class="label">Classic Only</span> Details of the reward that could be earned, but is not yet earned.
+      allOf:
+      - $ref: '#/components/schemas/RewardTemplate'
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error.
+          type: integer
+          format: int32
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code.
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code.
+          type: string
+          example: RS042
     CodeClassicReward:
       description: A referral code, the referrer it belongs to, and details of the reward it unlocks (Classic reward format).
       type: object
@@ -247,10 +251,13 @@ components:
           example: Bob T
         reward:
           $ref: '#/components/schemas/ClassicRewardTemplate'
-    ClassicRewardTemplate:
-      description: <span class="label">Classic Only</span> Details of the reward that could be earned, but is not yet earned.
-      allOf:
-      - $ref: '#/components/schemas/RewardTemplate'
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     TenantAlias:
       name: tenant_alias
@@ -259,13 +266,6 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    GeneralError:
-      description: Unexpected Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     APIKey:
       type: http

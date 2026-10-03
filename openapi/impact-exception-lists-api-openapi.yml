@@ -226,6 +226,23 @@ paths:
     - url: https://api.impact.com
 components:
   schemas:
+    ExceptionListUpdate:
+      type: object
+      properties:
+        ActionTrackerId:
+          type: string
+          description: Comma-separated list of event type IDs.
+          example: '18500'
+        Name:
+          type: string
+          description: The display name for the exception list.
+          example: USA-State-CA-Exclusions
+        Type:
+          type: string
+          description: Whether this list applies to CATEGORY or SKU.
+          enum:
+          - CATEGORY
+          - SKU
     ExceptionListCreate:
       type: object
       required:
@@ -252,6 +269,17 @@ components:
           enum:
           - CATEGORY
           - SKU
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected resource.
     ExceptionList:
       type: object
       properties:
@@ -319,34 +347,42 @@ components:
           format: uri-reference
           description: The unique reference to this exception list in the impact.com API.
           example: /Advertisers/<AccountSID>/ExceptionLists/12345
-    SuccessUriResponse:
+    ExceptionListItem:
       type: object
+      description: An item within an exception list that defines a specific category or SKU value triggering an alternate commission rate.
       properties:
-        Status:
+        Id:
           type: string
-          description: Indicates whether the operation was successful.
-          example: OK
-        Uri:
+          description: Unique identifier for the exception list item.
+          example: '1'
+        ListId:
           type: string
-          format: uri-reference
-          description: The unique reference to the affected resource.
-    ExceptionListUpdate:
-      type: object
-      properties:
-        ActionTrackerId:
-          type: string
-          description: Comma-separated list of event type IDs.
-          example: '18500'
+          description: Unique identifier for the parent exception list.
+          example: '5001'
         Name:
           type: string
-          description: The display name for the exception list.
-          example: USA-State-CA-Exclusions
-        Type:
+          description: Display name of the exception list item.
+          example: Batsuit SKU
+        Value:
           type: string
-          description: Whether this list applies to CATEGORY or SKU.
+          description: The category or SKU value that this item matches against, depending on the parent exception list's Type.
+          example: BS-KVL-01
+        MatchMode:
+          type: string
           enum:
-          - CATEGORY
-          - SKU
+          - EQ
+          - REGEX
+          description: The matching methodology used to evaluate the value. EQ matches exactly; REGEX matches using a regular expression.
+          example: EQ
+        CreatedDate:
+          type: string
+          format: date-time
+          description: Date and time this item was added to the exception list (ISO 8601).
+          example: '2024-01-15T10:30:00-08:00'
+        Uri:
+          type: string
+          description: Unique reference to the exception list item in the impact.com API.
+          example: /Mediapartners/<AccountSID>/ExceptionLists/5001/Items/1
     ExceptionList_2:
       type: object
       properties:
@@ -399,42 +435,6 @@ components:
           type: string
           description: Unique reference to the exception list object in the impact.com API.
           example: /Mediapartners/<AccountSID>/ExceptionLists/5001
-    ExceptionListItem:
-      type: object
-      description: An item within an exception list that defines a specific category or SKU value triggering an alternate commission rate.
-      properties:
-        Id:
-          type: string
-          description: Unique identifier for the exception list item.
-          example: '1'
-        ListId:
-          type: string
-          description: Unique identifier for the parent exception list.
-          example: '5001'
-        Name:
-          type: string
-          description: Display name of the exception list item.
-          example: Batsuit SKU
-        Value:
-          type: string
-          description: The category or SKU value that this item matches against, depending on the parent exception list's Type.
-          example: BS-KVL-01
-        MatchMode:
-          type: string
-          enum:
-          - EQ
-          - REGEX
-          description: The matching methodology used to evaluate the value. EQ matches exactly; REGEX matches using a regular expression.
-          example: EQ
-        CreatedDate:
-          type: string
-          format: date-time
-          description: Date and time this item was added to the exception list (ISO 8601).
-          example: '2024-01-15T10:30:00-08:00'
-        Uri:
-          type: string
-          description: Unique reference to the exception list item in the impact.com API.
-          example: /Mediapartners/<AccountSID>/ExceptionLists/5001/Items/1
   securitySchemes:
     basicAuth:
       type: http

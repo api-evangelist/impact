@@ -189,6 +189,165 @@ paths:
                 $ref: '#/components/schemas/SuccessUriResponse'
 components:
   schemas:
+    PartnerCreate:
+      type: object
+      required:
+      - AccountName
+      - Website
+      - AddressLine1
+      - City
+      - PostalCode
+      - Country
+      - PhoneCountry
+      - PhoneNumber
+      - PrimaryPromotionalMethod
+      - Username
+      - FirstName
+      - LastName
+      - Password
+      - EmailAddress
+      - TemplateTermsId
+      - Currency
+      properties:
+        AccountName:
+          type: string
+          description: The display name for the partner's account.
+          example: Wile E. Coyote Facebook
+        Website:
+          type: string
+          format: uri
+          description: The partner's website URL.
+          example: https://www.example-partner.com
+        AddressLine1:
+          type: string
+          description: Address line 1.
+          example: 123 Main St
+        City:
+          type: string
+          description: City for the partner's address.
+          example: Santa Barbara
+        PostalCode:
+          type: string
+          description: ZIP or postal code.
+          example: '93101'
+        Country:
+          type: string
+          description: 'Two-letter ISO 3166-1 alpha-2 country code. Possible values: `US`, `UK`, `CANADA`, `AUSTRALIA`, `GERMANY`, `FRANCE`, `AFGHANISTAN`, `ALAND ISLANDS`, `ALBANIA`, `ALGERIA`, `AMERICANSAMOA`, `ANDORRA`, `ANGOLA`, `ANGUILLA`, `ANTARCTICA`, `ANTIGUABARBUDA`, `ARGENTINA`, `ARMENIA`, `ARUBA`, `AUSTRIA`, `AZERBAIJAN`, `BAHAMAS`, `BAHRAIN`, `BANGLADESH`, `BARBADOS`, `BELARUS`, `BELGIUM`, `BELIZE`, `BENIN`, `BERMUDA`, `BHUTAN`, `BOLIVIA`, `BOSNIAHERZEGOVINA`, `BOTSWANA`, `BRAZIL`, `BRITISHINDIANOCEANTERRITORY`, `BRUNEIDARUSSALAM`, `BULGARIA`, `BURKINAFASO`, `BURUNDI`, `CAMBODIA`, `CAMEROON`, `CAPVERDE`, `CAYMANISLANDS`, `CENTRALAFRICANREPUBLIC`, `CHAD`, `CHILE`, `CHINA`, `CHRISTMASISLAND`, `COCOSISLANDS`, `COLOMBIA`, `COMOROS`, `CONGO`, `DEMOCRATICREPUBLICCONGO`, `COOKISLANDS`, `COSTARICA`, `IVORYCOAST`, `CROATIA`, `CUBA`, `CYPRUS`, `CZECHREPUBLIC`, `DENMARK`, `DIJIBOUTI`, `DOMINICA`, `DOMINICANREPUBLIC`, `ECUADOR`, `EGYPT`, `ELSALVADOR`, `EQUATORIALGUINEA`, `ERITREA`, `ESTONIA`, `ETHIOPIA`, `FALKLANDISLANDS`, `FAROEISLANDS`, `FIJI`, `FINLAND`, `FRENCHGUIANA`, `FRENCHPOLYNESIA`, `FRENCHSOUTHERNTERRITORIES`, `GABON`, `GAMBIA`, `GEORGIA`, `GHANA`, `GIBRALTAR`, `GREECE`, `GREENLAND`, `GRENADA`, `GUADELOUPE`, `GUAM`, `GUATEMALA`, `GUERNSEY`, `GUINEA`, `GUINEABISSAU`, `GUYANA`, `HAITI`, `VATICAN`, `HONDURAS`, `HONGKONG`, `HUNGARY`, `ICELAND`, `INDIA`, `INDONESIA`, `IRAN`, `IRAQ`, `IRELAND`, `ISLE OF MAN`, `ISRAEL`, `ITALY`, `JAMAICA`, `JAPAN`, `JERSEY`, `JORDAN`, `KAZAKHSTAN`, `KENYA`, `KIRIBATI`, `SOUTHKOREA`, `KUWAIT`, `KYRGYZSTAN`, `LAOS`, `LATVIA`, `LEBANON`, `LESOTHO`, `LIBERIA`, `LIBYA`, `LICHTENSTEIN`, `LITHUANIA`, `LUXEMBOURG`, `MACAO`, `MACEDONIA`, `MADAGASCAR`, `MALAWI`, `MALAYSIA`, `MALDIVES`, `MALI`, `MALTA`, `MARSHALLISLANDS`, `MARTINIQUE`, `MAURITANIA`, `MAURITIUS`, `MAYOTTE`, `MEXICO`, `MICRONESIA`, `MOLDOVA`, `MONACO`, `MONGOLIA`, `MONTENEGRO`, `MONTSERRAT`, `MOROCCO`, `MOZAMBIQUE`, `MYANMAR`, `NAMIBIA`, `NAURU`, `NEPAL`, `NETHERLANDS`, `NETHERLANDSANTILLES`, `NEWCALEDONIA`, `NEWZEALAND`, `NICARAGUA`, `NIGER`, `NIGERIA`, `NIUE`, `NORFOLKISLAND`, `NORTHKOREA`, `NORTHERNMARIANAISLANDS`, `NORWAY`, `OMAN`, `PAKISTAN`, `PALAU`, `PALESTINIANTERRITORY`, `PANAMA`, `PAPUANEWGUINEA`, `PARAGUAY`, `PERU`, `PHILIPPINES`, `PITCAIRN`, `POLAND`, `PORTUGAL`, `PUERTORICO`, `QATAR`, `REUNION`, `ROMANIA`, `RUSSIA`, `RWANDA`, `SAINTHELENA`, `SAINTKITTSNEVIS`, `SAINTLUCIA`, `SAINTPIERREMIQUELON`, `SAINTVINCENTGRENADINES`, `SAMOA`, `SANMARINO`, `SAOTOME`, `SAUDIARABIA`, `SENEGAL`, `SERBIA`, `YUGOSLAVIA`, `SEYCHELLES`, `SIERRALEONE`, `SINGAPORE`, `SLOVAKIA`, `SLOVENIA`, `SOLOMONISLANDS`, `SOMALIA`, `SOUTHAFRICA`, `SPAIN`, `SRILANKA`, `SUDAN`, `SURINAME`, `SVALBARDJANMAYEN`, `SWAZILAND`, `SWEDEN`, `SWITZERLAND`, `SYRIA`, `TAIWAN`, `TAJIKISTAN`, `TANZANIA`, `THAILAND`, `TIMOR`, `TOGO`, `TOKELAU`, `TONGA`, `TRINIDADTOBAGO`, `TUNISIA`, `TURKEY`, `TURKMENISTAN`, `TURKSCAICOSISLANDS`, `TUVALU`, `UGANDA`, `UKRAINE`, `UAE`, `UNITED STATES MINOR OUTLYING ISLANDS`, `URUGUAY`, `UZBEKISTAN`, `VANUATU`, `VENEZUELA`, `VIETNAM`, `BRITISHVIRGINISLANDS`, `USVIRGINISLANDS`, `WALLISFUTUNA`, `WESTERNSAHARA`, `YEMEN`, `ZAMBIA`, `ZIMBABWE`.'
+          example: US
+        PhoneCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code for the phone number.
+          example: US
+        PhoneNumber:
+          type: string
+          description: The partner's contact phone number.
+          example: '8051234567'
+        PrimaryPromotionalMethod:
+          type: string
+          description: The partner's primary method of promoting.
+          enum:
+          - EMAIL
+          - SEARCH
+          - LOYALTY
+          - COUPON
+          - SYNDICATION_BLOG_NETWORKS
+          - CPA_NETWORK
+          - MOBILE
+          - CONTENT
+          - SHOPPING
+          - SOCIAL_MEDIA_INFLUENCER
+          - SERVICE_PROVIDER
+          - CONSUMER_SOFTWARE
+          - INCENTIVIZED
+          - OFFLINE
+          - OTHER
+          - CASHBACK
+        Username:
+          type: string
+          description: The username for the partner's primary user account.
+          example: wile.coyote
+        FirstName:
+          type: string
+          description: First name of the primary contact.
+          example: Wile
+        LastName:
+          type: string
+          description: Last name of the primary contact.
+          example: Coyote
+        Password:
+          type: string
+          format: password
+          description: Password for the primary user account.
+        EmailAddress:
+          type: string
+          format: email
+          description: Email address of the primary contact.
+          example: wile.coyote@example.com
+        TemplateTermsId:
+          type: integer
+          description: The unique ID of the contract template to assign to this partner.
+          example: 99999
+        Currency:
+          type: string
+          description: 3-letter ISO 4217 currency code.
+        TaxId:
+          type: string
+          description: Tax identification number for the partner.
+        OrganizationType:
+          type: string
+          description: Organization type for the partner.
+          enum:
+          - NONP_GOV
+          - CORP
+          - SOLE_IND
+          - LLC_LLP_LLS
+          - TRUST
+          - SOLE_TRD
+          - PARTNERS
+          - LLC
+          - LLP
+          - COMPANY
+          - GOVERNMENT
+          - OTHER
+          example: CORP
+        AddressLine2:
+          type: string
+          description: Address line 2.
+        CountryState:
+          type: string
+          description: State or region within the country.
+        Timezone:
+          type: string
+          description: The partner's timezone.
+        PromotingCountries:
+          type: string
+          description: Comma-separated list of 2-letter ISO 3166-1 alpha 2 country codes.
+        Description:
+          type: string
+          description: A description of the partner.
+        MPGroupIDs:
+          type: string
+          description: Comma-separated list of partner group IDs to add the partner to.
+        MPValue1:
+          type: string
+          description: Custom tracking value 1.
+        MPValue2:
+          type: string
+          description: Custom tracking value 2.
+        MPValue3:
+          type: string
+          description: Custom tracking value 3.
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected partner.
     Partner:
       type: object
       properties:
@@ -446,162 +605,3 @@ components:
           type: string
           format: uri-reference
           description: The unique reference to this partner in the impact.com API.
-    PartnerCreate:
-      type: object
-      required:
-      - AccountName
-      - Website
-      - AddressLine1
-      - City
-      - PostalCode
-      - Country
-      - PhoneCountry
-      - PhoneNumber
-      - PrimaryPromotionalMethod
-      - Username
-      - FirstName
-      - LastName
-      - Password
-      - EmailAddress
-      - TemplateTermsId
-      - Currency
-      properties:
-        AccountName:
-          type: string
-          description: The display name for the partner's account.
-          example: Wile E. Coyote Facebook
-        Website:
-          type: string
-          format: uri
-          description: The partner's website URL.
-          example: https://www.example-partner.com
-        AddressLine1:
-          type: string
-          description: Address line 1.
-          example: 123 Main St
-        City:
-          type: string
-          description: City for the partner's address.
-          example: Santa Barbara
-        PostalCode:
-          type: string
-          description: ZIP or postal code.
-          example: '93101'
-        Country:
-          type: string
-          description: 'Two-letter ISO 3166-1 alpha-2 country code. Possible values: `US`, `UK`, `CANADA`, `AUSTRALIA`, `GERMANY`, `FRANCE`, `AFGHANISTAN`, `ALAND ISLANDS`, `ALBANIA`, `ALGERIA`, `AMERICANSAMOA`, `ANDORRA`, `ANGOLA`, `ANGUILLA`, `ANTARCTICA`, `ANTIGUABARBUDA`, `ARGENTINA`, `ARMENIA`, `ARUBA`, `AUSTRIA`, `AZERBAIJAN`, `BAHAMAS`, `BAHRAIN`, `BANGLADESH`, `BARBADOS`, `BELARUS`, `BELGIUM`, `BELIZE`, `BENIN`, `BERMUDA`, `BHUTAN`, `BOLIVIA`, `BOSNIAHERZEGOVINA`, `BOTSWANA`, `BRAZIL`, `BRITISHINDIANOCEANTERRITORY`, `BRUNEIDARUSSALAM`, `BULGARIA`, `BURKINAFASO`, `BURUNDI`, `CAMBODIA`, `CAMEROON`, `CAPVERDE`, `CAYMANISLANDS`, `CENTRALAFRICANREPUBLIC`, `CHAD`, `CHILE`, `CHINA`, `CHRISTMASISLAND`, `COCOSISLANDS`, `COLOMBIA`, `COMOROS`, `CONGO`, `DEMOCRATICREPUBLICCONGO`, `COOKISLANDS`, `COSTARICA`, `IVORYCOAST`, `CROATIA`, `CUBA`, `CYPRUS`, `CZECHREPUBLIC`, `DENMARK`, `DIJIBOUTI`, `DOMINICA`, `DOMINICANREPUBLIC`, `ECUADOR`, `EGYPT`, `ELSALVADOR`, `EQUATORIALGUINEA`, `ERITREA`, `ESTONIA`, `ETHIOPIA`, `FALKLANDISLANDS`, `FAROEISLANDS`, `FIJI`, `FINLAND`, `FRENCHGUIANA`, `FRENCHPOLYNESIA`, `FRENCHSOUTHERNTERRITORIES`, `GABON`, `GAMBIA`, `GEORGIA`, `GHANA`, `GIBRALTAR`, `GREECE`, `GREENLAND`, `GRENADA`, `GUADELOUPE`, `GUAM`, `GUATEMALA`, `GUERNSEY`, `GUINEA`, `GUINEABISSAU`, `GUYANA`, `HAITI`, `VATICAN`, `HONDURAS`, `HONGKONG`, `HUNGARY`, `ICELAND`, `INDIA`, `INDONESIA`, `IRAN`, `IRAQ`, `IRELAND`, `ISLE OF MAN`, `ISRAEL`, `ITALY`, `JAMAICA`, `JAPAN`, `JERSEY`, `JORDAN`, `KAZAKHSTAN`, `KENYA`, `KIRIBATI`, `SOUTHKOREA`, `KUWAIT`, `KYRGYZSTAN`, `LAOS`, `LATVIA`, `LEBANON`, `LESOTHO`, `LIBERIA`, `LIBYA`, `LICHTENSTEIN`, `LITHUANIA`, `LUXEMBOURG`, `MACAO`, `MACEDONIA`, `MADAGASCAR`, `MALAWI`, `MALAYSIA`, `MALDIVES`, `MALI`, `MALTA`, `MARSHALLISLANDS`, `MARTINIQUE`, `MAURITANIA`, `MAURITIUS`, `MAYOTTE`, `MEXICO`, `MICRONESIA`, `MOLDOVA`, `MONACO`, `MONGOLIA`, `MONTENEGRO`, `MONTSERRAT`, `MOROCCO`, `MOZAMBIQUE`, `MYANMAR`, `NAMIBIA`, `NAURU`, `NEPAL`, `NETHERLANDS`, `NETHERLANDSANTILLES`, `NEWCALEDONIA`, `NEWZEALAND`, `NICARAGUA`, `NIGER`, `NIGERIA`, `NIUE`, `NORFOLKISLAND`, `NORTHKOREA`, `NORTHERNMARIANAISLANDS`, `NORWAY`, `OMAN`, `PAKISTAN`, `PALAU`, `PALESTINIANTERRITORY`, `PANAMA`, `PAPUANEWGUINEA`, `PARAGUAY`, `PERU`, `PHILIPPINES`, `PITCAIRN`, `POLAND`, `PORTUGAL`, `PUERTORICO`, `QATAR`, `REUNION`, `ROMANIA`, `RUSSIA`, `RWANDA`, `SAINTHELENA`, `SAINTKITTSNEVIS`, `SAINTLUCIA`, `SAINTPIERREMIQUELON`, `SAINTVINCENTGRENADINES`, `SAMOA`, `SANMARINO`, `SAOTOME`, `SAUDIARABIA`, `SENEGAL`, `SERBIA`, `YUGOSLAVIA`, `SEYCHELLES`, `SIERRALEONE`, `SINGAPORE`, `SLOVAKIA`, `SLOVENIA`, `SOLOMONISLANDS`, `SOMALIA`, `SOUTHAFRICA`, `SPAIN`, `SRILANKA`, `SUDAN`, `SURINAME`, `SVALBARDJANMAYEN`, `SWAZILAND`, `SWEDEN`, `SWITZERLAND`, `SYRIA`, `TAIWAN`, `TAJIKISTAN`, `TANZANIA`, `THAILAND`, `TIMOR`, `TOGO`, `TOKELAU`, `TONGA`, `TRINIDADTOBAGO`, `TUNISIA`, `TURKEY`, `TURKMENISTAN`, `TURKSCAICOSISLANDS`, `TUVALU`, `UGANDA`, `UKRAINE`, `UAE`, `UNITED STATES MINOR OUTLYING ISLANDS`, `URUGUAY`, `UZBEKISTAN`, `VANUATU`, `VENEZUELA`, `VIETNAM`, `BRITISHVIRGINISLANDS`, `USVIRGINISLANDS`, `WALLISFUTUNA`, `WESTERNSAHARA`, `YEMEN`, `ZAMBIA`, `ZIMBABWE`.'
-          example: US
-        PhoneCountry:
-          type: string
-          description: Two-letter ISO 3166-1 alpha-2 country code for the phone number.
-          example: US
-        PhoneNumber:
-          type: string
-          description: The partner's contact phone number.
-          example: '8051234567'
-        PrimaryPromotionalMethod:
-          type: string
-          description: The partner's primary method of promoting.
-          enum:
-          - EMAIL
-          - SEARCH
-          - LOYALTY
-          - COUPON
-          - SYNDICATION_BLOG_NETWORKS
-          - CPA_NETWORK
-          - MOBILE
-          - CONTENT
-          - SHOPPING
-          - SOCIAL_MEDIA_INFLUENCER
-          - SERVICE_PROVIDER
-          - CONSUMER_SOFTWARE
-          - INCENTIVIZED
-          - OFFLINE
-          - OTHER
-          - CASHBACK
-        Username:
-          type: string
-          description: The username for the partner's primary user account.
-          example: wile.coyote
-        FirstName:
-          type: string
-          description: First name of the primary contact.
-          example: Wile
-        LastName:
-          type: string
-          description: Last name of the primary contact.
-          example: Coyote
-        Password:
-          type: string
-          format: password
-          description: Password for the primary user account.
-        EmailAddress:
-          type: string
-          format: email
-          description: Email address of the primary contact.
-          example: wile.coyote@example.com
-        TemplateTermsId:
-          type: integer
-          description: The unique ID of the contract template to assign to this partner.
-          example: 99999
-        Currency:
-          type: string
-          description: 3-letter ISO 4217 currency code.
-        TaxId:
-          type: string
-          description: Tax identification number for the partner.
-        OrganizationType:
-          type: string
-          description: Organization type for the partner.
-          enum:
-          - NONP_GOV
-          - CORP
-          - SOLE_IND
-          - LLC_LLP_LLS
-          - TRUST
-          - SOLE_TRD
-          - PARTNERS
-          - LLC
-          - LLP
-          - COMPANY
-          - GOVERNMENT
-          - OTHER
-          example: CORP
-        AddressLine2:
-          type: string
-          description: Address line 2.
-        CountryState:
-          type: string
-          description: State or region within the country.
-        Timezone:
-          type: string
-          description: The partner's timezone.
-        PromotingCountries:
-          type: string
-          description: Comma-separated list of 2-letter ISO 3166-1 alpha 2 country codes.
-        Description:
-          type: string
-          description: A description of the partner.
-        MPGroupIDs:
-          type: string
-          description: Comma-separated list of partner group IDs to add the partner to.
-        MPValue1:
-          type: string
-          description: Custom tracking value 1.
-        MPValue2:
-          type: string
-          description: Custom tracking value 2.
-        MPValue3:
-          type: string
-          description: Custom tracking value 3.
-    SuccessUriResponse:
-      type: object
-      properties:
-        Status:
-          type: string
-          description: Indicates whether the operation was successful.
-          example: OK
-        Uri:
-          type: string
-          format: uri-reference
-          description: The unique reference to the affected partner.

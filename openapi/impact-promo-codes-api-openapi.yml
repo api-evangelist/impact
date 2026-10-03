@@ -283,23 +283,52 @@ paths:
     - url: https://api.impact.com
       description: Production server
 components:
-  responses:
-    SuccessUriResponse:
-      description: The request was successful.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Status:
-                type: string
-                description: Indicates whether the operation was successful.
-                example: OK
-              Uri:
-                type: string
-                format: uri-reference
-                description: The unique reference to the affected promo code.
   schemas:
+    PromoCodeCreate:
+      type: object
+      required:
+      - AssignedPartnerId
+      - CampaignId
+      - CreditPolicy
+      - Code
+      - Type
+      properties:
+        AssignedPartnerId:
+          type: integer
+          description: The partner account ID this promo code is assigned to.
+        CampaignId:
+          type: integer
+          description: The program ID this promo code applies to.
+        CreditPolicy:
+          type: string
+          description: How credit is awarded for actions involving this code.
+          enum:
+          - ALWAYS
+          - INVOLVED
+          - WINNER
+        Code:
+          type: string
+          description: The promo code value.
+        Type:
+          type: string
+          description: LI for Exact match, RE for Regex.
+          enum:
+          - LI
+          - RE
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the promo code becomes active.
+        EndDate:
+          type: string
+          format: date-time
+          description: The date and time the promo code expires.
+        DealId:
+          type: integer
+          description: The unique identifier of a Deal to link this promo code to.
+        DealName:
+          type: string
+          description: The display name of the linked Deal.
     PromoCode:
       type: object
       properties:
@@ -466,64 +495,6 @@ components:
           format: uri-reference
           description: The unique reference to this promo code in the impact.com API.
           example: /Advertisers/<AccountSID>/PromoCodes/7777777
-    PromoCodeCreate:
-      type: object
-      required:
-      - AssignedPartnerId
-      - CampaignId
-      - CreditPolicy
-      - Code
-      - Type
-      properties:
-        AssignedPartnerId:
-          type: integer
-          description: The partner account ID this promo code is assigned to.
-        CampaignId:
-          type: integer
-          description: The program ID this promo code applies to.
-        CreditPolicy:
-          type: string
-          description: How credit is awarded for actions involving this code.
-          enum:
-          - ALWAYS
-          - INVOLVED
-          - WINNER
-        Code:
-          type: string
-          description: The promo code value.
-        Type:
-          type: string
-          description: LI for Exact match, RE for Regex.
-          enum:
-          - LI
-          - RE
-        StartDate:
-          type: string
-          format: date-time
-          description: The date and time the promo code becomes active.
-        EndDate:
-          type: string
-          format: date-time
-          description: The date and time the promo code expires.
-        DealId:
-          type: integer
-          description: The unique identifier of a Deal to link this promo code to.
-        DealName:
-          type: string
-          description: The display name of the linked Deal.
-    MatchMode:
-      type: string
-      enum:
-      - LI
-      - RE
-      description: 'How the promo code value is matched against codes used at checkout.
-
-
-        - `LI`: Literal — the code must match exactly.
-
-        - `RE`: Regex — the code is interpreted as a regular expression.
-
-        '
     CreditRule:
       type: string
       enum:
@@ -538,6 +509,19 @@ components:
         - `INVOLVED`: Credited only when involved in the click path leading to the sale.
 
         - `WINNER`: Credited only when the partner drove the last click before the sale.
+
+        '
+    MatchMode:
+      type: string
+      enum:
+      - LI
+      - RE
+      description: 'How the promo code value is matched against codes used at checkout.
+
+
+        - `LI`: Literal — the code must match exactly.
+
+        - `RE`: Regex — the code is interpreted as a regular expression.
 
         '
     PromoCode_2:
@@ -639,6 +623,22 @@ components:
           format: uri
           description: API resource path for this promo code.
           example: /Mediapartners/<AccountSID>/PromoCodes/8111554
+  responses:
+    SuccessUriResponse:
+      description: The request was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates whether the operation was successful.
+                example: OK
+              Uri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the affected promo code.
   securitySchemes:
     basicAuth:
       type: http

@@ -527,14 +527,6 @@ paths:
       description: Production server
 components:
   parameters:
-    AccountSID:
-      name: AccountSID
-      in: path
-      required: true
-      description: Your Agency Account SID.
-      schema:
-        type: string
-      example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
     JobId:
       name: JobId
       in: path
@@ -544,6 +536,14 @@ components:
         type: string
         format: uuid
       example: 81258bc5-54cf-4a09-9fbc-eb837637d02f
+    AccountSID:
+      name: AccountSID
+      in: path
+      required: true
+      description: Your Agency Account SID.
+      schema:
+        type: string
+      example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
   schemas:
     Job:
       type: object

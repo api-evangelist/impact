@@ -1438,6 +1438,35 @@ components:
           type: string
           description: User agent of the customer, used to provide device reporting.
           example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
+    AuthError:
+      type: object
+      description: Returned when the request could not be authenticated or is not authorized.
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 401
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          example: Unauthorized
+    ConversionType:
+      type: string
+      description: 'The conversion type. The only accepted value is `CLO` or `clo`
+
+        (case-insensitive). If absent or blank it''ll default to partner.
+
+        Similarly, unknown non-empty values will queue with a warning and
+
+        default to partner.
+
+
+        This field is required for CLO partners. To flag a conversion as a
+
+        card-linked offer, include the parameter `ConversionType=CLO`.
+
+        '
+      example: CLO
     ConversionError:
       type: object
       description: Returned when the conversion submission request is invalid.
@@ -1497,35 +1526,6 @@ components:
           - field: CardBin
             level: WARNING
             message: 'CardBin ignored: must be exactly 6 or 8 digits.'
-    ConversionType:
-      type: string
-      description: 'The conversion type. The only accepted value is `CLO` or `clo`
-
-        (case-insensitive). If absent or blank it''ll default to partner.
-
-        Similarly, unknown non-empty values will queue with a warning and
-
-        default to partner.
-
-
-        This field is required for CLO partners. To flag a conversion as a
-
-        card-linked offer, include the parameter `ConversionType=CLO`.
-
-        '
-      example: CLO
-    AuthError:
-      type: object
-      description: Returned when the request could not be authenticated or is not authorized.
-      properties:
-        status:
-          type: integer
-          description: The HTTP status code.
-          example: 401
-        title:
-          type: string
-          description: A short, human-readable summary of the error.
-          example: Unauthorized
   parameters:
     AccountSID:
       name: AccountSID

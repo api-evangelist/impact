@@ -46,48 +46,27 @@ paths:
         source: "curl -L \\\n  --request POST \\\n  --url 'https://trkapi.impact.com/DeferredDeepLink' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --header 'Accept: */*'"
 components:
   schemas:
-    ErrorResponse:
+    DeferredDeepLinkResponse:
       type: object
-      description: Describes errors and warnings found in the request.
+      description: Contains the deep link information if a match is found, along with connection details.
       properties:
-        errors:
-          type: array
-          description: Errors that prevented the request from succeeding.
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-                description: The parameter that caused the error.
-              level:
-                type: string
-                description: The severity level of the message.
-                enum:
-                - ERROR
-                - WARNING
-                example: ERROR
-              message:
-                type: string
-                description: A description of the error.
-        warnings:
-          type: array
-          description: Non-fatal warnings about the request.
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-                description: The parameter that caused the warning.
-              level:
-                type: string
-                description: The severity level of the message.
-                enum:
-                - ERROR
-                - WARNING
-                example: WARNING
-              message:
-                type: string
-                description: A description of the warning.
+        landingPage:
+          type: string
+          format: uri
+          description: URL of the web page the user was being redirected to before the app store.
+          example: https://www.acme.com/products/tennis-balls
+        clickId:
+          type: string
+          description: The unique impact.com click identifier.
+          example: QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0
+        clickIpAddress:
+          type: string
+          description: IP Address captured at the time of the click.
+          example: 192.168.1.1
+        connectionIpAddress:
+          type: string
+          description: IP Address captured when the connection to this endpoint is made.
+          example: 192.168.1.2
     DeferredDeepLinkRequest:
       type: object
       required:
@@ -132,27 +111,48 @@ components:
           type: string
           description: Third-party web tracking cookie or anonymous user ID.
           example: a1b2c3d4e5f6
-    DeferredDeepLinkResponse:
+    ErrorResponse:
       type: object
-      description: Contains the deep link information if a match is found, along with connection details.
+      description: Describes errors and warnings found in the request.
       properties:
-        landingPage:
-          type: string
-          format: uri
-          description: URL of the web page the user was being redirected to before the app store.
-          example: https://www.acme.com/products/tennis-balls
-        clickId:
-          type: string
-          description: The unique impact.com click identifier.
-          example: QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0
-        clickIpAddress:
-          type: string
-          description: IP Address captured at the time of the click.
-          example: 192.168.1.1
-        connectionIpAddress:
-          type: string
-          description: IP Address captured when the connection to this endpoint is made.
-          example: 192.168.1.2
+        errors:
+          type: array
+          description: Errors that prevented the request from succeeding.
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: The parameter that caused the error.
+              level:
+                type: string
+                description: The severity level of the message.
+                enum:
+                - ERROR
+                - WARNING
+                example: ERROR
+              message:
+                type: string
+                description: A description of the error.
+        warnings:
+          type: array
+          description: Non-fatal warnings about the request.
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: The parameter that caused the warning.
+              level:
+                type: string
+                description: The severity level of the message.
+                enum:
+                - ERROR
+                - WARNING
+                example: WARNING
+              message:
+                type: string
+                description: A description of the warning.
   securitySchemes:
     basicAuth:
       type: http

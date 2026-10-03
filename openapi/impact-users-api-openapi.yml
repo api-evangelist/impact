@@ -92,56 +92,6 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Users/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
 components:
   schemas:
-    UserState:
-      type: string
-      enum:
-      - ACTIVE
-      - PENDING
-      - INVITED
-      description: The account state of the user.
-    AccessRight:
-      type: object
-      properties:
-        Role:
-          type: string
-          enum:
-          - Advertiser Management
-          - Finance
-          - Technical
-          - Creative Management
-          - Account Administration
-          description: The functional area the granted permissions apply to.
-          example: Creative Management
-        Permissions:
-          type: array
-          description: The specific permissions granted to the user under this role.
-          items:
-            type: string
-            enum:
-            - MANAGE_DIRECTORY_INFO
-            - RUN_USAGE_REPORTS
-            - MANAGE_ACCOUNT_INFO
-            - MANAGE_PUBLISHER_PACKAGES
-            - MESSAGING
-            - NEGOTIATE_AGREEMENTS
-            - REQUEST_CAP_EXTENSIONS_AND_AGREEMENT_EXCEPTIONS
-            - SEND_MARKETING_MSG_TO_BRAND
-            - VIEW_BRAND_INFO
-            - APPLY_TO_CAMPAIGN
-            - RUN_ACTION_AND_PERFORMANCE_REPORTS
-            - REQUEST_CUSTOM_ADS
-            - APPROVE_CREATIVE_AND_DUB_HOUSE_EXPENSES
-            - MANAGE_CREATIVES
-            - RUN_CREATIVE_REPORTS
-            - GET_AD_HTML
-            - VIEW_FINANCIALS
-            - MANAGE_FINANCIAL_SETTINGS
-            - RUN_FINANCIAL_TRANSACTION_REPORTS
-            - WEBSERVICES_INTEGRATION
-            - EVENT_CALLBACK_INTEGRATION
-            - RUN_TECHNICAL_REPORTS
-            - TRACKER_AND_BRAND_URL_INTEGRATIONS
-            - ITEM_LIST_INTEGRATIONS
     User:
       type: object
       properties:
@@ -194,6 +144,56 @@ components:
           type: string
           description: API resource path for this user.
           example: /Mediapartners/<AccountSID>/Users/I-1139074
+    AccessRight:
+      type: object
+      properties:
+        Role:
+          type: string
+          enum:
+          - Advertiser Management
+          - Finance
+          - Technical
+          - Creative Management
+          - Account Administration
+          description: The functional area the granted permissions apply to.
+          example: Creative Management
+        Permissions:
+          type: array
+          description: The specific permissions granted to the user under this role.
+          items:
+            type: string
+            enum:
+            - MANAGE_DIRECTORY_INFO
+            - RUN_USAGE_REPORTS
+            - MANAGE_ACCOUNT_INFO
+            - MANAGE_PUBLISHER_PACKAGES
+            - MESSAGING
+            - NEGOTIATE_AGREEMENTS
+            - REQUEST_CAP_EXTENSIONS_AND_AGREEMENT_EXCEPTIONS
+            - SEND_MARKETING_MSG_TO_BRAND
+            - VIEW_BRAND_INFO
+            - APPLY_TO_CAMPAIGN
+            - RUN_ACTION_AND_PERFORMANCE_REPORTS
+            - REQUEST_CUSTOM_ADS
+            - APPROVE_CREATIVE_AND_DUB_HOUSE_EXPENSES
+            - MANAGE_CREATIVES
+            - RUN_CREATIVE_REPORTS
+            - GET_AD_HTML
+            - VIEW_FINANCIALS
+            - MANAGE_FINANCIAL_SETTINGS
+            - RUN_FINANCIAL_TRANSACTION_REPORTS
+            - WEBSERVICES_INTEGRATION
+            - EVENT_CALLBACK_INTEGRATION
+            - RUN_TECHNICAL_REPORTS
+            - TRACKER_AND_BRAND_URL_INTEGRATIONS
+            - ITEM_LIST_INTEGRATIONS
+    UserState:
+      type: string
+      enum:
+      - ACTIVE
+      - PENDING
+      - INVITED
+      description: The account state of the user.
   securitySchemes:
     basicAuth:
       type: http

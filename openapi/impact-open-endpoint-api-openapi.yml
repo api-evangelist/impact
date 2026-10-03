@@ -175,26 +175,30 @@ paths:
       - lang: cURL
         source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/user' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
+  responses:
+    ForbiddenError:
+      description: Forbidden/Endpoint Disabled
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnauthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    extraFields:
-      name: extraFields
-      in: query
-      schema:
-        type: string
-      description: The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`.
-      style: form
-      explode: false
     accountId:
       name: accountId
       in: path
       description: The ID of the account.
-      required: true
-      schema:
-        type: string
-    userId:
-      name: userId
-      in: path
-      description: The ID of the user.
       required: true
       schema:
         type: string
@@ -213,24 +217,22 @@ components:
       description: The fields to be included in the response. Cannot coexist with `extraFields`.
       style: form
       explode: false
+    extraFields:
+      name: extraFields
+      in: query
+      schema:
+        type: string
+      description: The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`.
+      style: form
+      explode: false
+    userId:
+      name: userId
+      in: path
+      description: The ID of the user.
+      required: true
+      schema:
+        type: string
   schemas:
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error.
-          type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code.
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code.
-          type: string
-          example: RS042
     ProgramShareLink:
       description: A map of program IDs to share link sets for that program.
       type: object
@@ -272,34 +274,23 @@ components:
             additionalProperties:
               type: string
               format: uri
-    UserByCode:
-      description: Minimal user information returned when looking up a user by referral code from the open endpoint.
-      type: object
+    Error:
       properties:
-        id:
+        statusCode:
+          description: The HTTP status code of the error.
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
           type: string
-          description: The unique identifier for the user.
-          example: abc123
-        accountId:
+        apiErrorCode:
+          description: A machine-readable error code.
           type: string
-          description: The unique identifier of the account the user belongs to.
-          example: abc123
-        firstName:
+        rsCode:
+          description: A secondary machine-readable error code.
           type: string
-          description: The user's first name.
-          example: Bob
-        lastInitial:
-          type: string
-          description: The first initial of the user's last name.
-          example: T
-        referralCode:
-          type: string
-          description: The user's primary referral code.
-          example: CFMVQHNUEU2AWWDO
-        imageUrl:
-          type: string
-          description: URL of the user's profile image.
-          example: ''
+          example: RS042
     OpenUser:
       description: A user object returned by open endpoints. Includes program share links and custom fields.
       type: object
@@ -388,6 +379,34 @@ components:
           description: Referral codes used to refer this user.
           example:
           - NCC8IQ4ADTVDQAOA
+    UserByCode:
+      description: Minimal user information returned when looking up a user by referral code from the open endpoint.
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the user.
+          example: abc123
+        accountId:
+          type: string
+          description: The unique identifier of the account the user belongs to.
+          example: abc123
+        firstName:
+          type: string
+          description: The user's first name.
+          example: Bob
+        lastInitial:
+          type: string
+          description: The first initial of the user's last name.
+          example: T
+        referralCode:
+          type: string
+          description: The user's primary referral code.
+          example: CFMVQHNUEU2AWWDO
+        imageUrl:
+          type: string
+          description: URL of the user's profile image.
+          example: ''
     OpenUserUpsert:
       title: A Open User object for Upsert/Create
       description: An object describing an individual user submitted to an open endpoint when you want to create or update a user.
@@ -459,25 +478,6 @@ components:
           type: object
           additionalProperties: true
           description: An object containing the custom fields for this user.
-  responses:
-    NotFoundError:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnauthorizedError:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ForbiddenError:
-      description: Forbidden/Endpoint Disabled
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

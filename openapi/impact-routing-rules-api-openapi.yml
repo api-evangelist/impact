@@ -240,87 +240,6 @@ components:
           items:
             type: string
             example: US
-    Interstitial:
-      type: object
-      properties:
-        HeaderText:
-          type: string
-          description: Header text displayed on the interstitial page.
-          example: Welcome to Acme
-        BodyText:
-          type: string
-          nullable: true
-          description: Body text displayed on the interstitial page.
-          example: Please confirm your details to continue.
-        RequireUserAcknowledgement:
-          type: boolean
-          description: Whether the user must acknowledge before continuing.
-          example: true
-        ButtonText:
-          type: string
-          nullable: true
-          description: Text shown on the acknowledgement button.
-          example: Continue
-        ButtonColor:
-          type: string
-          nullable: true
-          description: Color of the acknowledgement button.
-          example: '#FF0000'
-        RequireUserInput:
-          type: boolean
-          description: Whether the user must provide input before continuing.
-          example: true
-        UserInputs:
-          type: array
-          description: User input fields shown on the interstitial.
-          items:
-            type: object
-            properties:
-              Variable:
-                type: string
-                description: The variable the user input populates.
-                enum:
-                - SHARED_ID
-                - SUB_ID1
-                - SUB_ID2
-                - SUB_ID3
-                - PARAM1
-                - PARAM2
-                - PARAM3
-                - CUSTOMER_ID
-              DisplayValue:
-                type: string
-                description: Display label shown to the user.
-                example: Email Address
-              RegularExpression:
-                type: string
-                description: Validation pattern for the input.
-                example: ^[^@]+@[^@]+\.[^@]+$
-              ErrorMessage:
-                type: string
-                description: Error message shown if validation fails.
-                example: Please enter a valid email address.
-        IncludeSkipOption:
-          type: boolean
-          description: Whether to include a skip option.
-          example: false
-        ShowPageAtLeastOnce:
-          type: boolean
-          description: Whether the page must be shown at least once per session.
-          example: true
-        CoBranded:
-          type: boolean
-          description: Whether the interstitial is co-branded.
-          example: false
-        CustomizeCss:
-          type: boolean
-          description: Whether custom CSS is used.
-          example: false
-        CustomCss:
-          type: string
-          nullable: true
-          description: Custom CSS for styling the interstitial page.
-          example: ''
     RoutingRule:
       type: object
       properties:
@@ -413,3 +332,84 @@ components:
           type: string
           format: uri-reference
           example: /Advertisers/<AccountSID>/Programs/1000/BlockRedirectRules/50000
+    Interstitial:
+      type: object
+      properties:
+        HeaderText:
+          type: string
+          description: Header text displayed on the interstitial page.
+          example: Welcome to Acme
+        BodyText:
+          type: string
+          nullable: true
+          description: Body text displayed on the interstitial page.
+          example: Please confirm your details to continue.
+        RequireUserAcknowledgement:
+          type: boolean
+          description: Whether the user must acknowledge before continuing.
+          example: true
+        ButtonText:
+          type: string
+          nullable: true
+          description: Text shown on the acknowledgement button.
+          example: Continue
+        ButtonColor:
+          type: string
+          nullable: true
+          description: Color of the acknowledgement button.
+          example: '#FF0000'
+        RequireUserInput:
+          type: boolean
+          description: Whether the user must provide input before continuing.
+          example: true
+        UserInputs:
+          type: array
+          description: User input fields shown on the interstitial.
+          items:
+            type: object
+            properties:
+              Variable:
+                type: string
+                description: The variable the user input populates.
+                enum:
+                - SHARED_ID
+                - SUB_ID1
+                - SUB_ID2
+                - SUB_ID3
+                - PARAM1
+                - PARAM2
+                - PARAM3
+                - CUSTOMER_ID
+              DisplayValue:
+                type: string
+                description: Display label shown to the user.
+                example: Email Address
+              RegularExpression:
+                type: string
+                description: Validation pattern for the input.
+                example: ^[^@]+@[^@]+\.[^@]+$
+              ErrorMessage:
+                type: string
+                description: Error message shown if validation fails.
+                example: Please enter a valid email address.
+        IncludeSkipOption:
+          type: boolean
+          description: Whether to include a skip option.
+          example: false
+        ShowPageAtLeastOnce:
+          type: boolean
+          description: Whether the page must be shown at least once per session.
+          example: true
+        CoBranded:
+          type: boolean
+          description: Whether the interstitial is co-branded.
+          example: false
+        CustomizeCss:
+          type: boolean
+          description: Whether custom CSS is used.
+          example: false
+        CustomCss:
+          type: string
+          nullable: true
+          description: Custom CSS for styling the interstitial page.
+          example: ''

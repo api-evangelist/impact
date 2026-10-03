@@ -228,42 +228,6 @@ paths:
     - url: https://api.impact.com
 components:
   schemas:
-    Contact:
-      type: object
-      description: An agency employee assigned to a key contact role.
-      properties:
-        UserId:
-          type: string
-          description: 'The impact.com numeric user ID of the assigned employee. Empty if no contact has been assigned to this role.
-
-
-            To resolve to a full user record, use the Users endpoint.'
-          example: '5402850'
-        Name:
-          type: string
-          description: The contact's full display name. Empty if no contact is assigned.
-          example: Carrie Oakey
-        Email:
-          type: string
-          format: email
-          description: The contact's email address. Empty if no contact is assigned.
-          example: carrie.oakey@nuttandco-agency.com
-        WorkPhoneNumber:
-          type: string
-          description: The contact's work phone number. Digits only. Empty if not set.
-          example: '15125550191'
-        WorkPhoneNumberCountry:
-          type: string
-          description: The country associated with the work phone number.
-          example: US
-        CellPhoneNumber:
-          type: string
-          description: The contact's mobile phone number. Digits only. Empty if not set.
-          example: ''
-        CellPhoneNumberCountry:
-          type: string
-          description: The country associated with the cell phone number.
-          example: ''
     Address:
       type: object
       description: A physical address on the agency's account.
@@ -400,6 +364,42 @@ components:
           type: string
           description: The relative URI for this resource within the Agency API.
           example: /Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/CompanyInformation
+    Contact:
+      type: object
+      description: An agency employee assigned to a key contact role.
+      properties:
+        UserId:
+          type: string
+          description: 'The impact.com numeric user ID of the assigned employee. Empty if no contact has been assigned to this role.
+
+
+            To resolve to a full user record, use the Users endpoint.'
+          example: '5402850'
+        Name:
+          type: string
+          description: The contact's full display name. Empty if no contact is assigned.
+          example: Carrie Oakey
+        Email:
+          type: string
+          format: email
+          description: The contact's email address. Empty if no contact is assigned.
+          example: carrie.oakey@nuttandco-agency.com
+        WorkPhoneNumber:
+          type: string
+          description: The contact's work phone number. Digits only. Empty if not set.
+          example: '15125550191'
+        WorkPhoneNumberCountry:
+          type: string
+          description: The country associated with the work phone number.
+          example: US
+        CellPhoneNumber:
+          type: string
+          description: The contact's mobile phone number. Digits only. Empty if not set.
+          example: ''
+        CellPhoneNumberCountry:
+          type: string
+          description: The country associated with the cell phone number.
+          example: ''
     CompanyInformationUpdate:
       type: object
       description: 'Partial company information update. All fields are optional — omitted fields keep their existing values.
@@ -551,6 +551,65 @@ components:
           format: uri-reference
           description: The unique reference to this object in the impact.com API.
           example: /Advertisers/<AccountSID>/CompanyInformation
+    Contact_2:
+      type: object
+      properties:
+        UserId:
+          type: string
+          description: Unique impact.com member account ID for the user.
+          example: '1234567'
+        Name:
+          type: string
+          description: The contact's full name.
+          example: Road Runner
+        Email:
+          type: string
+          format: email
+          description: The contact's email address.
+          example: finance@example.com
+        WorkPhoneNumber:
+          type: string
+          description: The contact's work phone number.
+          example: '2065550100'
+        WorkPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the work phone number.
+          example: US
+        CellPhoneNumber:
+          type: string
+          description: The contact's cell phone number.
+          example: '2065550133'
+        CellPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the cell phone number.
+          example: US
+    Address_2:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+          description: Address line 1 (address number, street name)
+          example: 1640 Riverside Dr.
+        AddressLine2:
+          type: string
+          description: Address line 2 (building, unit, suite, etc. number)
+          example: Suite 400
+        City:
+          type: string
+          description: City, district, suburb, town, or village
+          example: Hill Valley
+        State:
+          type: string
+          description: State or territory
+          example: CALIFORNIA
+        PostalCode:
+          type: string
+          description: ZIP or postal code
+          example: '90210'
+        Country:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
     OrganizationType:
       type: string
       description: Organization type for the account.
@@ -643,65 +702,6 @@ components:
         BillingAddressCountry:
           type: string
           description: Two-letter country code for the billing address.
-          example: US
-    Contact_2:
-      type: object
-      properties:
-        UserId:
-          type: string
-          description: Unique impact.com member account ID for the user.
-          example: '1234567'
-        Name:
-          type: string
-          description: The contact's full name.
-          example: Road Runner
-        Email:
-          type: string
-          format: email
-          description: The contact's email address.
-          example: finance@example.com
-        WorkPhoneNumber:
-          type: string
-          description: The contact's work phone number.
-          example: '2065550100'
-        WorkPhoneNumberCountry:
-          type: string
-          description: Two-letter country code for the work phone number.
-          example: US
-        CellPhoneNumber:
-          type: string
-          description: The contact's cell phone number.
-          example: '2065550133'
-        CellPhoneNumberCountry:
-          type: string
-          description: Two-letter country code for the cell phone number.
-          example: US
-    Address_2:
-      type: object
-      properties:
-        AddressLine1:
-          type: string
-          description: Address line 1 (address number, street name)
-          example: 1640 Riverside Dr.
-        AddressLine2:
-          type: string
-          description: Address line 2 (building, unit, suite, etc. number)
-          example: Suite 400
-        City:
-          type: string
-          description: City, district, suburb, town, or village
-          example: Hill Valley
-        State:
-          type: string
-          description: State or territory
-          example: CALIFORNIA
-        PostalCode:
-          type: string
-          description: ZIP or postal code
-          example: '90210'
-        Country:
-          type: string
-          description: Two-letter ISO 3166-1 alpha-2 country code.
           example: US
     Industry:
       type: object

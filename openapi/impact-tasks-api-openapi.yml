@@ -231,6 +231,26 @@ paths:
       description: Production server
 components:
   schemas:
+    Comment:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: Unique identifier for the comment.
+          example: 98765
+        Comment:
+          type: string
+          description: The comment text.
+          example: I've updated our home page with the latest ads, see attached screenshot.
+        Commenter:
+          type: string
+          description: Name of the user who posted the comment.
+          example: Wile E. Coyote
+        Attachments:
+          type: array
+          description: Details about each attachment on the comment.
+          items:
+            $ref: '#/components/schemas/Attachment'
     TaskReference:
       type: object
       properties:
@@ -250,18 +270,22 @@ components:
           type: string
           description: Custom partner tracking value 3.
           example: tennis
-    User:
+    Attachment:
       type: object
       properties:
-        Username:
+        Id:
           type: string
-          description: The user's username.
-          example: Wile E. Coyote
-        EmailAddress:
+          description: Unique identifier for the attachment.
+          example: task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7
+        Filename:
           type: string
-          format: email
-          description: The user's email address.
-          example: wilecoyote@example.com
+          description: Original filename of the attachment.
+          example: acme_reward_card_details.pdf
+        Location:
+          type: string
+          format: uri
+          description: URL to download the attachment.
+          example: https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf
     Task:
       type: object
       properties:
@@ -324,22 +348,6 @@ components:
         LastUpdatedBy:
           $ref: '#/components/schemas/User'
           description: Name of the user that last updated the task.
-    Attachment:
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier for the attachment.
-          example: task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7
-        Filename:
-          type: string
-          description: Original filename of the attachment.
-          example: acme_reward_card_details.pdf
-        Location:
-          type: string
-          format: uri
-          description: URL to download the attachment.
-          example: https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf
     TaskDetails:
       type: object
       properties:
@@ -391,26 +399,18 @@ components:
           type: string
           nullable: true
           example: ''
-    Comment:
+    User:
       type: object
       properties:
-        Id:
-          type: integer
-          description: Unique identifier for the comment.
-          example: 98765
-        Comment:
+        Username:
           type: string
-          description: The comment text.
-          example: I've updated our home page with the latest ads, see attached screenshot.
-        Commenter:
-          type: string
-          description: Name of the user who posted the comment.
+          description: The user's username.
           example: Wile E. Coyote
-        Attachments:
-          type: array
-          description: Details about each attachment on the comment.
-          items:
-            $ref: '#/components/schemas/Attachment'
+        EmailAddress:
+          type: string
+          format: email
+          description: The user's email address.
+          example: wilecoyote@example.com
     Task_2:
       type: object
       properties:

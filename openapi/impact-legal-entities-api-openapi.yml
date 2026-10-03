@@ -98,6 +98,23 @@ components:
           type: string
           description: Two-letter ISO 3166-1 alpha-2 country code.
           example: US
+    OrganizationType:
+      type: string
+      description: Organization type for the account.
+      enum:
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER
+      example: CORP
     LegalEntity:
       type: object
       description: Stores legal entity information like payment and tax details.
@@ -133,20 +150,3 @@ components:
           type: string
           description: The Employer Identification Number, Social Security Number, or a foreign Tax ID.
           example: 12-3456789
-    OrganizationType:
-      type: string
-      description: Organization type for the account.
-      enum:
-      - NONP_GOV
-      - CORP
-      - SOLE_IND
-      - LLC_LLP_LLS
-      - TRUST
-      - SOLE_TRD
-      - PARTNERS
-      - LLC
-      - LLP
-      - COMPANY
-      - GOVERNMENT
-      - OTHER
-      example: CORP

@@ -38,6 +38,35 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Describes errors and warnings found in the request.
+      properties:
+        errors:
+          type: array
+          description: Errors that prevented the request from succeeding.
+          items:
+            $ref: '#/components/schemas/Error'
+        warnings:
+          type: array
+          description: Non-fatal warnings about the request.
+          items:
+            $ref: '#/components/schemas/Warning'
+    Error:
+      type: object
+      properties:
+        field:
+          type: string
+          description: The parameter that caused the error.
+        level:
+          type: string
+          description: The severity level of the message.
+          enum:
+          - WARNING
+          - ERROR
+        message:
+          type: string
+          description: A description of the error.
     PageLoadResponse:
       type: object
       properties:
@@ -60,21 +89,6 @@ components:
           description: Non-fatal warnings about the request.
           items:
             $ref: '#/components/schemas/Warning'
-    Warning:
-      type: object
-      properties:
-        field:
-          type: string
-          description: The parameter that caused the warning.
-        level:
-          type: string
-          description: The severity level of the message.
-          enum:
-          - WARNING
-          - ERROR
-        message:
-          type: string
-          description: A description of the warning.
     PageLoadRequest:
       type: object
       required:
@@ -174,12 +188,12 @@ components:
           type: string
           description: Mobile device's model. impact.com expects this to be passed in a specific format—refer to the code below that needs to be included in your mobile app to capture the value in the appropriate format.
           example: iPhone 15
-    Error:
+    Warning:
       type: object
       properties:
         field:
           type: string
-          description: The parameter that caused the error.
+          description: The parameter that caused the warning.
         level:
           type: string
           description: The severity level of the message.
@@ -188,18 +202,4 @@ components:
           - ERROR
         message:
           type: string
-          description: A description of the error.
-    ErrorResponse:
-      type: object
-      description: Describes errors and warnings found in the request.
-      properties:
-        errors:
-          type: array
-          description: Errors that prevented the request from succeeding.
-          items:
-            $ref: '#/components/schemas/Error'
-        warnings:
-          type: array
-          description: Non-fatal warnings about the request.
-          items:
-            $ref: '#/components/schemas/Warning'
+          description: A description of the warning.

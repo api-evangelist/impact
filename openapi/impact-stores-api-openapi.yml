@@ -140,47 +140,6 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Stores/{Id}/Group/{GroupId}/Items' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
 components:
   schemas:
-    Store:
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier for the store (also the brand's Campaign ID).
-          example: '10306'
-        Name:
-          type: string
-          description: Display name of the store as shown on the brand's storefront.
-          example: Hazel's Wellness Picks
-        NumberOfGroups:
-          type: string
-          description: Number of curated groups in this store.
-          example: '1'
-        DateLastUpdated:
-          type: string
-          format: date-time
-          description: Date and time the store was last updated (ISO 8601).
-          example: '2025-06-20T08:03:12-07:00'
-        StoreUri:
-          type: string
-          description: Web URL to view this store in the impact.com interface.
-          example: https://member.impactradius.com/secure/mediapartner/ads/view-partner-storefront-flow.ihtml?storefrontId=10306
-        StoreAvatar:
-          type: string
-          description: Public CDN URL of the brand's logo for this store. May be empty.
-          example: https://cdn2.impact.com/display-logo-via-campaign/10306.png
-        StoreBanner:
-          type: string
-          description: Public CDN URL of the storefront banner image. May be empty.
-          example: https://product.impact.com/productservices/apps/assets/banner/MTAzMDZfRnJpIEp1biAyMCAxNTowMzoxMSBVVEMgMjAyNQ==.JPG
-        Uri:
-          type: string
-          description: API resource path for this store.
-          example: /Mediapartners/<AccountSID>/Stores/10306
-        Groups:
-          type: array
-          description: The curated groups contained in this store.
-          items:
-            $ref: '#/components/schemas/StoreGroup'
     CatalogItem:
       type: object
       description: A product within a store group. For richer item operations and full-catalog search, see the Partner Catalogs API at `Uri`.
@@ -547,6 +506,47 @@ components:
           type: string
           description: Optional preview image representing the group's products. May be empty.
           example: ''
+    Store:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the store (also the brand's Campaign ID).
+          example: '10306'
+        Name:
+          type: string
+          description: Display name of the store as shown on the brand's storefront.
+          example: Hazel's Wellness Picks
+        NumberOfGroups:
+          type: string
+          description: Number of curated groups in this store.
+          example: '1'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: Date and time the store was last updated (ISO 8601).
+          example: '2025-06-20T08:03:12-07:00'
+        StoreUri:
+          type: string
+          description: Web URL to view this store in the impact.com interface.
+          example: https://member.impactradius.com/secure/mediapartner/ads/view-partner-storefront-flow.ihtml?storefrontId=10306
+        StoreAvatar:
+          type: string
+          description: Public CDN URL of the brand's logo for this store. May be empty.
+          example: https://cdn2.impact.com/display-logo-via-campaign/10306.png
+        StoreBanner:
+          type: string
+          description: Public CDN URL of the storefront banner image. May be empty.
+          example: https://product.impact.com/productservices/apps/assets/banner/MTAzMDZfRnJpIEp1biAyMCAxNTowMzoxMSBVVEMgMjAyNQ==.JPG
+        Uri:
+          type: string
+          description: API resource path for this store.
+          example: /Mediapartners/<AccountSID>/Stores/10306
+        Groups:
+          type: array
+          description: The curated groups contained in this store.
+          items:
+            $ref: '#/components/schemas/StoreGroup'
   securitySchemes:
     basicAuth:
       type: http

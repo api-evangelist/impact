@@ -183,13 +183,6 @@ components:
         type: integer
         default: 0
       description: Offsets the first result to return in the list for pagination.
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 10
-      description: A limit on the number of results returned.
     tenant_alias:
       name: tenant_alias
       in: path
@@ -197,7 +190,224 @@ components:
       schema:
         type: string
       description: Tenant being referenced. E.g. `"aboih12h16t"`
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 10
+      description: A limit on the number of results returned.
   schemas:
+    FraudSignal:
+      type: object
+      properties:
+        message:
+          type: string
+        score:
+          type: integer
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        accountId:
+          type: string
+          example: abc123
+        firstName:
+          type: string
+          example: Bob
+        lastName:
+          type: string
+          example: Testerson
+        lastInitial:
+          type: string
+          example: T
+        email:
+          type: string
+          format: email
+          example: bob.testerson@example.com
+        emailHash:
+          type: string
+          description: An MD5 hash of the user's email address.
+          example: 714ed06b2d5c95b93d499a3be731c19f
+        imageUrl:
+          type: string
+          description: URL of the user's profile image. Empty string if not set.
+          example: ''
+        referralCode:
+          type: string
+          example: BOBTESTERSON
+        cookieId:
+          type: string
+          nullable: true
+          example: abc123cookie
+        paymentProviderId:
+          type: string
+          nullable: true
+          example: pay_abc123
+        locale:
+          type: string
+          nullable: true
+          example: en_US
+        countryCode:
+          type: string
+          nullable: true
+          example: US
+        referralSource:
+          type: string
+          nullable: true
+          example: DIRECT
+        firstSeenIP:
+          type: string
+          nullable: true
+          example: 203.0.113.42
+        lastSeenIP:
+          type: string
+          nullable: true
+          example: 203.0.113.42
+        dateCreated:
+          type: integer
+          format: int64
+          example: 1774386824964
+        dateBlocked:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        shareLinks:
+          type: object
+          description: The user's share links, organised by share medium and engagement medium.
+    ReferralModerationBulkRequest:
+      description: A request to perform one or several moderation actions.
+      required:
+      - actions
+      properties:
+        actions:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ReferralModerationRequest'
+    Error:
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 404
+        message:
+          type: string
+          description: The human-readable description of what went wrong. Use this to help you debug.
+        apiErrorCode:
+          type: string
+          description: A machine-readable error code.
+        rsCode:
+          type: string
+          nullable: true
+          description: A secondary machine-readable error code.
+          example: RS042
+    ReferralModerationRequest:
+      description: A request to moderate a single referral.
+      required:
+      - referralId
+      - action
+      properties:
+        referralId:
+          type: string
+        action:
+          type: string
+          enum:
+          - APPROVED
+          - DENIED
+          - REFERRER_APPROVED
+          - REFERRED_APPROVED
+          - REFERRER_DENIED
+          - REFERRED_DENIED
+    Reward:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6a1709e0eb067e53ef651c3b
+        type:
+          type: string
+          example: CREDIT
+        uniqueId:
+          type: string
+          nullable: true
+          example: null
+        dateCreated:
+          type: integer
+          format: int64
+          example: 1779894752360
+        dateScheduledFor:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        dateGiven:
+          type: integer
+          format: int64
+          nullable: true
+          example: 1779894752451
+        dateExpires:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        dateCancelled:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        accountId:
+          type: string
+          example: abc123
+        userId:
+          type: string
+          example: abc123
+        cancellable:
+          type: boolean
+          example: true
+        rewardSource:
+          type: string
+          example: REFERRED
+        programId:
+          type: string
+          nullable: true
+          example: null
+        programRewardKey:
+          type: string
+          nullable: true
+          example: null
+        globalRewardKey:
+          type: string
+          nullable: true
+          example: null
+        referralId:
+          type: string
+          nullable: true
+          example: 6a1709e0eb067e53ef651c29
+        unit:
+          type: string
+          example: CENTS
+        assignedCredit:
+          type: integer
+          example: 100
+        redeemedCredit:
+          type: integer
+          example: 0
+        name:
+          type: string
+          example: Dollar Credit
+        currency:
+          type: string
+          nullable: true
+          example: null
+        redemptions:
+          type: object
+          nullable: true
+          example: null
     Referral:
       description: A link between the user/account of the referrer and the new referred user/account.
       properties:
@@ -316,216 +526,6 @@ components:
             dateConverted: null
             dateModified: 1779894752494
             dateUserModified: null
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          example: abc123
-        accountId:
-          type: string
-          example: abc123
-        firstName:
-          type: string
-          example: Bob
-        lastName:
-          type: string
-          example: Testerson
-        lastInitial:
-          type: string
-          example: T
-        email:
-          type: string
-          format: email
-          example: bob.testerson@example.com
-        emailHash:
-          type: string
-          description: An MD5 hash of the user's email address.
-          example: 714ed06b2d5c95b93d499a3be731c19f
-        imageUrl:
-          type: string
-          description: URL of the user's profile image. Empty string if not set.
-          example: ''
-        referralCode:
-          type: string
-          example: BOBTESTERSON
-        cookieId:
-          type: string
-          nullable: true
-          example: abc123cookie
-        paymentProviderId:
-          type: string
-          nullable: true
-          example: pay_abc123
-        locale:
-          type: string
-          nullable: true
-          example: en_US
-        countryCode:
-          type: string
-          nullable: true
-          example: US
-        referralSource:
-          type: string
-          nullable: true
-          example: DIRECT
-        firstSeenIP:
-          type: string
-          nullable: true
-          example: 203.0.113.42
-        lastSeenIP:
-          type: string
-          nullable: true
-          example: 203.0.113.42
-        dateCreated:
-          type: integer
-          format: int64
-          example: 1774386824964
-        dateBlocked:
-          type: integer
-          format: int64
-          nullable: true
-          example: null
-        shareLinks:
-          type: object
-          description: The user's share links, organised by share medium and engagement medium.
-    Reward:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 6a1709e0eb067e53ef651c3b
-        type:
-          type: string
-          example: CREDIT
-        uniqueId:
-          type: string
-          nullable: true
-          example: null
-        dateCreated:
-          type: integer
-          format: int64
-          example: 1779894752360
-        dateScheduledFor:
-          type: integer
-          format: int64
-          nullable: true
-          example: null
-        dateGiven:
-          type: integer
-          format: int64
-          nullable: true
-          example: 1779894752451
-        dateExpires:
-          type: integer
-          format: int64
-          nullable: true
-          example: null
-        dateCancelled:
-          type: integer
-          format: int64
-          nullable: true
-          example: null
-        accountId:
-          type: string
-          example: abc123
-        userId:
-          type: string
-          example: abc123
-        cancellable:
-          type: boolean
-          example: true
-        rewardSource:
-          type: string
-          example: REFERRED
-        programId:
-          type: string
-          nullable: true
-          example: null
-        programRewardKey:
-          type: string
-          nullable: true
-          example: null
-        globalRewardKey:
-          type: string
-          nullable: true
-          example: null
-        referralId:
-          type: string
-          nullable: true
-          example: 6a1709e0eb067e53ef651c29
-        unit:
-          type: string
-          example: CENTS
-        assignedCredit:
-          type: integer
-          example: 100
-        redeemedCredit:
-          type: integer
-          example: 0
-        name:
-          type: string
-          example: Dollar Credit
-        currency:
-          type: string
-          nullable: true
-          example: null
-        redemptions:
-          type: object
-          nullable: true
-          example: null
-    Error:
-      properties:
-        statusCode:
-          type: integer
-          format: int32
-          example: 404
-        message:
-          type: string
-          description: The human-readable description of what went wrong. Use this to help you debug.
-        apiErrorCode:
-          type: string
-          description: A machine-readable error code.
-        rsCode:
-          type: string
-          nullable: true
-          description: A secondary machine-readable error code.
-          example: RS042
-    ReferralModerationRequest:
-      description: A request to moderate a single referral.
-      required:
-      - referralId
-      - action
-      properties:
-        referralId:
-          type: string
-        action:
-          type: string
-          enum:
-          - APPROVED
-          - DENIED
-          - REFERRER_APPROVED
-          - REFERRED_APPROVED
-          - REFERRER_DENIED
-          - REFERRED_DENIED
-    ReferralModerationBulkRequest:
-      description: A request to perform one or several moderation actions.
-      required:
-      - actions
-      properties:
-        actions:
-          type: array
-          minItems: 1
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/ReferralModerationRequest'
-    FraudSignal:
-      type: object
-      properties:
-        message:
-          type: string
-        score:
-          type: integer
     FraudSignals:
       type: object
       properties:

@@ -628,6 +628,19 @@ paths:
       description: Production server
 components:
   schemas:
+    QueuedResponse:
+      type: object
+      description: Returned when a modification or reversal request has been accepted and queued for processing.
+      properties:
+        Status:
+          type: string
+          description: Indicates the status of the request. A successful submission returns `QUEUED`.
+          example: QUEUED
+        QueuedUri:
+          type: string
+          format: uri-reference
+          description: The URI of the API submission record, which can be used to track the status of the queued request.
+          example: /Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/APISubmissions/A-4632dba3-2211-4615-a62d-6e121ddcdfa1
     ActionModificationRequest:
       type: object
       description: 'Request body for updating an action or its line items. At least one identifier path must be provided: either `ActionId` and `Reason`, or `ActionTrackerId` + `OrderId` and `Reason`.'
@@ -687,6 +700,43 @@ components:
           type: number
           description: A relative delta amount to add or subtract from the item's SaleAmount. Use instead of Amount for partial adjustments.
           example: -5.0
+    ActionReversalRequest:
+      type: object
+      description: Request body for reversing an action.
+      required:
+      - DispositionCode
+      properties:
+        ActionId:
+          type: string
+          description: The unique impact.com identifier for the action to reverse. Required unless ActionTrackerId and OrderId are used together.
+          example: 1000.4636.158133
+        ActionTrackerId:
+          type: integer
+          description: The event type ID. Required with OrderId if ActionId is not used.
+          example: 2240
+        OrderId:
+          type: string
+          description: Your unique order identifier. Required with ActionTrackerId if ActionId is not used.
+          example: '9217374917472'
+        DispositionCode:
+          type: string
+          description: Required. A valid code explaining the reason for the reversal. Changes the action status to REVERSED.
+          enum:
+          - REJECTED
+          - CONS_INFO_INVALID
+          - CONS_ERROR
+          - CONS_FRAUD
+          - ITEM_RETURNED
+          - ITEM_OUT_OF_STOCK
+          - ORDER_ERROR
+          - PUB_ACT_DISPUTE
+          - NOT_COMPLIANCE_TERMS
+          - MP_RETURNED
+          - OTHER
+          - CREDITED_DIFFERENT_MP
+          - ADV_ACT_DISPUTE
+          - TEST_ACTION
+          example: ITEM_RETURNED
     ActionItem:
       type: object
       description: Represents a single line item within an action.
@@ -746,19 +796,6 @@ components:
           format: uri-reference
           description: Unique URI reference to this action item object.
           example: /Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133/Items/12345
-    QueuedResponse:
-      type: object
-      description: Returned when a modification or reversal request has been accepted and queued for processing.
-      properties:
-        Status:
-          type: string
-          description: Indicates the status of the request. A successful submission returns `QUEUED`.
-          example: QUEUED
-        QueuedUri:
-          type: string
-          format: uri-reference
-          description: The URI of the API submission record, which can be used to track the status of the queued request.
-          example: /Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/APISubmissions/A-4632dba3-2211-4615-a62d-6e121ddcdfa1
     Action:
       type: object
       description: Represents a conversion event credited to a partner.
@@ -938,43 +975,6 @@ components:
           format: uri-reference
           description: Unique URI reference to this action object.
           example: /Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133
-    ActionReversalRequest:
-      type: object
-      description: Request body for reversing an action.
-      required:
-      - DispositionCode
-      properties:
-        ActionId:
-          type: string
-          description: The unique impact.com identifier for the action to reverse. Required unless ActionTrackerId and OrderId are used together.
-          example: 1000.4636.158133
-        ActionTrackerId:
-          type: integer
-          description: The event type ID. Required with OrderId if ActionId is not used.
-          example: 2240
-        OrderId:
-          type: string
-          description: Your unique order identifier. Required with ActionTrackerId if ActionId is not used.
-          example: '9217374917472'
-        DispositionCode:
-          type: string
-          description: Required. A valid code explaining the reason for the reversal. Changes the action status to REVERSED.
-          enum:
-          - REJECTED
-          - CONS_INFO_INVALID
-          - CONS_ERROR
-          - CONS_FRAUD
-          - ITEM_RETURNED
-          - ITEM_OUT_OF_STOCK
-          - ORDER_ERROR
-          - PUB_ACT_DISPUTE
-          - NOT_COMPLIANCE_TERMS
-          - MP_RETURNED
-          - OTHER
-          - CREDITED_DIFFERENT_MP
-          - ADV_ACT_DISPUTE
-          - TEST_ACTION
-          example: ITEM_RETURNED
     ActionUpdate:
       type: object
       properties:
@@ -1315,13 +1315,6 @@ components:
           type: string
           description: Unique reference to the action object in the impact.com API.
           example: /Mediapartners/<AccountSID>/Actions/1000.4636.158133
-    ActionState:
-      type: string
-      description: The current state of the action.
-      enum:
-      - PENDING
-      - APPROVED
-      - REVERSED
     Item:
       type: object
       properties:
@@ -1405,6 +1398,13 @@ components:
           type: string
           description: Unique reference to the action item object in the impact.com API.
           example: /Mediapartners/<AccountSID>/Actions/1000.4636.158133/Items/12345
+    ActionState:
+      type: string
+      description: The current state of the action.
+      enum:
+      - PENDING
+      - APPROVED
+      - REVERSED
   securitySchemes:
     basicAuth:
       type: http
