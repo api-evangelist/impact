@@ -386,14 +386,33 @@ paths:
       - lang: cURL
         source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/user' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
+  responses:
+    ForbiddenError:
+      description: Forbidden/Endpoint Disabled
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnauthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: When included, offsets the first result returned in the list.
+    userId:
+      name: userId
+      in: path
+      description: The ID of the user.
+      required: true
       schema:
-        type: integer
-        default: 0
+        type: string
     fields:
       name: fields
       in: query
@@ -402,6 +421,27 @@ components:
       description: The fields to be included in the response. Cannot coexist with `extraFields`.
       style: form
       explode: false
+    accountId:
+      name: accountId
+      in: path
+      description: The ID of the account.
+      required: true
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: When included, offsets the first result returned in the list.
+      schema:
+        type: integer
+        default: 0
+    tenant_alias:
+      name: tenant_alias
+      in: path
+      description: Tenant being referenced. E.g. `"aboih12h16t"`
+      required: true
+      schema:
+        type: string
     extraFields:
       name: extraFields
       in: query
@@ -410,33 +450,6 @@ components:
       description: The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`.
       style: form
       explode: false
-    tenant_alias:
-      name: tenant_alias
-      in: path
-      description: Tenant being referenced. E.g. `"aboih12h16t"`
-      required: true
-      schema:
-        type: string
-    query:
-      name: query
-      in: query
-      description: A search query that can be used to filter users by email, name or ID.
-      schema:
-        type: string
-    accountId:
-      name: accountId
-      in: path
-      description: The ID of the account.
-      required: true
-      schema:
-        type: string
-    userId:
-      name: userId
-      in: path
-      description: The ID of the user.
-      required: true
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -444,24 +457,113 @@ components:
       schema:
         type: integer
         default: 10
+    query:
+      name: query
+      in: query
+      description: A search query that can be used to filter users by email, name or ID.
+      schema:
+        type: string
   schemas:
-    Error:
+    SharelinkEngagementMedium:
+      description: Share links for a single engagement medium in the legacy flat format.
+      type: object
       properties:
-        statusCode:
-          description: The HTTP status code of the error.
+        shareLink:
+          type: string
+          format: uri
+          description: The primary share link for this engagement medium.
+          example: https://share.impact.squatchtesting.com/mvbnEye
+        facebookShareLink:
+          type: string
+          format: uri
+          description: The Facebook share link for this engagement medium.
+          example: https://share.impact.squatchtesting.com/mmbnEye
+        twitterShareLink:
+          type: string
+          format: uri
+          description: The Twitter share link for this engagement medium.
+          example: https://share.impact.squatchtesting.com/mRbnEye
+        emailShareLink:
+          type: string
+          format: uri
+          description: The Email share link for this engagement medium.
+          example: https://share.impact.squatchtesting.com/mLbnEye
+        linkedinShareLink:
+          type: string
+          format: uri
+          description: The LinkedIn share link for this engagement medium.
+          example: https://share.impact.squatchtesting.com/m6bnEye
+    OpenUserUpsert:
+      title: A Open User object for Upsert/Create
+      description: An object describing an individual user submitted to an open endpoint when you want to create or update a user.
+      required:
+      - id
+      - accountId
+      properties:
+        id:
+          type: string
+          description: The unique identifier provided for this user. Use the user's email as their user Id.
+          example: bob.testerson@example.com
+        accountId:
+          type: string
+          description: The unique identifier of the account. Value must match `id`. Use the user's email as their account Id.
+          example: bob.testerson@example.com
+        firstName:
+          type: string
+          description: The user's first name.
+          example: Bob
+        lastName:
+          type: string
+          description: The user's last name.
+          example: Testerson
+        email:
+          type: string
+          format: email
+          description: The email address provided for the user.
+          example: bob.testerson@example.com
+        referable:
+          type: boolean
+          description: Flag to determine whether a user is able to be referred.
+        referralCodes:
+          type: object
+          additionalProperties:
+            type: string
+          description: The primary custom referral codes for different programs, mapping `programId` to `code`.
+        locale:
+          type: string
+          description: The user's locale, used for Internationalization (e.g., `en_US`).
+          example: en_US
+        countryCode:
+          type: string
+          description: The user's ISO 3166-1 Alpha-2 country code (e.g., `US`).
+          example: US
+        dateUsTaxFormSubmitted:
           type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
+          format: int64
+          description: The timestamp of when a user's W-9 tax form was submitted.
+        referredByCodes:
+          type: array
+          items:
+            type: string
+          description: An array of referral codes used to refer this account.
+        cookies:
           type: string
-        apiErrorCode:
-          description: A machine-readable error code.
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code.
-          type: string
-          example: RS042
+          description: The Base64URL encoded attribution cookie values.
+          example: eyJjb29raWVJZCI6ImFiYzEyMyJ9
+        segments:
+          type: array
+          items:
+            type: string
+          description: A list of operations for adding and removing a user from segments (e.g., `["segment1", "~segment2"]`).
+        shareLinks:
+          type: object
+          additionalProperties:
+            type: string
+          description: The primary custom shareLinks for different programs, mapping `programId` to `sharelink`.
+        customFields:
+          type: object
+          additionalProperties: true
+          description: An object containing the custom fields for this user.
     UserList:
       type: object
       properties:
@@ -532,8 +634,49 @@ components:
           $ref: '#/components/schemas/SharelinkEngagementMedium'
         EMAIL:
           $ref: '#/components/schemas/SharelinkEngagementMedium'
-    OpenUser:
-      description: A user object returned by open endpoints. Includes program share links and custom fields.
+    ProgramShareLink:
+      description: A map of program IDs to share link sets for that program.
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          cleanShareLink:
+            type: string
+            format: uri
+            description: The clean (unencoded) primary share link for this program.
+            example: https://share.impact.squatchtesting.com/mzbnEyE
+          UNKNOWN:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          EMAIL:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          MOBILE:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          EMBED:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          POPUP:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          HOSTED:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+    User:
+      description: A user in the impact.com referral program.
       type: object
       properties:
         id:
@@ -552,20 +695,37 @@ components:
           type: string
           description: The user's last name.
           example: Testerson
+        lastInitial:
+          type: string
+          description: The first initial of the user's last name.
+          example: T
         email:
           type: string
           format: email
           description: The user's email address.
           example: bob.testerson@example.com
+        emailHash:
+          type: string
+          description: An MD5 hash of the user's email address.
+          example: 714ed06b2d5c95b93d499a3be731c19f
         imageUrl:
           type: string
-          description: URL of the user's profile image.
+          description: URL of the user's profile image. Empty string if not set.
           example: ''
+        referralCode:
+          type: string
+          description: The user's primary referral code.
+          example: CFMVQHNUEU2AWWDO
         cookieId:
           type: string
           nullable: true
           description: The cookie ID associated with this user.
           example: abc123cookie
+        paymentProviderId:
+          type: string
+          nullable: true
+          description: The ID of the user in the payment provider system.
+          example: pay_abc123
         locale:
           type: string
           nullable: true
@@ -576,10 +736,11 @@ components:
           nullable: true
           description: The user's ISO 3166-1 Alpha-2 country code (e.g. `US`).
           example: US
-        referable:
-          type: boolean
-          description: Whether this user can be referred by another user.
-          example: true
+        referralSource:
+          type: string
+          nullable: true
+          description: The source of the user's referral.
+          example: DIRECT
         firstSeenIP:
           type: string
           nullable: true
@@ -595,31 +756,14 @@ components:
           format: int64
           description: Unix timestamp (milliseconds) when the user was created.
           example: 1774386824964
-        referralCodes:
-          type: object
-          additionalProperties:
-            type: string
-          description: A map of program IDs to the user's referral code for that program.
-          example:
-            '47255': BOBTESTERSON
-        programShareLinks:
-          $ref: '#/components/schemas/ProgramShareLink'
-        customFields:
-          type: object
-          additionalProperties: true
-          description: Custom fields for this user.
-        segments:
-          type: array
-          items:
-            type: string
-          description: The segments this user belongs to.
-        referredByCodes:
-          type: array
-          items:
-            type: string
-          description: Referral codes used to refer this user.
-          example:
-          - NCC8IQ4ADTVDQAOA
+        dateBlocked:
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp (milliseconds) when the user was blocked. Null if not blocked.
+          example: 1779871222634
+        shareLinks:
+          $ref: '#/components/schemas/Sharelink'
     UserPII:
       description: Full personally identifiable information for a user, including rewards, referrals, and share links. Only use in connection with data protection and privacy compliance.
       type: object
@@ -895,6 +1039,122 @@ components:
           items:
             type: string
           description: The segments this user belongs to.
+    UserByCode:
+      description: Minimal user information returned when looking up a user by referral code from the open endpoint.
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the user.
+          example: abc123
+        accountId:
+          type: string
+          description: The unique identifier of the account the user belongs to.
+          example: abc123
+        firstName:
+          type: string
+          description: The user's first name.
+          example: Bob
+        lastInitial:
+          type: string
+          description: The first initial of the user's last name.
+          example: T
+        referralCode:
+          type: string
+          description: The user's primary referral code.
+          example: CFMVQHNUEU2AWWDO
+        imageUrl:
+          type: string
+          description: URL of the user's profile image.
+          example: ''
+    OpenUser:
+      description: A user object returned by open endpoints. Includes program share links and custom fields.
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the user.
+          example: abc123
+        accountId:
+          type: string
+          description: The unique identifier of the account the user belongs to.
+          example: abc123
+        firstName:
+          type: string
+          description: The user's first name.
+          example: Bob
+        lastName:
+          type: string
+          description: The user's last name.
+          example: Testerson
+        email:
+          type: string
+          format: email
+          description: The user's email address.
+          example: bob.testerson@example.com
+        imageUrl:
+          type: string
+          description: URL of the user's profile image.
+          example: ''
+        cookieId:
+          type: string
+          nullable: true
+          description: The cookie ID associated with this user.
+          example: abc123cookie
+        locale:
+          type: string
+          nullable: true
+          description: The user's locale (e.g. `en_US`).
+          example: en_US
+        countryCode:
+          type: string
+          nullable: true
+          description: The user's ISO 3166-1 Alpha-2 country code (e.g. `US`).
+          example: US
+        referable:
+          type: boolean
+          description: Whether this user can be referred by another user.
+          example: true
+        firstSeenIP:
+          type: string
+          nullable: true
+          description: The IP address the user was first seen from.
+          example: 203.0.113.42
+        lastSeenIP:
+          type: string
+          nullable: true
+          description: The IP address the user was last seen from.
+          example: 203.0.113.42
+        dateCreated:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when the user was created.
+          example: 1774386824964
+        referralCodes:
+          type: object
+          additionalProperties:
+            type: string
+          description: A map of program IDs to the user's referral code for that program.
+          example:
+            '47255': BOBTESTERSON
+        programShareLinks:
+          $ref: '#/components/schemas/ProgramShareLink'
+        customFields:
+          type: object
+          additionalProperties: true
+          description: Custom fields for this user.
+        segments:
+          type: array
+          items:
+            type: string
+          description: The segments this user belongs to.
+        referredByCodes:
+          type: array
+          items:
+            type: string
+          description: Referral codes used to refer this user.
+          example:
+          - NCC8IQ4ADTVDQAOA
     UserStub:
       description: Request body for creating or updating a user.
       required:
@@ -938,283 +1198,23 @@ components:
           type: object
           additionalProperties: true
           description: Custom fields for this user.
-    UserByCode:
-      description: Minimal user information returned when looking up a user by referral code from the open endpoint.
-      type: object
+    Error:
       properties:
-        id:
-          type: string
-          description: The unique identifier for the user.
-          example: abc123
-        accountId:
-          type: string
-          description: The unique identifier of the account the user belongs to.
-          example: abc123
-        firstName:
-          type: string
-          description: The user's first name.
-          example: Bob
-        lastInitial:
-          type: string
-          description: The first initial of the user's last name.
-          example: T
-        referralCode:
-          type: string
-          description: The user's primary referral code.
-          example: CFMVQHNUEU2AWWDO
-        imageUrl:
-          type: string
-          description: URL of the user's profile image.
-          example: ''
-    ProgramShareLink:
-      description: A map of program IDs to share link sets for that program.
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          cleanShareLink:
-            type: string
-            format: uri
-            description: The clean (unencoded) primary share link for this program.
-            example: https://share.impact.squatchtesting.com/mzbnEyE
-          UNKNOWN:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-          EMAIL:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-          MOBILE:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-          EMBED:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-          POPUP:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-          HOSTED:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-    User:
-      description: A user in the impact.com referral program.
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the user.
-          example: abc123
-        accountId:
-          type: string
-          description: The unique identifier of the account the user belongs to.
-          example: abc123
-        firstName:
-          type: string
-          description: The user's first name.
-          example: Bob
-        lastName:
-          type: string
-          description: The user's last name.
-          example: Testerson
-        lastInitial:
-          type: string
-          description: The first initial of the user's last name.
-          example: T
-        email:
-          type: string
-          format: email
-          description: The user's email address.
-          example: bob.testerson@example.com
-        emailHash:
-          type: string
-          description: An MD5 hash of the user's email address.
-          example: 714ed06b2d5c95b93d499a3be731c19f
-        imageUrl:
-          type: string
-          description: URL of the user's profile image. Empty string if not set.
-          example: ''
-        referralCode:
-          type: string
-          description: The user's primary referral code.
-          example: CFMVQHNUEU2AWWDO
-        cookieId:
-          type: string
-          nullable: true
-          description: The cookie ID associated with this user.
-          example: abc123cookie
-        paymentProviderId:
-          type: string
-          nullable: true
-          description: The ID of the user in the payment provider system.
-          example: pay_abc123
-        locale:
-          type: string
-          nullable: true
-          description: The user's locale (e.g. `en_US`).
-          example: en_US
-        countryCode:
-          type: string
-          nullable: true
-          description: The user's ISO 3166-1 Alpha-2 country code (e.g. `US`).
-          example: US
-        referralSource:
-          type: string
-          nullable: true
-          description: The source of the user's referral.
-          example: DIRECT
-        firstSeenIP:
-          type: string
-          nullable: true
-          description: The IP address the user was first seen from.
-          example: 203.0.113.42
-        lastSeenIP:
-          type: string
-          nullable: true
-          description: The IP address the user was last seen from.
-          example: 203.0.113.42
-        dateCreated:
+        statusCode:
+          description: The HTTP status code of the error.
           type: integer
-          format: int64
-          description: Unix timestamp (milliseconds) when the user was created.
-          example: 1774386824964
-        dateBlocked:
-          type: integer
-          format: int64
-          nullable: true
-          description: Unix timestamp (milliseconds) when the user was blocked. Null if not blocked.
-          example: 1779871222634
-        shareLinks:
-          $ref: '#/components/schemas/Sharelink'
-    OpenUserUpsert:
-      title: A Open User object for Upsert/Create
-      description: An object describing an individual user submitted to an open endpoint when you want to create or update a user.
-      required:
-      - id
-      - accountId
-      properties:
-        id:
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
           type: string
-          description: The unique identifier provided for this user. Use the user's email as their user Id.
-          example: bob.testerson@example.com
-        accountId:
+        apiErrorCode:
+          description: A machine-readable error code.
           type: string
-          description: The unique identifier of the account. Value must match `id`. Use the user's email as their account Id.
-          example: bob.testerson@example.com
-        firstName:
+        rsCode:
+          description: A secondary machine-readable error code.
           type: string
-          description: The user's first name.
-          example: Bob
-        lastName:
-          type: string
-          description: The user's last name.
-          example: Testerson
-        email:
-          type: string
-          format: email
-          description: The email address provided for the user.
-          example: bob.testerson@example.com
-        referable:
-          type: boolean
-          description: Flag to determine whether a user is able to be referred.
-        referralCodes:
-          type: object
-          additionalProperties:
-            type: string
-          description: The primary custom referral codes for different programs, mapping `programId` to `code`.
-        locale:
-          type: string
-          description: The user's locale, used for Internationalization (e.g., `en_US`).
-          example: en_US
-        countryCode:
-          type: string
-          description: The user's ISO 3166-1 Alpha-2 country code (e.g., `US`).
-          example: US
-        dateUsTaxFormSubmitted:
-          type: integer
-          format: int64
-          description: The timestamp of when a user's W-9 tax form was submitted.
-        referredByCodes:
-          type: array
-          items:
-            type: string
-          description: An array of referral codes used to refer this account.
-        cookies:
-          type: string
-          description: The Base64URL encoded attribution cookie values.
-          example: eyJjb29raWVJZCI6ImFiYzEyMyJ9
-        segments:
-          type: array
-          items:
-            type: string
-          description: A list of operations for adding and removing a user from segments (e.g., `["segment1", "~segment2"]`).
-        shareLinks:
-          type: object
-          additionalProperties:
-            type: string
-          description: The primary custom shareLinks for different programs, mapping `programId` to `sharelink`.
-        customFields:
-          type: object
-          additionalProperties: true
-          description: An object containing the custom fields for this user.
-    SharelinkEngagementMedium:
-      description: Share links for a single engagement medium in the legacy flat format.
-      type: object
-      properties:
-        shareLink:
-          type: string
-          format: uri
-          description: The primary share link for this engagement medium.
-          example: https://share.impact.squatchtesting.com/mvbnEye
-        facebookShareLink:
-          type: string
-          format: uri
-          description: The Facebook share link for this engagement medium.
-          example: https://share.impact.squatchtesting.com/mmbnEye
-        twitterShareLink:
-          type: string
-          format: uri
-          description: The Twitter share link for this engagement medium.
-          example: https://share.impact.squatchtesting.com/mRbnEye
-        emailShareLink:
-          type: string
-          format: uri
-          description: The Email share link for this engagement medium.
-          example: https://share.impact.squatchtesting.com/mLbnEye
-        linkedinShareLink:
-          type: string
-          format: uri
-          description: The LinkedIn share link for this engagement medium.
-          example: https://share.impact.squatchtesting.com/m6bnEye
-  responses:
-    UnauthorizedError:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ForbiddenError:
-      description: Forbidden/Endpoint Disabled
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFoundError:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+          example: RS042
   securitySchemes:
     basicAuth:
       type: http

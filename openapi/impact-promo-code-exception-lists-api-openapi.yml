@@ -191,6 +191,22 @@ paths:
     servers:
     - url: https://api.impact.com
 components:
+  responses:
+    SuccessUriResponse:
+      description: The request was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates whether the operation was successful.
+                example: OK
+              Uri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the affected resource.
   schemas:
     PromoCodeExceptionList:
       type: object
@@ -334,22 +350,6 @@ components:
           type: string
           description: Unique reference to the promo code exception list object in the impact.com API.
           example: /Mediapartners/<AccountSID>/PromoCodeExceptionLists/6001
-  responses:
-    SuccessUriResponse:
-      description: The request was successful.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Status:
-                type: string
-                description: Indicates whether the operation was successful.
-                example: OK
-              Uri:
-                type: string
-                format: uri-reference
-                description: The unique reference to the affected resource.
   securitySchemes:
     basicAuth:
       type: http

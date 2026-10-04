@@ -217,6 +217,32 @@ components:
           type: string
           description: The filename (e.g., 'crm_7654321_...') of the attachment to remove.
           example: 1,2
+    NoteCreate:
+      type: object
+      required:
+      - MediaId
+      properties:
+        MediaId:
+          type: integer
+          description: The partner account ID this note is for.
+          example: 10000
+        Content:
+          type: string
+          description: The plaintext content of the note. Optional if an Attachment is provided.
+          example: Following up on this partner.
+        Attachment:
+          type: string
+          format: binary
+          description: An image file to upload as an attachment. Optional if Content is provided.
+        Type:
+          type: string
+          description: The interaction type for this note.
+          enum:
+          - EMAIL
+          - IM
+          - NONE
+          - PHONE
+          default: NONE
     Note:
       type: object
       properties:
@@ -271,32 +297,6 @@ components:
           format: uri-reference
           description: The unique reference to this note in the impact.com API.
           example: /Advertisers/<AccountSID>/Campaigns/1000/Notes/123456
-    NoteCreate:
-      type: object
-      required:
-      - MediaId
-      properties:
-        MediaId:
-          type: integer
-          description: The partner account ID this note is for.
-          example: 10000
-        Content:
-          type: string
-          description: The plaintext content of the note. Optional if an Attachment is provided.
-          example: Following up on this partner.
-        Attachment:
-          type: string
-          format: binary
-          description: An image file to upload as an attachment. Optional if Content is provided.
-        Type:
-          type: string
-          description: The interaction type for this note.
-          enum:
-          - EMAIL
-          - IM
-          - NONE
-          - PHONE
-          default: NONE
     SuccessUriResponse:
       type: object
       properties:

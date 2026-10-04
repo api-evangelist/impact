@@ -118,6 +118,64 @@ paths:
                       $ref: '#/components/schemas/FtpErrorDetail'
 components:
   schemas:
+    FtpSubmission:
+      type: object
+      properties:
+        BatchId:
+          type: string
+          description: Id of the FTP submission.
+          example: BATCH-789
+        AccountId:
+          type: integer
+          description: Id of the brand account that submitted the file.
+          example: 12345
+        SubmissionDate:
+          type: string
+          format: date-time
+          description: Date and time the FTP submission was submitted (ISO 8601).
+          example: '2026-09-10T22:55:32-08:00'
+        FileName:
+          type: string
+          description: Name of the file that was submitted.
+          example: actions_20260910.csv
+        Type:
+          type: string
+          description: Type of records submitted.
+          enum:
+          - Conversion
+          - Modification
+          - Reversal
+        Status:
+          type: string
+          description: Status of the FTP submission. Will always begin as Queued.
+          enum:
+          - Queued
+          - In Progress
+          - Complete
+        TotalRecords:
+          type: integer
+          description: Total number of records in the submitted file.
+          example: 1000
+        TotalErrors:
+          type: integer
+          description: Total number of errors found in the submitted file.
+          example: 5
+        CompletionDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: Date and time that the submission finished processing (ISO 8601). Empty if not finished.
+          example: '2026-09-10T22:55:45-08:00'
+        ErrorsUri:
+          type: string
+          format: uri-reference
+          description: The URI to retrieve detailed error information for this submission.
+          example: /Advertisers/<AccountSID>/FTPSubmissions/BATCH-789/Errors
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this FTP submission in the impact.com API.
+          example: /Advertisers/<AccountSID>/FTPSubmissions/BATCH-789
     FtpErrorDetail:
       type: object
       properties:
@@ -254,61 +312,3 @@ components:
           format: uri-reference
           description: FTP submission error's direct URI to view only one specific FTP submission error.
           example: /Advertisers/<AccountSID>/FTPSubmissions/BATCH-789/Errors/42
-    FtpSubmission:
-      type: object
-      properties:
-        BatchId:
-          type: string
-          description: Id of the FTP submission.
-          example: BATCH-789
-        AccountId:
-          type: integer
-          description: Id of the brand account that submitted the file.
-          example: 12345
-        SubmissionDate:
-          type: string
-          format: date-time
-          description: Date and time the FTP submission was submitted (ISO 8601).
-          example: '2026-09-10T22:55:32-08:00'
-        FileName:
-          type: string
-          description: Name of the file that was submitted.
-          example: actions_20260910.csv
-        Type:
-          type: string
-          description: Type of records submitted.
-          enum:
-          - Conversion
-          - Modification
-          - Reversal
-        Status:
-          type: string
-          description: Status of the FTP submission. Will always begin as Queued.
-          enum:
-          - Queued
-          - In Progress
-          - Complete
-        TotalRecords:
-          type: integer
-          description: Total number of records in the submitted file.
-          example: 1000
-        TotalErrors:
-          type: integer
-          description: Total number of errors found in the submitted file.
-          example: 5
-        CompletionDate:
-          type: string
-          format: date-time
-          nullable: true
-          description: Date and time that the submission finished processing (ISO 8601). Empty if not finished.
-          example: '2026-09-10T22:55:45-08:00'
-        ErrorsUri:
-          type: string
-          format: uri-reference
-          description: The URI to retrieve detailed error information for this submission.
-          example: /Advertisers/<AccountSID>/FTPSubmissions/BATCH-789/Errors
-        Uri:
-          type: string
-          format: uri-reference
-          description: The unique reference to this FTP submission in the impact.com API.
-          example: /Advertisers/<AccountSID>/FTPSubmissions/BATCH-789

@@ -327,99 +327,6 @@ paths:
     - url: https://api.impact.com
 components:
   schemas:
-    ActionInquiryUpdateRequest:
-      type: object
-      required:
-      - Id
-      - ResolutionStatus
-      properties:
-        Id:
-          type: integer
-          description: Unique identifier for the action inquiry to update.
-          example: 778987
-        ResolutionStatus:
-          type: string
-          description: The new resolution status for the inquiry.
-          enum:
-          - VALID
-          - DECLINED
-          - INCOMPLETE
-          example: VALID
-        RejectReason:
-          type: string
-          description: Required if ResolutionStatus is 'DECLINED'.
-          enum:
-          - This transaction has been tracked successfully
-          - Another marketing channel was credited with the sale
-          - Another marketing channel was credited with the sale, due to a voucher/discount code used
-          - Did not meet terms and conditions set by merchant
-          - Transaction not completed - Order cancelled, changed, or returned
-          - Transaction cannot be traced
-          - Transaction not fully completed online
-          - Enquiry does not provide complete information required for evaluation
-          - Other
-          example: Enquiry does not provide complete information required for evaluation
-        ActionTrackerId:
-          type: integer
-          description: Required if ResolutionStatus is 'VALID'. Unique ID for the event type.
-          example: 4000
-        ResolutionNotes:
-          type: string
-          description: Optional notes about the resolution for the partner to see.
-          example: Customer confirmed delivery; approved.
-        TransactionAmount:
-          type: number
-          format: decimal
-          description: Overrides the transaction amount provided by the partner.
-          example: 14.0
-        FinalPayout:
-          type: number
-          format: decimal
-          description: Manually sets the final payout, overriding system calculations.
-          example: 0.28
-        TransactionDate:
-          type: string
-          format: date-time
-          description: Specifies a new transaction date.
-          example: '2026-09-10T00:00:00-07:00'
-        ItemSku[i]:
-          type: string
-          description: Indexed parameter for item SKU (e.g., ItemSku1, ItemSku2).
-        ItemCategory[i]:
-          type: string
-          description: Indexed parameter for item category.
-        ItemName[i]:
-          type: string
-          description: For a VALID action inquiry, specifies the name of the item. This information can also be automatically appended through uploading a product catalog. impact.com highly recommends submitting this parameter when approving action inquiries to maintain accurate records & reporting.
-          example: Acme Tennis Balls (One Dozen)
-        ItemSubCategory[i]:
-          type: string
-          description: The sub-category for the item.
-          example: Tennis
-        ItemMPN[i]:
-          type: string
-          description: Manufacturer Part Number for the item; primarily used for retail sales.
-          example: ACME-MPN-101
-        ItemTotalRebate[i]:
-          type: number
-          format: decimal
-          description: Discount applied to this line item (not just for each product of this type).
-          example: 5.0
-        ItemQty[i]:
-          type: integer
-          description: Indexed parameter for item quantity.
-        ItemSubtotal[i]:
-          type: number
-          format: decimal
-          description: Indexed parameter for item subtotal.
-        PromoCode:
-          type: string
-          description: Specifies the promo code used.
-          example: 10OFF-FORGE
-        CustomerId:
-          type: string
-          description: Your unique, non-PII customer identifier.
-          example: BCZ2WVSH674563PDPYOTM3AXDQ
     ActionInquiry:
       type: object
       properties:
@@ -536,29 +443,99 @@ components:
           type: string
           format: uri-reference
           example: /Advertisers/<AccountSid>/ActionInquiries/778987
-    Comment:
+    ActionInquiryUpdateRequest:
       type: object
+      required:
+      - Id
+      - ResolutionStatus
       properties:
-        User:
+        Id:
+          type: integer
+          description: Unique identifier for the action inquiry to update.
+          example: 778987
+        ResolutionStatus:
           type: string
-          description: The name or identifier of the user who posted the comment.
-          example: Carrie Oakey
-        Comment:
+          description: The new resolution status for the inquiry.
+          enum:
+          - VALID
+          - DECLINED
+          - INCOMPLETE
+          example: VALID
+        RejectReason:
           type: string
-          description: The content of the comment.
-          example: Please approve!
-        Date:
+          description: Required if ResolutionStatus is 'DECLINED'.
+          enum:
+          - This transaction has been tracked successfully
+          - Another marketing channel was credited with the sale
+          - Another marketing channel was credited with the sale, due to a voucher/discount code used
+          - Did not meet terms and conditions set by merchant
+          - Transaction not completed - Order cancelled, changed, or returned
+          - Transaction cannot be traced
+          - Transaction not fully completed online
+          - Enquiry does not provide complete information required for evaluation
+          - Other
+          example: Enquiry does not provide complete information required for evaluation
+        ActionTrackerId:
+          type: integer
+          description: Required if ResolutionStatus is 'VALID'. Unique ID for the event type.
+          example: 4000
+        ResolutionNotes:
+          type: string
+          description: Optional notes about the resolution for the partner to see.
+          example: Customer confirmed delivery; approved.
+        TransactionAmount:
+          type: number
+          format: decimal
+          description: Overrides the transaction amount provided by the partner.
+          example: 14.0
+        FinalPayout:
+          type: number
+          format: decimal
+          description: Manually sets the final payout, overriding system calculations.
+          example: 0.28
+        TransactionDate:
           type: string
           format: date-time
-          description: The date and time the comment was posted.
-          example: '2026-05-25T11:35:38-07:00'
-    InquiryType:
-      type: string
-      description: The type of inquiry being raised.
-      enum:
-      - UNTRACKED
-      - INCORRECT
-      - DECLINED
+          description: Specifies a new transaction date.
+          example: '2026-09-10T00:00:00-07:00'
+        ItemSku[i]:
+          type: string
+          description: Indexed parameter for item SKU (e.g., ItemSku1, ItemSku2).
+        ItemCategory[i]:
+          type: string
+          description: Indexed parameter for item category.
+        ItemName[i]:
+          type: string
+          description: For a VALID action inquiry, specifies the name of the item. This information can also be automatically appended through uploading a product catalog. impact.com highly recommends submitting this parameter when approving action inquiries to maintain accurate records & reporting.
+          example: Acme Tennis Balls (One Dozen)
+        ItemSubCategory[i]:
+          type: string
+          description: The sub-category for the item.
+          example: Tennis
+        ItemMPN[i]:
+          type: string
+          description: Manufacturer Part Number for the item; primarily used for retail sales.
+          example: ACME-MPN-101
+        ItemTotalRebate[i]:
+          type: number
+          format: decimal
+          description: Discount applied to this line item (not just for each product of this type).
+          example: 5.0
+        ItemQty[i]:
+          type: integer
+          description: Indexed parameter for item quantity.
+        ItemSubtotal[i]:
+          type: number
+          format: decimal
+          description: Indexed parameter for item subtotal.
+        PromoCode:
+          type: string
+          description: Specifies the promo code used.
+          example: 10OFF-FORGE
+        CustomerId:
+          type: string
+          description: Your unique, non-PII customer identifier.
+          example: BCZ2WVSH674563PDPYOTM3AXDQ
     ActionInquiry_2:
       type: object
       properties:
@@ -665,6 +642,13 @@ components:
           type: string
           description: Unique reference to the action inquiry object in the impact.com API.
           example: /Mediapartners/<AccountSID>/ActionInquiries/15652378
+    InquiryType:
+      type: string
+      description: The type of inquiry being raised.
+      enum:
+      - UNTRACKED
+      - INCORRECT
+      - DECLINED
     RejectReason:
       type: string
       description: The reason provided by the brand for declining the inquiry.
@@ -686,6 +670,22 @@ components:
       - VALID
       - DECLINED
       - INCOMPLETE
+    Comment:
+      type: object
+      properties:
+        User:
+          type: string
+          description: The name or identifier of the user who posted the comment.
+          example: Carrie Oakey
+        Comment:
+          type: string
+          description: The content of the comment.
+          example: Please approve!
+        Date:
+          type: string
+          format: date-time
+          description: The date and time the comment was posted.
+          example: '2026-05-25T11:35:38-07:00'
   parameters:
     AccountSID:
       name: AccountSID

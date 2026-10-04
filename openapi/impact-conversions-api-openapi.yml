@@ -1241,6 +1241,94 @@ components:
           description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
           example: '2026-09-10T22:55:32-08:00'
           x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+    ConversionType:
+      type: string
+      description: 'The conversion type. The only accepted value is `CLO` or `clo`
+
+        (case-insensitive). If absent or blank it''ll default to partner.
+
+        Similarly, unknown non-empty values will queue with a warning and
+
+        default to partner.
+
+
+        This field is required for CLO partners. To flag a conversion as a
+
+        card-linked offer, include the parameter `ConversionType=CLO`.
+
+        '
+      example: CLO
+    ConversionError:
+      type: object
+      description: Returned when the conversion submission request is invalid.
+      properties:
+        Status:
+          type: string
+          description: Indicates that the request failed.
+          example: ERROR
+        errors:
+          type: array
+          description: One or more validation errors describing what was wrong with the request.
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: The name of the field that caused the error.
+              level:
+                type: string
+                description: The severity of the error.
+              message:
+                type: string
+                description: A human-readable error message.
+    ConversionSubmissionResponse:
+      type: object
+      description: Returned when a conversion event is successfully queued for processing.
+      properties:
+        Status:
+          type: string
+          description: The submission status. `QUEUED` means the conversion was accepted for processing.
+          example: QUEUED
+        QueuedUri:
+          type: string
+          format: uri-reference
+          description: URI of the queued submission record. Use this to poll for processing status.
+          example: /Mediapartners/<AccountSID>/APISubmissions/A-b1234c56-7d89-0e12-3f4g-5h6ij7k8901l
+        warnings:
+          type: array
+          description: 'Included when one or more optional field values were invalid or not
+
+            recognized and were ignored or defaulted instead of causing an error.
+
+            '
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: The name of the field the warning applies to.
+              level:
+                type: string
+                description: The severity of the warning.
+              message:
+                type: string
+                description: A human-readable message describing the warning.
+          example:
+          - field: CardBin
+            level: WARNING
+            message: 'CardBin ignored: must be exactly 6 or 8 digits.'
+    AuthError:
+      type: object
+      description: Returned when the request could not be authenticated or is not authorized.
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 401
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          example: Unauthorized
     ConversionPayload_2:
       type: object
       description: The details of a conversion event you submit.
@@ -1438,94 +1526,6 @@ components:
           type: string
           description: User agent of the customer, used to provide device reporting.
           example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
-    AuthError:
-      type: object
-      description: Returned when the request could not be authenticated or is not authorized.
-      properties:
-        status:
-          type: integer
-          description: The HTTP status code.
-          example: 401
-        title:
-          type: string
-          description: A short, human-readable summary of the error.
-          example: Unauthorized
-    ConversionType:
-      type: string
-      description: 'The conversion type. The only accepted value is `CLO` or `clo`
-
-        (case-insensitive). If absent or blank it''ll default to partner.
-
-        Similarly, unknown non-empty values will queue with a warning and
-
-        default to partner.
-
-
-        This field is required for CLO partners. To flag a conversion as a
-
-        card-linked offer, include the parameter `ConversionType=CLO`.
-
-        '
-      example: CLO
-    ConversionError:
-      type: object
-      description: Returned when the conversion submission request is invalid.
-      properties:
-        Status:
-          type: string
-          description: Indicates that the request failed.
-          example: ERROR
-        errors:
-          type: array
-          description: One or more validation errors describing what was wrong with the request.
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-                description: The name of the field that caused the error.
-              level:
-                type: string
-                description: The severity of the error.
-              message:
-                type: string
-                description: A human-readable error message.
-    ConversionSubmissionResponse:
-      type: object
-      description: Returned when a conversion event is successfully queued for processing.
-      properties:
-        Status:
-          type: string
-          description: The submission status. `QUEUED` means the conversion was accepted for processing.
-          example: QUEUED
-        QueuedUri:
-          type: string
-          format: uri-reference
-          description: URI of the queued submission record. Use this to poll for processing status.
-          example: /Mediapartners/<AccountSID>/APISubmissions/A-b1234c56-7d89-0e12-3f4g-5h6ij7k8901l
-        warnings:
-          type: array
-          description: 'Included when one or more optional field values were invalid or not
-
-            recognized and were ignored or defaulted instead of causing an error.
-
-            '
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-                description: The name of the field the warning applies to.
-              level:
-                type: string
-                description: The severity of the warning.
-              message:
-                type: string
-                description: A human-readable message describing the warning.
-          example:
-          - field: CardBin
-            level: WARNING
-            message: 'CardBin ignored: must be exactly 6 or 8 digits.'
   parameters:
     AccountSID:
       name: AccountSID

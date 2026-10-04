@@ -293,6 +293,45 @@ components:
           format: uri-reference
           description: The unique reference to this invoice in the impact.com API.
           example: /Advertisers/<AccountSID>/Invoices/1924609-1
+    DetailedLineItem:
+      type: object
+      properties:
+        AccountId:
+          type: integer
+          description: The unique identifier for the partner account.
+          example: 1299679
+        Name:
+          type: string
+          description: The display name of the partner account.
+          example: ACME Online
+        ProgramId:
+          type: integer
+          description: The unique identifier of the program.
+          example: 1000
+        ProgramName:
+          type: string
+          description: The display name of the program.
+          example: ACME Online
+        EventMonthYear:
+          type: string
+          description: The month and year (MYYYY) the events occurred.
+          example: '92018'
+        ActionAmount:
+          type: number
+          format: decimal
+          description: The amount owed for actions in this period.
+          example: 65.0
+        OtherAmount:
+          type: number
+          format: decimal
+          nullable: true
+          description: Other amounts owed in this period, if any.
+          example: 0.0
+        TotalAmount:
+          type: number
+          format: decimal
+          description: The total amount for this detailed line item.
+          example: 65.0
     LineItem:
       type: object
       properties:
@@ -353,45 +392,6 @@ components:
           nullable: true
           description: The date and time the line item was paid, if applicable.
           example: '2018-10-16T00:35:47-04:00'
-    DetailedLineItem:
-      type: object
-      properties:
-        AccountId:
-          type: integer
-          description: The unique identifier for the partner account.
-          example: 1299679
-        Name:
-          type: string
-          description: The display name of the partner account.
-          example: ACME Online
-        ProgramId:
-          type: integer
-          description: The unique identifier of the program.
-          example: 1000
-        ProgramName:
-          type: string
-          description: The display name of the program.
-          example: ACME Online
-        EventMonthYear:
-          type: string
-          description: The month and year (MYYYY) the events occurred.
-          example: '92018'
-        ActionAmount:
-          type: number
-          format: decimal
-          description: The amount owed for actions in this period.
-          example: 65.0
-        OtherAmount:
-          type: number
-          format: decimal
-          nullable: true
-          description: Other amounts owed in this period, if any.
-          example: 0.0
-        TotalAmount:
-          type: number
-          format: decimal
-          description: The total amount for this detailed line item.
-          example: 65.0
     Invoice_2:
       type: object
       properties:
@@ -444,6 +444,44 @@ components:
           type: string
           description: Unique reference to this invoice in the impact.com API.
           example: /Mediapartners/<AccountSID>/Invoices/1924609-1
+    DetailedLineItem_2:
+      type: object
+      properties:
+        AccountId:
+          type: integer
+          description: Unique identifier of the partner account associated with this payout.
+          example: 1804207
+        Name:
+          type: string
+          description: Display name of the partner account associated with this payout.
+          example: Acme Corporation
+        ProgramId:
+          type: string
+          description: Unique identifier for the program associated with this payout.
+          example: '10306'
+        ProgramName:
+          type: string
+          description: Display name of the program associated with this payout.
+          example: Wayne Enterprises
+        EventMonthYear:
+          type: string
+          description: Month (M or MM) and YYYY of when the events occurred (e.g., 42021).
+          example: '12021'
+        ActionAmount:
+          type: string
+          format: decimal
+          description: Amount attributable to tracked actions. May be empty if not applicable.
+          example: '48.00'
+        OtherAmount:
+          type: string
+          format: decimal
+          description: Amount attributable to non-action payouts such as bonuses.
+          example: '2.00'
+        TotalAmount:
+          type: string
+          format: decimal
+          description: Total payout amount for this detailed line item.
+          example: '50.00'
     LineItem_2:
       type: object
       properties:
@@ -503,44 +541,6 @@ components:
           format: date-time
           description: Date and time this line item was paid (ISO 8601). Empty if not yet paid.
           example: '2024-10-01T00:00:00-07:00'
-    DetailedLineItem_2:
-      type: object
-      properties:
-        AccountId:
-          type: integer
-          description: Unique identifier of the partner account associated with this payout.
-          example: 1804207
-        Name:
-          type: string
-          description: Display name of the partner account associated with this payout.
-          example: Acme Corporation
-        ProgramId:
-          type: string
-          description: Unique identifier for the program associated with this payout.
-          example: '10306'
-        ProgramName:
-          type: string
-          description: Display name of the program associated with this payout.
-          example: Wayne Enterprises
-        EventMonthYear:
-          type: string
-          description: Month (M or MM) and YYYY of when the events occurred (e.g., 42021).
-          example: '12021'
-        ActionAmount:
-          type: string
-          format: decimal
-          description: Amount attributable to tracked actions. May be empty if not applicable.
-          example: '48.00'
-        OtherAmount:
-          type: string
-          format: decimal
-          description: Amount attributable to non-action payouts such as bonuses.
-          example: '2.00'
-        TotalAmount:
-          type: string
-          format: decimal
-          description: Total payout amount for this detailed line item.
-          example: '50.00'
   securitySchemes:
     basicAuth:
       type: http

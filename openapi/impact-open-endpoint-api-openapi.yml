@@ -182,30 +182,23 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFoundError:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     UnauthorizedError:
       description: Unauthorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    accountId:
-      name: accountId
+    userId:
+      name: userId
       in: path
-      description: The ID of the account.
-      required: true
-      schema:
-        type: string
-    tenant_alias:
-      name: tenant_alias
-      in: path
-      description: Tenant being referenced. E.g. `"aboih12h16t"`
+      description: The ID of the user.
       required: true
       schema:
         type: string
@@ -225,14 +218,49 @@ components:
       description: The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`.
       style: form
       explode: false
-    userId:
-      name: userId
+    accountId:
+      name: accountId
       in: path
-      description: The ID of the user.
+      description: The ID of the account.
+      required: true
+      schema:
+        type: string
+    tenant_alias:
+      name: tenant_alias
+      in: path
+      description: Tenant being referenced. E.g. `"aboih12h16t"`
       required: true
       schema:
         type: string
   schemas:
+    UserByCode:
+      description: Minimal user information returned when looking up a user by referral code from the open endpoint.
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the user.
+          example: abc123
+        accountId:
+          type: string
+          description: The unique identifier of the account the user belongs to.
+          example: abc123
+        firstName:
+          type: string
+          description: The user's first name.
+          example: Bob
+        lastInitial:
+          type: string
+          description: The first initial of the user's last name.
+          example: T
+        referralCode:
+          type: string
+          description: The user's primary referral code.
+          example: CFMVQHNUEU2AWWDO
+        imageUrl:
+          type: string
+          description: URL of the user's profile image.
+          example: ''
     ProgramShareLink:
       description: A map of program IDs to share link sets for that program.
       type: object
@@ -274,23 +302,6 @@ components:
             additionalProperties:
               type: string
               format: uri
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error.
-          type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code.
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code.
-          type: string
-          example: RS042
     OpenUser:
       description: A user object returned by open endpoints. Includes program share links and custom fields.
       type: object
@@ -379,34 +390,6 @@ components:
           description: Referral codes used to refer this user.
           example:
           - NCC8IQ4ADTVDQAOA
-    UserByCode:
-      description: Minimal user information returned when looking up a user by referral code from the open endpoint.
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the user.
-          example: abc123
-        accountId:
-          type: string
-          description: The unique identifier of the account the user belongs to.
-          example: abc123
-        firstName:
-          type: string
-          description: The user's first name.
-          example: Bob
-        lastInitial:
-          type: string
-          description: The first initial of the user's last name.
-          example: T
-        referralCode:
-          type: string
-          description: The user's primary referral code.
-          example: CFMVQHNUEU2AWWDO
-        imageUrl:
-          type: string
-          description: URL of the user's profile image.
-          example: ''
     OpenUserUpsert:
       title: A Open User object for Upsert/Create
       description: An object describing an individual user submitted to an open endpoint when you want to create or update a user.
@@ -478,6 +461,23 @@ components:
           type: object
           additionalProperties: true
           description: An object containing the custom fields for this user.
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error.
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code.
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code.
+          type: string
+          example: RS042
   securitySchemes:
     basicAuth:
       type: http

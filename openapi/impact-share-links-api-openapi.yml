@@ -136,82 +136,30 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Sharelink:
-      description: '**Deprecated** flat-format share link response. Returned by the deprecated *Lookup a user''s share links* endpoint. New integrations should use the `Shareurls` schema.
-
-        '
+    Shareurls:
+      description: A user's share links, organised by engagement medium and share medium.
       type: object
       properties:
-        shareLink:
-          type: string
-          description: The unique share link the user can refer their friends with.
-        facebookShareLink:
-          type: string
-          description: The share link for Facebook.
-        twitterShareLink:
-          type: string
-          description: The share link for Twitter.
-        emailShareLink:
-          type: string
-          description: The share link for Email.
-        mobileShareLink:
-          type: string
-          description: The share link for mobile devices.
-        mobileFacebookShareLink:
-          type: string
-          description: The share link for Facebook on mobile devices.
-        mobileTwitterSharelink:
-          type: string
-          description: The share link for Twitter on mobile devices.
-        mobileEmailShareLink:
-          type: string
-          description: The share link for Email on mobile devices.
-        EMBED:
-          $ref: '#/components/schemas/LegacyEngagementLinks'
-        POPUP:
-          $ref: '#/components/schemas/LegacyEngagementLinks'
-        HOSTED:
-          $ref: '#/components/schemas/LegacyEngagementLinks'
-        MOBILE:
-          $ref: '#/components/schemas/LegacyEngagementLinks'
-        EMAIL:
-          $ref: '#/components/schemas/LegacyEngagementLinks'
-    LegacyEngagementLinks:
-      description: A user's share links for a single engagement medium (legacy flat-property format).
-      type: object
-      properties:
-        shareLink:
-          type: string
-          description: The unique share link the user can refer their friends with. Contains the referral code and a source tag for analytics.
-        facebookShareLink:
-          type: string
-          description: The share link for Facebook.
-        twitterShareLink:
-          type: string
-          description: The share link for Twitter.
-        emailShareLink:
-          type: string
-          description: The share link for Email.
-        linkedinShareLink:
-          type: string
-          description: The share link for LinkedIn.
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error
-          type: integer
-          format: int32
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code
-          type: string
-          nullable: true
-          example: RS042
+        shareLinks:
+          type: object
+          properties:
+            cleanShareLink:
+              type: string
+              format: uri
+              description: The clean (unencoded) share link for the program's primary link. If the program uses a vanity link, this is the unencoded form; otherwise it's the `UNKNOWN` engagement medium and `UNKNOWN` share medium link.
+              example: https://share.impact.squatchtesting.com/mzbnEyE
+            EMAIL:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            MOBILE:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            EMBED:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            POPUP:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            HOSTED:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            UNKNOWN:
+              $ref: '#/components/schemas/ShareMediumLinks'
     ShareMediumLinks:
       description: A user's share links for a single engagement medium, with one entry per share medium.
       type: object
@@ -271,31 +219,105 @@ components:
           format: uri
           description: Share link for an unknown share medium.
           example: https://share.impact.squatchtesting.com/mBbnEyE
-    Shareurls:
-      description: A user's share links, organised by engagement medium and share medium.
+    LegacyEngagementLinks:
+      description: A user's share links for a single engagement medium (legacy flat-property format).
       type: object
       properties:
-        shareLinks:
-          type: object
-          properties:
-            cleanShareLink:
-              type: string
-              format: uri
-              description: The clean (unencoded) share link for the program's primary link. If the program uses a vanity link, this is the unencoded form; otherwise it's the `UNKNOWN` engagement medium and `UNKNOWN` share medium link.
-              example: https://share.impact.squatchtesting.com/mzbnEyE
-            EMAIL:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            MOBILE:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            EMBED:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            POPUP:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            HOSTED:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            UNKNOWN:
-              $ref: '#/components/schemas/ShareMediumLinks'
+        shareLink:
+          type: string
+          description: The unique share link the user can refer their friends with. Contains the referral code and a source tag for analytics.
+        facebookShareLink:
+          type: string
+          description: The share link for Facebook.
+        twitterShareLink:
+          type: string
+          description: The share link for Twitter.
+        emailShareLink:
+          type: string
+          description: The share link for Email.
+        linkedinShareLink:
+          type: string
+          description: The share link for LinkedIn.
+    Sharelink:
+      description: '**Deprecated** flat-format share link response. Returned by the deprecated *Lookup a user''s share links* endpoint. New integrations should use the `Shareurls` schema.
+
+        '
+      type: object
+      properties:
+        shareLink:
+          type: string
+          description: The unique share link the user can refer their friends with.
+        facebookShareLink:
+          type: string
+          description: The share link for Facebook.
+        twitterShareLink:
+          type: string
+          description: The share link for Twitter.
+        emailShareLink:
+          type: string
+          description: The share link for Email.
+        mobileShareLink:
+          type: string
+          description: The share link for mobile devices.
+        mobileFacebookShareLink:
+          type: string
+          description: The share link for Facebook on mobile devices.
+        mobileTwitterSharelink:
+          type: string
+          description: The share link for Twitter on mobile devices.
+        mobileEmailShareLink:
+          type: string
+          description: The share link for Email on mobile devices.
+        EMBED:
+          $ref: '#/components/schemas/LegacyEngagementLinks'
+        POPUP:
+          $ref: '#/components/schemas/LegacyEngagementLinks'
+        HOSTED:
+          $ref: '#/components/schemas/LegacyEngagementLinks'
+        MOBILE:
+          $ref: '#/components/schemas/LegacyEngagementLinks'
+        EMAIL:
+          $ref: '#/components/schemas/LegacyEngagementLinks'
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          nullable: true
+          example: RS042
   parameters:
+    ProgramId:
+      name: programId
+      in: query
+      description: The ID of the program whose share links to return. Required — the API returns `400` if omitted.
+      required: true
+      schema:
+        type: string
+        example: '47255'
+    TenantAlias:
+      name: tenant_alias
+      in: path
+      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+      required: true
+      schema:
+        type: string
+    UserId:
+      name: userId
+      in: path
+      description: Filters share links by `user.id`.
+      required: true
+      schema:
+        type: string
     ShareMedium:
       name: shareMedium
       in: query
@@ -314,13 +336,6 @@ components:
         - LINKEDIN
         - DIRECT
         - UNKNOWN
-    UserId:
-      name: userId
-      in: path
-      description: Filters share links by `user.id`.
-      required: true
-      schema:
-        type: string
     EngagementMedium:
       name: engagementMedium
       in: query
@@ -341,21 +356,6 @@ components:
       required: true
       schema:
         type: string
-    TenantAlias:
-      name: tenant_alias
-      in: path
-      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
-      required: true
-      schema:
-        type: string
-    ProgramId:
-      name: programId
-      in: query
-      description: The ID of the program whose share links to return. Required — the API returns `400` if omitted.
-      required: true
-      schema:
-        type: string
-        example: '47255'
   responses:
     GeneralError:
       description: Unexpected Error

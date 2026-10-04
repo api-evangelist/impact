@@ -270,6 +270,38 @@ paths:
         source: "curl -L \\\n  --request DELETE \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/MediaProperties/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
+    PropertyType:
+      type: string
+      description: The type of media property — website, mobile app, or social media account.
+      enum:
+      - WEBSITE
+      - MOBILE
+      - SOCIAL
+    InstallsFollowers:
+      type: string
+      description: Tiered count buckets for app installs (MOBILE) or social followers (SOCIAL).
+      enum:
+      - HUNDRED_PLUS
+      - THOUSAND_PLUS
+      - TEN_THOUSAND_PLUS
+      - HUNDRED_THOUSAND_PLUS
+      - MILLION_PLUS
+      - TEN_MILLION_PLUS
+      - HUNDRED_MILLION_PLUS
+    SocialPlatform:
+      type: string
+      description: The social media platform the property is on.
+      enum:
+      - INSTAGRAM
+      - YOUTUBE
+      - X/TWITTER
+      - FACEBOOK
+      - PINTEREST
+      - TWITCH
+      - TIKTOK
+      - LINKEDIN
+      - WECHAT
+      - WEIBO
     RevenueModel:
       type: string
       description: The monetization model used by a media property.
@@ -279,6 +311,12 @@ components:
       - PAY_PER_SALE
       - PAY_PER_CLICK
       - PAY_PER_INSTALL
+    MobilePlatform:
+      type: string
+      description: The mobile operating system platform the app is published on.
+      enum:
+      - IOS
+      - ANDROID
     MediaProperty:
       type: object
       properties:
@@ -363,44 +401,6 @@ components:
           type: string
           description: Unique reference to this media property in the impact.com API.
           example: /Mediapartners/<AccountSID>/MediaProperties/4622773
-    PropertyType:
-      type: string
-      description: The type of media property — website, mobile app, or social media account.
-      enum:
-      - WEBSITE
-      - MOBILE
-      - SOCIAL
-    SocialPlatform:
-      type: string
-      description: The social media platform the property is on.
-      enum:
-      - INSTAGRAM
-      - YOUTUBE
-      - X/TWITTER
-      - FACEBOOK
-      - PINTEREST
-      - TWITCH
-      - TIKTOK
-      - LINKEDIN
-      - WECHAT
-      - WEIBO
-    MobilePlatform:
-      type: string
-      description: The mobile operating system platform the app is published on.
-      enum:
-      - IOS
-      - ANDROID
-    InstallsFollowers:
-      type: string
-      description: Tiered count buckets for app installs (MOBILE) or social followers (SOCIAL).
-      enum:
-      - HUNDRED_PLUS
-      - THOUSAND_PLUS
-      - TEN_THOUSAND_PLUS
-      - HUNDRED_THOUSAND_PLUS
-      - MILLION_PLUS
-      - TEN_MILLION_PLUS
-      - HUNDRED_MILLION_PLUS
   securitySchemes:
     basicAuth:
       type: http

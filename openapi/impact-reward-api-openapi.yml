@@ -400,55 +400,20 @@ paths:
         source: "curl -L \\\n  --request POST \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/rewards/account/{accountId}/user/{userId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
-    NewReward:
-      description: Details of a new reward to create.
+    RewardDebitRequest:
+      description: A request to debit a single reward
+      required:
+      - amount
+      - unit
       properties:
-        type:
-          type: string
-          description: The type of reward.
-          example: PCT_DISCOUNT
-          enum:
-          - PCT_DISCOUNT
-          - CREDIT
-          - FUELTANK
-        dateExpires:
-          type: integer
-          format: int64
-          description: Unix timestamp (milliseconds) when this reward is set to expire.
-          example: 1471028988000
-        dateScheduledFor:
-          type: integer
-          format: int64
-          description: Unix timestamp (milliseconds) when the reward is scheduled to become available.
-        cancellable:
-          type: boolean
-          description: If a reward is cancellable then it may be revoked. If it has been cancelled then dateCancelled will be non-null.
-          example: true
-        unit:
-          type: string
-          description: 'An identifier for the unit of the reward. E.g. `''credit-in-cents''`, `''freemb''`, `''giftcard20''`, `''tshirt''`, `''freemonth''` or `''%''`. Works with: `CREDIT`'
-        discountPercent:
-          type: integer
-          description: 'The percent discount. E.g. 10 means 10% Works with: `PCT_DISCOUNT`'
-          example: 15
-        assignedCredit:
-          type: integer
-          description: 'The earned quantity of the reward. Works with: `CREDIT`'
-        currency:
-          type: string
-          description: 'For programs that require a currency. Works with: `CREDIT`'
-        fuelTankType:
-          type: string
-          description: 'The type of reward associated with this fueltank code. Works with: `FUELTANK`'
-          enum:
-          - PCT_DISCOUNT
-          - CREDIT
-        fuelTankCode:
-          type: string
-          description: 'The fueltank code associated with this reward. Works with: `FUELTANK`.'
         amount:
           type: integer
-          description: 'The earned quantity of the reward. Works with: `FUELTANK`'
+          example: 200
+          description: The amount of credit to be debitted.
+        unit:
+          type: string
+          description: The type of credit to be debitted. E.g. "free-months" or "cents"
+          example: cents
     Redemption:
       title: A redemption object
       description: Details about when a quantity of a reward was redeemed from the impact.com system.
@@ -483,28 +448,6 @@ components:
           type: string
           example: cents
           description: The type of credit that was just debitted.
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error
-          type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code
-          type: string
-          example: RS042
-    RewardList:
-      type: array
-      description: A list of Reward objects.
-      items:
-        $ref: '#/components/schemas/Reward'
     Reward:
       title: Reward
       description: Rewards are used by impact.com to track the credits, discounts, gift cards and other prizes that a User earns.
@@ -611,20 +554,77 @@ components:
           enum:
           - PCT_DISCOUNT
           - CREDIT
-    RewardDebitRequest:
-      description: A request to debit a single reward
-      required:
-      - amount
-      - unit
+    NewReward:
+      description: Details of a new reward to create.
       properties:
-        amount:
+        type:
+          type: string
+          description: The type of reward.
+          example: PCT_DISCOUNT
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+          - FUELTANK
+        dateExpires:
           type: integer
-          example: 200
-          description: The amount of credit to be debitted.
+          format: int64
+          description: Unix timestamp (milliseconds) when this reward is set to expire.
+          example: 1471028988000
+        dateScheduledFor:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when the reward is scheduled to become available.
+        cancellable:
+          type: boolean
+          description: If a reward is cancellable then it may be revoked. If it has been cancelled then dateCancelled will be non-null.
+          example: true
         unit:
           type: string
-          description: The type of credit to be debitted. E.g. "free-months" or "cents"
-          example: cents
+          description: 'An identifier for the unit of the reward. E.g. `''credit-in-cents''`, `''freemb''`, `''giftcard20''`, `''tshirt''`, `''freemonth''` or `''%''`. Works with: `CREDIT`'
+        discountPercent:
+          type: integer
+          description: 'The percent discount. E.g. 10 means 10% Works with: `PCT_DISCOUNT`'
+          example: 15
+        assignedCredit:
+          type: integer
+          description: 'The earned quantity of the reward. Works with: `CREDIT`'
+        currency:
+          type: string
+          description: 'For programs that require a currency. Works with: `CREDIT`'
+        fuelTankType:
+          type: string
+          description: 'The type of reward associated with this fueltank code. Works with: `FUELTANK`'
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+        fuelTankCode:
+          type: string
+          description: 'The fueltank code associated with this reward. Works with: `FUELTANK`.'
+        amount:
+          type: integer
+          description: 'The earned quantity of the reward. Works with: `FUELTANK`'
+    RewardList:
+      type: array
+      description: A list of Reward objects.
+      items:
+        $ref: '#/components/schemas/Reward'
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          example: RS042
   responses:
     GeneralError:
       description: Unexpected Error

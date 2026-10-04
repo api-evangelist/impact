@@ -526,24 +526,6 @@ paths:
     - url: https://api.impact.com
       description: Production server
 components:
-  parameters:
-    JobId:
-      name: JobId
-      in: path
-      required: true
-      description: The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`).
-      schema:
-        type: string
-        format: uuid
-      example: 81258bc5-54cf-4a09-9fbc-eb837637d02f
-    AccountSID:
-      name: AccountSID
-      in: path
-      required: true
-      description: Your Agency Account SID.
-      schema:
-        type: string
-      example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
   schemas:
     Job:
       type: object
@@ -863,6 +845,24 @@ components:
           type: string
           description: API resource path to download the result file once the job is complete.
           example: /Mediapartners/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f/Download
+  parameters:
+    AccountSID:
+      name: AccountSID
+      in: path
+      required: true
+      description: Your Agency Account SID.
+      schema:
+        type: string
+      example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
+    JobId:
+      name: JobId
+      in: path
+      required: true
+      description: The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`).
+      schema:
+        type: string
+        format: uuid
+      example: 81258bc5-54cf-4a09-9fbc-eb837637d02f
   securitySchemes:
     basicAuth:
       type: http

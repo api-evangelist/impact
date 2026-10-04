@@ -100,29 +100,23 @@ paths:
         source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/account/{accountId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
-    Error:
+    Account:
+      required:
+      - id
+      - subscription
       properties:
-        statusCode:
-          type: integer
-          format: int32
-          example: 404
-          description: The HTTP status code of the error.
-        message:
+        id:
           type: string
-          description: The human-readable description of what went wrong. Use this to help you debug.
-        apiErrorCode:
+          description: Unique identifier for the account.
+          example: abc123
+        subscription:
+          $ref: '#/components/schemas/AccountSubscription'
+        referral:
+          $ref: '#/components/schemas/AccountReferral'
+        currency:
           type: string
-          description: A machine-readable error code.
-        rsCode:
-          type: string
-          nullable: true
-          description: A secondary machine-readable error code.
-          example: RS042
-    AccountReferral:
-      properties:
-        code:
-          type: string
-          example: BOBTESTERSON
+          example: USD
+          description: ISO 4217 standard currency code (e.g. `USD`, `EUR`).
     AccountSubscription:
       required:
       - status
@@ -152,23 +146,29 @@ components:
           type: number
           format: double
           example: 49.99
-    Account:
-      required:
-      - id
-      - subscription
+    Error:
       properties:
-        id:
+        statusCode:
+          type: integer
+          format: int32
+          example: 404
+          description: The HTTP status code of the error.
+        message:
           type: string
-          description: Unique identifier for the account.
-          example: abc123
-        subscription:
-          $ref: '#/components/schemas/AccountSubscription'
-        referral:
-          $ref: '#/components/schemas/AccountReferral'
-        currency:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+        apiErrorCode:
           type: string
-          example: USD
-          description: ISO 4217 standard currency code (e.g. `USD`, `EUR`).
+          description: A machine-readable error code.
+        rsCode:
+          type: string
+          nullable: true
+          description: A secondary machine-readable error code.
+          example: RS042
+    AccountReferral:
+      properties:
+        code:
+          type: string
+          example: BOBTESTERSON
   securitySchemes:
     APIKey:
       type: http

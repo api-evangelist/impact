@@ -423,20 +423,22 @@ components:
           type: string
           description: Two-letter ISO 3166-1 alpha-2 country code for the cell phone number.
           example: ''
-    Pronouns:
+    OrganizationType:
       type: string
-      description: The preferred pronouns of the partner.
+      description: The legal structure of the organization. Available options vary depending on the country the business is registered in.
       enum:
-      - he_him
-      - she_her
-      - they_them
-      - ey_em
-      - ne_nem
-      - ve_ver
-      - xe_xem
-      - xie_xem
-      - ze_zir
-      - None
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER
     Address:
       type: object
       properties:
@@ -474,15 +476,19 @@ components:
       - Widowed
       - Divorced
       - None
-    ParentalStatus:
+    Pronouns:
       type: string
-      description: The parental status of the partner.
+      description: The preferred pronouns of the partner.
       enum:
-      - Mom
-      - Dad
-      - Grandfather
-      - Grandmother
-      - Other
+      - he_him
+      - she_her
+      - they_them
+      - ey_em
+      - ne_nem
+      - ve_ver
+      - xe_xem
+      - xie_xem
+      - ze_zir
       - None
     Education:
       type: string
@@ -496,26 +502,6 @@ components:
       - Some_college
       - Other
       - None
-    PromotionalMethod:
-      type: string
-      description: A promotional method used to drive traffic and conversions.
-      enum:
-      - EMAIL
-      - SEARCH
-      - LOYALTY
-      - COUPON
-      - SYNDICATION_BLOG_NETWORKS
-      - CPA_NETWORK
-      - MOBILE
-      - CONTENT
-      - SHOPPING
-      - SOCIAL_MEDIA_INFLUENCER
-      - SERVICE_PROVIDER
-      - CONSUMER_SOFTWARE
-      - INCENTIVIZED
-      - OFFLINE
-      - OTHER
-      - CASHBACK
     Ethnicity:
       type: string
       description: The ethnic background of the partner.
@@ -554,19 +540,33 @@ components:
       - Over_75K
       - Over_100K
       - None
-    OrganizationType:
+    PromotionalMethod:
       type: string
-      description: The legal structure of the organization. Available options vary depending on the country the business is registered in.
+      description: A promotional method used to drive traffic and conversions.
       enum:
-      - NONP_GOV
-      - CORP
-      - SOLE_IND
-      - LLC_LLP_LLS
-      - TRUST
-      - SOLE_TRD
-      - PARTNERS
-      - LLC
-      - LLP
-      - COMPANY
-      - GOVERNMENT
+      - EMAIL
+      - SEARCH
+      - LOYALTY
+      - COUPON
+      - SYNDICATION_BLOG_NETWORKS
+      - CPA_NETWORK
+      - MOBILE
+      - CONTENT
+      - SHOPPING
+      - SOCIAL_MEDIA_INFLUENCER
+      - SERVICE_PROVIDER
+      - CONSUMER_SOFTWARE
+      - INCENTIVIZED
+      - OFFLINE
       - OTHER
+      - CASHBACK
+    ParentalStatus:
+      type: string
+      description: The parental status of the partner.
+      enum:
+      - Mom
+      - Dad
+      - Grandfather
+      - Grandmother
+      - Other
+      - None

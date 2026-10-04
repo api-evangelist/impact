@@ -134,38 +134,6 @@ components:
           type: integer
           description: The amount of credit to be debitted.
           example: 200
-    RewardDebitResponse:
-      description: Details about a successful Reward Balance Debit transaction.
-      properties:
-        creditRedeemed:
-          type: integer
-          example: 200
-          description: The amount of credit that was just debitted.
-        creditAvailable:
-          type: integer
-          example: 0
-          description: The remaining credit in this account of the same unit type.
-        unit:
-          type: string
-          example: cents
-          description: The type of credit that was just debitted.
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error
-          type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code
-          type: string
-          example: RS042
     RewardBalance:
       description: Details of the balance of several individual rewards.
       properties:
@@ -216,6 +184,38 @@ components:
         totalFuelTankCodes:
           type: integer
           description: 'The number of earned fueltank rewards. Only works with type: `FUELTANK`'
+    RewardDebitResponse:
+      description: Details about a successful Reward Balance Debit transaction.
+      properties:
+        creditRedeemed:
+          type: integer
+          example: 200
+          description: The amount of credit that was just debitted.
+        creditAvailable:
+          type: integer
+          example: 0
+          description: The remaining credit in this account of the same unit type.
+        unit:
+          type: string
+          example: cents
+          description: The type of credit that was just debitted.
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          example: RS042
   responses:
     GeneralError:
       description: Unexpected Error
