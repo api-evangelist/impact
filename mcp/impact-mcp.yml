@@ -177,3 +177,19 @@ notes:
   so mode is remote and install/package are intentionally absent.
 - The MCP tool surface is NOT a wrapper over the REST API. Only a handful of tools map to published REST
   operations; the analytics, discovery and guidance tools have no public REST equivalent. See mcp/impact-tool-crosswalk.yml.
+rfc9728:
+  endpoint: https://mcp.impact.com/mcp
+  metadata_url: https://app.impact.com/.well-known/oauth-protected-resource
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://mcp.impact.com/mcp
+    authorization_servers:
+    - https://app.impact.com
+    scopes_supported:
+    - mcp:read
+    - mcp:write
+    bearer_methods_supported:
+    - header
