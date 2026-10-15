@@ -98,3 +98,16 @@
     detected: '2026-10-14'
   status: not-a-workflow
   arazzo: null
+- slug: impact-stripe-own
+  label: Stripe (own)
+  partner: stripe
+  partner_name: Stripe (own)
+  category: affiliate_and_referrals
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.stripe.com/apps/impactcom-affiliate
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
