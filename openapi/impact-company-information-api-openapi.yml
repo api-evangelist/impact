@@ -228,6 +228,34 @@ paths:
     - url: https://api.impact.com
 components:
   schemas:
+    Address:
+      type: object
+      description: A physical address on the agency's account.
+      properties:
+        AddressLine1:
+          type: string
+          description: First line of the street address.
+          example: 100 Commerce Drive
+        AddressLine2:
+          type: string
+          description: Second line of the address (suite, floor, unit, etc.). May be an empty string if not provided.
+          example: Suite 200
+        City:
+          type: string
+          description: City or municipality.
+          example: Austin
+        State:
+          type: string
+          description: State, province, or region. May be empty for countries that do not subdivide this way.
+          example: TX
+        PostalCode:
+          type: string
+          description: ZIP or postal code.
+          example: '78701'
+        Country:
+          type: string
+          description: Country code, using impact.com's format (e.g., `US`, `SOUTHAFRICA`). May differ from ISO 3166.
+          example: US
     CompanyInformationUpdate:
       type: object
       description: 'Partial company information update. All fields are optional — omitted fields keep their existing values.
@@ -298,6 +326,42 @@ components:
           $ref: '#/components/schemas/Contact'
         CommercialContact:
           $ref: '#/components/schemas/Contact'
+    Contact:
+      type: object
+      description: An agency employee assigned to a key contact role.
+      properties:
+        UserId:
+          type: string
+          description: 'The impact.com numeric user ID of the assigned employee. Empty if no contact has been assigned to this role.
+
+
+            To resolve to a full user record, use the Users endpoint.'
+          example: '5402850'
+        Name:
+          type: string
+          description: The contact's full display name. Empty if no contact is assigned.
+          example: Carrie Oakey
+        Email:
+          type: string
+          format: email
+          description: The contact's email address. Empty if no contact is assigned.
+          example: carrie.oakey@nuttandco-agency.com
+        WorkPhoneNumber:
+          type: string
+          description: The contact's work phone number. Digits only. Empty if not set.
+          example: '15125550191'
+        WorkPhoneNumberCountry:
+          type: string
+          description: The country associated with the work phone number.
+          example: US
+        CellPhoneNumber:
+          type: string
+          description: The contact's mobile phone number. Digits only. Empty if not set.
+          example: ''
+        CellPhoneNumberCountry:
+          type: string
+          description: The country associated with the cell phone number.
+          example: ''
     CompanyInformation:
       type: object
       description: Your agency's company profile.
@@ -406,69 +470,168 @@ components:
           type: string
           description: The relative URI for this resource within the Agency API.
           example: /Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/CompanyInformation
-    Contact:
+    CompanyInformationUpdate_2:
       type: object
-      description: An agency employee assigned to a key contact role.
+      description: Fields available for updating company information.
       properties:
-        UserId:
+        CompanyName:
           type: string
-          description: 'The impact.com numeric user ID of the assigned employee. Empty if no contact has been assigned to this role.
-
-
-            To resolve to a full user record, use the Users endpoint.'
-          example: '5402850'
-        Name:
+          description: The name used for the account.
+          example: Acme Corporation
+        Website:
           type: string
-          description: The contact's full display name. Empty if no contact is assigned.
-          example: Carrie Oakey
-        Email:
+          format: uri
+          description: The official company website URL.
+          example: https://www.example.com
+        PrimaryPhoneNumber:
           type: string
-          format: email
-          description: The contact's email address. Empty if no contact is assigned.
-          example: carrie.oakey@nuttandco-agency.com
-        WorkPhoneNumber:
+          description: The primary domestic contact number.
+          example: '1235550100'
+        PrimaryPhoneNumberCountry:
           type: string
-          description: The contact's work phone number. Digits only. Empty if not set.
-          example: '15125550191'
-        WorkPhoneNumberCountry:
-          type: string
-          description: The country associated with the work phone number.
+          description: Two-letter country code for the primary phone number (required if PrimaryPhoneNumber is provided).
           example: US
-        CellPhoneNumber:
+        SecondaryPhoneNumber:
           type: string
-          description: The contact's mobile phone number. Digits only. Empty if not set.
-          example: ''
-        CellPhoneNumberCountry:
+          description: A secondary domestic contact phone number.
+          example: '3215550100'
+        SecondaryPhoneNumberCountry:
           type: string
-          description: The country associated with the cell phone number.
-          example: ''
-    Address:
+          description: Two-letter country code for the secondary phone number (required if SecondaryPhoneNumber is provided).
+          example: US
+        OrganizationType:
+          $ref: '#/components/schemas/OrganizationType'
+          description: Organization type for the account. Available options will vary depending on the country that the business is registered in.
+        EinSsnForeignTaxId:
+          type: string
+          description: EIN, SSN, or foreign Tax ID.
+          example: 12-3456789
+        CorporateAddressLine1:
+          type: string
+          description: Address line 1 for the corporate address.
+          example: 1640 Riverside Dr.
+        CorporateAddressLine2:
+          type: string
+          description: Address line 2 for the corporate address.
+          example: Suite 400
+        CorporateAddressCity:
+          type: string
+          description: City for the corporate address.
+          example: Hill Valley
+        CorporateAddressPostalCode:
+          type: string
+          description: Postal code for the corporate address.
+          example: '90210'
+        CorporateAddressCountry:
+          type: string
+          description: Two-letter country code for the corporate address.
+          example: US
+        BillingAddressLine1:
+          type: string
+          description: Address line 1 for the billing address.
+          example: 112 1/2 Beacon St.
+        BillingAddressLine2:
+          type: string
+          description: Address line 2 for the billing address.
+          example: Floor 2
+        BillingAddressCity:
+          type: string
+          description: City for the billing address.
+          example: Boston
+        BillingAddressPostalCode:
+          type: string
+          description: Postal code for the billing address.
+          example: '02116'
+        BillingAddressCountry:
+          type: string
+          description: Two-letter country code for the billing address.
+          example: US
+    OrganizationType:
+      type: string
+      description: Organization type for the account.
+      enum:
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER
+      example: CORP
+    Address_2:
       type: object
-      description: A physical address on the agency's account.
       properties:
         AddressLine1:
           type: string
-          description: First line of the street address.
-          example: 100 Commerce Drive
+          description: Address line 1 (address number, street name)
+          example: 1640 Riverside Dr.
         AddressLine2:
           type: string
-          description: Second line of the address (suite, floor, unit, etc.). May be an empty string if not provided.
-          example: Suite 200
+          description: Address line 2 (building, unit, suite, etc. number)
+          example: Suite 400
         City:
           type: string
-          description: City or municipality.
-          example: Austin
+          description: City, district, suburb, town, or village
+          example: Hill Valley
         State:
           type: string
-          description: State, province, or region. May be empty for countries that do not subdivide this way.
-          example: TX
+          description: State or territory
+          example: CALIFORNIA
         PostalCode:
           type: string
-          description: ZIP or postal code.
-          example: '78701'
+          description: ZIP or postal code
+          example: '90210'
         Country:
           type: string
-          description: Country code, using impact.com's format (e.g., `US`, `SOUTHAFRICA`). May differ from ISO 3166.
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+    Industry:
+      type: object
+      properties:
+        IndustryId:
+          type: string
+          description: Unique identifier for the selected industry.
+          example: '833'
+        IndustryName:
+          type: string
+          description: The display name for the selected industry.
+          example: Miscellaneous Retail Stores, Not Elsewhere Classified
+    Contact_2:
+      type: object
+      properties:
+        UserId:
+          type: string
+          description: Unique impact.com member account ID for the user.
+          example: '1234567'
+        Name:
+          type: string
+          description: The contact's full name.
+          example: Road Runner
+        Email:
+          type: string
+          format: email
+          description: The contact's email address.
+          example: finance@example.com
+        WorkPhoneNumber:
+          type: string
+          description: The contact's work phone number.
+          example: '2065550100'
+        WorkPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the work phone number.
+          example: US
+        CellPhoneNumber:
+          type: string
+          description: The contact's cell phone number.
+          example: '2065550133'
+        CellPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the cell phone number.
           example: US
     CompanyInformation_2:
       type: object
@@ -551,169 +714,6 @@ components:
           format: uri-reference
           description: The unique reference to this object in the impact.com API.
           example: /Advertisers/<AccountSID>/CompanyInformation
-    Contact_2:
-      type: object
-      properties:
-        UserId:
-          type: string
-          description: Unique impact.com member account ID for the user.
-          example: '1234567'
-        Name:
-          type: string
-          description: The contact's full name.
-          example: Road Runner
-        Email:
-          type: string
-          format: email
-          description: The contact's email address.
-          example: finance@example.com
-        WorkPhoneNumber:
-          type: string
-          description: The contact's work phone number.
-          example: '2065550100'
-        WorkPhoneNumberCountry:
-          type: string
-          description: Two-letter country code for the work phone number.
-          example: US
-        CellPhoneNumber:
-          type: string
-          description: The contact's cell phone number.
-          example: '2065550133'
-        CellPhoneNumberCountry:
-          type: string
-          description: Two-letter country code for the cell phone number.
-          example: US
-    OrganizationType:
-      type: string
-      description: Organization type for the account.
-      enum:
-      - NONP_GOV
-      - CORP
-      - SOLE_IND
-      - LLC_LLP_LLS
-      - TRUST
-      - SOLE_TRD
-      - PARTNERS
-      - LLC
-      - LLP
-      - COMPANY
-      - GOVERNMENT
-      - OTHER
-      example: CORP
-    Industry:
-      type: object
-      properties:
-        IndustryId:
-          type: string
-          description: Unique identifier for the selected industry.
-          example: '833'
-        IndustryName:
-          type: string
-          description: The display name for the selected industry.
-          example: Miscellaneous Retail Stores, Not Elsewhere Classified
-    Address_2:
-      type: object
-      properties:
-        AddressLine1:
-          type: string
-          description: Address line 1 (address number, street name)
-          example: 1640 Riverside Dr.
-        AddressLine2:
-          type: string
-          description: Address line 2 (building, unit, suite, etc. number)
-          example: Suite 400
-        City:
-          type: string
-          description: City, district, suburb, town, or village
-          example: Hill Valley
-        State:
-          type: string
-          description: State or territory
-          example: CALIFORNIA
-        PostalCode:
-          type: string
-          description: ZIP or postal code
-          example: '90210'
-        Country:
-          type: string
-          description: Two-letter ISO 3166-1 alpha-2 country code.
-          example: US
-    CompanyInformationUpdate_2:
-      type: object
-      description: Fields available for updating company information.
-      properties:
-        CompanyName:
-          type: string
-          description: The name used for the account.
-          example: Acme Corporation
-        Website:
-          type: string
-          format: uri
-          description: The official company website URL.
-          example: https://www.example.com
-        PrimaryPhoneNumber:
-          type: string
-          description: The primary domestic contact number.
-          example: '1235550100'
-        PrimaryPhoneNumberCountry:
-          type: string
-          description: Two-letter country code for the primary phone number (required if PrimaryPhoneNumber is provided).
-          example: US
-        SecondaryPhoneNumber:
-          type: string
-          description: A secondary domestic contact phone number.
-          example: '3215550100'
-        SecondaryPhoneNumberCountry:
-          type: string
-          description: Two-letter country code for the secondary phone number (required if SecondaryPhoneNumber is provided).
-          example: US
-        OrganizationType:
-          $ref: '#/components/schemas/OrganizationType'
-          description: Organization type for the account. Available options will vary depending on the country that the business is registered in.
-        EinSsnForeignTaxId:
-          type: string
-          description: EIN, SSN, or foreign Tax ID.
-          example: 12-3456789
-        CorporateAddressLine1:
-          type: string
-          description: Address line 1 for the corporate address.
-          example: 1640 Riverside Dr.
-        CorporateAddressLine2:
-          type: string
-          description: Address line 2 for the corporate address.
-          example: Suite 400
-        CorporateAddressCity:
-          type: string
-          description: City for the corporate address.
-          example: Hill Valley
-        CorporateAddressPostalCode:
-          type: string
-          description: Postal code for the corporate address.
-          example: '90210'
-        CorporateAddressCountry:
-          type: string
-          description: Two-letter country code for the corporate address.
-          example: US
-        BillingAddressLine1:
-          type: string
-          description: Address line 1 for the billing address.
-          example: 112 1/2 Beacon St.
-        BillingAddressLine2:
-          type: string
-          description: Address line 2 for the billing address.
-          example: Floor 2
-        BillingAddressCity:
-          type: string
-          description: City for the billing address.
-          example: Boston
-        BillingAddressPostalCode:
-          type: string
-          description: Postal code for the billing address.
-          example: '02116'
-        BillingAddressCountry:
-          type: string
-          description: Two-letter country code for the billing address.
-          example: US
 x-refined-from:
 - impact-agency-companyinformation-v3-openapi.yml
 - impact-brand-account-v14-openapi.yml

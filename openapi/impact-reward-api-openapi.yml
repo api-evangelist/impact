@@ -400,20 +400,23 @@ paths:
         source: "curl -L \\\n  --request POST \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/rewards/account/{accountId}/user/{userId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
-    RewardDebitRequest:
-      description: A request to debit a single reward
-      required:
-      - amount
-      - unit
+    Error:
       properties:
-        amount:
+        statusCode:
+          description: The HTTP status code of the error
           type: integer
-          example: 200
-          description: The amount of credit to be debitted.
-        unit:
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
           type: string
-          description: The type of credit to be debitted. E.g. "free-months" or "cents"
-          example: cents
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          example: RS042
     Redemption:
       title: A redemption object
       description: Details about when a quantity of a reward was redeemed from the impact.com system.
@@ -433,21 +436,60 @@ components:
         id: 5462600de4b09b1c41238f2f
         dateRedeemed: 1415733261275
         quantityRedeemed: 2000
-    RewardDebitResponse:
-      description: Details about a successful Reward Balance Debit transaction.
+    NewReward:
+      description: Details of a new reward to create.
       properties:
-        creditRedeemed:
+        type:
+          type: string
+          description: The type of reward.
+          example: PCT_DISCOUNT
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+          - FUELTANK
+        dateExpires:
           type: integer
-          example: 200
-          description: The amount of credit that was just debitted.
-        creditAvailable:
+          format: int64
+          description: Unix timestamp (milliseconds) when this reward is set to expire.
+          example: 1471028988000
+        dateScheduledFor:
           type: integer
-          example: 1800
-          description: The remaining credit in this account of the same unit type.
+          format: int64
+          description: Unix timestamp (milliseconds) when the reward is scheduled to become available.
+        cancellable:
+          type: boolean
+          description: If a reward is cancellable then it may be revoked. If it has been cancelled then dateCancelled will be non-null.
+          example: true
         unit:
           type: string
-          example: cents
-          description: The type of credit that was just debitted.
+          description: 'An identifier for the unit of the reward. E.g. `''credit-in-cents''`, `''freemb''`, `''giftcard20''`, `''tshirt''`, `''freemonth''` or `''%''`. Works with: `CREDIT`'
+        discountPercent:
+          type: integer
+          description: 'The percent discount. E.g. 10 means 10% Works with: `PCT_DISCOUNT`'
+          example: 15
+        assignedCredit:
+          type: integer
+          description: 'The earned quantity of the reward. Works with: `CREDIT`'
+        currency:
+          type: string
+          description: 'For programs that require a currency. Works with: `CREDIT`'
+        fuelTankType:
+          type: string
+          description: 'The type of reward associated with this fueltank code. Works with: `FUELTANK`'
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+        fuelTankCode:
+          type: string
+          description: 'The fueltank code associated with this reward. Works with: `FUELTANK`.'
+        amount:
+          type: integer
+          description: 'The earned quantity of the reward. Works with: `FUELTANK`'
+    RewardList:
+      type: array
+      description: A list of Reward objects.
+      items:
+        $ref: '#/components/schemas/Reward'
     Reward:
       title: Reward
       description: Rewards are used by impact.com to track the credits, discounts, gift cards and other prizes that a User earns.
@@ -554,77 +596,35 @@ components:
           enum:
           - PCT_DISCOUNT
           - CREDIT
-    NewReward:
-      description: Details of a new reward to create.
+    RewardDebitResponse:
+      description: Details about a successful Reward Balance Debit transaction.
       properties:
-        type:
-          type: string
-          description: The type of reward.
-          example: PCT_DISCOUNT
-          enum:
-          - PCT_DISCOUNT
-          - CREDIT
-          - FUELTANK
-        dateExpires:
+        creditRedeemed:
           type: integer
-          format: int64
-          description: Unix timestamp (milliseconds) when this reward is set to expire.
-          example: 1471028988000
-        dateScheduledFor:
+          example: 200
+          description: The amount of credit that was just debitted.
+        creditAvailable:
           type: integer
-          format: int64
-          description: Unix timestamp (milliseconds) when the reward is scheduled to become available.
-        cancellable:
-          type: boolean
-          description: If a reward is cancellable then it may be revoked. If it has been cancelled then dateCancelled will be non-null.
-          example: true
+          example: 1800
+          description: The remaining credit in this account of the same unit type.
         unit:
           type: string
-          description: 'An identifier for the unit of the reward. E.g. `''credit-in-cents''`, `''freemb''`, `''giftcard20''`, `''tshirt''`, `''freemonth''` or `''%''`. Works with: `CREDIT`'
-        discountPercent:
-          type: integer
-          description: 'The percent discount. E.g. 10 means 10% Works with: `PCT_DISCOUNT`'
-          example: 15
-        assignedCredit:
-          type: integer
-          description: 'The earned quantity of the reward. Works with: `CREDIT`'
-        currency:
-          type: string
-          description: 'For programs that require a currency. Works with: `CREDIT`'
-        fuelTankType:
-          type: string
-          description: 'The type of reward associated with this fueltank code. Works with: `FUELTANK`'
-          enum:
-          - PCT_DISCOUNT
-          - CREDIT
-        fuelTankCode:
-          type: string
-          description: 'The fueltank code associated with this reward. Works with: `FUELTANK`.'
+          example: cents
+          description: The type of credit that was just debitted.
+    RewardDebitRequest:
+      description: A request to debit a single reward
+      required:
+      - amount
+      - unit
+      properties:
         amount:
           type: integer
-          description: 'The earned quantity of the reward. Works with: `FUELTANK`'
-    RewardList:
-      type: array
-      description: A list of Reward objects.
-      items:
-        $ref: '#/components/schemas/Reward'
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error
-          type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
+          example: 200
+          description: The amount of credit to be debitted.
+        unit:
           type: string
-        apiErrorCode:
-          description: A machine-readable error code
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code
-          type: string
-          example: RS042
+          description: The type of credit to be debitted. E.g. "free-months" or "cents"
+          example: cents
   responses:
     GeneralError:
       description: Unexpected Error

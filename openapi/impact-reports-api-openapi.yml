@@ -156,39 +156,6 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Reports/{Id}/MetaData' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
-    ReportMetadata:
-      type: object
-      properties:
-        Name:
-          type: string
-          description: Display name of the report.
-          example: Action Listing
-        Id:
-          type: string
-          description: The report handle.
-          example: mp_action_listing_fast
-        Description:
-          type: string
-          description: A short description of what the report contains.
-          example: Displays data for each individual action that has been credited to you.
-        Filters:
-          type: array
-          description: The filters this report accepts as query parameters when run.
-          items:
-            $ref: '#/components/schemas/ReportFilter'
-        Attributes:
-          type: array
-          description: The columns this report returns. Each row in a Run Report response contains one key per attribute.
-          items:
-            $ref: '#/components/schemas/ReportAttribute'
-        RunUri:
-          type: string
-          description: API resource path to run this report.
-          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast
-        Uri:
-          type: string
-          description: Unique reference to this report's metadata in the impact.com API.
-          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast/MetaData
     ReportAttribute:
       type: object
       properties:
@@ -225,6 +192,39 @@ components:
           type: string
           description: Additional format hint for the filter, if any.
           example: ''
+    ReportMetadata:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Display name of the report.
+          example: Action Listing
+        Id:
+          type: string
+          description: The report handle.
+          example: mp_action_listing_fast
+        Description:
+          type: string
+          description: A short description of what the report contains.
+          example: Displays data for each individual action that has been credited to you.
+        Filters:
+          type: array
+          description: The filters this report accepts as query parameters when run.
+          items:
+            $ref: '#/components/schemas/ReportFilter'
+        Attributes:
+          type: array
+          description: The columns this report returns. Each row in a Run Report response contains one key per attribute.
+          items:
+            $ref: '#/components/schemas/ReportAttribute'
+        RunUri:
+          type: string
+          description: API resource path to run this report.
+          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast
+        Uri:
+          type: string
+          description: Unique reference to this report's metadata in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast/MetaData
     Report:
       type: object
       properties:

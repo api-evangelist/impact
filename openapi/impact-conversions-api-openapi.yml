@@ -1258,29 +1258,6 @@ components:
 
         '
       example: CLO
-    ConversionError:
-      type: object
-      description: Returned when the conversion submission request is invalid.
-      properties:
-        Status:
-          type: string
-          description: Indicates that the request failed.
-          example: ERROR
-        errors:
-          type: array
-          description: One or more validation errors describing what was wrong with the request.
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-                description: The name of the field that caused the error.
-              level:
-                type: string
-                description: The severity of the error.
-              message:
-                type: string
-                description: A human-readable error message.
     ConversionSubmissionResponse:
       type: object
       description: Returned when a conversion event is successfully queued for processing.
@@ -1329,6 +1306,29 @@ components:
           type: string
           description: A short, human-readable summary of the error.
           example: Unauthorized
+    ConversionError:
+      type: object
+      description: Returned when the conversion submission request is invalid.
+      properties:
+        Status:
+          type: string
+          description: Indicates that the request failed.
+          example: ERROR
+        errors:
+          type: array
+          description: One or more validation errors describing what was wrong with the request.
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: The name of the field that caused the error.
+              level:
+                type: string
+                description: The severity of the error.
+              message:
+                type: string
+                description: A human-readable error message.
     ConversionPayload_2:
       type: object
       description: The details of a conversion event you submit.

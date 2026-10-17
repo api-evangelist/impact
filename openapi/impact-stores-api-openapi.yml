@@ -140,59 +140,6 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Stores/{Id}/Group/{GroupId}/Items' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
 components:
   schemas:
-    StoreGroup:
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier for the group within the store.
-          example: '817'
-        Name:
-          type: string
-          description: Display name of the group.
-          example: Professional Equipment
-        NumberOfProducts:
-          type: string
-          description: Number of products in this group.
-          example: '17'
-        DateLastUpdated:
-          type: string
-          format: date-time
-          description: Date and time the group was last updated (ISO 8601).
-          example: '2025-06-20T08:01:43-07:00'
-        StartDate:
-          type: string
-          format: date-time
-          description: Date and time from which this group is active (ISO 8601). Empty for groups with no scheduled start.
-          example: ''
-        EndDate:
-          type: string
-          format: date-time
-          description: Date and time at which this group ends (ISO 8601). Empty for groups with no scheduled end.
-          example: ''
-        Status:
-          type: string
-          enum:
-          - ACTIVE
-          - DISABLED
-          description: Current state of the group.
-          example: ACTIVE
-        CatalogId:
-          type: string
-          description: Unique identifier for the brand catalog that contains the items in this group.
-          example: '24836'
-        Uri:
-          type: string
-          description: Web URL to view the products in this group in the impact.com interface.
-          example: https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817
-        ItemsUri:
-          type: string
-          description: API resource path to list the items in this group.
-          example: /Mediapartners/<AccountSID>/Stores/10306/Group/817/Items
-        GroupProductPreview:
-          type: string
-          description: Optional preview image representing the group's products. May be empty.
-          example: ''
     Store:
       type: object
       properties:
@@ -547,6 +494,59 @@ components:
           type: string
           description: API resource path to this item in the Partner Catalogs API.
           example: /Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016
+    StoreGroup:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the group within the store.
+          example: '817'
+        Name:
+          type: string
+          description: Display name of the group.
+          example: Professional Equipment
+        NumberOfProducts:
+          type: string
+          description: Number of products in this group.
+          example: '17'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: Date and time the group was last updated (ISO 8601).
+          example: '2025-06-20T08:01:43-07:00'
+        StartDate:
+          type: string
+          format: date-time
+          description: Date and time from which this group is active (ISO 8601). Empty for groups with no scheduled start.
+          example: ''
+        EndDate:
+          type: string
+          format: date-time
+          description: Date and time at which this group ends (ISO 8601). Empty for groups with no scheduled end.
+          example: ''
+        Status:
+          type: string
+          enum:
+          - ACTIVE
+          - DISABLED
+          description: Current state of the group.
+          example: ACTIVE
+        CatalogId:
+          type: string
+          description: Unique identifier for the brand catalog that contains the items in this group.
+          example: '24836'
+        Uri:
+          type: string
+          description: Web URL to view the products in this group in the impact.com interface.
+          example: https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817
+        ItemsUri:
+          type: string
+          description: API resource path to list the items in this group.
+          example: /Mediapartners/<AccountSID>/Stores/10306/Group/817/Items
+        GroupProductPreview:
+          type: string
+          description: Optional preview image representing the group's products. May be empty.
+          example: ''
   securitySchemes:
     basicAuth:
       type: http

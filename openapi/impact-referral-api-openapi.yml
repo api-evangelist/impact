@@ -176,106 +176,23 @@ paths:
         source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/referrals' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
-    Referral:
-      description: A link between the user/account of the referrer and the new referred user/account.
+    Error:
       properties:
-        id:
+        statusCode:
+          type: integer
+          format: int32
+          example: 404
+        message:
           type: string
-          example: 6a1709e0eb067e53ef651c29
-        referredUser:
-          $ref: '#/components/schemas/User'
-        referrerUser:
-          $ref: '#/components/schemas/User'
-        referredReward:
-          $ref: '#/components/schemas/Reward'
-        referrerReward:
-          nullable: true
-          allOf:
-          - $ref: '#/components/schemas/Reward'
-        referralCodeUsed:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+        apiErrorCode:
+          type: string
+          description: A machine-readable error code.
+        rsCode:
           type: string
           nullable: true
-          example: BOBTESTERSON
-        shareLinkUsed:
-          type: string
-          nullable: true
-          example: null
-        moderationStatus:
-          type: string
-          example: ACTIONED
-          enum:
-          - PENDING
-          - ACTIONED
-        referredModerationStatus:
-          type: string
-          example: APPROVED
-          enum:
-          - PENDING
-          - APPROVED
-          - DENIED
-        referrerModerationStatus:
-          type: string
-          example: APPROVED
-          enum:
-          - PENDING
-          - APPROVED
-          - DENIED
-        fraudSignals:
-          nullable: true
-          allOf:
-          - $ref: '#/components/schemas/FraudSignals'
-        dateReferralStarted:
-          type: integer
-          format: int64
-          example: 1779894752097
-        dateReferralPaid:
-          type: integer
-          format: int64
-          nullable: true
-          example: null
-        dateReferralEnded:
-          type: integer
-          format: int64
-          nullable: true
-          example: null
-        dateModerated:
-          type: integer
-          format: int64
-          nullable: true
-          example: 1779894752099
-        dateConverted:
-          type: integer
-          format: int64
-          nullable: true
-          description: Unix timestamp (milliseconds) when the referral converted.
-          example: null
-        dateModified:
-          type: integer
-          format: int64
-          description: Unix timestamp (milliseconds) when the referral was last modified.
-          example: 1779894752494
-        dateUserModified:
-          type: integer
-          format: int64
-          nullable: true
-          description: Unix timestamp (milliseconds) when the referred user was last modified.
-          example: null
-        programId:
-          type: string
-          nullable: true
-          description: The ID of the program this referral belongs to.
-          example: null
-    FraudSignals:
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/FraudSignal'
-        ip:
-          $ref: '#/components/schemas/FraudSignal'
-        email:
-          $ref: '#/components/schemas/FraudSignal'
-        rate:
-          $ref: '#/components/schemas/FraudSignal'
+          description: A secondary machine-readable error code.
+          example: RS042
     FraudSignal:
       type: object
       properties:
@@ -356,6 +273,34 @@ components:
         shareLinks:
           type: object
           description: The user's share links, organised by share medium and engagement medium.
+    ReferralModerationRequest:
+      description: A request to moderate a single referral.
+      required:
+      - referralId
+      - action
+      properties:
+        referralId:
+          type: string
+        action:
+          type: string
+          enum:
+          - APPROVED
+          - DENIED
+          - REFERRER_APPROVED
+          - REFERRED_APPROVED
+          - REFERRER_DENIED
+          - REFERRED_DENIED
+    FraudSignals:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/FraudSignal'
+        ip:
+          $ref: '#/components/schemas/FraudSignal'
+        email:
+          $ref: '#/components/schemas/FraudSignal'
+        rate:
+          $ref: '#/components/schemas/FraudSignal'
     ReferralList:
       type: object
       properties:
@@ -470,6 +415,95 @@ components:
           type: object
           nullable: true
           example: null
+    Referral:
+      description: A link between the user/account of the referrer and the new referred user/account.
+      properties:
+        id:
+          type: string
+          example: 6a1709e0eb067e53ef651c29
+        referredUser:
+          $ref: '#/components/schemas/User'
+        referrerUser:
+          $ref: '#/components/schemas/User'
+        referredReward:
+          $ref: '#/components/schemas/Reward'
+        referrerReward:
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/Reward'
+        referralCodeUsed:
+          type: string
+          nullable: true
+          example: BOBTESTERSON
+        shareLinkUsed:
+          type: string
+          nullable: true
+          example: null
+        moderationStatus:
+          type: string
+          example: ACTIONED
+          enum:
+          - PENDING
+          - ACTIONED
+        referredModerationStatus:
+          type: string
+          example: APPROVED
+          enum:
+          - PENDING
+          - APPROVED
+          - DENIED
+        referrerModerationStatus:
+          type: string
+          example: APPROVED
+          enum:
+          - PENDING
+          - APPROVED
+          - DENIED
+        fraudSignals:
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/FraudSignals'
+        dateReferralStarted:
+          type: integer
+          format: int64
+          example: 1779894752097
+        dateReferralPaid:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        dateReferralEnded:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        dateModerated:
+          type: integer
+          format: int64
+          nullable: true
+          example: 1779894752099
+        dateConverted:
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp (milliseconds) when the referral converted.
+          example: null
+        dateModified:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when the referral was last modified.
+          example: 1779894752494
+        dateUserModified:
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp (milliseconds) when the referred user was last modified.
+          example: null
+        programId:
+          type: string
+          nullable: true
+          description: The ID of the program this referral belongs to.
+          example: null
     ReferralModerationBulkRequest:
       description: A request to perform one or several moderation actions.
       required:
@@ -481,48 +515,7 @@ components:
           maxItems: 100
           items:
             $ref: '#/components/schemas/ReferralModerationRequest'
-    Error:
-      properties:
-        statusCode:
-          type: integer
-          format: int32
-          example: 404
-        message:
-          type: string
-          description: The human-readable description of what went wrong. Use this to help you debug.
-        apiErrorCode:
-          type: string
-          description: A machine-readable error code.
-        rsCode:
-          type: string
-          nullable: true
-          description: A secondary machine-readable error code.
-          example: RS042
-    ReferralModerationRequest:
-      description: A request to moderate a single referral.
-      required:
-      - referralId
-      - action
-      properties:
-        referralId:
-          type: string
-        action:
-          type: string
-          enum:
-          - APPROVED
-          - DENIED
-          - REFERRER_APPROVED
-          - REFERRED_APPROVED
-          - REFERRER_DENIED
-          - REFERRED_DENIED
   parameters:
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 10
-      description: A limit on the number of results returned.
     offset:
       name: offset
       in: query
@@ -530,6 +523,13 @@ components:
         type: integer
         default: 0
       description: Offsets the first result to return in the list for pagination.
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 10
+      description: A limit on the number of results returned.
     tenant_alias:
       name: tenant_alias
       in: path

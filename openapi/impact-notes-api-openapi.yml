@@ -194,29 +194,6 @@ paths:
                     example: DELETED
 components:
   schemas:
-    NoteUpdate:
-      type: object
-      properties:
-        Content:
-          type: string
-          description: The new plaintext content for the note.
-          example: Updated note content.
-        Type:
-          type: string
-          description: The interaction type for this note.
-          enum:
-          - EMAIL
-          - IM
-          - NONE
-          - PHONE
-        AttachmentsAdd:
-          type: string
-          format: binary
-          description: An image file to add as a new attachment.
-        AttachmentsRemove:
-          type: string
-          description: The filename (e.g., 'crm_7654321_...') of the attachment to remove.
-          example: 1,2
     NoteCreate:
       type: object
       required:
@@ -243,6 +220,18 @@ components:
           - NONE
           - PHONE
           default: NONE
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected note.
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Notes/2750
     Note:
       type: object
       properties:
@@ -297,15 +286,26 @@ components:
           format: uri-reference
           description: The unique reference to this note in the impact.com API.
           example: /Advertisers/<AccountSID>/Campaigns/1000/Notes/123456
-    SuccessUriResponse:
+    NoteUpdate:
       type: object
       properties:
-        Status:
+        Content:
           type: string
-          description: Indicates whether the operation was successful.
-          example: OK
-        Uri:
+          description: The new plaintext content for the note.
+          example: Updated note content.
+        Type:
           type: string
-          format: uri-reference
-          description: The unique reference to the affected note.
-          example: /Advertisers/<AccountSID>/Campaigns/1000/Notes/2750
+          description: The interaction type for this note.
+          enum:
+          - EMAIL
+          - IM
+          - NONE
+          - PHONE
+        AttachmentsAdd:
+          type: string
+          format: binary
+          description: An image file to add as a new attachment.
+        AttachmentsRemove:
+          type: string
+          description: The filename (e.g., 'crm_7654321_...') of the attachment to remove.
+          example: 1,2

@@ -226,22 +226,13 @@ paths:
     - url: https://api.impact.com
 components:
   schemas:
-    ExceptionListCreate:
+    ExceptionListUpdate:
       type: object
-      required:
-      - ActionTrackerId
-      - CampaignId
-      - Name
-      - Type
       properties:
         ActionTrackerId:
           type: string
           description: Comma-separated list of event type IDs.
           example: '18500'
-        CampaignId:
-          type: integer
-          description: The program ID the list applies to.
-          example: 1000
         Name:
           type: string
           description: The display name for the exception list.
@@ -252,6 +243,17 @@ components:
           enum:
           - CATEGORY
           - SKU
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected resource.
     ExceptionList:
       type: object
       properties:
@@ -319,13 +321,22 @@ components:
           format: uri-reference
           description: The unique reference to this exception list in the impact.com API.
           example: /Advertisers/<AccountSID>/ExceptionLists/12345
-    ExceptionListUpdate:
+    ExceptionListCreate:
       type: object
+      required:
+      - ActionTrackerId
+      - CampaignId
+      - Name
+      - Type
       properties:
         ActionTrackerId:
           type: string
           description: Comma-separated list of event type IDs.
           example: '18500'
+        CampaignId:
+          type: integer
+          description: The program ID the list applies to.
+          example: 1000
         Name:
           type: string
           description: The display name for the exception list.
@@ -336,17 +347,6 @@ components:
           enum:
           - CATEGORY
           - SKU
-    SuccessUriResponse:
-      type: object
-      properties:
-        Status:
-          type: string
-          description: Indicates whether the operation was successful.
-          example: OK
-        Uri:
-          type: string
-          format: uri-reference
-          description: The unique reference to the affected resource.
     ExceptionList_2:
       type: object
       properties:

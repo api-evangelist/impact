@@ -143,6 +143,24 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code.
+          type: string
+          nullable: true
+          example: RS042
     WebhookEndpoint:
       description: An endpoint to receive events
       properties:
@@ -166,24 +184,6 @@ components:
             type: string
           example:
           - '*'
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error
-          type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine error code
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code.
-          type: string
-          nullable: true
-          example: RS042
   securitySchemes:
     APIKey:
       type: http

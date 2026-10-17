@@ -139,22 +139,6 @@ paths:
         '200':
           $ref: '#/components/responses/SuccessUriResponse'
 components:
-  responses:
-    SuccessUriResponse:
-      description: The request was successful.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Status:
-                type: string
-                description: Indicates whether the operation was successful.
-                example: OK
-              Uri:
-                type: string
-                format: uri-reference
-                description: The unique reference to the affected request.
   schemas:
     TrackingValueRequest:
       type: object
@@ -534,3 +518,19 @@ components:
           type: string
           description: Optional display name of the associated Deal.
           example: AcmeDeal3
+  responses:
+    SuccessUriResponse:
+      description: The request was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates whether the operation was successful.
+                example: OK
+              Uri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the affected request.

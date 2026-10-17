@@ -136,30 +136,23 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Shareurls:
-      description: A user's share links, organised by engagement medium and share medium.
-      type: object
+    Error:
       properties:
-        shareLinks:
-          type: object
-          properties:
-            cleanShareLink:
-              type: string
-              format: uri
-              description: The clean (unencoded) share link for the program's primary link. If the program uses a vanity link, this is the unencoded form; otherwise it's the `UNKNOWN` engagement medium and `UNKNOWN` share medium link.
-              example: https://share.impact.squatchtesting.com/mzbnEyE
-            EMAIL:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            MOBILE:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            EMBED:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            POPUP:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            HOSTED:
-              $ref: '#/components/schemas/ShareMediumLinks'
-            UNKNOWN:
-              $ref: '#/components/schemas/ShareMediumLinks'
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          nullable: true
+          example: RS042
     ShareMediumLinks:
       description: A user's share links for a single engagement medium, with one entry per share medium.
       type: object
@@ -278,46 +271,31 @@ components:
           $ref: '#/components/schemas/LegacyEngagementLinks'
         EMAIL:
           $ref: '#/components/schemas/LegacyEngagementLinks'
-    Error:
+    Shareurls:
+      description: A user's share links, organised by engagement medium and share medium.
+      type: object
       properties:
-        statusCode:
-          description: The HTTP status code of the error
-          type: integer
-          format: int32
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code
-          type: string
-          nullable: true
-          example: RS042
+        shareLinks:
+          type: object
+          properties:
+            cleanShareLink:
+              type: string
+              format: uri
+              description: The clean (unencoded) share link for the program's primary link. If the program uses a vanity link, this is the unencoded form; otherwise it's the `UNKNOWN` engagement medium and `UNKNOWN` share medium link.
+              example: https://share.impact.squatchtesting.com/mzbnEyE
+            EMAIL:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            MOBILE:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            EMBED:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            POPUP:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            HOSTED:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            UNKNOWN:
+              $ref: '#/components/schemas/ShareMediumLinks'
   parameters:
-    ProgramId:
-      name: programId
-      in: query
-      description: The ID of the program whose share links to return. Required — the API returns `400` if omitted.
-      required: true
-      schema:
-        type: string
-        example: '47255'
-    TenantAlias:
-      name: tenant_alias
-      in: path
-      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
-      required: true
-      schema:
-        type: string
-    UserId:
-      name: userId
-      in: path
-      description: Filters share links by `user.id`.
-      required: true
-      schema:
-        type: string
     ShareMedium:
       name: shareMedium
       in: query
@@ -336,6 +314,13 @@ components:
         - LINKEDIN
         - DIRECT
         - UNKNOWN
+    AccountId:
+      name: accountId
+      in: path
+      description: The ID of the account to look up
+      required: true
+      schema:
+        type: string
     EngagementMedium:
       name: engagementMedium
       in: query
@@ -349,10 +334,25 @@ components:
         - MOBILE
         - EMAIL
         - UNKNOWN
-    AccountId:
-      name: accountId
+    ProgramId:
+      name: programId
+      in: query
+      description: The ID of the program whose share links to return. Required — the API returns `400` if omitted.
+      required: true
+      schema:
+        type: string
+        example: '47255'
+    UserId:
+      name: userId
       in: path
-      description: The ID of the account to look up
+      description: Filters share links by `user.id`.
+      required: true
+      schema:
+        type: string
+    TenantAlias:
+      name: tenant_alias
+      in: path
+      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
       required: true
       schema:
         type: string

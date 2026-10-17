@@ -161,6 +161,17 @@ components:
           description: The list of unsubscribed contact objects on this page.
           items:
             $ref: '#/components/schemas/UnsubscribedContact'
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected resource.
     UnsubscribedContact:
       type: object
       properties:
@@ -183,14 +194,3 @@ components:
           format: date-time
           description: The date and time the unsubscribe was last updated.
           example: '2026-02-05T12:13:08Z'
-    SuccessUriResponse:
-      type: object
-      properties:
-        Status:
-          type: string
-          description: Indicates whether the operation was successful.
-          example: OK
-        Uri:
-          type: string
-          format: uri-reference
-          description: The unique reference to the affected resource.
