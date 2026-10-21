@@ -6,6 +6,7 @@ source:
 - https://composio.dev/toolkits/impact
 - https://monid.ai/tools/impact
 checked:
+- chargebee/integrations/chargebee-integration-edges.yml
 - https://composio.dev/toolkits/impact
 - https://docs.mparticle.com/integrations/impact/event/
 - https://fivetran.com/docs-sitemap.xml
@@ -19,9 +20,75 @@ checked:
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/impact-partnership-cloud
 - https://zapier.com/apps/impact/integrations
 - stripe/integrations/stripe-integration-edges.yml
+- https://docs.stripe.com/stripe-apps
+- https://docs.stripe.com/stripe-apps/review-requirements
+- https://marketplace.stripe.com/
+- https://marketplace.stripe.com/appm/apps
+- https://stripe.com/partners/directory
+- https://stripe.com/partners/verified-partners
+- https://stripe.partners/sitemap.xml
 summary: null
 marketplace_apps: []
 edges:
+- partner_name: IAB Europe TCF Global Vendor List
+  partner: null
+  partner_match: domain
+  type: contract
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://vendor-list.consensu.org/v3/vendor-list.json
+  contract_reference:
+    register: IAB Europe TCF Global Vendor List
+    spec_file: null
+    role: tcf-vendor
+    registered_name: impact.com
+    register_id: '721'
+    products:
+    - impact.com
+    matched_domain: impact.com
+    api_families:
+    - feature-1
+    - feature-3
+    - purpose-1
+    - purpose-11
+    - purpose-2
+    - purpose-3
+    - purpose-4
+    - purpose-5
+    - purpose-6
+    - purpose-7
+    - purpose-8
+    - special-purpose-1
+    - special-purpose-2
+    api_families_basis: TCF purposes, special purposes, features and special features declared on the registration
+    detected_by: sweep-adtech.py
+    detected: '2026-10-14'
+  detected_by: sweep-adtech.py
+  detected: '2026-10-14'
+- partner_name: Google Ad Tech Providers
+  partner: null
+  partner_match: domain
+  type: contract
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://storage.googleapis.com/tcfac/additional-consent-providers.csv
+  contract_reference:
+    register: Google Ad Tech Providers (Additional Consent)
+    spec_file: null
+    role: google-atp
+    registered_name: Impact
+    register_id: '1735'
+    products:
+    - Impact
+    matched_domain: impact.com
+    api_families: null
+    api_families_basis: null
+    detected_by: sweep-adtech.py
+    detected: '2026-10-14'
+  detected_by: sweep-adtech.py
+  detected: '2026-10-14'
 - partner_name: Twilio Segment
   partner: segment
   partner_match: aggregator
@@ -92,82 +159,6 @@ edges:
       - update
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
-- partner_name: IAB Europe TCF Global Vendor List
-  partner: null
-  partner_match: domain
-  type: contract
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://vendor-list.consensu.org/v3/vendor-list.json
-  contract_reference:
-    register: IAB Europe TCF Global Vendor List
-    spec_file: null
-    role: tcf-vendor
-    registered_name: impact.com
-    register_id: '721'
-    products:
-    - impact.com
-    matched_domain: impact.com
-    api_families:
-    - feature-1
-    - feature-3
-    - purpose-1
-    - purpose-11
-    - purpose-2
-    - purpose-3
-    - purpose-4
-    - purpose-5
-    - purpose-6
-    - purpose-7
-    - purpose-8
-    - special-purpose-1
-    - special-purpose-2
-    api_families_basis: TCF purposes, special purposes, features and special features declared on the registration
-    detected_by: sweep-adtech.py
-    detected: '2026-10-14'
-  detected_by: sweep-adtech.py
-  detected: '2026-10-14'
-- partner_name: Google Ad Tech Providers
-  partner: null
-  partner_match: domain
-  type: contract
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://storage.googleapis.com/tcfac/additional-consent-providers.csv
-  contract_reference:
-    register: Google Ad Tech Providers (Additional Consent)
-    spec_file: null
-    role: google-atp
-    registered_name: Impact
-    register_id: '1735'
-    products:
-    - Impact
-    matched_domain: impact.com
-    api_families: null
-    api_families_basis: null
-    detected_by: sweep-adtech.py
-    detected: '2026-10-14'
-  detected_by: sweep-adtech.py
-  detected: '2026-10-14'
-- partner_name: Stripe (own)
-  partner: stripe
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.stripe.com/apps/impactcom-affiliate
-  mirror_of: stripe/integrations/stripe-integration-edges.yml
-  apps:
-  - impact.com Affiliate
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-  category: affiliate_and_referrals
 - partner_name: Fivetran
   partner: fivetran
   partner_match: aggregator
@@ -229,4 +220,82 @@ edges:
     builder: 'community (Meltano Hub variant maintainers: bytecodeio, singer-io, voxmedia)'
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
+- partner_name: Chargebee (own)
+  partner: chargebee
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.chargebee.com/apps/['impact']
+  mirror_of: chargebee/integrations/chargebee-integration-edges.yml
+  apps:
+  - Partner Manager by impact.com
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: Marketing Automation
+- partner_name: Stripe (own)
+  partner: stripe
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.stripe.com/apps/impactcom-affiliate
+  mirror_of: stripe/integrations/stripe-integration-edges.yml
+  apps:
+  - impact.com Affiliate
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: affiliate_and_referrals
+- partner_name: Stripe Partner Ecosystem
+  partner: stripe
+  partner_match: register
+  type: register
+  direction: partner-built
+  channel: standard-directory
+  relationship: standard-participant
+  evidence: https://stripe.partners/directory/impactdotcom
+  category: Stripe ecosystem partner
+  contract_reference:
+    register: Stripe Partner Ecosystem directory (stripe.com/partners/directory -> stripe.partners, PartnerPage
+      SSR __NUXT_DATA__)
+    standard: Stripe Partner Ecosystem
+    spec_file: null
+    role: stripe-verified-partner
+    registered_name: Impact Affiliate & Influencer Marketing
+    register_id: impactdotcom
+    partner_tier:
+    - Premier Apps Partner
+    matched_domain: impact.com
+    matched_by: domain
+    identity_source: the directory's own website field for the partner (no lookup)
+    signal_note: 'certified_products = ONE entry per verified product type (Premier Apps / SaaS Platform / Payments
+      Partner: Stripe verified the product integration; no dates printed, lapsed null = unknown); Premier Services
+      Partner is a services tier (partner_tier only); Certified Professional Developers certify PEOPLE (context);
+      callouts / products never counted'
+    context:
+      callouts:
+      - CRM
+      stripe_products:
+      - Checkout
+      - Invoicing
+      - Payments
+      location: Santa Barbara, United States
+    detected_by: sweep-stripe-app-marketplace.py
+    detected: '2026-10-21'
+    certified_products:
+    - product: Impact Affiliate & Influencer Marketing
+      product_type: Stripe App (verified app integration)
+      certifier: Stripe (Verified Partner program)
+      verification: Premier Apps Partner
+      lapsed: null
+  detected_by: sweep-stripe-app-marketplace.py
+  first_seen: '2026-10-21'
 templates: []
