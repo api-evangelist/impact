@@ -238,6 +238,40 @@
     detected: '2026-10-21'
   status: not-a-workflow
   arazzo: null
+- slug: impact-amazon-ads-partner-directory
+  label: Amazon Ads Partner Directory
+  partner: amazon
+  partner_name: Amazon Ads Partner Directory
+  category: Amazon Ads partner (services)
+  type: register
+  channel: standard-directory
+  evidence: https://advertising.amazon.com/partners/directory
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Amazon Ads Partner Directory (advertising.amazon.com/partners/directory, GetPartners)
+    registered_name: Impact.com
+    register_id: amzn1.ads1.ma1.cnb8xuwo6vbbsstphxvf9srbx
+    matched_domain: impact.com
+    matched_by: domain
+    services:
+    - ADVERTISING_EFFECTIVENESS
+    - BUSINESS_AND_MARKETING_INTELLIGENCE_TOOLS
+    - CAMPAIGN_MANAGEMENT
+    - CAMPAIGN_REPORTING
+    - DATA_INTEGRATION
+    - REPORTING_AND_ANALYTICS
+    - RETAIL_PERFORMANCE_MEASUREMENT
+    ads_products:
+    - AMAZON_ATTRIBUTION
+    service_models:
+    - TOOL_PROVIDER
+    signal_note: listing = participation; accreditation recorded as partner_tier; ads_certifications are Amazon
+      Ads LEARNING certifications held by staff, not product conformance, never certified_products
+    detected_by: sweep-amazon-sp-api-appstore.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
 - slug: impact-chargebee-own
   label: Chargebee (own)
   partner: chargebee
@@ -277,37 +311,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
-- slug: impact-amazon-ads-partner-directory
-  label: Amazon Ads Partner Directory
-  partner: amazon
-  partner_name: Amazon Ads Partner Directory
-  category: Amazon Ads partner (services)
-  type: register
-  channel: standard-directory
-  evidence: https://advertising.amazon.com/partners/directory
+- slug: impact-adobe-commerce-own
+  label: Adobe Commerce (own)
+  partner: adobe-commerce
+  partner_name: Adobe Commerce (own)
+  category: Adobe Commerce Marketplace extension
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://commercemarketplace.adobe.com/impact-tech-module-magento-integration.html
   source: edge
-  relationship: standard-participant
-  contract_reference:
-    register: Amazon Ads Partner Directory (advertising.amazon.com/partners/directory, GetPartners)
-    registered_name: Impact.com
-    register_id: amzn1.ads1.ma1.cnb8xuwo6vbbsstphxvf9srbx
-    matched_domain: impact.com
-    matched_by: domain
-    services:
-    - ADVERTISING_EFFECTIVENESS
-    - BUSINESS_AND_MARKETING_INTELLIGENCE_TOOLS
-    - CAMPAIGN_MANAGEMENT
-    - CAMPAIGN_REPORTING
-    - DATA_INTEGRATION
-    - REPORTING_AND_ANALYTICS
-    - RETAIL_PERFORMANCE_MEASUREMENT
-    ads_products:
-    - AMAZON_ATTRIBUTION
-    service_models:
-    - TOOL_PROVIDER
-    signal_note: listing = participation; accreditation recorded as partner_tier; ads_certifications are Amazon
-      Ads LEARNING certifications held by staff, not product conformance, never certified_products
-    detected_by: sweep-amazon-sp-api-appstore.py
-    detected: '2026-10-21'
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
